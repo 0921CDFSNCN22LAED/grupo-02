@@ -18,7 +18,7 @@ breve descripción
 
 ### Luis Dartayet
 
-    Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en los entornos educativos. Particularmente centrado en la creación de herramientas para mejorar y acercar la educación musical a quienes lo deseen.
+Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en los entornos educativos. Particularmente centrado en la creación de herramientas para mejorar y acercar la educación musical a quienes lo deseen.
 
 ## Sitios de referencia
 
