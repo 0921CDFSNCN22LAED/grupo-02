@@ -6,7 +6,7 @@
 
 ### Juan Ignacio LLopiz
 
-breve descripción
+Estudiante ing. en sistemas de información en la UTN, cuento con algunos conocimientos en programación y gestión de proyectos.
 
 ### Cristian Kwak
 
