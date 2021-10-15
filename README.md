@@ -14,7 +14,7 @@ breve descripción
 
 ### Sofía Shakalis
 
-breve descripción
+Estudiante de Diseño en UTDT con mucho interés en la tecnología pero cuento con cero experiencia en programación.
 
 ### Luis Dartayet
 
