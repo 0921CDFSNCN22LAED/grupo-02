@@ -25,6 +25,10 @@
 
 *   [Google Fonts](https://fonts.google.com/share?selection.family=Mulish:wght@500%7CPoppins)
 
+#### Wireframe
+
+-   ver en [Figma](https://www.figma.com/file/hQxsKOUaQovzKBDVKIMVHo/grupo-02?node-id=0%3A1)
+
 ## Integrantes
 
 ### Juan Ignacio LLopiz
