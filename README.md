@@ -22,6 +22,7 @@
 
 -   'Mulish' (H)
 -   'Poppins' (p)
+-   'Gotham'
 
 *   [Google Fonts](https://fonts.google.com/share?selection.family=Mulish:wght@500%7CPoppins)
 
