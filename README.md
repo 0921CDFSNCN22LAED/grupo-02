@@ -9,6 +9,7 @@
 #### Logo
 
 ![logo](/public/img/mundo-sapien-logo-150.png)
+![logo](/public/img/Logo-MundoSapien-10.jpg)
 
 #### paleta de colores
 
