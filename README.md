@@ -1,30 +1,27 @@
-# grupo-02
+# Mundo Sapien
 
 ## Descripción del proyecto
 
 ---
 
-[Nombre del sitio] es un market place donde docentes pueden ofrecer clases sobre distintos temas de la curricula escolar. Pensado para alumnos del nivel primario (de 6 a 12 años) se buscará una interacción atractiva y sencilla para los niños así como la posibilidad de crear una colección personal de cursos adquiridos por pago directo o suscripción.
+**Mundo Sapien** es un market place donde docentes pueden ofrecer clases sobre distintos temas de la curricula escolar. Pensado para alumnos del nivel primario (de 6 a 12 años) se buscará una interacción atractiva y sencilla para los niños así como la posibilidad de crear una colección personal de cursos adquiridos por pago directo o suscripción.
 
 #### Logo
 
-![logo](https://via.placeholder.com/150.png/09f/fff)
+![logo](public\img\mundo-sapien-logo-150.png)
 
-#### paleta de colores (PLACEHOLDER, DECIDIR EN BASE A PROPUESTA)
+#### paleta de colores
 
--   ![##0D758C](https://via.placeholder.com/15/0D758C/000000?text=+) `##0D758C`
--   ![##188C8C](https://via.placeholder.com/15/188C8C/000000?text=+) `##188C8C`
--   ![##308C6A](https://via.placeholder.com/15/308C6A/000000?text=+) `##308C6A`
--   ![##F26241](https://via.placeholder.com/15/F26241/000000?text=+) `##F26241`
--   ![##F2F2F2](https://via.placeholder.com/15/F2F2F2/000000?text=+) `##F2F2F2`
+-   ![##00CC33](https://via.placeholder.com/15/00CC33/000000?text=+) `##00CC33`
+-   ![##003366](https://via.placeholder.com/15/003366/000000?text=+) `##003366`
+-   ![##96705B](https://via.placeholder.com/15/96705B/000000?text=+) `##96705B`
+-   ![##AB8476](https://via.placeholder.com/15/AB8476/000000?text=+) `##AB8476`
+-   ![##F0F7F4](https://via.placeholder.com/15/F0F7F4/000000?text=+) `##F0F7F4`
 
-#### Tipografías (SUGERENCIA, A DECIDIR)
+#### Tipografías
 
--   'Mulish' (H)
--   'Poppins' (p)
--   'Gotham'
-
-*   [Google Fonts](https://fonts.google.com/share?selection.family=Mulish:wght@500%7CPoppins)
+-   ['Gotham'](https://freefontsfamily.com/gotham-font-family/) Sans-serif geométrica de estructura sencilla ideal para headings y lugares de impacto
+-   ['EB Garamond'](https://fonts.google.com/specimen/EB+Garamond?category=Serif&subset=latin-ext&preview.size=64&preview.layout=row&vfonly=true&query=eb) Serif Old-style, fuente de fácil lectura con reminiscencia a textos impresos y libros. Pensada para pasajes tipo parrafo.
 
 #### Wireframe
 
