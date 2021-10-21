@@ -62,7 +62,7 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
 
 ### [Coursera](https://www.coursera.org/)
 
--   Minimalista con buen balace de colores y llamativas publicidades para utilizar la pagina. Especializados a cursos para para mayores. La página esta dividida en varias etapas.
+-   Minimalista con buen balance de colores y llamativas publicidades para utilizar la pagina. Especializados a cursos para para mayores. La página esta dividida en varias etapas.
 -   Tiene un sistema para sumar cursos a tu carrito
 -   Los cursos tiene buenos detalles cuando uno quiere ver que contiene y las recomendaciones del mismo.
 *   paleta de colores
@@ -158,6 +158,23 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
 *   Tipografía
     -   'Roboto'
 
+### [KLASS](https://www.klassinstitute.com/)
+
+-   Es un sitio no gratuito, que brinda cursos para jovenes y adultos.
+
+*   Me resulta bastante atractivo las tipografias que se usaron para la pagina.
+*   Los recuadros que tiene para cada curso, mostrando informacion sobre la cantidad de estudiantes que cursaron o estan cursando la materia y la puntuacion resulta interesante.
+*   No es practico la ausencia del buscador.
+*   Utiliza colores apagados lo que da lugar una percepcion seria de la pagina.
+
+*   paleta de colores
+    -   ![##202751](https://via.placeholder.com/15/202751/000000?text=+) `##202751`
+    -   ![##ffffff](https://via.placeholder.com/15/ffffff/000000?text=+) `##ffffff`
+    -   ![##787878](https://via.placeholder.com/15/787878/000000?text=+) `##787878`
+    -   ![##000000](https://via.placeholder.com/15/000000/000000?text=+) `##000000`
+    -   ![##fafafa](https://via.placeholder.com/15/fafafa/000000?text=+) `##fafafa`
+*   Tipografía
+    -   'Futura', 'Sans-Serif', 'Arial', 'Helvetica'
 ### Varios
 
 -   links de youtube de profesores que mis alumnos consultan cuando tienen dudas de matemáticas
