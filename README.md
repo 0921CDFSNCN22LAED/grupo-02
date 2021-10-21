@@ -65,12 +65,11 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
 -   Minimalista con buen balace de colores y llamativas publicidades para utilizar la pagina. Especializados a cursos para para mayores. La página esta dividida en varias etapas.
 -   Tiene un sistema para sumar cursos a tu carrito
 -   Los cursos tiene buenos detalles cuando uno quiere ver que contiene y las recomendaciones del mismo.
+*   paleta de colores
+     -   ![##0056D2](https://via.placeholder.com/15/0056D2/000000?text=+) `###0056D2`
+     -   ![##EBF3FF](https://via.placeholder.com/15/EBF3FF/000000?text=+) `##EBF3FF`
+     -   ![##F5F5F5](https://via.placeholder.com/15/##F5F5F5/000000?text=+) `##F5F5F5`
 
-
-
-
-   
-   
 
 
 ### [Adapted Mind](https://www.adaptedmind.com/)
