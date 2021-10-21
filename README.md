@@ -175,7 +175,7 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
     -   ![##fafafa](https://via.placeholder.com/15/fafafa/000000?text=+) `##fafafa`
 *   Tipografía
     -   'Futura', 'Sans-Serif', 'Arial', 'Helvetica'
-    ### [Capacitarte](https://www.capacitarte.org/)
+### [Capacitarte](https://www.capacitarte.org/)
 
 -   En esta pagina me parece muy bueno como se categorizan los cursos.
 
