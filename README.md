@@ -50,6 +50,11 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
 ## Sitios de referencia
 
 ---
+### [Udemy](https://www.udemy.com/)
+
+-   Página enfocada a cursos, no está dirigida a niños pero los conceptos que utiliza son interesantes para nuestro formato de página. Tiene una gran cantidad de cursos y tiene animaciones que podríamos usar.
+
+
 
 ### [Adapted Mind](https://www.adaptedmind.com/)
 
