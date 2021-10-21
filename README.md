@@ -8,7 +8,7 @@
 
 #### Logo
 
-![logo](/public/img/mundo-sapien-logo-150.png)
+![logo](/public/img/Logo-MundoSapien-10.jpg)
 
 #### paleta de colores
 
@@ -26,6 +26,8 @@
 #### Wireframe
 
 -   ver en [Figma](https://www.figma.com/file/hQxsKOUaQovzKBDVKIMVHo/grupo-02?node-id=0%3A1)
+
+![logo](/public/img/mundo.gif)
 
 ## Integrantes
 
