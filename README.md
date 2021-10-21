@@ -25,7 +25,7 @@
 
 #### Wireframe
 
--   ver en [Figma](https://www.figma.com/file/hQxsKOUaQovzKBDVKIMVHo/grupo-02?node-id=0%3A1)
+-   ver en carpeta
 
 ![logo](/public/img/mundo.gif)
 
@@ -50,27 +50,28 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
 ## Sitios de referencia
 
 ---
+
 ### [Udemy](https://www.udemy.com/)
 
 -   Página enfocada a cursos, no está dirigida a niños pero los conceptos que utiliza son interesantes para nuestro formato de página. Tiene una gran cantidad de cursos y tiene animaciones que podríamos usar.
 -   En su página pricipal hace mucho enfoque a la publicidad de los cursos y promociona en modo de "oferta".
 -   Si sos usuario tiene una lista de recomendados en la página principal segun lo que buscaste o cursaste.
+
 *   paleta de colores
-     -   ![##5624D0](https://via.placeholder.com/15/5624D0/000000?text=+) `###5624D0`
-     -   ![##1C1D1F](https://via.placeholder.com/15/1C1D1F/000000?text=+) `##1C1D1F`
-     -   ![##ECEB98](https://via.placeholder.com/15/ECEB98/000000?text=+) `##ECEB98`
+    -   ![##5624D0](https://via.placeholder.com/15/5624D0/000000?text=+) `###5624D0`
+    -   ![##1C1D1F](https://via.placeholder.com/15/1C1D1F/000000?text=+) `##1C1D1F`
+    -   ![##ECEB98](https://via.placeholder.com/15/ECEB98/000000?text=+) `##ECEB98`
 
 ### [Coursera](https://www.coursera.org/)
 
 -   Minimalista con buen balance de colores y llamativas publicidades para utilizar la pagina. Especializados a cursos para para mayores. La página esta dividida en varias etapas.
 -   Tiene un sistema para sumar cursos a tu carrito
 -   Los cursos tiene buenos detalles cuando uno quiere ver que contiene y las recomendaciones del mismo.
+
 *   paleta de colores
-     -   ![##0056D2](https://via.placeholder.com/15/0056D2/000000?text=+) `###0056D2`
-     -   ![##EBF3FF](https://via.placeholder.com/15/EBF3FF/000000?text=+) `##EBF3FF`
-     -   ![##F5F5F5](https://via.placeholder.com/15/##F5F5F5/000000?text=+) `##F5F5F5`
-
-
+    -   ![##0056D2](https://via.placeholder.com/15/0056D2/000000?text=+) `###0056D2`
+    -   ![##EBF3FF](https://via.placeholder.com/15/EBF3FF/000000?text=+) `##EBF3FF`
+    -   ![##F5F5F5](https://via.placeholder.com/15/##F5F5F5/000000?text=+) `##F5F5F5`
 
 ### [Adapted Mind](https://www.adaptedmind.com/)
 
@@ -175,6 +176,7 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
     -   ![##fafafa](https://via.placeholder.com/15/fafafa/000000?text=+) `##fafafa`
 *   Tipografía
     -   'Futura', 'Sans-Serif', 'Arial', 'Helvetica'
+
 ### [Capacitarte](https://www.capacitarte.org/)
 
 -   En esta pagina me parece muy bueno como se categorizan los cursos.
@@ -191,6 +193,7 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
     -   ![##000000](https://via.placeholder.com/15/000000/000000?text=+) `##000000`
 *   Tipografía
     -   'Raleway', 'Sans-Serif'
+
 ### Varios
 
 -   links de youtube de profesores que mis alumnos consultan cuando tienen dudas de matemáticas
