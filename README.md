@@ -175,6 +175,22 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
     -   ![##fafafa](https://via.placeholder.com/15/fafafa/000000?text=+) `##fafafa`
 *   Tipografía
     -   'Futura', 'Sans-Serif', 'Arial', 'Helvetica'
+    ### [Capacitarte](https://www.capacitarte.org/)
+
+-   En esta pagina me parece muy bueno como se categorizan los cursos.
+
+*   Es util cuando muestra la cantidad de cursos disponibles que hay por categoria.
+*   Esta bueno cuando haces click en la solapa de la categoria, ya que muestra debajo los distintos cursos con los aranceles de cada uno.
+*   Debajo de la pagina hay un slide que muestra la reseña de cada alumno lo que me parece bastante util.
+*   No me parece atractivo la estetica de la pagina.
+
+*   paleta de colores
+    -   ![##ee5a27](https://via.placeholder.com/15/ee5a27/000000?text=+) `##ee5a27`
+    -   ![##f0eeee](https://via.placeholder.com/15/f0eeee/000000?text=+) `##f0eeee`
+    -   ![##ffffff](https://via.placeholder.com/15/ffffff/000000?text=+) `##ffffff`
+    -   ![##000000](https://via.placeholder.com/15/000000/000000?text=+) `##000000`
+*   Tipografía
+    -   'Raleway', 'Sans-Serif'
 ### Varios
 
 -   links de youtube de profesores que mis alumnos consultan cuando tienen dudas de matemáticas
