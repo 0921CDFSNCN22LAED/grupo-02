@@ -37,7 +37,7 @@ Estudiante ing. en sistemas de información en la UTN, cuento con algunos conoci
 
 ### Cristian Kwak
 
-breve descripción
+Estudiante en Ing en sistemas en la UADE, tengo conocimiento basicos de Python pero nunca habia programado con JS.
 
 ### Sofía Shakalis
 
