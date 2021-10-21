@@ -53,7 +53,20 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
 ### [Udemy](https://www.udemy.com/)
 
 -   Página enfocada a cursos, no está dirigida a niños pero los conceptos que utiliza son interesantes para nuestro formato de página. Tiene una gran cantidad de cursos y tiene animaciones que podríamos usar.
+-   En su página pricipal hace mucho enfoque a la publicidad de los cursos y promociona en modo de "oferta".
+-   Si sos usuario tiene una lista de recomendados en la página principal segun lo que buscaste o cursaste
 
+### [Coursera](https://www.coursera.org/)
+
+-   Minimalista con buen balace de colores y llamativas publicidades para utilizar la pagina. Especializados a cursos para para mayores. La página esta dividida en varias etapas.
+-   Tiene un sistema para sumar cursos a tu carrito
+-   Los cursos tiene buenos detalles cuando uno quiere ver que contiene y las recomendaciones del mismo
+   *   paleta de colores
+    -   ![##0056D2](https://via.placeholder.com/15/0D758C/000000?text=+) `##0056D2`
+    -   ![##D6EDF6](https://via.placeholder.com/15/0D758C/000000?text=+) `##D6EDF6`
+    -   ![##F5F5F5](https://via.placeholder.com/15/0D758C/000000?text=+) `##F5F5F5`
+   
+   
 
 
 ### [Adapted Mind](https://www.adaptedmind.com/)
