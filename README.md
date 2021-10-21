@@ -54,7 +54,11 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
 
 -   Página enfocada a cursos, no está dirigida a niños pero los conceptos que utiliza son interesantes para nuestro formato de página. Tiene una gran cantidad de cursos y tiene animaciones que podríamos usar.
 -   En su página pricipal hace mucho enfoque a la publicidad de los cursos y promociona en modo de "oferta".
--   Si sos usuario tiene una lista de recomendados en la página principal segun lo que buscaste o cursaste
+-   Si sos usuario tiene una lista de recomendados en la página principal segun lo que buscaste o cursaste.
+*   paleta de colores
+     -   ![##5624D0](https://via.placeholder.com/15/5624D0/000000?text=+) `###5624D0`
+     -   ![##1C1D1F](https://via.placeholder.com/15/1C1D1F/000000?text=+) `##1C1D1F`
+     -   ![##ECEB98](https://via.placeholder.com/15/ECEB98/000000?text=+) `##ECEB98`
 
 ### [Coursera](https://www.coursera.org/)
 
@@ -62,10 +66,7 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
 -   Tiene un sistema para sumar cursos a tu carrito
 -   Los cursos tiene buenos detalles cuando uno quiere ver que contiene y las recomendaciones del mismo.
 
-*   paleta de colores
-     -   ![##0056D2](https://via.placeholder.com/15/0056D2/000000?text=+) `##0056D2`
-     -   ![##D6EDF6](https://via.placeholder.com/15/D6EDF6/000000?text=+) `##D6EDF6`
-     -   ![##F5F5F5](https://via.placeholder.com/15/F5F5F5/000000?text=+) `##F5F5F5`
+
 
 
    
