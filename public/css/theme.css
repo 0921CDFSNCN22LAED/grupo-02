@@ -1,0 +1,45 @@
+/* fonts */
+/* font-family: "Gotham", sans-serif;
+    font-family: "Gotham Black", sans-serif;
+    font-family: "Gotham Light", sans-serif;
+    font-family: "Gotham Thin", sans-serif;
+    font-family: "Gotham XLight", sans-serif;
+    font-family: "Gotham Book", sans-serif;
+    font-family: "Gotham Ultra", sans-serif; */
+
+/* font-family: 'EB Garamond', serif; */
+
+/* colors */
+/* colors {
+    verde-joya: #33b56a;
+    azul-joya: #3358b5;
+    verde-pastel: #c1ead1;
+    azul-pastel: #c1cee8;
+    gris-sombra: #3a3a3a;
+} */
+
+/* Normalize */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+
+.img-logo {
+    width: 25%;
+}
+
+h1 {
+    font-family: "Gotham Black", sans-serif;
+}
+
+p {
+    font-family: "EB Garamond", serif;
+}
+
+/* Body */
+
+/* Footer */

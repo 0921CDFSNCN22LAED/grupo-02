@@ -1,0 +1,23 @@
+{
+    "name": "mundo-sapien",
+    "version": "1.0.0",
+    "description": "sitio de e-learning para niños",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/0921CDFSNCN22LAED/grupo-02.git"
+    },
+    "author": "Luis Dartayet, Cristian Kwak, Juan Ignacio LLopiz, Sofía Shakalis",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/0921CDFSNCN22LAED/grupo-02/issues"
+    },
+    "homepage": "https://github.com/0921CDFSNCN22LAED/grupo-02#readme",
+    "dependencies": {
+        "express": "^4.17.1",
+        "normalize.css": "^8.0.1"
+    }
+}

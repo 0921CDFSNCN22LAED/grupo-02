@@ -1,5 +1,13 @@
 # Mundo Sapien
 
+## Vínculos
+
+---
+
+### [Trello](https://trello.com/b/ULW9CG64/mundo-sapien)
+
+<br />
+
 ## Descripción del proyecto
 
 ---
@@ -31,21 +39,21 @@
 
 ## Integrantes
 
-### Juan Ignacio LLopiz
+### Luis Dartayet
 
-Estudiante ing. en sistemas de información en la UTN, cuento con algunos conocimientos en programación y gestión de proyectos.
+Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en los entornos educativos. Particularmente centrado en la creación de herramientas para mejorar y acercar la educación musical a quienes lo deseen.
 
 ### Cristian Kwak
 
 Estudiante en Ing en sistemas en la UADE, tengo conocimiento basicos de Python pero nunca habia programado con JS.
 
+### Juan Ignacio LLopiz
+
+Estudiante ing. en sistemas de información en la UTN, cuento con algunos conocimientos en programación y gestión de proyectos.
+
 ### Sofía Shakalis
 
 Estudiante de Diseño en UTDT con mucho interés en la tecnología pero cuento con cero experiencia en programación.
-
-### Luis Dartayet
-
-Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en los entornos educativos. Particularmente centrado en la creación de herramientas para mejorar y acercar la educación musical a quienes lo deseen.
 
 ## Sitios de referencia
 
@@ -54,7 +62,7 @@ Músico docente con interés en cómo las nuevas tecnologías pueden ayudar en l
 ### [Udemy](https://www.udemy.com/)
 
 -   Página enfocada a cursos, no está dirigida a niños pero los conceptos que utiliza son interesantes para nuestro formato de página. Tiene una gran cantidad de cursos y tiene animaciones que podríamos usar.
--   En su página pricipal hace mucho enfoque a la publicidad de los cursos y promociona en modo de "oferta".
+-   En su página principal hace mucho enfoque a la publicidad de los cursos y promociona en modo de "oferta".
 -   Si sos usuario tiene una lista de recomendados en la página principal segun lo que buscaste o cursaste.
 
 *   paleta de colores
