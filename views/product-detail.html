@@ -11,6 +11,11 @@
             rel="stylesheet"
         />
 
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            rel="stylesheet"
+        />
+
         <link rel="stylesheet" href="./css/normalize.css" />
         <link rel="stylesheet" href="/css/theme.css" />
 
@@ -18,10 +23,169 @@
     </head>
     <body>
         <header>
-            <img class="img-logo" src="/img/logo.png" alt="logo Mundo Sapien" />
-            <h1>Mundo Sapien</h1>
+            <div id="header">
+                <div class="logo-title padding-10">
+                    <a href="./">
+                        <img
+                            class="img-logo"
+                            src="/img/logo.png"
+                            alt="logo Mundo Sapien"
+                        />
+                        <h1>
+                            MUNDO <br />
+                            SAPIEN
+                        </h1>
+                    </a>
+                </div>
+                <!-- <div class="subscription">
+                    <p>plan/suscripción</p>
+                </div> -->
+                <div class="search padding-10">
+                    <input
+                        type="search"
+                        name="main-search"
+                        id="main-search"
+                        placeholder="Busca clases, temas o profesores"
+                    />
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                <nav class="nav-bar padding-10">
+                    <div id="cart" class="padding-10">
+                        <a href="/cart"><i class="fas fa-shopping-cart"></i></a>
+                    </div>
+                    <div id="notifications" class="padding-10">
+                        <a href=""><i class="fas fa-inbox"></i></a>
+                    </div>
+                    <div id="profile" class="padding-10">
+                        <a href=""><i class="fas fa-user-circle"></i></a>
+                    </div>
+                </nav>
+            </div>
         </header>
-        <main>product-detail</main>
-        <footer></footer>
+        <main id="main">product-detail</main>
+        <footer>
+            <div id="footer" class="padding-10">
+                <div class="col-footer padding-10">
+                    <h3>Info</h3>
+                    <ul>
+                        <a href="">
+                            <li>info@mundosapien.edu.ar</li>
+                        </a>
+                        <a href="">
+                            <li>¿Quiénes somos?</li>
+                        </a>
+                        <a href="">
+                            <li>Nuestro</li>
+                        </a>
+                        <a href="">
+                            <li>Términos y condiciones</li>
+                        </a>
+                        <a href="">
+                            <li>Política de privacidad</li>
+                        </a>
+                        <a href="">
+                            <li>Términos de pago</li>
+                        </a>
+                        <a href="">
+                            <li>Preguntas frecuentes</li>
+                        </a>
+                    </ul>
+                </div>
+                <div id="comunidad-footer" class="col-footer padding-10">
+                    <h3>Comunidad</h3>
+                    <ul>
+                        <a href="">
+                            <li><i class="fab fa-youtube"></i> Youtube</li>
+                        </a>
+                        <a href="">
+                            <li><i class="fab fa-facebook"></i> Facebook</li>
+                        </a>
+                        <a href="">
+                            <li><i class="fab fa-instagram"></i> Instagram</li>
+                        </a>
+                        <a href="">
+                            <li><i class="fab fa-twitter"></i> Twitter</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="col-footer padding-10">
+                    <h3>Curricula 1er ciclo</h3>
+                    <ul>
+                        <li>Artes</li>
+                        <ul>
+                            <a href="">
+                                <li>Música</li>
+                            </a>
+                            <a href="">
+                                <li>Plástica</li>
+                            </a>
+                            <a href="">
+                                <li>Teatro</li>
+                            </a>
+                        </ul>
+                        <a href="">
+                            <li>Conocimiento del Mundo</li>
+                        </a>
+                        <a href="">
+                            <li>Educación Física</li>
+                        </a>
+                        <a href="">
+                            <li>Informática</li>
+                        </a>
+                        <a href="">
+                            <li>Matemática</li>
+                        </a>
+                        <a href="">
+                            <li>Prácticas del lenguaje</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="col-footer padding-10">
+                    <h3>Curricula 2do ciclo</h3>
+                    <ul>
+                        <li>Artes</li>
+                        <ul>
+                            <a href="">
+                                <li>Música</li>
+                            </a>
+                            <a href="">
+                                <li>Plástica</li>
+                            </a>
+                            <a href="">
+                                <li>Teatro</li>
+                            </a>
+                        </ul>
+                        <a href="">
+                            <li>Ciencias Naturales</li>
+                        </a>
+                        <a href="">
+                            <li>Ciencias Sociales</li>
+                        </a>
+                        <a href="">
+                            <li>Educación Física</li>
+                        </a>
+                        <a href="">
+                            <li>Educación Tecnológica</li>
+                        </a>
+                        <a href="">
+                            <li>Formación Ética y Ciudadana</li>
+                        </a>
+                        <a href="">
+                            <li>Informática</li>
+                        </a>
+                        <a href="">
+                            <li>Matemática</li>
+                        </a>
+                        <a href="">
+                            <li>Prácticas del lenguaje</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <p id="copyright" class="padding-10">
+                Copyright &copy; Mundo Sapien 2021 -Todos los derechos
+                reservados
+            </p>
+        </footer>
     </body>
 </html>
