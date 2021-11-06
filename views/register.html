@@ -18,6 +18,7 @@
 
         <link rel="stylesheet" href="./css/normalize.css" />
         <link rel="stylesheet" href="/css/theme.css" />
+        <link rel="stylesheet" href="/css/style.css" />
 
         <title>Mundo Sapien</title>
     </head>
@@ -61,14 +62,111 @@
                         ></a>
                     </div>
                     <div id="profile" class="padding-10">
-                        <a class="restyled-link" href="/login"
+                        <a class="restyled-link" href="/register"
                             ><i class="fas fa-user-circle"></i
                         ></a>
                     </div>
                 </nav>
             </div>
         </header>
-        <main id="register-main">register</main>
+        <main>
+            <div id="register-main">
+                <div id="register-with">
+                    <h2>EXPLORE SU CREATIVIDAD</h2>
+                    <h4>Empezá gratis</h4>
+                    <a class="restyled-link login-media" href="">
+                        <i class="fab fa-facebook"></i> Continua con Facebook
+                    </a>
+                    <a class="restyled-link login-media" href="">
+                        <i class="fab fa-google"></i> Continua con Google
+                    </a>
+                    <a class="restyled-link login-media" href="">
+                        <i class="fab fa-apple"></i> Continua con Apple
+                    </a>
+
+                    <div class="divider">
+                        <span><hr /></span>
+                        <i class="far fa-circle"></i>
+                        <span><hr /></span>
+                    </div>
+                    <a class="restyled-link" href="/register">
+                        <h3>Registrate usando correo electrónico</h3>
+                    </a>
+                    <div class="login-cred">
+                        <form action="/" method="get">
+                            <!-- <label for="user-name">Nombre de usuario</label> -->
+                            <input
+                                type="text"
+                                name="user-name"
+                                id="user-name"
+                                placeholder="Nombre de usuario"
+                            />
+                            <!-- <label for="user-password">Contraseña</label> -->
+                            <input
+                                type="password"
+                                name="user-password"
+                                id="user-password"
+                                placeholder="Contraseña"
+                            />
+                            <input
+                                type="password"
+                                name="user-password-confirmation"
+                                id="user-password-confirmation"
+                                placeholder="Confirmá la contraseña"
+                            />
+                            <button type="submit">Entrar</button>
+                        </form>
+                        <p class="terms">
+                            al registrarte aceptas nuestros
+                            <a href="">Terminos de servicio</a> y
+                            <a href="">Política de privacidad</a>
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <div id="iniciar-sesion">
+                        <p>¿Ya tenés una cuenta?</p>
+                        <a class="restyled-link" href="">INICIAR SESIÓN</a>
+                        <p>
+                            INICIAR SESIÓN ES UN POP UP QUE EN ESTE MOMENTO
+                            TIENE DISPLAY NONE Y EL FONDO UN BLUR QUE ESTÁ
+                            COMENTADO EN STYLE.CSS 156 A 172
+                        </p>
+                    </div>
+                    <div id="nuestro-proyecto" class="padding-10">
+                        <h2 class="padding-10">Nuestro proyecto</h2>
+                        <a href="">
+                            <div>
+                                <img
+                                    class="width300 padding-10"
+                                    src="/img/picture-placeholder.svg"
+                                    alt="picture placeholder"
+                                />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="login-cred" id="login-pop-up">
+                    <form action="/" method="get">
+                        <!-- <label for="user-name">Nombre de usuario</label> -->
+                        <input
+                            type="text"
+                            name="user-name"
+                            id="user-name"
+                            placeholder="Nombre de usuario"
+                        />
+                        <!-- <label for="user-password">Contraseña</label> -->
+                        <input
+                            type="password"
+                            name="user-password"
+                            id="user-password"
+                            placeholder="Contraseña"
+                        />
+                        <button type="submit">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </main>
         <footer>
             <div id="footer" class="padding-10">
                 <div class="col-footer padding-10">
