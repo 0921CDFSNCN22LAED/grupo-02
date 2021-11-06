@@ -1,0 +1,35 @@
+/* home page */
+
+#main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 40px 0;
+}
+
+.cursos-main h2 {
+    font-family: "Gotham Light", sans-serif;
+}
+
+#otros-cursos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#otros-cursos div {
+    border: #3a3a3a dashed 1px;
+    padding: 5px;
+    margin: 5px;
+    flex: 1 0 auto;
+}
+
+@media (min-width: 769px) {
+    #main {
+        padding: 40px 6%;
+    }
+}
+
+/* Login */

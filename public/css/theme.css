@@ -27,6 +27,19 @@
     font-family: "EB Garamond", serif;
 }
 
+.padding-10 {
+    padding: 10px 20px;
+}
+
+.width300 {
+    width: 300px;
+}
+
+.restyled-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 html,
 body {
     height: 100%;
@@ -39,6 +52,7 @@ body {
 }
 main {
     flex: 1 0 auto;
+    background: linear-gradient(172deg, #c1cee8 38.2%, #c1ead1 61.8%);
 }
 footer {
     flex-shrink: 0;
@@ -47,10 +61,6 @@ footer {
 header,
 footer {
     background-color: #3a3a3a;
-}
-
-.padding-10 {
-    padding: 10px 20px;
 }
 
 /* Header */
@@ -140,11 +150,6 @@ footer {
     justify-content: space-between;
 }
 
-.nav-bar a {
-    color: inherit;
-    text-decoration: inherit;
-}
-
 .nav-bar i {
     font-size: 40px;
 }
@@ -175,16 +180,13 @@ footer {
         order: 0;
         width: 33%;
     }
-    #main {
-        padding-left: calc(16% + 40px);
-    }
 }
 
 @media (min-width: 1200px) {
     #header,
     #footer,
     #main {
-        max-width: 1400px;
+        max-width: 1200px;
         margin: auto;
     }
 }
@@ -216,11 +218,6 @@ footer {
 
 .col-footer ul li {
     line-height: 2em;
-}
-
-.col-footer ul a {
-    color: inherit;
-    text-decoration: inherit;
 }
 
 .col-footer ul > ul > a > li {
