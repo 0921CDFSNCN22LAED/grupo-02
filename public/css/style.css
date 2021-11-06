@@ -52,8 +52,10 @@
 }
 
 #register-with h2,
+#login-pop-up h2,
 #register-with h4,
 #register-with h3,
+#login-pop-up h3,
 #register-with p,
 #register-with a {
     color: #c1ead1;
@@ -61,7 +63,7 @@
     text-align: center;
     margin: 20px 0;
 }
-#register-with .login-media {
+.login-media {
     display: block;
     color: #c1ead1;
     text-align: center;
@@ -167,7 +169,7 @@
     background-color: #3a3a3a;
     margin: 5% auto;
     height: 60%;
-    width: 40%;
+    width: 400px;
     padding: 20px;
     border-radius: 20px;
 }
