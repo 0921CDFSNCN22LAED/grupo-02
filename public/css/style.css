@@ -33,3 +33,120 @@
 }
 
 /* Login */
+
+#login-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 40px 0;
+}
+
+#login-with {
+    background-color: #3a3a3a;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 400px;
+}
+
+#login-with h2,
+#login-with h4,
+#login-with h3,
+#login-with p,
+#login-with a {
+    color: #c1ead1;
+    font-family: "Gotham Light", sans-serif;
+    text-align: center;
+    margin: 20px 0;
+}
+#login-with .login-media {
+    display: block;
+    color: #c1ead1;
+    text-align: center;
+    width: 100%;
+    font-family: "Gotham", sans-serif;
+    background-color: #3a3a3a;
+    border: #c1ead1 solid 1px;
+    padding: 7px;
+    margin-bottom: 20px;
+}
+
+.divider {
+    text-align: center;
+    color: #c1ead1;
+}
+
+.divider hr {
+    display: inline-block;
+    width: 40%;
+    transform: translateY(-3px);
+}
+
+.divider i {
+    font-size: 8px;
+}
+
+#login-with h3 {
+    color: #33b56a;
+}
+
+.terms {
+    font-size: 12px;
+    padding: 0 4 0px;
+}
+
+#iniciar-sesion {
+    text-align: center;
+    padding: 40px;
+}
+
+#iniciar-sesion p {
+    margin-bottom: 10px;
+}
+#iniciar-sesion a {
+    display: block;
+    color: #3a3a3a;
+    text-align: center;
+    width: 100%;
+    font-family: "Gotham Black", sans-serif;
+    background-color: #c1ead1;
+    border: #3a3a3a solid 1px;
+    padding: 7px;
+    margin-bottom: 20px;
+}
+
+#login-cred {
+    background-color: #3a3a3a;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#login-cred label {
+    color: #33b56a;
+    font-family: "Gotham", sans-serif;
+    padding: 10px 0;
+}
+
+#login-cred input {
+    display: block;
+    width: 100%;
+    margin: 10px 0 20px;
+    padding: 3px;
+}
+#login-cred input:focus {
+    outline: none;
+}
+
+#login-cred button {
+    display: block;
+    color: #3a3a3a;
+    text-align: center;
+    width: 100%;
+    font-family: "Gotham Black", sans-serif;
+    background-color: #c1ead1;
+    border: #3a3a3a solid 1px;
+    padding: 7px;
+    margin-bottom: 20px;
+}
