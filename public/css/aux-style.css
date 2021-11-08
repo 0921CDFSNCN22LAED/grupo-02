@@ -1,0 +1,218 @@
+#cart-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 1;
+    align-items: center;
+    font-family: "EB Garamond", serif;
+    color: #3a3a3a;
+}
+
+#cart-details {
+    max-width: 800px;
+}
+
+#cart-details h2 {
+    font-family: "Gotham ", sans-serif;
+    font-size: 50px;
+    color: #3a3a3a;
+    margin-top: 30px;
+}
+
+.cart-course {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.inner-border {
+    border: #3a3a3a solid 1px;
+}
+
+.cart-course-data {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cart-course-data h3,
+.cart-course-data h4 {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.price-and-options {
+    display: flex;
+    justify-content: space-between;
+    font-family: "EB Garamond", serif;
+    color: #33b56a;
+}
+
+.price-and-options span {
+    font-size: 30px;
+}
+
+.pay {
+    background-color: white;
+    font-size: 30px;
+    max-width: 400px;
+    margin: auto;
+    padding: 5px;
+}
+
+.pay p {
+    margin-bottom: 30px;
+}
+
+.pay p:first-child {
+    font-family: "Gotham Light", sans-serif;
+}
+
+.pay p:nth-child(2) {
+    font-family: "Gotham Black", sans-serif;
+}
+
+.pay button {
+    width: 100%;
+    background-color: #33b56a;
+    color: white;
+    font-family: "Gotham Black", sans-serif;
+    margin-bottom: 30px;
+}
+
+.cart-recomendations {
+    margin-bottom: 40px;
+}
+
+@media (min-width: 481px) {
+    .cart-course-details {
+        display: flex;
+    }
+}
+
+/* products page */
+
+#product-page-main {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cursos-usuario,
+.cursos-usuario .upper-row,
+.cursos-usuario .lower-row {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cursos-usuario .upper-row,
+.cursos-usuario .lower-row {
+    border-radius: 10px;
+    border: #3a3a3a solid 1px;
+    margin: 20px;
+}
+
+.usuario-big {
+    font-size: 200px;
+    color: #3a3a3a;
+    margin: 0 20px;
+}
+.cursos-recomendados-reel {
+    max-width: 100px;
+}
+
+.search-more-courses {
+    text-align: center;
+    color: #33b56a;
+    background-color: #3a3a3a;
+    border-radius: 10px;
+    border: #33b56a solid 1px;
+    margin: 20px;
+}
+
+.search-more-courses h2 {
+    margin: 20px 0;
+}
+.search-more-courses div {
+    margin: auto;
+}
+
+.search-more-courses div:nth-child(2) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* product-detail */
+
+#product-detail-main {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.course-info-short {
+    max-width: 400px;
+}
+.course-info-short h3 {
+    font-family: "Gotham", sans-serif;
+    font-size: 30px;
+}
+
+.course-info-short p {
+    margin-bottom: 10px;
+}
+
+.course-info-short h4 {
+    margin: 10px 0px;
+    font-family: "Gotham Light", sans-serif;
+    font-size: 16px;
+}
+
+.course-description ul {
+    list-style-type: none;
+}
+
+.course-description ul li {
+    margin-bottom: 10px;
+}
+
+.course-buy-now {
+    max-width: 400px;
+    margin: 40px 0;
+    height: fit-content;
+    background-color: white;
+    padding: 5px;
+}
+
+.course-buy-now p:first-child {
+    font-size: 24px;
+    margin: 30px 0;
+}
+
+.course-buy-now p:nth-child(2) {
+    font-size: 30px;
+    margin: 30px 0;
+    color: #33b56a;
+}
+
+.course-buy-now button {
+    font-size: 24px;
+    padding: 5px;
+    width: 100%;
+    background-color: #33b56a;
+    color: white;
+    font-family: "Gotham Black", sans-serif;
+    margin-bottom: 30px;
+}
+
+.course-buy-now ul {
+    list-style-type: none;
+}
+
+.course-buy-now ul li {
+    margin: 10px 0;
+}
