@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap"
+            rel="stylesheet"
+        />
+
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="./css/normalize.css" />
+        <link rel="stylesheet" href="/css/theme.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+
+        <title>Mundo Sapien</title>
+    </head>
+    <body>
+        <%- include("./partials/header") %>
+        <main>
+            <div id="main">
+                <div class="cursos-main padding-10">
+                    <h2 class="padding-10">Cursos actuales</h2>
+                    <a href="">
+                        <div>
+                            <img
+                                class="width300 padding-10"
+                                src="/img/picture-placeholder.svg"
+                                alt="picture placeholder"
+                            />
+                        </div>
+                    </a>
+                </div>
+                <div class="cursos-main padding-10">
+                    <h2 class="padding-10">Sugerencias</h2>
+                    <a href="/products-page">
+                        <div>
+                            <img
+                                class="width300 padding-10"
+                                src="/img/picture-placeholder.svg"
+                                alt="picture placeholder"
+                            />
+                        </div>
+                    </a>
+                </div>
+                <div class="cursos-main padding-10">
+                    <h2 class="padding-10">Mi colección</h2>
+                    <a href="">
+                        <div>
+                            <img
+                                class="width300 padding-10"
+                                src="/img/picture-placeholder.svg"
+                                alt="picture placeholder"
+                            />
+                        </div>
+                    </a>
+                </div>
+                <div class="cursos-main padding-10">
+                    <h2 class="padding-10">Otros cursos</h2>
+                    <div id="otros-cursos" class="width300 padding-10">
+                        <a class="restyled-link" href="/product-detail">
+                            <div>Curso 1</div>
+                        </a>
+                        <a class="restyled-link" href="">
+                            <div>Curso curso 2</div>
+                        </a>
+                        <a class="restyled-link" href="">
+                            <div>Curso 3</div>
+                        </a>
+                        <a class="restyled-link" href="">
+                            <div>Curso curso curso 4</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include("./partials/footer") %>
+    </body>
+</html>
