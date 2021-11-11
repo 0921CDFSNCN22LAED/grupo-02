@@ -331,8 +331,8 @@
     justify-content: center;
 }
 
-.course-info-short {
-    max-width: 400px;
+.course-info {
+    max-width: 500px;
 }
 .course-info-short h3 {
     font-family: "Gotham", sans-serif;
@@ -346,19 +346,28 @@
 .course-info-short h4 {
     margin: 10px 0px;
     font-family: "Gotham Light", sans-serif;
-    font-size: 16px;
+    font-size: 24px;
 }
 
+.course-description h4 {
+    font-size: 20px;
+}
 .course-description ul {
     list-style-type: none;
 }
 
-.course-description ul li {
-    margin-bottom: 10px;
+.course-description dl dt {
+    margin: 20px 0 10px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.course-description dl dd div {
+    margin-top: 10px;
 }
 
 .course-buy-now {
-    max-width: 400px;
+    max-width: 300px;
     margin: 40px 0;
     height: fit-content;
     background-color: white;

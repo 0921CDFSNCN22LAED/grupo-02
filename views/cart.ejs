@@ -55,11 +55,11 @@
                                     </h4>
                                     <div>
                                         <% let stars = 0%> <% for(let i = 0; i <
-                                        Math.floor(cursoEnCarrito.rating); i++){
-                                        stars++; %>
+                                        Math.floor(cursoEnCarrito.rating());
+                                        i++){ stars++; %>
                                         <i class="fas fa-star"></i>
-                                        <% } %> <% if(cursoEnCarrito.rating % 1
-                                        !== 0) { stars++; %>
+                                        <% } %> <% if(cursoEnCarrito.rating() %
+                                        1 != 0) { stars++; %>
                                         <i class="fas fa-star-half-alt"></i>
                                         <% } %> <% for(let i = 0; i < 5 - stars
                                         ; i++){ %>
@@ -108,11 +108,11 @@
                             <p><%= recommendation.nombre %></p>
                             <div>
                                 <% let stars = 0%> <% for(let i = 0; i <
-                                Math.floor(recommendation.rating); i++){
+                                Math.floor(recommendation.rating()); i++){
                                 stars++; %>
                                 <i class="fas fa-star"></i>
-                                <% } %> <% if(recommendation.rating % 1 !== 0) {
-                                stars++; %>
+                                <% } %> <% if(recommendation.rating() % 1 !== 0)
+                                { stars++; %>
                                 <i class="fas fa-star-half-alt"></i>
                                 <% } %> <% for(let i = 0; i < 5 - stars ; i++){
                                 %>
