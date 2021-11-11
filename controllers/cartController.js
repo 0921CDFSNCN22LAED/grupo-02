@@ -211,7 +211,7 @@ const recommendations = [
 
 const controller = {
     main: (req, res) => {
-        return res.render("cart.ejs", {
+        return res.render("cart", {
             enCarrito: cartProducts,
             recommendations: recommendations,
         });

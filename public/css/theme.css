@@ -18,6 +18,16 @@
     gris-sombra: #3a3a3a;
 } */
 
+/* Variables */
+
+:root {
+    --color-1-strong: #33b56a;
+    --color-2-strong: #3358b5;
+    --color-1-light: #c1ead1;
+    --color-2-light: #c1cee8;
+    --color-shadow: #3a3a3f;
+}
+
 /* Normalize */
 
 * {
@@ -48,11 +58,15 @@ body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: #c1ead1;
+    background-color: var(--color-1-light);
 }
 main {
     flex: 1 0 auto;
-    background: linear-gradient(172deg, #c1cee8 38.2%, #c1ead1 61.8%);
+    background: linear-gradient(
+        172deg,
+        var(--color-2-light) 38.2%,
+        var(--color-1-light) 61.8%
+    );
 }
 footer {
     flex-shrink: 0;
@@ -60,14 +74,14 @@ footer {
 
 header,
 footer {
-    background-color: #3a3a3a;
+    background-color: var(--color-shadow);
 }
 
 /* Header */
 
 #header {
     display: flex;
-    color: #c1cee8;
+    color: var(--color-2-light);
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
@@ -85,7 +99,7 @@ footer {
     font-family: "Gotham", sans-serif;
     margin: 0px;
     padding: 10px;
-    color: #c1ead1;
+    color: var(--color-1-light);
 }
 
 .logo-title a img {
@@ -112,18 +126,18 @@ footer {
     width: 100%;
     padding: 5px 15% 5px 5px;
     flex-grow: 1;
-    border: solid 1px #c1cee8;
-    color: #c1cee8;
+    border: solid 1px var(--color-2-light);
+    color: var(--color-2-light);
     border-radius: 10px;
-    background-color: #3a3a3a;
+    background-color: var(--color-shadow);
     position: relative;
     z-index: 9;
 }
 
 #main-search:focus {
     outline: none;
-    border: 1px solid #c1cee8;
-    box-shadow: 0 0 10px #c1cee8;
+    border: 1px solid var(--color-2-light);
+    box-shadow: 0 0 10px var(--color-2-light);
 }
 
 .search button {
@@ -140,8 +154,8 @@ footer {
 
 .search button i {
     padding: 3px 6px;
-    border-left: solid 1px #c1cee8;
-    color: #c1cee8;
+    border-left: solid 1px var(--color-2-light);
+    color: var(--color-2-light);
 }
 
 .nav-bar {
@@ -199,7 +213,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    color: #c1ead1;
+    color: var(--color-1-light);
 }
 
 .col-footer {
@@ -207,7 +221,7 @@ footer {
 }
 
 .col-footer h3 {
-    color: #c1cee8;
+    color: var(--color-2-light);
     font-family: "Gotham Light", sans-serif;
     margin-bottom: 10px;
 }
@@ -231,7 +245,7 @@ footer {
 
 #copyright {
     text-align: center;
-    color: #c1ead1;
+    color: var(--color-1-light);
 }
 
 @media (min-width: 481px) {

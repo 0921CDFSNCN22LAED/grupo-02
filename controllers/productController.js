@@ -109,7 +109,7 @@ const controller = {
         let chosenProduct = products.find(
             (product) => product.id == req.params.id
         );
-        return res.render("product-detail.ejs", {
+        return res.render("product-detail", {
             chosenProduct: chosenProduct,
         });
     },

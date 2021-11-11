@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-app.set("view-engine", "ejs");
+app.set("view engine", "ejs");
 
 const mainRoutes = require("./routes/mainRoutes");
 const cartRoutes = require("./routes/cartRoutes");

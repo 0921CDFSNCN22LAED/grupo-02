@@ -23,7 +23,7 @@
 -   ![##33B56A](https://via.placeholder.com/15/33B56A/000000?text=+) `##33B56A`
 -   ![##3358B5](https://via.placeholder.com/15/3358B5/000000?text=+) `##3358B5`
 -   ![##C1EAD1](https://via.placeholder.com/15/C1EAD1/000000?text=+) `##C1EAD1`
--   ![##C1CEE8](https://via.placeholder.com/15/C1CEE8/000000?text=+) `##C1CEE8`
+-   ![##C1CEE8](https://via.placeholder.com/15/C1CEE8/000000?text=+) `#var( --color-2-light)`
 -   ![##3A3A3A](https://via.placeholder.com/15/3A3A3A/000000?text=+) `##3A3A3A`
 
 #### Tipografías
