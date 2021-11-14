@@ -31,10 +31,10 @@
                                     </h4>
                                     <div>
                                         <% let stars = 0%> <% for(let i = 0; i <
-                                        Math.floor(cursoEnCarrito.rating());
+                                        Math.floor(cursoEnCarrito.rating);
                                         i++){ stars++; %>
                                         <i class="fas fa-star"></i>
-                                        <% } %> <% if(cursoEnCarrito.rating() %
+                                        <% } %> <% if(cursoEnCarrito.rating %
                                         1 != 0) { stars++; %>
                                         <i class="fas fa-star-half-alt"></i>
                                         <% } %> <% for(let i = 0; i < 5 - stars
@@ -42,6 +42,7 @@
                                         <i class="far fa-star"></i>
                                         <% } %>
                                     </div>
+                                
                                 </div>
                             </div>
                             <div class="price-and-options padding-10">
@@ -60,12 +61,19 @@
 
                     <div class="pay">
                         <div class="inner-border padding-10">
-                            <p>Total</p>
                             <p>
-                                $<%= enCarrito.reduce((a, b) => a.precio +
-                                b.precio).toFixed(2) %>
+                                <% if(enCarrito.length > 1) { %>
+                                    <p>Total</p>
+                                    $<%= enCarrito.reduce((a, b) => b.precio + a.precio).toFixed(2) %>
+                                    <button type="submit">Pagar</button>
+                                    <% } else if(enCarrito.length === 1){ %>
+                                        <p>Total</p>
+                                        $<%= enCarrito[0].precio.toFixed(2) %>
+                                        <button type="submit">Pagar</button>
+                                <% } else { %>
+                                    ¡Elegí alguna de nuestras clases en nuestra <a href="products-page">página de clases</a>!
+                                <% }  %>
                             </p>
-                            <button type="submit">Pagar</button>
                         </div>
                     </div>
                 </div>
@@ -84,14 +92,14 @@
                             <p><%= recommendation.nombre %></p>
                             <div>
                                 <% let stars = 0%> <% for(let i = 0; i <
-                                Math.floor(recommendation.rating()); i++){
-                                stars++; %>
+                                Math.floor(recommendation.rating);
+                                i++){ stars++; %>
                                 <i class="fas fa-star"></i>
-                                <% } %> <% if(recommendation.rating() % 1 !== 0)
-                                { stars++; %>
+                                <% } %> <% if(recommendation.rating %
+                                1 != 0) { stars++; %>
                                 <i class="fas fa-star-half-alt"></i>
-                                <% } %> <% for(let i = 0; i < 5 - stars ; i++){
-                                %>
+                                <% } %> <% for(let i = 0; i < 5 - stars
+                                ; i++){ %>
                                 <i class="far fa-star"></i>
                                 <% } %>
                             </div>

@@ -19,10 +19,10 @@
                         <p><%=chosenProduct.descripcion %></p>
                         <div>
                             <% let stars = 0%> <% for(let i = 0; i <
-                            Math.floor(chosenProduct.rating()); i++){ stars++;
+                            Math.floor(chosenProduct.rating); i++){ stars++;
                             %>
                             <i class="fas fa-star"></i>
-                            <% } %> <% if(chosenProduct.rating() % 1 != 0) {
+                            <% } %> <% if(chosenProduct.rating % 1 != 0) {
                             stars++; %>
                             <i class="fas fa-star-half-alt"></i>
                             <% } %> <% for(let i = 0; i < 5 - stars ; i++){ %>
@@ -90,8 +90,8 @@
                         <h5>Esta clase incluye</h5>
                         <ul>
                             <li>
-                                <%= chosenProduct.duracionVideoHoras() %> <%
-                                if(chosenProduct.duracionVideoHoras() / 1 > 1) {
+                                <%= chosenProduct.duracionVideoHoras %> <%
+                                if(chosenProduct.duracionVideoHoras / 1 > 1) {
                                 %> horas <%} else { %> hora <% } %> de video
                             </li>
                             <% if(chosenProduct.materialExtra) { %>
