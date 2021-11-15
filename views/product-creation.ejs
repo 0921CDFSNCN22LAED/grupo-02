@@ -1,0 +1,97 @@
+<%- include("./partials/head") %>
+<body>
+<%- include("./partials/header") %>
+<main>
+    <div class="container-fluid padding-10 " id="product-creation-main">
+        <form class="row" action="/" method="post">
+            
+            <fieldset class="col-md-6 padding-10">
+                <h2>Datos de la clase</h2>
+                <div class="form-floating">
+                    <input class="form-control" type="text" name="nombre" id="nombre" placeholder="tema">
+                    <label for="nombre">Tema</label>
+                </div>
+                <select class="form-select" name="materia">
+                    <option selected value="">Seleccioná la materia</option>
+                    <option value="Música">Música</option>
+                    <option value="Plástica">Plástica</option>
+                    <option value="Teatro">Teatro</option>
+                    <option value="Conocimiento del Mundo">Conocimiento del Mundo</option>
+                    <option value="Ciencia Naturales">Ciencia Naturales</option>
+                    <option value="Ciencias Sociales">Ciencias Sociales</option>
+                    <option value="Educación Física">Educación Física</option>
+                    <option value="Educación Tecnológica">Educación Tecnológica</option>
+                    <option value="Formación Ética y Ciudadana">Formación Ética y Ciudadana</option>
+                    <option value="Informática">Informática</option>
+                    <option value="Matemática">Matemática</option>
+                    <option value="Prácticas del lenguaje">Prácticas del lenguaje</option>
+                </select>
+                <select class="form-select" name="grado">
+                    <option selected value="">Seleccioná el año</option>
+                    <option value="1er año">1er año</option>
+                    <option value="2do año">2do año</option>
+                    <option value="3er año">3er año</option>
+                    <option value="4to año">4to año</option>
+                    <option value="5to año">5to año</option>
+                    <option value="6to año">6to año</option>
+                    <option value="7mo año">7mo año</option>
+                </select>
+                    <div class="input-group">
+                        <span class="input-group-text" id="moneda">$</span>
+                        <div class="form-floating" id="precio-container">
+                            <input class="form-control" type="text" name="precio" id="precio" placeholder="precio">
+                            <label for="precio">Precio</label>
+                        </div>
+                    </div>
+                    <div class="form-floating" >
+                        <input class="form-control" type="text" name="contenidos" id="contenidos" placeholder="contenidos">
+                        <label for="contenidos">Contenidos</label>
+                    </div>
+                    <div class="form-floating">
+                        <textarea  class="form-control" name="descripcion" id="descripcion" placeholder="Descripción corta"> </textarea>
+                        <label for="descripcion">Descripción corta</label>
+                    </div>
+                    <div class="form-floating">
+                        <textarea  class="form-control" name="descripcionLong" id="descripcionLong" placeholder="Descripción detallada"> </textarea>
+                        <label for="descripcionLong">Descripción detallada</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Video explicativo</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Material extra</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    
+            
+
+                    
+            </fieldset>
+            <fieldset class="col-md-6 padding-10" >
+                <h2>Datos del profesor</h2>
+                <div class="form-floating">
+                    <input  class="form-control" type="text" name="nombre" id="nombre" placeholder="nombre">
+                    <label for="nombre">Nombre</label>
+                </div>
+                <div class="form-floating">
+                    <input  class="form-control" type="text" name="apellido" id="apellido" placeholder="apellido">
+                    <label for="apellido">Apellido</label>
+                </div>
+                <div class="form-floating">
+                    <input  class="form-control" type="text" name="email" id="email" placeholder="email">
+                    <label for="email">Correo electrónico</label>
+                </div>
+                <div class="col-auto">
+                <button type="submit" class="btn" id="register-class-btn" >Registrar clase</button>
+            </div>
+            </fieldset>
+
+
+        </form>
+    </div>
+  
+</main>
+<%- include("./partials/footer") %>
+    </body>
+</html>

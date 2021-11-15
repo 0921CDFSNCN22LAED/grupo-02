@@ -403,3 +403,36 @@
 .course-buy-now ul li {
     margin: 10px 0;
 }
+
+/* product-creation */
+
+#product-creation-main {
+    margin: 4% auto;
+    max-width: 1200px;
+}
+
+#product-creation-main form {
+    width: fit-content;
+    margin: auto;
+}
+
+#product-creation-main fieldset {
+    width: 400px;
+}
+
+#product-creation-main #precio-container {
+    flex-grow: 1;
+}
+
+#product-creation-main textarea {
+    margin: 10px 0px;
+}
+
+#product-creation-main #register-class-btn {
+    border: var(--color-2-strong) 1px solid;
+    background-color: var(--color-2-light);
+    float: right;
+    margin-top: 40px;
+    font-size: 20px;
+    font-family: "Gotham light", sans-serif;
+}
