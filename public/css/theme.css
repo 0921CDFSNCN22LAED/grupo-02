@@ -50,6 +50,26 @@
     text-decoration: inherit;
 }
 
+.ms-primary-btn {
+    color: var(--color-shadow);
+    text-align: center;
+    font-family: "Gotham Black", sans-serif;
+    background-color: var(--color-1-light);
+    border: var(--color-shadow) solid 1px;
+    padding: 7px;
+    margin-bottom: 20px;
+}
+
+.btn:focus,
+.btn:active {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(51, 181, 106, 0.25);
+}
+
+.img-logo-mini {
+    width: 20px;
+}
+
 html,
 body {
     height: 100%;
@@ -88,10 +108,16 @@ footer {
     position: relative;
     z-index: 0;
 }
+
 .logo-title {
     width: 100%;
     position: relative;
 }
+
+.logo-title a {
+    text-decoration: none;
+}
+
 .logo-title h1 {
     width: 100%;
     margin: 0 auto;

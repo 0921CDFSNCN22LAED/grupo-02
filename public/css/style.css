@@ -67,12 +67,12 @@
     display: block;
     color: var(--color-1-light);
     text-align: center;
-    width: 100%;
+    width: calc(100%-40px);
     font-family: "Gotham", sans-serif;
     background-color: var(--color-shadow);
     border: var(--color-1-light) solid 1px;
     padding: 7px;
-    margin-bottom: 20px;
+    margin: 20px !important;
 }
 
 .divider {
@@ -83,11 +83,7 @@
 .divider hr {
     display: inline-block;
     width: 40%;
-    transform: translateY(-3px);
-}
-
-.divider i {
-    font-size: 8px;
+    transform: translateY(13px);
 }
 
 #register-with h3 {
@@ -106,19 +102,13 @@
 }
 
 #iniciar-sesion p {
-    margin-bottom: 10px;
+    margin: 30px 0 10px;
 }
 
-#iniciar-sesion a {
+#iniciar-sesion button {
     display: block;
-    color: var(--color-shadow);
-    text-align: center;
     width: 100%;
-    font-family: "Gotham Black", sans-serif;
-    background-color: var(--color-1-light);
-    border: var(--color-shadow) solid 1px;
-    padding: 7px;
-    margin-bottom: 20px;
+    font-size: 20px;
 }
 
 .login-cred {
@@ -127,50 +117,49 @@
     border-radius: 20px;
 }
 
-.login-cred label {
-    color: var(--color-1-strong);
-    font-family: "Gotham", sans-serif;
-    padding: 10px 0;
-}
-
-.login-cred input {
-    display: block;
-    width: 100%;
-    margin: 10px 0 20px;
-    padding: 3px;
-}
-.login-cred input:focus {
-    outline: none;
+.login-cred form div {
+    margin-bottom: 10px;
 }
 
 .login-cred button {
     display: block;
-    color: var(--color-shadow);
-    text-align: center;
     width: 100%;
-    font-family: "Gotham Black", sans-serif;
-    background-color: var(--color-1-light);
-    border: var(--color-shadow) solid 1px;
-    padding: 7px;
-    margin-bottom: 20px;
+}
+
+#nuestro-proyecto p {
+    margin: 20px 0 20px 40px;
+    font-size: 20px;
+    font-family: "Gotham Thin", sans-serif;
+}
+
+#nuestro-proyecto .carousel-item {
+    width: 300px;
+    height: 188px;
+    object-fit: cover;
 }
 
 /* Login */
 
-#register-with,
-#iniciar-sesion,
-#nuestro-proyecto {
-    /* filter: blur(8px); */
+#loginModal .modal-content {
+    background-color: var(--color-1-light);
 }
 
-#login-pop-up {
-    display: none;
-    position: absolute;
-    background-color: var(--color-shadow);
-    margin: 5% auto;
-    width: 400px;
-    padding: 20px;
-    border-radius: 20px;
+#loginModal form div {
+    margin-top: 10px;
+}
+
+#loginModal #login-media-modal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#login-media-modal label {
+    width: 100%;
+}
+
+#login-media-modal button {
+    font-size: 24px;
+    margin: 10px;
 }
 
 /* carrito */
