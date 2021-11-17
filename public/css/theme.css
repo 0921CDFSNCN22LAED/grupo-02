@@ -194,6 +194,10 @@ footer {
     font-size: 40px;
 }
 
+.nav-bar a:hover {
+    color: var(--color-1-light);
+}
+
 @media (min-width: 481px) {
     .logo-title {
         order: -2;
@@ -258,6 +262,10 @@ footer {
 
 .col-footer ul li {
     line-height: 2em;
+}
+
+.col-footer a:hover {
+    color: var(--color-1-strong);
 }
 
 .col-footer ul > ul > a > li {

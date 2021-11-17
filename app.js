@@ -13,14 +13,6 @@ app.listen(3000);
 
 app.use("/", userRoutes);
 
-// app.get("/register", (req, res) => {
-//     res.sendFile(path.join(__dirname, "views/register.html"));
-// });
-
-app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "views/login.html"));
-});
-
 app.get("/products-page", (req, res) => {
     res.sendFile(path.join(__dirname, "views/products-page.html"));
 });

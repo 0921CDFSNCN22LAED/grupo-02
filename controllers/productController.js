@@ -46,6 +46,9 @@ const controller = {
             recommendations: recommendations,
         });
     },
+    create: (req, res) => {
+        return res.render("product-creation");
+    },
 };
 
 module.exports = controller;
