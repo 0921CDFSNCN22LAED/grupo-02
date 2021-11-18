@@ -244,6 +244,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     color: var(--color-1-light);
+    position: relative;
 }
 
 .col-footer {
