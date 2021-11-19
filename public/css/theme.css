@@ -250,6 +250,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     color: var(--color-1-light);
+    position: relative;
 }
 
 .col-footer {
@@ -272,6 +273,10 @@ footer {
 
 .col-footer ul li {
     line-height: 2em;
+}
+
+.col-footer a:hover {
+    color: var(--color-1-strong);
 }
 
 .col-footer ul > ul > a > li {
