@@ -66,6 +66,11 @@
     box-shadow: 0 0 0 0.25rem rgba(51, 181, 106, 0.25);
 }
 
+.form-control:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(193, 234, 209, 0.25);
+}
+
 .img-logo-mini {
     width: 20px;
 }
@@ -76,8 +81,8 @@ body {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     background-color: var(--color-1-light);
 }
 main {
@@ -123,6 +128,7 @@ footer {
     margin: 0 auto;
     text-align: right;
     font-family: "Gotham", sans-serif;
+    font-size: 36px;
     margin: 0px;
     padding: 10px;
     color: var(--color-1-light);
@@ -194,6 +200,10 @@ footer {
     font-size: 40px;
 }
 
+.nav-bar a:hover {
+    color: var(--color-1-light);
+}
+
 @media (min-width: 481px) {
     .logo-title {
         order: -2;
@@ -250,6 +260,10 @@ footer {
     color: var(--color-2-light);
     font-family: "Gotham Light", sans-serif;
     margin-bottom: 10px;
+}
+
+.col-footer a:hover {
+    color: var(--color-1-strong);
 }
 
 .col-footer ul {
