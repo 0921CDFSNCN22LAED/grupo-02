@@ -11,7 +11,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(3000);
 
-app.use("/", userRoutes);
+const chosenBackground = (req, res, next) => {
+    if (req.path == "/") {
+        app.locals.background = Math.floor(Math.random() * 4) + 1;
+    }
+    next();
+};
+
+app.use("/", chosenBackground, userRoutes);
 
 app.get("/products-page", (req, res) => {
     res.sendFile(path.join(__dirname, "views/products-page.html"));
