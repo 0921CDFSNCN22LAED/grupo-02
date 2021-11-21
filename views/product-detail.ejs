@@ -1,6 +1,10 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
         <%- include("./partials/head") %>
+    </head>
     <body>
-        <%- include("./partials/header") %>
+        <header><%- include("./partials/header") %></header>
         <main>
             <div id="product-detail-main" class="">
                 <div class="course-info padding-10">
@@ -19,8 +23,7 @@
                         <p><%=chosenProduct.descripcion %></p>
                         <div>
                             <% let stars = 0%> <% for(let i = 0; i <
-                            Math.floor(chosenProduct.rating); i++){ stars++;
-                            %>
+                            Math.floor(chosenProduct.rating); i++){ stars++; %>
                             <i class="fas fa-star"></i>
                             <% } %> <% if(chosenProduct.rating % 1 != 0) {
                             stars++; %>
@@ -30,7 +33,7 @@
                             <% } %>
                         </div>
                         <h4>
-                            <%=chosenProduct.profesor.titulo + " " +
+                            <%=chosenProduct.profesor.nombre + " " +
                             chosenProduct.profesor.apellido %>
                         </h4>
                     </div>
@@ -68,7 +71,7 @@
                             </dd>
                             <% } %>
 
-                            <dt>Clases similares</dt>
+                            <dt>clases similares</dt>
                             <% for(let clase of chosenProduct.clasesSimilares) {
                             %>
                             <dd><%= clase.titulo %></dd>

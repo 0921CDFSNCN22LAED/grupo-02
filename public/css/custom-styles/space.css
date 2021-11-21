@@ -2,7 +2,9 @@
     --color-1-strong: #b6d44b;
     --color-2-strong: #ff8b2d;
     --color-1-light: #dee5be;
+    --color-1-light-rgba: rgba(222, 229, 190, 0.7);
     --color-2-light: #e5cfbe;
+    --color-2-light-rgba: rgba(229, 207, 190, 0.7);
     --color-shadow: #3a3a3f;
 }
 

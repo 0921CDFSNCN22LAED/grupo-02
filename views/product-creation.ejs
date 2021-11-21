@@ -1,104 +1,185 @@
-<%- include("./partials/head") %>
-
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <%- include("./partials/head") %>
+    </head>
     <body>
-        <%- include("./partials/header") %>
-            <main>
-                <div class="container px-4" id="product-creation-main">
-                    <form class="row gx-5 justify-content-center" action="" method="post">
-                        <div class="col-md-6 padding-10">
-                            <div class="input-group ">
-                                <h2>Datos de la clase</h2>
-                                <div class="form-floating ">
-                                    <input class="form-control" type="text" name="titulo" id="titulo"
-                                        placeholder="titulo">
-                                    <label for="titulo">Título</label>
-                                </div>
-                                <select class="form-select " aria-label="select año">
-                                    <option selected>Seleccioná el año</option>
-                                    <option value="1er">1er año</option>
-                                    <option value="2do">2do año</option>
-                                    <option value="3er">3er año</option>
-                                    <option value="4to">4to año</option>
-                                    <option value="5to">5to año</option>
-                                    <option value="6to">6to año</option>
-                                    <option value="7mo">7mo año</option>
-                                </select>
-                                <select class="form-select " aria-label="select materia">
-                                    <option selected>Seleccioná la materia</option>
-                                    <option value="musica">Música</option>
-                                    <option value="plastica">Plástica</option>
-                                    <option value="teatro">Teatro</option>
-                                    <option value="ciencias-naturales">Ciencias Naturales</option>
-                                    <option value="ciencias-sociales">Ciencias Sociales</option>
-                                    <option value="conocimiento-del-mundo">Conocimiento del Mundo</option>
-                                    <option value="educacion-fisica">Educación Física</option>
-                                    <option value="educacion-tecnologica">Educación Tecnológica</option>
-                                    <option value="formacion-etica">Formación Ética y Ciudadana</option>
-                                    <option value="informatica">Informática</option>
-                                    <option value="matematica">Matemática</option>
-                                    <option value="practicas-del-lenguaje">Práctica del lenguaje</option>
-                                </select>
-                                <div class="form-floating ">
-                                    <input class="form-control" type="text" name="contenidos" id="contenidos"
-                                        placeholder="contenidos">
-                                    <label for="contenidos">Contenidos</label>
-                                </div>
-                                <div class="form-floating ">
-                                    <textarea class="form-control" placeholder="descripcion"
-                                        id="descripcion"></textarea>
-                                    <label for="descripcion">Descripción breve</label>
-                                </div>
-                                <div class="form-floating ">
-                                    <textarea class="form-control" placeholder="descripcionLong"
-                                        id="descripcionLong"></textarea>
-                                    <label for="descripcionLong">Descripción detallada</label>
-                                </div>
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control " name="precio" aria-label="precio"
-                                            placeholder="precio">
-                                        <label for="precio">Precio</label>
-                                    </div>
-                                <div class="upload">
-                                    <label for="video" class="form-label">Cargá la clase</label>
-                                    <input class="form-control" type="file" id="video" placeholder="Cargá la clase">
-                                </div>
-                                <div class="upload">
-                                    <label for="materialExtra" class="form-label">Cargá material extra</label>
-                                    <input class="form-control" type="file" id="materialExtra"
-                                        placeholder="Cargá material extra">
-                                </div>
+        <header><%- include("./partials/header") %></header>
+        <main>
+            <div class="container px-4" id="product-creation-main">
+                <form
+                    class="row gx-5 justify-content-center"
+                    action=""
+                    method="post"
+                >
+                    <div class="col-md-6 padding-10">
+                        <div class="input-group">
+                            <h2>Datos de la clase</h2>
+                            <div class="form-floating">
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    name="titulo"
+                                    id="titulo"
+                                    placeholder="titulo"
+                                />
+                                <label for="titulo">Título</label>
+                            </div>
+                            <select class="form-select" aria-label="select año">
+                                <option selected>Seleccioná el año</option>
+                                <option value="1er">1er año</option>
+                                <option value="2do">2do año</option>
+                                <option value="3er">3er año</option>
+                                <option value="4to">4to año</option>
+                                <option value="5to">5to año</option>
+                                <option value="6to">6to año</option>
+                                <option value="7mo">7mo año</option>
+                            </select>
+                            <select
+                                class="form-select"
+                                aria-label="select materia"
+                            >
+                                <option selected>Seleccioná la materia</option>
+                                <option value="musica">Música</option>
+                                <option value="plastica">Plástica</option>
+                                <option value="teatro">Teatro</option>
+                                <option value="ciencias-naturales">
+                                    Ciencias Naturales
+                                </option>
+                                <option value="ciencias-sociales">
+                                    Ciencias Sociales
+                                </option>
+                                <option value="conocimiento-del-mundo">
+                                    Conocimiento del Mundo
+                                </option>
+                                <option value="educacion-fisica">
+                                    Educación Física
+                                </option>
+                                <option value="educacion-tecnologica">
+                                    Educación Tecnológica
+                                </option>
+                                <option value="formacion-etica">
+                                    Formación Ética y Ciudadana
+                                </option>
+                                <option value="informatica">Informática</option>
+                                <option value="matematica">Matemática</option>
+                                <option value="practicas-del-lenguaje">
+                                    Práctica del lenguaje
+                                </option>
+                            </select>
+                            <div class="form-floating">
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    name="contenidos"
+                                    id="contenidos"
+                                    placeholder="contenidos"
+                                />
+                                <label for="contenidos">Contenidos</label>
+                            </div>
+                            <div class="form-floating">
+                                <textarea
+                                    class="form-control"
+                                    placeholder="descripcion"
+                                    id="descripcion"
+                                ></textarea>
+                                <label for="descripcion"
+                                    >Descripción breve</label
+                                >
+                            </div>
+                            <div class="form-floating">
+                                <textarea
+                                    class="form-control"
+                                    placeholder="descripcionLong"
+                                    id="descripcionLong"
+                                ></textarea>
+                                <label for="descripcionLong"
+                                    >Descripción detallada</label
+                                >
+                            </div>
+                            <div class="form-floating">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="precio"
+                                    aria-label="precio"
+                                    placeholder="precio"
+                                />
+                                <label for="precio">Precio</label>
+                            </div>
+                            <div class="upload">
+                                <label for="video" class="form-label"
+                                    >Cargá la clase</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="file"
+                                    id="video"
+                                    placeholder="Cargá la clase"
+                                />
+                            </div>
+                            <div class="upload">
+                                <label for="materialExtra" class="form-label"
+                                    >Cargá material extra</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="file"
+                                    id="materialExtra"
+                                    placeholder="Cargá material extra"
+                                />
                             </div>
                         </div>
-                        <div class="col-md-6 padding-10">
-                            <div class="input-group ">
-                                <h2>Datos del profesor</h2>
-                                <div class="form-floating ">
-                                    <input class="form-control " type="text" name="Nombre" id="Nombre"
-                                        placeholder="Nombre">
-                                    <label for="Nombre">Nombre</label>
-                                </div>
-                                <div class="form-floating ">
-                                    <input class="form-control" type="text" name="apellido" id="apellido"
-                                        placeholder="Apellido">
-                                    <label for="apellido">Apellido</label>
-                                </div>
-                                <div class="form-floating ">
-                                    <input class="form-control" type="email" name="email" id="email"
-                                        placeholder="Correo Electrónico">
-                                    <label for="email">Correo Electrónico</label>
-                                </div>
-                                <div class="form-floating ">
-                                    <textarea class="form-control" placeholder="cv" id="cv"></textarea>
-                                    <label for="cv">Breve presentación (cv)</label>
-                                </div>
+                    </div>
+                    <div class="col-md-6 padding-10">
+                        <div class="input-group">
+                            <h2>Datos del profesor</h2>
+                            <div class="form-floating">
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    name="Nombre"
+                                    id="Nombre"
+                                    placeholder="Nombre"
+                                />
+                                <label for="Nombre">Nombre</label>
                             </div>
-                            <button class="ms-primary-btn " type="submit">Cargar la clase</button>
+                            <div class="form-floating">
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    name="apellido"
+                                    id="apellido"
+                                    placeholder="Apellido"
+                                />
+                                <label for="apellido">Apellido</label>
+                            </div>
+                            <div class="form-floating">
+                                <input
+                                    class="form-control"
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Correo Electrónico"
+                                />
+                                <label for="email">Correo Electrónico</label>
+                            </div>
+                            <div class="form-floating">
+                                <textarea
+                                    class="form-control"
+                                    placeholder="cv"
+                                    id="cv"
+                                ></textarea>
+                                <label for="cv">Breve presentación (cv)</label>
+                            </div>
                         </div>
-                    </form>
-                </div>
-
-            </main>
-            <%- include("./partials/footer") %>
+                        <button class="ms-primary-btn" type="submit">
+                            Cargar la clase
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <%- include("./partials/footer") %>
     </body>
-
-    </html>
+</html>

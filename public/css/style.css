@@ -1,17 +1,86 @@
 /* home page */
 
-#main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+#main-nav {
+    position: fixed;
+    right: 0;
+    margin: 5% 20px;
+    z-index: 20;
+}
+
+#main-nav nav {
+    float: right;
+}
+
+.nav-item {
+    background-color: var(--color-shadow);
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: var(--color-1-strong);
+}
+
+.nav-link {
+    display: none;
+    color: var(--color-1-strong);
+}
+
+.nav-link:focus,
+.nav-link:hover {
+    color: var(--color-2-strong);
+}
+
+.nav-item i {
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+main > * {
+    padding-right: 40px;
     position: relative;
     z-index: 1;
-    padding: 40px 0;
+}
+
+.cursos-main {
+    padding: 20px;
 }
 
 .cursos-main h2 {
-    font-family: "Gotham Light", sans-serif;
+    font-family: "Gotham Black", sans-serif;
+    color: var(--color-2-strong);
+    text-shadow: 2px 2px 4px white;
+    width: 100%;
+}
+
+.clases-main-container {
+    background-color: var(--color-1-light-rgba);
+    border: 1px solid var(--color-shadow);
+    border-radius: 10px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.clases-main-item {
+    position: relative;
+    margin: 5px;
+    flex: 1 1 200px;
+}
+
+.img-thumbnail {
+    background-color: transparent;
+    border: 1px dashed var(--color-shadow);
+}
+
+.clases-main-item h4 {
+    position: absolute;
+    bottom: 0;
+    width: fit-content;
+    font-size: 100%;
+    font-family: "Gotham", sans-serif;
+    background-color: var(--color-shadow);
+    color: var(--color-2-strong);
 }
 
 #otros-cursos {
@@ -26,9 +95,55 @@
     flex: 1 0 auto;
 }
 
+.other-clases {
+    width: fit-content;
+    font-size: 100%;
+    font-family: "Gotham", sans-serif;
+    background-color: var(--color-shadow);
+    color: var(--color-2-strong);
+    border-radius: 10px;
+}
+
+#sobre-nosotros p {
+    font-size: 24px;
+}
+
+.users-comment {
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.users-comment p:first-child {
+    font-size: 24px;
+}
+.users-comment p:nth-child(2) {
+    text-align: right;
+}
+
+#comentarios form,
+#contacto form {
+    width: 100%;
+}
+
+#comentarios input,
+#contacto input {
+    margin-bottom: 10px;
+}
+
 @media (min-width: 769px) {
-    #main {
-        padding: 40px 6%;
+    .nav-link {
+        display: inline-block;
+    }
+    .nav-item i {
+        padding: 5px;
+        width: auto;
+        text-align: center;
+    }
+
+    main > * {
+        padding-right: 160px;
     }
 }
 

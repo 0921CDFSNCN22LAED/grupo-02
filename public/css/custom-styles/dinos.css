@@ -1,8 +1,10 @@
 :root {
     --color-1-strong: #d96f00;
-    --color-2-strong: #366e7a;
+    --color-2-strong: #4892a3;
     --color-1-light: #f9d130;
+    --color-1-light-rgba: rgba(249, 209, 48, 0.7);
     --color-2-light: #65b6ba;
+    --color-2-light-rgba: rgba(101, 182, 186, 0.7);
     --color-shadow: #3a3a3f;
 }
 

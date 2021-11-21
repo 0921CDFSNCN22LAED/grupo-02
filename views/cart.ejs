@@ -1,6 +1,12 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
         <%- include("./partials/head") %>
+    </head>
     <body>
-        <%- include("./partials/header") %>
+        <header>
+            <%- include("./partials/header") %>
+        </header>
         <main>
             <div id="cart-main">
                 <div class="padding-10" id="cart-details">
@@ -11,105 +17,93 @@
                         <%= enCarrito.length %> cursos en carrito
                     </p>
                     <% for(let cursoEnCarrito of enCarrito){ %>
-                    <div class="cart-course">
-                        <div class="inner-border padding-10">
-                            <div class="cart-course-details padding-10">
-                                <img
-                                    class="width300 padding-10"
-                                    src="<%=cursoEnCarrito.preview%>"
-                                    alt="picture placeholder"
-                                />
-                                <div class="cart-course-data padding-10">
-                                    <h3>
-                                        <%= cursoEnCarrito.titulo + " en " +
-                                        cursoEnCarrito.materia %>
-                                    </h3>
-                                    <h3><%=cursoEnCarrito.grado %></h3>
-                                    <h4>
-                                        <%=cursoEnCarrito.profesor.titulo + " "
-                                        + cursoEnCarrito.profesor.apellido %>
-                                    </h4>
-                                    <div>
-                                        <% let stars = 0%> <% for(let i = 0; i <
-                                        Math.floor(cursoEnCarrito.rating);
-                                        i++){ stars++; %>
-                                        <i class="fas fa-star"></i>
-                                        <% } %> <% if(cursoEnCarrito.rating %
-                                        1 != 0) { stars++; %>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <% } %> <% for(let i = 0; i < 5 - stars
-                                        ; i++){ %>
-                                        <i class="far fa-star"></i>
-                                        <% } %>
+                        <div class="cart-course">
+                            <div class="inner-border padding-10">
+                                <div class="cart-course-details padding-10">
+                                    <img class="width300 padding-10" src="<%=cursoEnCarrito.preview%>"
+                                        alt="picture placeholder" />
+                                    <div class="cart-course-data padding-10">
+                                        <h3>
+                                            <%= cursoEnCarrito.titulo + " en " + cursoEnCarrito.materia %>
+                                        </h3>
+                                        <h3>
+                                            <%=cursoEnCarrito.grado %>
+                                        </h3>
+                                        <h4>
+                                            <%=cursoEnCarrito.profesor.nombre + " " + cursoEnCarrito.profesor.apellido %>
+                                        </h4>
+                                        <div>
+                                            <% let stars=0; for(let i=0; i < Math.floor(cursoEnCarrito.rating); i++){ stars++; %>
+                                                <i class="fas fa-star"></i>
+                                                <% } %>
+                                                <% if(cursoEnCarrito.rating % 1 !=0) { stars++; %>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                <% } %>
+                                                <% for(let i=0; i < 5 - stars ; i++){ %>
+                                                    <i class="far fa-star"></i>
+                                                <% } %>
+                                        </div>
                                     </div>
-                                
                                 </div>
-                            </div>
-                            <div class="price-and-options padding-10">
-                                <span
-                                    ><%="$" + cursoEnCarrito.precio.toFixed(2)
-                                    %></span
-                                >
-                                <div>
-                                    <p>eliminar</p>
-                                    <p>guardar en favoritos</p>
+                                <div class="price-and-options padding-10">
+                                    <span>
+                                        <%="$" + cursoEnCarrito.precio.toFixed(2) %>
+                                    </span>
+                                    <div>
+                                        <p>eliminar</p>
+                                        <p>guardar en favoritos</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <% } %>
-
-                    <div class="pay">
-                        <div class="inner-border padding-10">
-                            <p>
-                                <% if(enCarrito.length > 1) { %>
-                                    <p>Total</p>
-                                    $<%= enCarrito.reduce((a, b) => b.precio + a.precio).toFixed(2) %>
-                                    <button type="submit">Pagar</button>
-                                    <% } else if(enCarrito.length === 1){ %>
-                                        <p>Total</p>
-                                        $<%= enCarrito[0].precio.toFixed(2) %>
-                                        <button type="submit">Pagar</button>
-                                <% } else { %>
-                                    ¡Elegí alguna de nuestras clases en nuestra <a href="products-page">página de clases</a>!
-                                <% }  %>
-                            </p>
-                        </div>
-                    </div>
+                        <% } %>
+                            <div class="pay">
+                                <div class="inner-border padding-10">
+                                    <p>
+                                        <% if(enCarrito.length> 1) { %>
+                                            <p>Total</p>
+                                            $<%= enCarrito.reduce((a, b)=> b.precio + a.precio).toFixed(2) %>
+                                                <button type="submit">Pagar</button>
+                                                <% } else if(enCarrito.length===1){ %>
+                                                    <p>Total</p>
+                                                    $<%= enCarrito[0].precio.toFixed(2) %>
+                                                        <button type="submit">Pagar</button>
+                                                        <% } else { %>
+                                                            <p>¡Elegí alguna de nuestras clases en nuestra <a
+                                                                    href="products-page">página de clases</a>!</p>
+                                                            <% } %>
+                                    </p>
+                                </div>
+                            </div>
                 </div>
                 <div class="cart-recomendations">
                     <h3>También podría gustarte...</h3>
-
                     <% for(let recommendation of recommendations){ %>
-
-                    <div>
-                        <img
-                            class="width300 padding-10"
-                            src="<%=recommendation.preview %>"
-                            alt="picture placeholder"
-                        />
                         <div>
-                            <p><%= recommendation.titulo %></p>
+                            <img class="width300 padding-10" src="<%=recommendation.preview %>" alt="picture placeholder" />
                             <div>
-                                <% let stars = 0%> <% for(let i = 0; i <
-                                Math.floor(recommendation.rating);
-                                i++){ stars++; %>
-                                <i class="fas fa-star"></i>
-                                <% } %> <% if(recommendation.rating %
-                                1 != 0) { stars++; %>
-                                <i class="fas fa-star-half-alt"></i>
-                                <% } %> <% for(let i = 0; i < 5 - stars
-                                ; i++){ %>
-                                <i class="far fa-star"></i>
-                                <% } %>
+                                <p>
+                                    <%= recommendation.titulo %>
+                                </p>
+                                <div>
+                                    <% let stars=0%>
+                                        <% for(let i=0; i < Math.floor(recommendation.rating); i++){ stars++; %>
+                                            <i class="fas fa-star"></i>
+                                            <% } %>
+                                                <% if(recommendation.rating % 1 !=0) { stars++; %>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                    <% } %>
+                                                        <% for(let i=0; i < 5 - stars ; i++){ %>
+                                                            <i class="far fa-star"></i>
+                                                            <% } %>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <% } %>
+                        <% } %>
                 </div>
             </div>
         </main>
         <%- include("./partials/footer") %>
     </body>
+
 </html>
