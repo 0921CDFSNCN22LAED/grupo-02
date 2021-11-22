@@ -40,7 +40,7 @@
     text-align: center;
 }
 
-main > * {
+#home > * {
     padding-right: 40px;
     position: relative;
     z-index: 1;
@@ -148,7 +148,7 @@ main > * {
         text-align: center;
     }
 
-    main > * {
+    #home > * {
         padding-right: 160px;
     }
 
@@ -290,95 +290,28 @@ main > * {
 /* carrito */
 
 #cart-main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    z-index: 1;
-    align-items: center;
-    font-family: "EB Garamond", serif;
-    color: var(--color-shadow);
-}
-
-#cart-details {
-    max-width: 800px;
-}
-
-#cart-details h2 {
-    font-family: "Gotham ", sans-serif;
-    font-size: 50px;
-    color: var(--color-shadow);
-    margin-top: 30px;
-}
-
-.cart-course {
-    background-color: white;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.inner-border {
-    border: var(--color-shadow) solid 1px;
-}
-
-.cart-course-data {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.cart-course-data h3,
-.cart-course-data h4 {
-    width: 100%;
-    margin-bottom: 10px;
+    padding-top: 40px;
 }
 
 .price-and-options {
-    display: flex;
-    justify-content: space-between;
-    font-family: "EB Garamond", serif;
     color: var(--color-1-strong);
 }
 
-.price-and-options span {
-    font-size: 30px;
-}
-
-.pay {
-    background-color: white;
-    font-size: 30px;
-    max-width: 400px;
-    margin: auto;
-    padding: 5px;
-}
-
-.pay p {
-    margin-bottom: 30px;
-}
-
-.pay p:first-child {
-    font-family: "Gotham Light", sans-serif;
-}
-
-.pay p:nth-child(2),
-.pay p a {
-    font-family: "Gotham Black", sans-serif;
+.price-and-options div p {
+    margin-bottom: 0;
 }
 
 .pay button {
-    width: 100%;
     background-color: var(--color-1-strong);
-    color: white;
-    font-family: "Gotham Black", sans-serif;
-    margin: 30px 0px;
+    border-color: var(--color-1-strong);
+    margin-left: 10px;
+}
+.pay button:hover {
+    background-color: var(--color-2-strong);
 }
 
-.cart-recomendations {
-    margin-bottom: 40px;
-}
-
-@media (min-width: 481px) {
-    .cart-course-details {
-        display: flex;
-    }
+.cart-recommendation {
+    max-width: 300px;
 }
 
 /* products page */

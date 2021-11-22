@@ -8,7 +8,7 @@ if (products == "") {
     products = JSON.parse(products);
 }
 
-const cartIds = [1];
+const cartIds = [1, 2];
 const clasesActualesId = [1];
 const comentarios = [
     {
