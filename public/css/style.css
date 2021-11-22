@@ -293,21 +293,8 @@
     padding-top: 40px;
 }
 
-.price-and-options {
-    color: var(--color-1-strong);
-}
-
 .price-and-options div p {
     margin-bottom: 0;
-}
-
-.pay button {
-    background-color: var(--color-1-strong);
-    border-color: var(--color-1-strong);
-    margin-left: 10px;
-}
-.pay button:hover {
-    background-color: var(--color-2-strong);
 }
 
 .cart-recommendation {
@@ -371,85 +358,6 @@
 }
 
 /* product-detail */
-
-#product-detail-main {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.course-info {
-    max-width: 500px;
-}
-.course-info-short h3 {
-    font-family: "Gotham", sans-serif;
-    font-size: 30px;
-}
-
-.course-info-short p {
-    margin-bottom: 10px;
-}
-
-.course-info-short h4 {
-    margin: 10px 0px;
-    font-family: "Gotham Light", sans-serif;
-    font-size: 24px;
-}
-
-.course-description h4 {
-    font-size: 20px;
-}
-.course-description ul {
-    list-style-type: none;
-}
-
-.course-description dl dt {
-    margin: 20px 0 10px;
-    font-weight: 600;
-    font-size: 18px;
-}
-
-.course-description dl dd div {
-    margin-top: 10px;
-}
-
-.course-buy-now {
-    max-width: 300px;
-    margin: 40px 0;
-    height: fit-content;
-    background-color: white;
-    padding: 5px;
-}
-
-.course-buy-now p:first-child {
-    font-size: 24px;
-    margin: 30px 0;
-}
-
-.course-buy-now p:nth-child(2) {
-    font-size: 30px;
-    margin: 30px 0;
-    color: var(--color-1-strong);
-}
-
-.course-buy-now button {
-    font-size: 24px;
-    padding: 5px;
-    width: 100%;
-    background-color: var(--color-1-strong);
-    color: white;
-    font-family: "Gotham Black", sans-serif;
-    margin-bottom: 30px;
-}
-
-.course-buy-now ul {
-    list-style-type: none;
-}
-
-.course-buy-now ul li {
-    margin: 10px 0;
-}
 
 /* product-creation */
 

@@ -70,7 +70,16 @@
     color: var(--color-1-light);
     font-family: "Gotham Light", sans-serif;
     text-align: center;
-    width: fit-content;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--color-1-strong);
+    border-color: var(--color-1-strong);
+    margin-left: 10px;
+}
+.btn-primary:hover {
+    background-color: var(--color-2-strong);
 }
 
 .ms-primary-btn {
@@ -223,6 +232,10 @@ footer {
     font-size: 40px;
 }
 
+.badge {
+    font-size: 0.5em;
+}
+
 .nav-bar a:hover {
     color: var(--color-1-light);
 }
@@ -262,9 +275,6 @@ footer {
     .max1200px {
         max-width: 1200px;
         margin: auto;
-    }
-    #main-nav {
-        right: calc((100vw - 1200px) / 2 - 10px);
     }
 }
 
