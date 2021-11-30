@@ -20,6 +20,8 @@
         "@fortawesome/fontawesome-free": "^5.15.4",
         "ejs": "^3.1.6",
         "express": "^4.17.1",
+        "method-override": "^3.0.0",
+        "multer": "^1.4.3",
         "normalize.css": "^8.0.1"
     },
     "devDependencies": {

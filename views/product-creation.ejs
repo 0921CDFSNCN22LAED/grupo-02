@@ -10,21 +10,21 @@
     <main class="container-fluid">
         <div class="row max1200px z-index-1">
             <div class="container px-4 padding-10" id="product-creation-main">
-                <form class="
+                <form action="/products" method="post" enctype="multipart/form-data" class="
                             row
                             gx-5
                             justify-content-center
                             clases-main-container
-                        " action="" method="post">
+                        ">
                     <div class="col-md-6 padding-10 clases-main-item">
                         <div class="input-group">
                             <h2>Datos de la clase</h2>
                             <div class="form-floating">
-                                <input class="form-control" type="text" name="titulo" id="titulo"
-                                    placeholder="titulo" />
+                                <input class="form-control" type="text" name="titulo" id="titulo" placeholder="titulo"
+                                    <% if(product){ %>value="<%= product.titulo %> " <%} %> />
                                 <label for="titulo">Título</label>
                             </div>
-                            <select class="form-select" aria-label="select año">
+                            <select class="form-select" aria-label="select año" name="grado">
                                 <option selected>Seleccioná el año</option>
                                 <option value="1er">1er año</option>
                                 <option value="2do">2do año</option>
@@ -34,7 +34,7 @@
                                 <option value="6to">6to año</option>
                                 <option value="7mo">7mo año</option>
                             </select>
-                            <select class="form-select" aria-label="select materia">
+                            <select class="form-select" aria-label="select materia" name="materia">
                                 <option selected>
                                     Seleccioná la materia
                                 </option>
@@ -71,16 +71,17 @@
                             </select>
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="contenidos" id="contenidos"
-                                    placeholder="contenidos" />
+                                    placeholder="contenidos" name="contenidos" />
                                 <label for="contenidos">Contenidos</label>
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="descripcion" id="descripcion"></textarea>
+                                <textarea class="form-control" placeholder="descripcion" id="descripcion"
+                                    name="descripcion"></textarea>
                                 <label for="descripcion">Descripción breve</label>
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="descripcionLong"
-                                    id="descripcionLong"></textarea>
+                                <textarea class="form-control" placeholder="descripcionLong" id="descripcionLong"
+                                    name="descripcionLong"></textarea>
                                 <label for="descripcionLong">Descripción detallada</label>
                             </div>
                             <div class="form-floating">
@@ -90,12 +91,18 @@
                             </div>
                             <div class="upload">
                                 <label for="video" class="form-label">Cargá la clase</label>
-                                <input class="form-control" type="file" id="video" placeholder="Cargá la clase" />
+                                <input class="form-control" type="file" id="video" placeholder="Cargá la clase"
+                                    name="video" />
                             </div>
                             <div class="upload">
                                 <label for="materialExtra" class="form-label">Cargá material extra</label>
                                 <input class="form-control" type="file" id="materialExtra"
-                                    placeholder="Cargá material extra" />
+                                    placeholder="Cargá material extra" name="materialExtra" />
+                            </div>
+                            <div class="upload">
+                                <label for="preview" class="form-label">Previsualización del curso</label>
+                                <input class="form-control" type="file" id="preview"
+                                    placeholder="Previsualización del curso" name="preview" />
                             </div>
                         </div>
                     </div>
@@ -118,14 +125,13 @@
                                 <label for="email">Correo Electrónico</label>
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="cv" id="cv"></textarea>
+                                <textarea class="form-control" placeholder="cv" id="cv" name="cv"></textarea>
                                 <label for="cv">Breve presentación (cv)</label>
                             </div>
                         </div>
                         <button class="btn btn-primary btn-lg" type="submit">
                             Cargar la clase
                         </button>
-                    </div>
                 </form>
             </div>
         </div>

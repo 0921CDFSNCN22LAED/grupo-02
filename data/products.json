@@ -9,7 +9,7 @@
             "apellido": "Rodriguez"
         },
         "rating": 3.5,
-        "precio": 450.0,
+        "precio": 450,
         "preview": "/img/clases-preview/Fracciones5to.png",
         "descripcion": "Esta clase es una introducción a las fracciones",
         "descripcionLong": "Esta clase es una introducción a las fracciones donde aprenderás conceptos como numerador y denominador...",
@@ -25,11 +25,17 @@
             }
         ],
         "clasesSimilares": [
-            { "id": 2, "nombre": "Sustantivos" },
-            { "id": 3, "nombre": "Fracciones II" }
+            {
+                "id": 2,
+                "nombre": "Sustantivos"
+            },
+            {
+                "id": 3,
+                "nombre": "Fracciones II"
+            }
         ],
         "duracionVideo": 60,
-        "duracionVideoHoras": 60,
+        "duracionVideoHoras": 1,
         "materialExtra": true,
         "responsive": true,
         "certificado": false
@@ -44,7 +50,7 @@
             "apellido": "Perez"
         },
         "rating": 4.5,
-        "precio": 450.0,
+        "precio": 450,
         "preview": "/img/clases-preview/Sustantivos5to.png",
         "descripcion": "Esta clase es sobre la clasificación de sustantivos",
         "descripcionLong": "En esta clase veremos como pueden clasificarse los sustantivos en propios y comunes y la subdivisión de los sustantivos comunes en... ",
@@ -83,7 +89,7 @@
             "apellido": "Perez"
         },
         "rating": 4.5,
-        "precio": 450.0,
+        "precio": 450,
         "preview": "/img/clases-preview/Sustantivos5to.png",
         "descripcion": "Esta clase es sobre la clasificación de sustantivos",
         "descripcionLong": "En esta clase veremos como pueden clasificarse los sustantivos en propios y comunes y la subdivisión de los sustantivos comunes en... ",
@@ -122,7 +128,7 @@
             "apellido": "Rodriguez"
         },
         "rating": 3.5,
-        "precio": 450.0,
+        "precio": 450,
         "preview": "/img/clases-preview/Fracciones5to.png",
         "descripcion": "Esta clase es una introducción a las fracciones",
         "descripcionLong": "Esta clase es una introducción a las fracciones donde aprenderás conceptos como numerador y denominador...",
@@ -138,11 +144,17 @@
             }
         ],
         "clasesSimilares": [
-            { "id": 2, "nombre": "Sustantivos" },
-            { "id": 3, "nombre": "Fracciones II" }
+            {
+                "id": 2,
+                "nombre": "Sustantivos"
+            },
+            {
+                "id": 3,
+                "nombre": "Fracciones II"
+            }
         ],
         "duracionVideo": 60,
-        "duracionVideoHoras": 60,
+        "duracionVideoHoras": 1,
         "materialExtra": true,
         "responsive": true,
         "certificado": false
