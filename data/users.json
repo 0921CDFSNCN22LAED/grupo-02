@@ -1,0 +1,19 @@
+[
+    {
+        "id": 0,
+        "nombre-completo": {
+            "nombre": "Juan",
+            "apellido": "Rodriguez"
+        },
+        "email": "juanrodriguez@mail.com",
+        "password": "12345678",
+        "rol": "docente",
+        "hijos": [
+            {
+                "id": "",
+                "nombre-completo": ""
+            }
+        ],
+        "avatar": "default.img"
+    }
+]
