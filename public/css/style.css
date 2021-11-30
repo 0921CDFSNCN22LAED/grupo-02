@@ -303,58 +303,12 @@
 
 /* products page */
 
-#product-page-main {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.product-in-products-page {
+    height: 500px;
 }
 
-.cursos-usuario,
-.cursos-usuario .upper-row,
-.cursos-usuario .lower-row {
-    margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.cursos-usuario .upper-row,
-.cursos-usuario .lower-row {
-    border-radius: 10px;
-    border: var(--color-shadow) solid 1px;
-    margin: 20px;
-}
-
-.usuario-big {
-    font-size: 200px;
-    color: var(--color-shadow);
-    margin: 0 20px;
-}
-.cursos-recomendados-reel {
-    max-width: 100px;
-}
-
-.search-more-courses {
-    text-align: center;
-    color: var(--color-1-strong);
-    background-color: var(--color-shadow);
-    border-radius: 10px;
-    border: var(--color-1-strong) solid 1px;
-    margin: 20px;
-}
-
-.search-more-courses h2 {
-    margin: 20px 0;
-}
-.search-more-courses div {
-    margin: auto;
-}
-
-.search-more-courses div:nth-child(2) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.product-in-products-page-detail {
+    height: 400px;
 }
 
 /* product-detail */

@@ -20,8 +20,8 @@ const chosenBackground = (req, res, next) => {
 
 app.use("/", chosenBackground, userRoutes);
 
-app.get("/products-page", (req, res) => {
-    res.sendFile(path.join(__dirname, "views/products-page.html"));
-});
+// app.get("/products-page", (req, res) => {
+//     res.sendFile(path.join(__dirname, "views/products-page.html"));
+// });
 
 app.use("/products", productRoutes);

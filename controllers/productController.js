@@ -30,8 +30,8 @@ products.forEach((product) => {
 });
 
 const controller = {
-    viewProducts: (req, res) => {
-        res.render("products-page");
+    list: (req, res) => {
+        res.render("products-page", { products: products });
     },
     detail: (req, res) => {
         let chosenProduct = products.find(

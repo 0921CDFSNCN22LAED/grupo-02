@@ -27,6 +27,9 @@ const controller = {
             clasesActuales: products.filter((product) =>
                 clasesActualesId.includes(Number(product.id))
             ),
+            recommendations: [
+                products[Math.floor(Math.random() * products.length)],
+            ],
             clases: products,
             comentarios: comentarios,
         });

@@ -1,292 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap"
-            rel="stylesheet"
-        />
+<head>
+    <%- include("./partials/head") %>
+</head>
 
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-            rel="stylesheet"
-        />
-
-        <link rel="stylesheet" href="./css/normalize.css" />
-        <link rel="stylesheet" href="/css/theme.css" />
-        <link rel="stylesheet" href="/css/style.css" />
-        <link rel="stylesheet" href="/css/aux-style.css" />
-
-        <title>Mundo Sapien</title>
-    </head>
-    <body>
-        <header>
-            <div id="header">
-                <div class="logo-title padding-10">
-                    <a href="./">
-                        <img
-                            class="img-logo"
-                            src="/img/logo.png"
-                            alt="logo Mundo Sapien"
-                        />
-                        <h1>
-                            MUNDO <br />
-                            SAPIEN
-                        </h1>
-                    </a>
-                </div>
-                <!-- <div class="subscription">
-                    <p>plan/suscripción</p>
-                </div> -->
-                <div class="search padding-10">
-                    <input
-                        type="search"
-                        name="main-search"
-                        id="main-search"
-                        placeholder="Busca clases, temas o profesores"
-                    />
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                </div>
-                <nav class="nav-bar padding-10">
-                    <div id="cart" class="padding-10">
-                        <a class="restyled-link" href="/cart"
-                            ><i class="fas fa-shopping-cart"></i
-                        ></a>
-                    </div>
-                    <div id="notifications" class="padding-10">
-                        <a class="restyled-link" href=""
-                            ><i class="fas fa-inbox"></i
-                        ></a>
-                    </div>
-                    <div id="profile" class="padding-10">
-                        <a class="restyled-link" href="/register"
-                            ><i class="fas fa-user-circle"></i
-                        ></a>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        
-        
-        
-        
-        
-        
-        <main>
-            <div id="products-page-main">
-                <div class="cursos-usuario">
-                    <div class="upper-row padding-10">
-                        <div class="cursos-main padding-10">
-                            <h2 class="padding-10">Curso 1</h2>
-                            <a href="">
-                                <div>
-                                    <img
-                                        class="width300 padding-10"
-                                        src="/img/picture-placeholder.svg"
-                                        alt="picture placeholder"
-                                    />
+<body>
+    <header><%- include("./partials/header") %></header>
+    <main class="container-fluid">
+        <div class="row max1200px padding-10 z-index-1">
+            <div class="cursos-main padding-10">
+                <section class="d-flex flex-wrap">
+                    <% for(let product of products){ %>
+                    <article class="col-12 col-md-3">
+                        <div class="clases-main-container m-1">
+                            <a class="restyled-link clases-main-item" href="/products/<%= product.id %>">
+                                <div class="
+                                            d-flex
+                                            flex-column
+                                            product-in-products-page
+                                        ">
+                                    <div class="
+                                                m-1
+                                                product-in-products-page-detail
+                                            ">
+                                        <img class="img-thumbnail padding-10" src="<%=product.preview%>"
+                                            alt="picture placeholder" />
+                                        <div class="padding-10">
+                                            <h5>
+                                                <%= product.titulo + " en "
+                                                    + product.materia %>
+                                            </h5>
+                                            <h5><%=product.grado %></h5>
+                                            <h5>
+                                                <%=product.profesor.nombre +
+                                                    " " +
+                                                    product.profesor.apellido %>
+                                            </h5>
+                                            <div>
+                                                <% let stars=0; for(let i=0;
+                                                    i <
+                                                    Math.floor(product.rating);
+                                                    i++){ stars++; %>
+                                                <i class="fas fa-star"></i>
+                                                <% } %> <% if(product.rating
+                                                    % 1 !=0) { stars++; %>
+                                                <i class="
+                                                            fas
+                                                            fa-star-half-alt
+                                                        "></i>
+                                                <% } %> <% for(let i=0; i <
+                                                    5 - stars ; i++){ %>
+                                                <i class="far fa-star"></i>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="
+                                                price-and-options
+                                                bg-shadow-pill
+                                                align-self-end
+                                                text-end
+                                            ">
+                                        <h3 class="padding-10">
+                                            <%="$" +
+                                                product.precio.toFixed(2) %>
+                                        </h3>
+                                    </div>
                                 </div>
                             </a>
                         </div>
-                        
-                        <div class="cursos-main padding-10">
-                            <h2 class="padding-10">Curso 2</h2>
-                            <a href="">
-                                <div>
-                                    <img
-                                        class="width300 padding-10"
-                                        src="/img/picture-placeholder.svg"
-                                        alt="picture placeholder"
-                                    />
-                                </div>
-                            </a>
-                        </div>
-                        
-                        <div class="cursos-main padding-10">
-                            <h2 class="padding-10">Curso 3</h2>
-                            <a href="">
-                                <div>
-                                    <img
-                                        class="width300 padding-10"
-                                        src="/img/picture-placeholder.svg"
-                                        alt="picture placeholder"
-                                    />
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    
-                <div class="search-more-courses">
-                    <h2>¿Querés aprender algo nuevo?</h2>
-                    <div class="search padding-10">
-                        <input
-                            type="search"
-                            name="main-search"
-                            id="main-search"
-                            placeholder="Busca clases, temas o profesores"
-                        />
-                        <button type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                    <div class="padding-10">
-                        <h2 class="padding-10">Navegá nuestras categorías</h2>
-                        <div>
-                            <a
-                                class="restyled-link padding-10"
-                                href="/product-detail"
-                            >
-                                <div>Matemáticas</div>
-                            </a>
-                            <a class="restyled-link padding-10" href="">
-                                <div>Ciencias</div>
-                            </a>
-                            <a class="restyled-link padding-10" href="">
-                                <div>Artes</div>
-                            </a>
-                            <a class="restyled-link padding-10" href="">
-                                <div>Tecnología</div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    </article>
+                    <% } %>
+                </section>
             </div>
-        </main>
-        
-        
-            
-            
-            
-        
-        
-        <footer>
-            <div id="footer" class="padding-10">
-                <div class="col-footer padding-10">
-                    <h3>Info</h3>
-                    <ul>
-                        <a class="restyled-link" href="">
-                            <li>info@mundosapien.edu.ar</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>¿Quiénes somos?</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Nuestro propósito</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Términos y condiciones</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Política de privacidad</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Términos de pago</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Preguntas frecuentes</li>
-                        </a>
-                    </ul>
-                </div>
-                <div id="comunidad-footer" class="col-footer padding-10">
-                    <h3>Comunidad</h3>
-                    <ul>
-                        <a class="restyled-link" href="">
-                            <li><i class="fab fa-youtube"></i> Youtube</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li><i class="fab fa-facebook"></i> Facebook</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li><i class="fab fa-instagram"></i> Instagram</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li><i class="fab fa-twitter"></i> Twitter</li>
-                        </a>
-                    </ul>
-                </div>
-                <div class="col-footer padding-10">
-                    <h3>Currícula 1er ciclo</h3>
-                    <ul>
-                        <li>Artes</li>
-                        <ul>
-                            <a class="restyled-link" href="">
-                                <li>Música</li>
-                            </a>
-                            <a class="restyled-link" href="">
-                                <li>Plástica</li>
-                            </a>
-                            <a class="restyled-link" href="">
-                                <li>Teatro</li>
-                            </a>
-                        </ul>
-                        <a class="restyled-link" href="">
-                            <li>Conocimiento del Mundo</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Educación Física</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Informática</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Matemática</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Prácticas del lenguaje</li>
-                        </a>
-                    </ul>
-                </div>
-                <div class="col-footer padding-10">
-                    <h3>Currícula 2do ciclo</h3>
-                    <ul>
-                        <li>Artes</li>
-                        <ul>
-                            <a class="restyled-link" href="">
-                                <li>Música</li>
-                            </a>
-                            <a class="restyled-link" href="">
-                                <li>Plástica</li>
-                            </a>
-                            <a class="restyled-link" href="">
-                                <li>Teatro</li>
-                            </a>
-                        </ul>
-                        <a class="restyled-link" href="">
-                            <li>Ciencias Naturales</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Ciencias Sociales</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Educación Física</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Educación Tecnológica</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Formación Ética y Ciudadana</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Informática</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Matemática</li>
-                        </a>
-                        <a class="restyled-link" href="">
-                            <li>Prácticas del lenguaje</li>
-                        </a>
-                    </ul>
-                </div>
-            </div>
-            <p id="copyright" class="padding-10">
-                Copyright &copy; Mundo Sapien 2021 -Todos los derechos
-                reservados
-            </p>
-        </footer>
-    </body>
+        </div>
+    </main>
+    <%- include("./partials/footer") %>
+</body>
+
 </html>
