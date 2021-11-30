@@ -21,7 +21,7 @@
                             <h2>Datos de la clase</h2>
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="titulo" id="titulo" placeholder="titulo"
-                                    <% if(product){ %>value="<%= product.titulo %> " <%} %> />
+                                    <% if(locals.old && old.titulo){ %>value="<%=old.titulo%>" <%} %> />
                                 <label for="titulo">Título</label>
                             </div>
                             <select class="form-select" aria-label="select año" name="grado">
@@ -71,17 +71,18 @@
                             </select>
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="contenidos" id="contenidos"
-                                    placeholder="contenidos" name="contenidos" />
+                                    placeholder="contenidos" name="contenidos"
+                                    <% if(locals.old && old.contenidos){ %>value="<%=old.contenidos%>" <%} %> />
                                 <label for="contenidos">Contenidos</label>
                             </div>
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="descripcion" id="descripcion"
-                                    name="descripcion"></textarea>
+                                    name="descripcion"><% if(locals.old && old.descripcion){ %><%=old.descripcion%> <%} %></textarea>
                                 <label for="descripcion">Descripción breve</label>
                             </div>
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="descripcionLong" id="descripcionLong"
-                                    name="descripcionLong"></textarea>
+                                    name="descripcionLong"><% if(locals.old && old.descripcionLong){ %><%=old.descripcionLong%> <%} %></textarea>
                                 <label for="descripcionLong">Descripción detallada</label>
                             </div>
                             <div class="form-floating">
@@ -110,22 +111,25 @@
                         <div class="input-group">
                             <h2>Datos del profesor</h2>
                             <div class="form-floating">
-                                <input class="form-control" type="text" name="Nombre" id="Nombre"
-                                    placeholder="Nombre" />
+                                <input class="form-control" type="text" name="Nombre" id="Nombre" placeholder="Nombre"
+                                    <% if(locals.old && old.nombre){ %>value="<%=old.nombre%>" <%} %> />
                                 <label for="Nombre">Nombre</label>
                             </div>
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="apellido" id="apellido"
-                                    placeholder="Apellido" />
+                                    placeholder="Apellido"
+                                    <% if(locals.old && old.apellido){ %>value="<%=old.apellido%>" <%} %> />
                                 <label for="apellido">Apellido</label>
                             </div>
                             <div class="form-floating">
                                 <input class="form-control" type="email" name="email" id="email"
-                                    placeholder="Correo Electrónico" />
+                                    placeholder="Correo Electrónico"
+                                    <% if(locals.old && old.email){ %>value="<%=old.email%>" <%} %> />
                                 <label for="email">Correo Electrónico</label>
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="cv" id="cv" name="cv"></textarea>
+                                <textarea class="form-control" placeholder="cv" id="cv"
+                                    name="cv"><% if(locals.old && old.cv){ %><%=old.cv%> <%} %></textarea>
                                 <label for="cv">Breve presentación (cv)</label>
                             </div>
                         </div>

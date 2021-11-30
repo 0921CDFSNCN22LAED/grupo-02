@@ -15,7 +15,7 @@ const controller = {
     productFormProcess: (req, res) => {
         console.log(req.body);
         // Products.createProduct(req.body);
-        res.redirect("/products/create", { product: req.body });
+        res.render("product-creation", { old: req.body });
     },
 };
 
