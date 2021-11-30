@@ -1,17 +1,92 @@
 /* home page */
 
-#main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+#main-nav {
+    position: fixed;
+    right: 0;
+    margin: 40px 20px;
+    z-index: 20;
+}
+
+@media (min-width: 1200px) {
+    #main-nav {
+        right: calc((100vw - 1200px) / 2 - 20px);
+    }
+}
+
+#main-nav nav {
+    float: right;
+}
+
+.nav-item {
+    background-color: var(--color-shadow);
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: var(--color-1-strong);
+}
+
+.nav-link {
+    display: none;
+    color: var(--color-1-strong);
+}
+
+.nav-link:focus,
+.nav-link:hover {
+    color: var(--color-2-strong);
+}
+
+.nav-item i {
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+#home > * {
+    padding-right: 40px;
     position: relative;
     z-index: 1;
-    padding: 40px 0;
+}
+
+.cursos-main {
+    padding: 20px;
 }
 
 .cursos-main h2 {
-    font-family: "Gotham Light", sans-serif;
+    font-family: "Gotham Black", sans-serif;
+    color: var(--color-2-strong);
+    text-shadow: 2px 2px 4px white;
+    width: 100%;
+}
+
+.clases-main-container {
+    background-color: var(--color-1-light-rgba);
+    border: 1px solid var(--color-shadow);
+    border-radius: 10px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.clases-main-item {
+    position: relative;
+    margin: 5px;
+    flex: 1 1 200px;
+}
+
+.img-thumbnail {
+    background-color: transparent;
+    border: 1px dashed var(--color-shadow);
+}
+
+.clases-main-item h4 {
+    position: absolute;
+    bottom: 0;
+    width: fit-content;
+    font-size: 100%;
+    font-family: "Gotham", sans-serif;
+    background-color: var(--color-shadow);
+    color: var(--color-2-strong);
 }
 
 #otros-cursos {
@@ -26,9 +101,59 @@
     flex: 1 0 auto;
 }
 
+.other-clases {
+    width: fit-content;
+    font-size: 100%;
+    font-family: "Gotham", sans-serif;
+    background-color: var(--color-shadow);
+    color: var(--color-2-strong);
+    border-radius: 10px;
+}
+
+#sobre-nosotros p {
+    font-size: 24px;
+}
+
+.users-comment {
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.users-comment p:first-child {
+    font-size: 24px;
+}
+.users-comment p:nth-child(2) {
+    text-align: right;
+}
+
+#comentarios form,
+#contacto form {
+    width: 100%;
+}
+
+#comentarios input,
+#contacto input {
+    margin-bottom: 10px;
+}
+
 @media (min-width: 769px) {
-    #main {
-        padding: 40px 6%;
+    .nav-link {
+        display: inline-block;
+    }
+    .nav-item i {
+        padding: 5px;
+        width: auto;
+        text-align: center;
+    }
+
+    #home > * {
+        padding-right: 160px;
+    }
+
+    #main-nav {
+        padding-right: 0px;
     }
 }
 
@@ -67,12 +192,12 @@
     display: block;
     color: var(--color-1-light);
     text-align: center;
-    width: 100%;
+    width: calc(100%-40px);
     font-family: "Gotham", sans-serif;
     background-color: var(--color-shadow);
     border: var(--color-1-light) solid 1px;
     padding: 7px;
-    margin-bottom: 20px;
+    margin: 20px !important;
 }
 
 .divider {
@@ -83,11 +208,7 @@
 .divider hr {
     display: inline-block;
     width: 40%;
-    transform: translateY(-3px);
-}
-
-.divider i {
-    font-size: 8px;
+    transform: translateY(13px);
 }
 
 #register-with h3 {
@@ -106,19 +227,13 @@
 }
 
 #iniciar-sesion p {
-    margin-bottom: 10px;
+    margin: 30px 0 10px;
 }
 
-#iniciar-sesion a {
+#iniciar-sesion button {
     display: block;
-    color: var(--color-shadow);
-    text-align: center;
     width: 100%;
-    font-family: "Gotham Black", sans-serif;
-    background-color: var(--color-1-light);
-    border: var(--color-shadow) solid 1px;
-    padding: 7px;
-    margin-bottom: 20px;
+    font-size: 20px;
 }
 
 .login-cred {
@@ -127,144 +242,63 @@
     border-radius: 20px;
 }
 
-.login-cred label {
-    color: var(--color-1-strong);
-    font-family: "Gotham", sans-serif;
-    padding: 10px 0;
-}
-
-.login-cred input {
-    display: block;
-    width: 100%;
-    margin: 10px 0 20px;
-    padding: 3px;
-}
-.login-cred input:focus {
-    outline: none;
+.login-cred form div {
+    margin-bottom: 10px;
 }
 
 .login-cred button {
     display: block;
-    color: var(--color-shadow);
-    text-align: center;
     width: 100%;
-    font-family: "Gotham Black", sans-serif;
-    background-color: var(--color-1-light);
-    border: var(--color-shadow) solid 1px;
-    padding: 7px;
-    margin-bottom: 20px;
+}
+
+#nuestro-proyecto p {
+    margin: 20px 0 20px 40px;
+    font-size: 20px;
+    font-family: "Gotham Thin", sans-serif;
+}
+
+#nuestro-proyecto .carousel-item {
+    width: 300px;
+    height: 188px;
+    object-fit: cover;
 }
 
 /* Login */
 
-#register-with,
-#iniciar-sesion,
-#nuestro-proyecto {
-    /* filter: blur(8px); */
+#loginModal .modal-content {
+    background-color: var(--color-1-light);
 }
 
-#login-pop-up {
-    display: none;
-    position: absolute;
-    background-color: var(--color-shadow);
-    margin: 5% auto;
-    width: 400px;
-    padding: 20px;
-    border-radius: 20px;
+#loginModal form div {
+    margin-bottom: 20px;
+}
+
+#loginModal #login-media-modal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#login-media-modal label {
+    width: 100%;
+}
+
+#login-media-modal button {
+    font-size: 24px;
+    margin: 10px;
 }
 
 /* carrito */
 
 #cart-main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    z-index: 1;
-    align-items: center;
-    font-family: "EB Garamond", serif;
-    color: var(--color-shadow);
+    padding-top: 40px;
 }
 
-#cart-details {
-    max-width: 800px;
+.price-and-options div p {
+    margin-bottom: 0;
 }
 
-#cart-details h2 {
-    font-family: "Gotham ", sans-serif;
-    font-size: 50px;
-    color: var(--color-shadow);
-    margin-top: 30px;
-}
-
-.cart-course {
-    background-color: white;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.inner-border {
-    border: var(--color-shadow) solid 1px;
-}
-
-.cart-course-data {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.cart-course-data h3,
-.cart-course-data h4 {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.price-and-options {
-    display: flex;
-    justify-content: space-between;
-    font-family: "EB Garamond", serif;
-    color: var(--color-1-strong);
-}
-
-.price-and-options span {
-    font-size: 30px;
-}
-
-.pay {
-    background-color: white;
-    font-size: 30px;
-    max-width: 400px;
-    margin: auto;
-    padding: 5px;
-}
-
-.pay p {
-    margin-bottom: 30px;
-}
-
-.pay p:first-child {
-    font-family: "Gotham Light", sans-serif;
-}
-
-.pay p:nth-child(2),
-.pay p a {
-    font-family: "Gotham Black", sans-serif;
-}
-
-.pay button {
-    width: 100%;
-    background-color: var(--color-1-strong);
-    color: white;
-    font-family: "Gotham Black", sans-serif;
-    margin: 30px 0px;
-}
-
-.cart-recomendations {
-    margin-bottom: 40px;
-}
-
-@media (min-width: 481px) {
-    .cart-course-details {
-        display: flex;
-    }
+.cart-recommendation {
+    max-width: 300px;
 }
 
 /* products page */
@@ -325,83 +359,36 @@
 
 /* product-detail */
 
-#product-detail-main {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+/* product-creation */
+
+#product-creation-main {
+    margin: auto;
+    max-width: 800px;
 }
 
-.course-info {
-    max-width: 500px;
-}
-.course-info-short h3 {
-    font-family: "Gotham", sans-serif;
-    font-size: 30px;
-}
-
-.course-info-short p {
-    margin-bottom: 10px;
+#product-creation-main h2 {
+    font-family: "Gotham ", sans-serif;
+    font-size: 50px;
+    color: var(--color-shadow);
+    margin-top: 30px;
 }
 
-.course-info-short h4 {
-    margin: 10px 0px;
-    font-family: "Gotham Light", sans-serif;
-    font-size: 24px;
-}
-
-.course-description h4 {
-    font-size: 20px;
-}
-.course-description ul {
-    list-style-type: none;
-}
-
-.course-description dl dt {
-    margin: 20px 0 10px;
-    font-weight: 600;
-    font-size: 18px;
-}
-
-.course-description dl dd div {
+#product-creation-main .form-floating,
+#product-creation-main .form-select,
+#product-creation-main .upload {
+    width: 100%;
     margin-top: 10px;
 }
 
-.course-buy-now {
-    max-width: 300px;
-    margin: 40px 0;
-    height: fit-content;
-    background-color: white;
-    padding: 5px;
+#product-creation-main .upload label {
+    margin: 10px 0px;
+    font-family: "Gotham Light", sans-serif;
+    font-size: 16px;
 }
 
-.course-buy-now p:first-child {
-    font-size: 24px;
-    margin: 30px 0;
-}
-
-.course-buy-now p:nth-child(2) {
-    font-size: 30px;
-    margin: 30px 0;
-    color: var(--color-1-strong);
-}
-
-.course-buy-now button {
-    font-size: 24px;
-    padding: 5px;
-    width: 100%;
-    background-color: var(--color-1-strong);
-    color: white;
-    font-family: "Gotham Black", sans-serif;
-    margin-bottom: 30px;
-}
-
-.course-buy-now ul {
-    list-style-type: none;
-}
-
-.course-buy-now ul li {
-    margin: 10px 0;
+#product-creation-main button {
+    margin-top: 40px;
+    float: right;
 }
 
 /* product-creation */

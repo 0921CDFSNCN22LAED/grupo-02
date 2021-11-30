@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "nombre": "Fracciones I",
+        "titulo": "Fracciones I",
         "materia": "Matemática",
         "grado": "5to año",
         "profesor": {
@@ -36,7 +36,7 @@
     },
     {
         "id": 2,
-        "nombre": "Sustantivos",
+        "titulo": "Sustantivos",
         "materia": "Práctica de lenguaje",
         "grado": "5to año",
         "profesor": {

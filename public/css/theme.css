@@ -45,9 +45,66 @@
     width: 300px;
 }
 
+.height-100 {
+    height: 100%;
+}
+
+.center-with-margin {
+    margin: auto;
+}
+
+.z-index-1 {
+    position: relative;
+    z-index: 1;
+}
+
 .restyled-link {
     color: inherit;
     text-decoration: inherit;
+}
+
+.bg-shadow-pill {
+    background-color: var(--color-shadow);
+    padding: 20px;
+    border-radius: 20px;
+    color: var(--color-1-light);
+    font-family: "Gotham Light", sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--color-1-strong);
+    border-color: var(--color-1-strong);
+    margin-left: 10px;
+}
+.btn-primary:hover {
+    background-color: var(--color-2-strong);
+}
+
+.ms-primary-btn {
+    color: var(--color-shadow);
+    text-align: center;
+    font-family: "Gotham Black", sans-serif;
+    background-color: var(--color-1-light);
+    border: var(--color-shadow) solid 1px;
+    padding: 7px;
+    margin-bottom: 20px;
+}
+
+.btn:focus,
+.btn:active {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(58, 58, 63, 0.25);
+}
+
+.form-control:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(58, 58, 63, 0.25);
+}
+
+.img-logo-mini {
+    width: 20px;
 }
 
 html,
@@ -56,8 +113,8 @@ body {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     background-color: var(--color-1-light);
 }
 main {
@@ -88,15 +145,22 @@ footer {
     position: relative;
     z-index: 0;
 }
+
 .logo-title {
     width: 100%;
     position: relative;
 }
+
+.logo-title a {
+    text-decoration: none;
+}
+
 .logo-title h1 {
     width: 100%;
     margin: 0 auto;
     text-align: right;
     font-family: "Gotham", sans-serif;
+    font-size: 36px;
     margin: 0px;
     padding: 10px;
     color: var(--color-1-light);
@@ -168,6 +232,14 @@ footer {
     font-size: 40px;
 }
 
+.badge {
+    font-size: 0.5em;
+}
+
+.nav-bar a:hover {
+    color: var(--color-1-light);
+}
+
 @media (min-width: 481px) {
     .logo-title {
         order: -2;
@@ -199,7 +271,8 @@ footer {
 @media (min-width: 1200px) {
     #header,
     #footer,
-    #main {
+    #main,
+    .max1200px {
         max-width: 1200px;
         margin: auto;
     }
@@ -214,6 +287,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     color: var(--color-1-light);
+    position: relative;
 }
 
 .col-footer {
@@ -226,12 +300,20 @@ footer {
     margin-bottom: 10px;
 }
 
+.col-footer a:hover {
+    color: var(--color-1-strong);
+}
+
 .col-footer ul {
     list-style-type: none;
 }
 
 .col-footer ul li {
     line-height: 2em;
+}
+
+.col-footer a:hover {
+    color: var(--color-1-strong);
 }
 
 .col-footer ul > ul > a > li {

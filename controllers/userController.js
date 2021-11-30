@@ -8,11 +8,28 @@ if (products == "") {
     products = JSON.parse(products);
 }
 
-const cartIds = [1];
+const cartIds = [1, 2];
+const clasesActualesId = [1];
+const comentarios = [
+    {
+        nombre: "Juan Rodriguez",
+        resena: "Muy linda la página, me gusta que cambien los fondos al pasar por el home",
+    },
+    {
+        nombre: "José Perez",
+        resena: "Va muy bien, a seguir trabajando!!!",
+    },
+];
 
 const controller = {
     home: (req, res) => {
-        return res.render("home");
+        return res.render("home", {
+            clasesActuales: products.filter((product) =>
+                clasesActualesId.includes(Number(product.id))
+            ),
+            clases: products,
+            comentarios: comentarios,
+        });
     },
     register: (req, res) => {
         return res.render("register");

@@ -1,112 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
         <%- include("./partials/head") %>
+    </head>
     <body>
-        <%- include("./partials/header") %>
-        <main>
-            <div id="product-detail-main" class="">
-                <div class="course-info padding-10">
-                    <div class="course-info-short padding-10">
-                        <div>
-                            <span> <%= chosenProduct.grado %></span>
-                            <i class="fas fa-caret-right"></i>
-                            <span> <%= chosenProduct.materia %> </span>
-                        </div>
-                        <h3><%= chosenProduct.nombre %></h3>
-                        <img
-                            class="width300 padding-10"
-                            src="<%=chosenProduct.preview %>"
-                            alt="picture placeholder"
-                        />
-                        <p><%=chosenProduct.descripcion %></p>
-                        <div>
-                            <% let stars = 0%> <% for(let i = 0; i <
-                            Math.floor(chosenProduct.rating); i++){ stars++;
-                            %>
-                            <i class="fas fa-star"></i>
-                            <% } %> <% if(chosenProduct.rating % 1 != 0) {
-                            stars++; %>
-                            <i class="fas fa-star-half-alt"></i>
-                            <% } %> <% for(let i = 0; i < 5 - stars ; i++){ %>
-                            <i class="far fa-star"></i>
-                            <% } %>
-                        </div>
-                        <h4>
-                            <%=chosenProduct.profesor.nombre + " " +
-                            chosenProduct.profesor.apellido %>
-                        </h4>
-                    </div>
-                    <div class="course-description padding-10">
-                        <h4>Lo que aprenderás</h4>
-                        <dl>
-                            <dt>Descripción de la clase:</dt>
-                            <dd><%= chosenProduct.descripcionLong %></dd>
-                            <dt>Contenidos de la clase</dt>
-                            <% for(let tema of chosenProduct.contenidos){%>
-                            <dd><%= tema %></dd>
-                            <% } %>
-                            <dt>Profesor</dt>
-                            <dd>
+        <header><%- include("./partials/header") %></header>
+        <main class="container-fluid">
+            <div class="row max1200px z-index-1">
+                <div class="col-12 col-md-2"></div>
+                <section class="col-12 col-md-4 cursos-main padding-10">
+                    <div class="clases-main-container">
+                        <article class="clases-main-item padding-10">
+                            <div>
+                                <span> <%= chosenProduct.grado %></span>
+                                <i class="fas fa-caret-right"></i>
+                                <span> <%= chosenProduct.materia %> </span>
+                            </div>
+                            <h2><%= chosenProduct.titulo %></h2>
+                            <img
+                                class="img-thumbnail padding-10"
+                                src="<%=chosenProduct.preview %>"
+                                alt="picture placeholder"
+                            />
+                            <p><%=chosenProduct.descripcion %></p>
+                            <div>
+                                <% let stars = 0%> <% for(let i = 0; i <
+                                Math.floor(chosenProduct.rating); i++){ stars++;
+                                %>
+                                <i class="fas fa-star"></i>
+                                <% } %> <% if(chosenProduct.rating % 1 != 0) {
+                                stars++; %>
+                                <i class="fas fa-star-half-alt"></i>
+                                <% } %> <% for(let i = 0; i < 5 - stars ; i++){
+                                %>
+                                <i class="far fa-star"></i>
+                                <% } %>
+                            </div>
+                            <h3>
                                 <%=chosenProduct.profesor.nombre + " " +
                                 chosenProduct.profesor.apellido %>
-                            </dd>
-                            <dt>Reseñas</dt>
-
-                            <% for(let resena of chosenProduct.resenas){%>
-                            <dd>
-                                <div>
-                                    <% let stars = 0%> <% for(let i = 0; i <
-                                    Math.floor(resena.rating); i++){ stars++; %>
-                                    <i class="fas fa-star"></i>
-                                    <% } %> <% if(resena.rating % 1 != 0) {
-                                    stars++; %>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <% } %> <% for(let i = 0; i < 5 - stars ;
-                                    i++){ %>
-                                    <i class="far fa-star"></i>
-                                    <% } %>
-                                </div>
-                                <%= resena.comentario %>
-                            </dd>
-                            <% } %>
-
-                            <dt>Clases similares</dt>
-                            <% for(let clase of chosenProduct.clasesSimilares) {
-                            %>
-                            <dd><%= clase.nombre %></dd>
-
-                            <% } %>
-                        </dl>
+                            </h3>
+                        </article>
+                        <article class="course-description padding-10">
+                            <h4>Lo que aprenderás</h4>
+                            <dl>
+                                <dt>Descripción de la clase:</dt>
+                                <dd><%= chosenProduct.descripcionLong %></dd>
+                                <dt>Contenidos de la clase</dt>
+                                <% for(let tema of chosenProduct.contenidos){%>
+                                <dd><%= tema %></dd>
+                                <% } %>
+                                <dt>Profesor</dt>
+                                <dd>
+                                    <%=chosenProduct.profesor.titulo + " " +
+                                    chosenProduct.profesor.apellido %>
+                                </dd>
+                                <dt>Reseñas</dt>
+                                <% for(let resena of chosenProduct.resenas){%>
+                                <dd>
+                                    <div>
+                                        <% let stars = 0%> <% for(let i = 0; i <
+                                        Math.floor(resena.rating); i++){
+                                        stars++; %>
+                                        <i class="fas fa-star"></i>
+                                        <% } %> <% if(resena.rating % 1 != 0) {
+                                        stars++; %>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <% } %> <% for(let i = 0; i < 5 - stars
+                                        ; i++){ %>
+                                        <i class="far fa-star"></i>
+                                        <% } %>
+                                    </div>
+                                    <%= resena.comentario %>
+                                </dd>
+                                <% } %>
+                                <dt>clases similares</dt>
+                                <% for(let clase of
+                                chosenProduct.clasesSimilares) { %>
+                                <dd><%= clase.titulo %></dd>
+                                <% } %>
+                            </dl>
+                        </article>
                     </div>
-                </div>
-                <div class="course-buy-now">
-                    <div class="inner-border padding-10">
-                        <p>
-                            <%= chosenProduct.nombre + " " +
-                            chosenProduct.materia + " " + chosenProduct.grado%>
-                        </p>
-                        <p><%="$" + chosenProduct.precio.toFixed(2) %></p>
-                        <form action="/cart">
-                            <button type="submit">Comprar ahora</button>
-                        </form>
-                        <h5>Esta clase incluye</h5>
-                        <ul>
-                            <li>
-                                <%= chosenProduct.duracionVideoHoras %> <%
-                                if(chosenProduct.duracionVideoHoras / 1 > 1) {
-                                %> horas <%} else { %> hora <% } %> de video
-                            </li>
-                            <% if(chosenProduct.materialExtra) { %>
-                            <li>Material extra descargable</li>
-                            <% } %>
-
-                            <li>Acceso de por vida</li>
-                            <% if(chosenProduct.responsive) { %>
-                            <li>Acceso en dispositivos móviles</li>
-                            <% } %> <% if(chosenProduct.certificado) { %>
-                            <li>Certificación de finalización</li>
-                            <% } %>
-                        </ul>
+                </section>
+                <section
+                    class="
+                        col-12 col-md-4
+                        align-self-start
+                        cursos-main
+                        padding-10
+                    "
+                >
+                    <div class="clases-main-container padding-10">
+                        <div class="clases-main-item">
+                            <h3>
+                                <%= chosenProduct.titulo + " " +
+                                chosenProduct.materia + " " +
+                                chosenProduct.grado%>
+                            </h3>
+                            <div class="bg-shadow-pill my-5">
+                                <h3>
+                                    <%="$" + chosenProduct.precio.toFixed(2) %>
+                                </h3>
+                                <form class="" action="/cart">
+                                    <button
+                                        class="btn btn-primary btn-lg"
+                                        type="submit"
+                                    >
+                                        Comprar ahora
+                                    </button>
+                                </form>
+                            </div>
+                            <h5>Esta clase incluye</h5>
+                            <ul>
+                                <li>
+                                    <%= chosenProduct.duracionVideoHoras %> <%
+                                    if(chosenProduct.duracionVideoHoras / 1 > 1)
+                                    { %> horas <%} else { %> hora <% } %> de
+                                    video
+                                </li>
+                                <% if(chosenProduct.materialExtra) { %>
+                                <li>Material extra descargable</li>
+                                <% } %>
+                                <li>Acceso de por vida</li>
+                                <% if(chosenProduct.responsive) { %>
+                                <li>Acceso en dispositivos móviles</li>
+                                <% } %> <% if(chosenProduct.certificado) { %>
+                                <li>Certificación de finalización</li>
+                                <% } %>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
         </main>
         <%- include("./partials/footer") %>
