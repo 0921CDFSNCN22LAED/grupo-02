@@ -25,49 +25,25 @@
                                 <label for="titulo">Título</label>
                             </div>
                             <select class="form-select" aria-label="select año" name="grado">
-                                <option selected>Seleccioná el año</option>
-                                <option value="1er">1er año</option>
-                                <option value="2do">2do año</option>
-                                <option value="3er">3er año</option>
-                                <option value="4to">4to año</option>
-                                <option value="5to">5to año</option>
-                                <option value="6to">6to año</option>
-                                <option value="7mo">7mo año</option>
+                                <option>Seleccioná el año</option>
+
+                                <% for (let grado of grados) { %>
+                                <option value="<%= grado %>" <%  if(locals.old && old.grado == grado){ %><%="selected"%>
+                                    <%} %>>
+                                    <%= grado %> año</option>
+                                <% } %>
                             </select>
                             <select class="form-select" aria-label="select materia" name="materia">
-                                <option selected>
+                                <option>
                                     Seleccioná la materia
                                 </option>
-                                <option value="musica">Música</option>
-                                <option value="plastica">Plástica</option>
-                                <option value="teatro">Teatro</option>
-                                <option value="ciencias-naturales">
-                                    Ciencias Naturales
+                                <% for(let materia of materias) { %>
+
+                                <option value="<%= materia %>"
+                                    <%  if(locals.old && old.materia == materia){ %><%="selected"%><% } %>>
+                                    <%= materia %>
                                 </option>
-                                <option value="ciencias-sociales">
-                                    Ciencias Sociales
-                                </option>
-                                <option value="conocimiento-del-mundo">
-                                    Conocimiento del Mundo
-                                </option>
-                                <option value="educacion-fisica">
-                                    Educación Física
-                                </option>
-                                <option value="educacion-tecnologica">
-                                    Educación Tecnológica
-                                </option>
-                                <option value="formacion-etica">
-                                    Formación Ética y Ciudadana
-                                </option>
-                                <option value="informatica">
-                                    Informática
-                                </option>
-                                <option value="matematica">
-                                    Matemática
-                                </option>
-                                <option value="practicas-del-lenguaje">
-                                    Práctica del lenguaje
-                                </option>
+                                <% } %>
                             </select>
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="contenidos" id="contenidos"
@@ -87,7 +63,8 @@
                             </div>
                             <div class="form-floating">
                                 <input type="text" class="form-control" name="precio" aria-label="precio"
-                                    placeholder="precio" />
+                                    placeholder="precio" <% if(locals.old && old.precio){ %>value="<%=old.precio%>"
+                                    <%} %> />
                                 <label for="precio">Precio</label>
                             </div>
                             <div class="upload">
@@ -111,9 +88,9 @@
                         <div class="input-group">
                             <h2>Datos del profesor</h2>
                             <div class="form-floating">
-                                <input class="form-control" type="text" name="Nombre" id="Nombre" placeholder="Nombre"
+                                <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Nombre"
                                     <% if(locals.old && old.nombre){ %>value="<%=old.nombre%>" <%} %> />
-                                <label for="Nombre">Nombre</label>
+                                <label for="nombre">Nombre</label>
                             </div>
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="apellido" id="apellido"

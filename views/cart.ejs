@@ -21,104 +21,106 @@
                     </p>
                     <section class="clases-main-container">
                         <% for(let cursoEnCarrito of enCarrito){ %>
-                            <article class=" clases-main-item align-self-stretch">
-                                <div class="d-flex flex-column justify-content-between height-100">
-                                    <div class="center-with-margin">
-                                        <img class="img-thumbnail padding-10" src="<%=cursoEnCarrito.preview%>"
-                                            alt="picture placeholder" />
-                                        <div class="padding-10 ">
-                                            <h5>
-                                                <%= cursoEnCarrito.titulo + " en " + cursoEnCarrito.materia %>
-                                            </h5>
-                                            <h5>
-                                                <%=cursoEnCarrito.grado %>
-                                            </h5>
-                                            <h5>
-                                                <%=cursoEnCarrito.profesor.nombre + " " +
+                        <article class=" clases-main-item align-self-stretch">
+                            <div class="d-flex flex-column justify-content-between height-100">
+                                <div class="center-with-margin">
+                                    <img class="img-thumbnail padding-10"
+                                        src="/img/clases-preview/<%=cursoEnCarrito.preview%>"
+                                        alt="picture placeholder" />
+                                    <div class="padding-10 ">
+                                        <h5>
+                                            <%= cursoEnCarrito.titulo + " en " + cursoEnCarrito.materia %>
+                                        </h5>
+                                        <h5>
+                                            <%=cursoEnCarrito.grado %>
+                                        </h5>
+                                        <h5>
+                                            <%=cursoEnCarrito.profesor.nombre + " " +
                                                     cursoEnCarrito.profesor.apellido %>
-                                            </h5>
-                                            <div>
-                                                <% let stars=0; for(let i=0; i < Math.floor(cursoEnCarrito.rating);
+                                        </h5>
+                                        <div>
+                                            <% let stars=0; for(let i=0; i < Math.floor(cursoEnCarrito.rating);
                                                     i++){ stars++; %>
-                                                    <i class="fas fa-star"></i>
-                                                    <% } %>
-                                                        <% if(cursoEnCarrito.rating % 1 !=0) { stars++; %>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                            <% } %>
-                                                                <% for(let i=0; i < 5 - stars ; i++){ %>
-                                                                    <i class="far fa-star"></i>
-                                                                    <% } %>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="price-and-options bg-shadow-pill align-self-end  text-end">
-                                        <h3 class="padding-10">
-                                            <%="$" + cursoEnCarrito.precio.toFixed(2) %>
-                                        </h3>
-                                        <div class="padding-10">
-                                            <p>eliminar</p>
-                                            <p>guardar en favoritos</p>
+                                            <i class="fas fa-star"></i>
+                                            <% } %>
+                                            <% if(cursoEnCarrito.rating % 1 !=0) { stars++; %>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <% } %>
+                                            <% for(let i=0; i < 5 - stars ; i++){ %>
+                                            <i class="far fa-star"></i>
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
-                            </article>
-                            <% } %>
+                                <div class="price-and-options bg-shadow-pill align-self-end  text-end">
+                                    <h3 class="padding-10">
+                                        <%="$" + cursoEnCarrito.precio.toFixed(2) %>
+                                    </h3>
+                                    <div class="padding-10">
+                                        <p>eliminar</p>
+                                        <p>guardar en favoritos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <% } %>
                     </section>
                 </div>
                 <div class="padding-10 row">
                     <div class="pay bg-shadow-pill padding-10 d-flex">
-                        <p >
+                        <p>
                             <% if(enCarrito.length> 1) { %>
-                                <h3 class="padding-10">Total: $<%= enCarrito.reduce((a, b)=> b.precio +
+                        <h3 class="padding-10">Total: $<%= enCarrito.reduce((a, b)=> b.precio +
                                         a.precio).toFixed(2) %></h3>
-                                <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
-                                <% } else if(enCarrito.length===1){ %>
-                                    <h3>Total: $<%= enCarrito[0].precio.toFixed(2) %>
-                                    </h3>
-                                    <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
-                                    <% } else { %>
-                                        <h3>¡Elegí alguna de nuestras clases en nuestra <a href="products-page">página
-                                                de
-                                                clases</a>!</h3>
-                                        <% } %>
+                        <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
+                        <% } else if(enCarrito.length===1){ %>
+                        <h3>Total: $<%= enCarrito[0].precio.toFixed(2) %>
+                        </h3>
+                        <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
+                        <% } else { %>
+                        <h3>¡Elegí alguna de nuestras clases en nuestra <a href="products-page">página
+                                de
+                                clases</a>!</h3>
+                        <% } %>
                         </p>
                     </div>
                 </div>
-                </div>
-            </section>
-            <section class="row max1200px padding-10 z-index-1">
-                <div class="cursos-main clases-main-container justify-content-center padding-10">
-                        <h2 class="padding-10">También podría gustarte...</h2>
-                        <section class="d-flex flex-wrap justify-content-center" >
-                            <% for(let recommendation of recommendations){ %>
-                                <article>
-                                    <div class="cart-recommendation clases-main-item align-self-stretch  padding-10">
-                                        <a class="" href="/products/<%= recommendation.id %> ">
-                                            <img class="padding-10 img-thumbnail" src="<%=recommendation.preview %> "
-                                                alt="<%= recommendation.titulo %> " />
-                                            <h4 class="padding-10">
-                                                <%= recommendation.titulo %>
-                                            </h4>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <% let stars=0%>
-                                            <% for(let i=0; i < Math.floor(recommendation.rating); i++){ stars++; %>
-                                                <i class="fas fa-star"></i>
-                                                <% } %>
-                                                    <% if(recommendation.rating % 1 !=0) { stars++; %>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <% } %>
-                                                            <% for(let i=0; i < 5 - stars ; i++){ %>
-                                                                <i class="far fa-star"></i>
-                                                                <% } %>
-                                    </div>
-                                </article>
-                                <% } %>
-                        </section>
-                </div>
-            </section>
-        
+            </div>
+        </section>
+        <section class="row max1200px padding-10 z-index-1">
+            <div class="cursos-main clases-main-container justify-content-center padding-10">
+                <h2 class="padding-10">También podría gustarte...</h2>
+                <section class="d-flex flex-wrap justify-content-center">
+                    <% for(let recommendation of recommendations){ %>
+                    <article>
+                        <div class="cart-recommendation clases-main-item align-self-stretch  padding-10">
+                            <a class="" href="/products/<%= recommendation.id %> ">
+                                <img class="padding-10 img-thumbnail"
+                                    src="/img/clases-preview/<%=recommendation.preview %> "
+                                    alt="<%= recommendation.titulo %> " />
+                                <h4 class="padding-10">
+                                    <%= recommendation.titulo %>
+                                </h4>
+                            </a>
+                        </div>
+                        <div>
+                            <% let stars=0%>
+                            <% for(let i=0; i < Math.floor(recommendation.rating); i++){ stars++; %>
+                            <i class="fas fa-star"></i>
+                            <% } %>
+                            <% if(recommendation.rating % 1 !=0) { stars++; %>
+                            <i class="fas fa-star-half-alt"></i>
+                            <% } %>
+                            <% for(let i=0; i < 5 - stars ; i++){ %>
+                            <i class="far fa-star"></i>
+                            <% } %>
+                        </div>
+                    </article>
+                    <% } %>
+                </section>
+            </div>
+        </section>
+
     </main>
     <%- include("./partials/footer") %>
 </body>

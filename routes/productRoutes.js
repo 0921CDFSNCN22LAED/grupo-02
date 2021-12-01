@@ -9,7 +9,24 @@ router.get("/", productController.list);
 
 //Create
 router.get("/create", productController.productForm);
-router.post("/", upload.single("video"), productController.productFormProcess);
+router.post(
+    "/",
+    upload.fields([
+        {
+            name: "video",
+            maxCount: 1,
+        },
+        {
+            name: "materialExtra",
+            maxCount: 1,
+        },
+        {
+            name: "preview",
+            maxCount: 1,
+        },
+    ]),
+    productController.productFormProcess
+);
 
 //Read Detail
 router.get("/:id", productController.detail);

@@ -13,6 +13,9 @@ const Products = {
             products = JSON.parse(products);
         }
         let duracionVideoHoras = function (chosenProduct) {
+            if (chosenProduct.duracionVideo == "") {
+                return "";
+            }
             let horas = Math.floor(chosenProduct.duracionVideo / 60);
             let minutos = chosenProduct.duracionVideo % 60;
             let minutosFraccionHora = minutos / 60;
@@ -20,6 +23,9 @@ const Products = {
         };
 
         let rating = function (chosenProduct) {
+            if (chosenProduct.resenas == "") {
+                return "";
+            }
             return (
                 Math.round(
                     (chosenProduct.resenas.reduce(
@@ -57,32 +63,42 @@ const Products = {
     },
     createProduct: function (productData) {
         let allClases = this.findAll();
+        let [productDataBody, productDataFiles] = productData;
         let newClase = {
             id: this.generateId(),
-            titulo: productData.titulo,
-            materia: productData.materia,
-            grado: productData.grado,
+            titulo: productDataBody.titulo,
+            materia: productDataBody.materia,
+            grado: productDataBody.grado,
             profesor: {
-                nombre: productData.nombre,
-                apellido: productData.apellido,
-                email: productData.email,
+                nombre: productDataBody.nombre,
+                apellido: productDataBody.apellido,
+                email: productDataBody.email,
             },
             rating: "",
-            precio: productData.precio,
-            preview: "preview.png",
-            descripcion: productData.descripcion,
-            descripcionLong: productData.descripcionLong,
-            contenidos: productData.contenidos.split(/[\s,.]+/),
+            precio: Number(productDataBody.precio),
+            preview: productDataFiles.preview
+                ? productDataFiles.preview[0].filename
+                : "",
+            descripcion: productDataBody.descripcion,
+            descripcionLong: productDataBody.descripcionLong,
+            contenidos: productDataBody.contenidos.split(/[\s,.]+/),
             resenas: [],
             clasesSimilares: [],
+            video: productDataFiles.video
+                ? productDataFiles.video[0].filename
+                : "",
             duracionVideo: "",
             duracionVideoHoras: "",
-            materialExtra: true,
+            materialExtra: productDataFiles.materialExtra
+                ? productDataFiles.materialExtra[0].filename
+                : "",
+            hayMaterialExtra: productDataFiles.materialExtra ? true : false,
             responsive: true,
             certificado: false,
         };
         allClases.push(newClase);
         fs.writeFileSync(this.fileName, JSON.stringify(allClases, null, " "));
+        console.log(newClase);
         return newClase;
     },
 };

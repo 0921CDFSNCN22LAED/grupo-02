@@ -49,7 +49,7 @@
                         <h2 class="padding-10">Cursos actuales</h2>
                         <% for(let clase of clasesActuales){ %>
                         <a class="clases-main-item" href="/products/<%= clase.id %> ">
-                            <img class="padding-10 img-thumbnail" src="<%= clase.preview %> "
+                            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %> "
                                 alt="<%= clase.titulo %> " />
                             <h4 class="padding-10"><%= clase.titulo %></h4>
                         </a>
@@ -61,7 +61,7 @@
                         <h2 class="padding-10">Sugerencias</h2>
                         <% for(let clase of recommendations){ %>
                         <a class="clases-main-item" href="/products/<%= clase.id %> ">
-                            <img class="padding-10 img-thumbnail" src="<%= clase.preview %> "
+                            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %> "
                                 alt="<%= clase.titulo %> " />
                             <h4 class="padding-10"><%= clase.titulo %></h4>
                         </a>
@@ -74,7 +74,7 @@
                         <% for(let clase of clasesActuales){ %>
                         <a href="/products/<%= clase.id %> ">
                             <div class="clases-main-item">
-                                <img class="padding-10 img-thumbnail" src="<%= clase.preview %> "
+                                <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %> "
                                     alt="<%= clase.titulo %> " />
                                 <h4 class="padding-10">
                                     <%= clase.titulo %>

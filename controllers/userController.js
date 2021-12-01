@@ -1,12 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-let products = fs.readFileSync(path.join(__dirname, "../data/products.json"));
-if (products == "") {
-    products = [];
-} else {
-    products = JSON.parse(products);
-}
+const Products = require("../models/Products");
 
 const cartIds = [1, 2];
 const clasesActualesId = [1];
@@ -24,13 +19,15 @@ const comentarios = [
 const controller = {
     home: (req, res) => {
         return res.render("home", {
-            clasesActuales: products.filter((product) =>
+            clasesActuales: Products.findAll().filter((product) =>
                 clasesActualesId.includes(Number(product.id))
             ),
             recommendations: [
-                products[Math.floor(Math.random() * products.length)],
+                Products.findAll()[
+                    Math.floor(Math.random() * Products.findAll().length)
+                ],
             ],
-            clases: products,
+            clases: Products.findAll(),
             comentarios: comentarios,
         });
     },
@@ -39,11 +36,14 @@ const controller = {
     },
     cart: (req, res) => {
         return res.render("cart", {
-            enCarrito: products.filter((product) =>
+            enCarrito: Products.findAll().filter((product) =>
                 cartIds.includes(Number(product.id))
             ),
-            recommendations: products,
+            recommendations: Products.findAll(),
         });
+    },
+    success: (req, res) => {
+        return res.render("success");
     },
 };
 

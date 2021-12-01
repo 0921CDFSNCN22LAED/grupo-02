@@ -10,7 +10,7 @@
         },
         "rating": 3.5,
         "precio": 450,
-        "preview": "/img/clases-preview/Fracciones5to.png",
+        "preview": "Fracciones5to.png",
         "descripcion": "Esta clase es una introducción a las fracciones",
         "descripcionLong": "Esta clase es una introducción a las fracciones donde aprenderás conceptos como numerador y denominador...",
         "contenidos": ["Numerador", "Denominador"],
@@ -51,7 +51,7 @@
         },
         "rating": 4.5,
         "precio": 450,
-        "preview": "/img/clases-preview/Sustantivos5to.png",
+        "preview": "Sustantivos5to.png",
         "descripcion": "Esta clase es sobre la clasificación de sustantivos",
         "descripcionLong": "En esta clase veremos como pueden clasificarse los sustantivos en propios y comunes y la subdivisión de los sustantivos comunes en... ",
         "contenidos": [
@@ -90,7 +90,7 @@
         },
         "rating": 4.5,
         "precio": 450,
-        "preview": "/img/clases-preview/Sustantivos5to.png",
+        "preview": "Sustantivos5to.png",
         "descripcion": "Esta clase es sobre la clasificación de sustantivos",
         "descripcionLong": "En esta clase veremos como pueden clasificarse los sustantivos en propios y comunes y la subdivisión de los sustantivos comunes en... ",
         "contenidos": [
@@ -129,7 +129,7 @@
         },
         "rating": 3.5,
         "precio": 450,
-        "preview": "/img/clases-preview/Fracciones5to.png",
+        "preview": "Fracciones5to.png",
         "descripcion": "Esta clase es una introducción a las fracciones",
         "descripcionLong": "Esta clase es una introducción a las fracciones donde aprenderás conceptos como numerador y denominador...",
         "contenidos": ["Numerador", "Denominador"],
@@ -153,9 +153,37 @@
                 "nombre": "Fracciones II"
             }
         ],
+        "video": "",
         "duracionVideo": 60,
         "duracionVideoHoras": 1,
-        "materialExtra": true,
+        "materialExtra": "",
+        "hayMaterialExtra": true,
+        "responsive": true,
+        "certificado": false
+    },
+    {
+        "id": 5,
+        "titulo": "Fracciones III",
+        "materia": "Matemática",
+        "grado": "5to",
+        "profesor": {
+            "nombre": "Juan",
+            "apellido": "Dominguez",
+            "email": "j.dominguez@mail.com"
+        },
+        "rating": "",
+        "precio": 500,
+        "preview": "preview-1638351847364.png",
+        "descripcion": "Más sobre fracciones",
+        "descripcionLong": "Mucho más sobre fracciones",
+        "contenidos": ["denominador", "numerador"],
+        "resenas": [],
+        "clasesSimilares": [],
+        "video": "video-1638351847352.png",
+        "duracionVideo": "",
+        "duracionVideoHoras": "",
+        "materialExtra": "",
+        "hayMaterialExtra": false,
         "responsive": true,
         "certificado": false
     }
