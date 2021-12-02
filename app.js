@@ -1,20 +1,13 @@
-const express = require("express");
 const path = require("path");
-const methodOverride = require("method-override");
 
-const app = express();
-app.set("view engine", "ejs");
+const express = require("express");
+const methodOverride = require("method-override");
 
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(methodOverride("_method"));
-
-app.listen(3000);
-
+//Cómo hacer para pasar la función chosenBackground al middleware randomBackground? El problema es el app
+const randomBackground = require("./middleware/randomBackground");
 const chosenBackground = (req, res, next) => {
     if (req.path == "/") {
         app.locals.background = Math.floor(Math.random() * 4) + 1;
@@ -22,10 +15,17 @@ const chosenBackground = (req, res, next) => {
     next();
 };
 
-app.use("/", chosenBackground, userRoutes);
+const app = express();
 
-// app.get("/products-page", (req, res) => {
-//     res.sendFile(path.join(__dirname, "views/products-page.html"));
-// });
+app.listen(3000);
+
+app.set("view engine", "ejs");
+
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(methodOverride("_method"));
+
+app.use("/", chosenBackground, userRoutes);
 
 app.use("/products", productRoutes);
