@@ -28,8 +28,8 @@ router.post(
     productController.productFormProcess
 );
 
-//Read Detail
-router.get("/:id", productController.detail);
+//Delete
+router.delete("/:id/delete", productController.delete);
 
 //Update
 router.get("/:id/edit", productController.productForm);
@@ -52,7 +52,7 @@ router.put(
     productController.productFormEdit
 );
 
-//Delete
-// router.delete("/:id");
+//Read Detail
+router.get("/:id", productController.detail);
 
 module.exports = router;

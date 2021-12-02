@@ -66,6 +66,10 @@ const controller = {
         Products.createProduct([req.body, req.files], id, old);
         res.redirect("/success");
     },
+    delete: (req, res) => {
+        Products.destroy(req.params.id);
+        res.redirect("/");
+    },
 };
 
 module.exports = controller;
