@@ -28,6 +28,11 @@
                 <a class="restyled-link" href="/products/create">
                     <li>Subir clase</li>
                 </a>
+                <% if(locals.id) { %>
+                <a class="restyled-link" href="/products/<%= id %>/edit">
+                    <li>Editar clase</li>
+                </a>
+                <% } %>
             </ul>
         </div>
         <div id="comunidad-footer" class="col-footer padding-10">

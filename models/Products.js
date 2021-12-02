@@ -2,6 +2,31 @@ const fs = require("fs");
 const path = require("path");
 
 const Products = {
+    productOld: {
+        id: "",
+        titulo: "",
+        materia: "",
+        grado: "",
+        profesorNombre: "",
+        profesorApellido: "",
+        profesorEmail: "",
+        profesorCv: "",
+        rating: "",
+        precio: "",
+        preview: "",
+        descripcion: "",
+        descripcionLong: "",
+        contenidos: [],
+        resenas: [],
+        clasesSimilares: [],
+        video: "",
+        duracionVideo: 60,
+        duracionVideoHoras: "",
+        materialExtra: "",
+        hayMaterialExtra: true,
+        responsive: true,
+        certificado: false,
+    },
     fileName: "./data/products.json",
     getData: function () {
         let products = fs.readFileSync(
@@ -37,11 +62,15 @@ const Products = {
             );
         };
         products.forEach((product) => {
-            product.rating = rating(product);
-            product.duracionVideoHoras = duracionVideoHoras(product);
+            // product.rating = rating(product);
+            // product.duracionVideoHoras = duracionVideoHoras(product);
         });
         return products;
     },
+    saveData: function (data) {
+        fs.writeFileSync(this.fileName, JSON.stringify(data, null, " "));
+    },
+
     generateId: function () {
         let posibleIds = [];
         let currentIds = [];
@@ -61,45 +90,46 @@ const Products = {
     findOneById: function (id) {
         return this.getData().find((product) => product.id == id);
     },
-    createProduct: function (productData) {
+    //createProduct se usa tanto para crear como para actualizar el producto.
+    //Si no hay nada en old (que es el req.body), toma un template del producto vacío y lo llena
+    //Si hay en el old, toma lo del old, actualiza los campos modificados, lo elimina (en el controller) de la DB y lo re sube
+    createProduct: function (productData, id, old) {
         let allClases = this.findAll();
         let [productDataBody, productDataFiles] = productData;
         let newClase = {
-            id: this.generateId(),
-            titulo: productDataBody.titulo,
-            materia: productDataBody.materia,
-            grado: productDataBody.grado,
-            profesor: {
-                nombre: productDataBody.nombre,
-                apellido: productDataBody.apellido,
-                email: productDataBody.email,
-            },
-            rating: "",
+            ...this.productOld,
+            ...old,
+            ...productDataBody,
+            id: id ? Number(id) : this.generateId(),
             precio: Number(productDataBody.precio),
-            preview: productDataFiles.preview
-                ? productDataFiles.preview[0].filename
-                : "",
-            descripcion: productDataBody.descripcion,
-            descripcionLong: productDataBody.descripcionLong,
             contenidos: productDataBody.contenidos.split(/[\s,.]+/),
-            resenas: [],
-            clasesSimilares: [],
-            video: productDataFiles.video
-                ? productDataFiles.video[0].filename
-                : "",
-            duracionVideo: "",
-            duracionVideoHoras: "",
-            materialExtra: productDataFiles.materialExtra
-                ? productDataFiles.materialExtra[0].filename
-                : "",
-            hayMaterialExtra: productDataFiles.materialExtra ? true : false,
-            responsive: true,
-            certificado: false,
+            preview:
+                productDataFiles && productDataFiles.preview
+                    ? productDataFiles.preview[0].filename
+                    : old && old.preview
+                    ? old.preview
+                    : "",
+            video:
+                productDataFiles && productDataFiles.video
+                    ? productDataFiles.video[0].filename
+                    : old && old.video
+                    ? old.video
+                    : "",
+            materialExtra:
+                productDataFiles && productDataFiles.materialExtra
+                    ? productDataFiles.materialExtra[0].filename
+                    : old && old.materialExtra
+                    ? old.materialExtra
+                    : "",
         };
         allClases.push(newClase);
-        fs.writeFileSync(this.fileName, JSON.stringify(allClases, null, " "));
-        console.log(newClase);
+        this.saveData(allClases);
         return newClase;
+    },
+    destroy: function (id) {
+        let allClases = this.findAll();
+        allClases = allClases.filter((clase) => clase.id != id);
+        this.saveData(allClases);
     },
 };
 

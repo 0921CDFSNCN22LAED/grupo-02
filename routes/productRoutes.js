@@ -32,8 +32,25 @@ router.post(
 router.get("/:id", productController.detail);
 
 //Update
-// router.get("/:id/edit");
-// router.put("/:id");
+router.get("/:id/edit", productController.productForm);
+router.put(
+    "/:id/edit",
+    upload.fields([
+        {
+            name: "video",
+            maxCount: 1,
+        },
+        {
+            name: "materialExtra",
+            maxCount: 1,
+        },
+        {
+            name: "preview",
+            maxCount: 1,
+        },
+    ]),
+    productController.productFormEdit
+);
 
 //Delete
 // router.delete("/:id");

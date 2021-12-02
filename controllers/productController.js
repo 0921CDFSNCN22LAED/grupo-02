@@ -1,6 +1,14 @@
 const Products = require("../models/Products");
 
-const grados = ["1er", "2do", "3er", "4to", "5to", "6to", "7mo"];
+const grados = [
+    "1er año",
+    "2do año",
+    "3er año",
+    "4to año",
+    "5to año",
+    "6to año",
+    "7mo año",
+];
 const materias = [
     "Música",
     "Plástica",
@@ -23,10 +31,18 @@ const controller = {
     detail: (req, res) => {
         return res.render("product-detail", {
             chosenProduct: Products.findOneById(req.params.id),
+            id: req.params.id,
         });
     },
     productForm: (req, res) => {
+        let old;
+
+        if (req.params.id) {
+            old = Products.findOneById(req.params.id);
+        }
         return res.render("product-creation", {
+            id: req.params.id,
+            old: old,
             grados: grados,
             materias: materias,
         });
@@ -38,6 +54,16 @@ const controller = {
         //     grados: grados,
         //     materias: materias,
         // });
+        res.redirect("/success");
+    },
+    productFormEdit: (req, res) => {
+        let old;
+        let id = req.params.id;
+        if (id) {
+            old = Products.findOneById(id);
+        }
+        Products.destroy(id);
+        Products.createProduct([req.body, req.files], id, old);
         res.redirect("/success");
     },
 };

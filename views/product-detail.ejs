@@ -36,8 +36,8 @@
                             <% } %>
                         </div>
                         <h3>
-                            <%=chosenProduct.profesor.nombre + " " +
-                                chosenProduct.profesor.apellido %>
+                            <%=chosenProduct.profesorNombre + " " +
+                                chosenProduct.profesorApellido %>
                         </h3>
                     </article>
                     <article class="course-description padding-10">
@@ -51,8 +51,8 @@
                             <% } %>
                             <dt>Profesor</dt>
                             <dd>
-                                <%=chosenProduct.profesor.nombre + " " +
-                                    chosenProduct.profesor.apellido %>
+                                <%=chosenProduct.profesorNombre + " " +
+                                    chosenProduct.profesorApellido %>
                             </dd>
                             <dt>Reseñas</dt>
                             <% for(let resena of chosenProduct.resenas){%>
@@ -91,10 +91,10 @@
                 <div class="clases-main-container padding-10">
                     <div class="clases-main-item">
                         <h3>
-                            <%= chosenProduct.titulo + " " +
-                                chosenProduct.materia + " " +
-                                chosenProduct.grado%>
+                            <%= chosenProduct.titulo %>
                         </h3>
+                        <h5><%= chosenProduct.grado %></h5>
+                        <h5><%= chosenProduct.materia %></h5>
                         <div class="bg-shadow-pill my-5">
                             <h3>
                                 <%="$" + chosenProduct.precio.toFixed(2) %>
