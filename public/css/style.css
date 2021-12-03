@@ -311,6 +311,22 @@
     height: 400px;
 }
 
+.descripcionContainer .descripcion {
+    background-color: var(--color-2-light);
+    color: var(--color-shadow);
+    height: 3em;
+    overflow: hidden;
+    border-radius: 20px;
+    transition-property: all;
+    transition-duration: 2s;
+    transition-delay: 250ms;
+}
+
+.descripcionContainer:hover .descripcion {
+    height: 100%;
+    padding-bottom: 33%;
+}
+
 /* product-detail */
 
 /* product-creation */

@@ -12,9 +12,10 @@
             <div class="cursos-main padding-10">
                 <section class="d-flex flex-wrap">
                     <% for(let product of products){ %>
-                    <article class="col-12 col-md-3">
+                    <article class="col-12 col-md-3 my-2">
                         <div class="clases-main-container m-1">
-                            <a class="restyled-link clases-main-item" href="/products/<%= product.id %>">
+                            <a class="restyled-link clases-main-item descripcionContainer"
+                                href="/products/<%= product.id %>">
                                 <div class="
                                             d-flex
                                             flex-column
@@ -22,38 +23,39 @@
                                         ">
                                     <div class="
                                                 m-1
-                                                product-in-products-page-detail
+                                                product-in-products-page-detail position-relative
                                             ">
                                         <img class="img-thumbnail padding-10"
                                             src="/img/clases-preview/<%=product.preview%>" alt="picture placeholder" />
-                                        <div class="padding-10">
+                                        <div class="padding-10 ">
                                             <h5>
                                                 <%= product.titulo + " en "
-                                                    + product.materia %>
+                                                        + product.materia %>
                                             </h5>
                                             <h5><%=product.grado %></h5>
                                             <h5>
                                                 <%=product.profesorNombre +
-                                                    " " +
-                                                    product.profesorApellido %>
+                                                        " " +
+                                                        product.profesorApellido %>
                                             </h5>
                                             <div>
-                                                <% let stars=0; for(let i=0;
-                                                    i <
-                                                    Math.floor(product.rating);
-                                                    i++){ stars++; %>
+                                                <% let stars = 0; %>
+                                                <%for(let i = 0; i < Math.floor(product.rating); i++){ %>
+                                                <% stars++; %>
                                                 <i class="fas fa-star"></i>
-                                                <% } %> <% if(product.rating
-                                                    % 1 !=0) { stars++; %>
-                                                <i class="
-                                                            fas
-                                                            fa-star-half-alt
-                                                        "></i>
-                                                <% } %> <% for(let i=0; i <
-                                                    5 - stars ; i++){ %>
+                                                <% } %>
+                                                <% if(product.rating % 1 !=0) { %>
+                                                <% stars++; %>
+                                                <i class="fas fa-star-half-alt"></i>
+                                                <% } %>
+                                                <% for(let i=0; i < 5 - stars ; i++){ %>
                                                 <i class="far fa-star"></i>
                                                 <% } %>
                                             </div>
+                                        </div>
+                                        <div class="position-absolute bottom-0 descripcion padding-10">
+                                            <h5>Más información</h5>
+                                            <p><%= product.descripcionLong %></p>
                                         </div>
                                     </div>
                                     <div class="

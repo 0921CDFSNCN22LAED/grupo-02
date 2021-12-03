@@ -55,7 +55,7 @@
                             <div class="form-floating">
                                 <textarea class="form-control" rows="3" style="height:90%;" placeholder="descripcion"
                                     id="descripcion"
-                                    name="descripcion"><% if(locals.old && old.descripcion){ %><%=old.descripcion%> <%} %></textarea>
+                                    name="descripcion"><%if(locals.old && old.descripcion){%><%=old.descripcion%><%}%></textarea>
                                 <label for="descripcion">Descripción breve</label>
                             </div>
                             <div class="form-floating">
@@ -150,7 +150,7 @@
                             <div class="form-floating">
                                 <textarea class="form-control" rows="5" style="height:90%;" placeholder="cv"
                                     id="profesorCv"
-                                    name="profesorCv"><% if(locals.old && old.profesorCv){ %><%=old.profesorCv%> <%} %></textarea>
+                                    name="profesorCv"><%if(locals.old && old.profesorCv){%><%=old.profesorCv%><%}%></textarea>
                                 <label for="profesorCv">Breve presentación (cv)</label>
                             </div>
                         </div>
@@ -160,7 +160,11 @@
                             formaction="<%="/products/"+id+"/delete?_method=DELETE"%>">
                             Eliminar clase
                         </button>
-                        <button class=" btn btn-primary btn-lg" type="submit">
+                        <button class=" btn btn-warning ms-2 btn-lg" type="submit" formmethod="post"
+                            formaction="<%="/products/"+id+"/duplicate"%>">
+                            Duplicar la clase
+                        </button>
+                        <button class=" btn btn-success btn-lg" type="submit">
                             Actualizar la clase
                         </button>
 

@@ -52,6 +52,26 @@ router.put(
     productController.productFormEdit
 );
 
+//duplicate
+router.post(
+    "/:id/duplicate",
+    upload.fields([
+        {
+            name: "video",
+            maxCount: 1,
+        },
+        {
+            name: "materialExtra",
+            maxCount: 1,
+        },
+        {
+            name: "preview",
+            maxCount: 1,
+        },
+    ]),
+    productController.productFormDuplicate
+);
+
 //Read Detail
 router.get("/:id", productController.detail);
 

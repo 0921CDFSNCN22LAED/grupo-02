@@ -131,6 +131,7 @@ const Products = {
         allClases = allClases.filter((clase) => clase.id != id);
         this.saveData(allClases);
     },
+    duplicate: function (id) {},
 };
 
 module.exports = Products;
