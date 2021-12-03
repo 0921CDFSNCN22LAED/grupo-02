@@ -172,6 +172,7 @@
   "hayMaterialExtra": true,
   "responsive": true,
   "certificado": false
+<<<<<<< HEAD
  },
  {
   "id": 7,
@@ -274,5 +275,7 @@
   "hayMaterialExtra": true,
   "responsive": true,
   "certificado": false
+=======
+>>>>>>> ed0dc8da3dba3b51add06d61d92b04543c816301
  }
 ]
