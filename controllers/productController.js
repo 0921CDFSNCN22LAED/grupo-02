@@ -70,6 +70,16 @@ const controller = {
         Products.destroy(req.params.id);
         res.redirect("/");
     },
+    productFormDuplicate: (req, res) => {
+        let old;
+        let id = req.params.id;
+        if (id) {
+            old = Products.findOneById(id);
+        }
+        id = undefined;
+        Products.createProduct([req.body, req.files], id, old);
+        res.redirect("/success");
+    },
 };
 
 module.exports = controller;

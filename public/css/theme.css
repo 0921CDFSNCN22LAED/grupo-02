@@ -82,6 +82,15 @@
     background-color: var(--color-2-strong);
 }
 
+.btn-secondary {
+    background-color: var(--color-2-strong);
+    border-color: var(--color-2-strong);
+    margin-left: 10px;
+}
+.btn-secondary:hover {
+    background-color: var(--color-1-strong);
+}
+
 .ms-primary-btn {
     color: var(--color-shadow);
     text-align: center;
