@@ -8,12 +8,6 @@ const productRoutes = require("./routes/productRoutes");
 
 //Cómo hacer para pasar la función chosenBackground al middleware randomBackground? El problema es el app
 const randomBackground = require("./middleware/randomBackground");
-const chosenBackground = (req, res, next) => {
-    if (req.path == "/") {
-        app.locals.background = Math.floor(Math.random() * 4) + 1;
-    }
-    next();
-};
 
 const app = express();
 
@@ -26,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 
-app.use("/", chosenBackground, userRoutes);
+app.use(randomBackground(app));
+app.use("/", userRoutes);
 
 app.use("/products", productRoutes);
