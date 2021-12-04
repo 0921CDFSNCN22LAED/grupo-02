@@ -11,6 +11,9 @@ const randomBackground = require("./middleware/randomBackground");
 
 const app = express();
 
+app.locals.logged = true;
+app.locals.loggedId = 1;
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 

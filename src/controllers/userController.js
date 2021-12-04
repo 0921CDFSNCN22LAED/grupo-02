@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const Products = require("../models/Products");
+const Users = require("../models/Users");
 
 const cartIds = [1, 2];
 const clasesActualesId = [1];
@@ -34,12 +35,22 @@ const controller = {
     register: (req, res) => {
         return res.render("register");
     },
+    registerProcess: (req, res) => {
+        let newUser = Users.createUser([req.body, req.files]);
+        let id = newUser.id;
+        res.redirect(`/${id}/profile`);
+    },
     cart: (req, res) => {
         return res.render("cart", {
             enCarrito: Products.findAll().filter((product) =>
                 cartIds.includes(Number(product.id))
             ),
             recommendations: Products.findAll(),
+        });
+    },
+    profile: (req, res) => {
+        return res.render("profile", {
+            old: Users.findOneById(req.params.id),
         });
     },
     success: (req, res) => {

@@ -18,7 +18,7 @@
             <a class="restyled-link" href="#main">
                 <li class="nav-item">
                     <i class="fas fa-chalkboard-teacher"></i>
-                    <span class="nav-link">Tus clases</span>
+                    <span class="nav-link"><%= logged?"Tus clases":"Ingresá" %></span>
                 </li>
             </a>
             <a class="restyled-link" href="#sobre-nosotros">
@@ -44,22 +44,64 @@
     <main id="home" class="container-fluid">
         <div id="main">
             <section class="row">
+                <% if(!logged) { %>
+
+                <article class="col-12 col-md-6 cursos-main padding-10">
+                    <div class="clases-main-container padding-10">
+                        <p class="pt-3  fw-bolder">¿No tenés cuenta?</p>
+                        <h2 class="">Registrate</h2>
+                        <div class=" bg-shadow-pill padding-10">
+                            <form class="padding-10" action="/register" method="post">
+                                <div class="form-floating my-3">
+                                    <input class="form-control" type="text" name="userName" id="userName"
+                                        placeholder="Nombre de usuario" />
+                                    <label class="text-shadow" for="userName">Nombre de usuario</label>
+                                </div>
+                                <div class="form-floating my-3">
+                                    <input class="form-control" type="email" name="userEmail" id="userEmail"
+                                        placeholder="Nombre de usuario" />
+                                    <label class="text-shadow" for="userEmail">Correo electrónico</label>
+                                </div>
+                                <div class="form-floating my-3">
+                                    <input class="form-control" type="password" name="userPassword" id="userPassword"
+                                        placeholder="Contraseña" />
+                                    <label class="text-shadow" for="userPassword">Contraseña</label>
+                                </div>
+                                <button class="ms-primary-btn " type="submit">
+                                    Registrarse
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-12 col-md-6 cursos-main padding-10">
+                    <div class="clases-main-container padding-10">
+                        <p class="pt-3  fw-bolder">¿Ya tenés cuenta?</p>
+                        <h2 class="">Ingresá</h2>
+                        <div class=" bg-shadow-pill padding-10">
+                            <form class="padding-10" action="/login" method="post">
+                                <div class="form-floating my-3">
+                                    <input class="form-control" type="text" name="userName" id="userName"
+                                        placeholder="Nombre de usuario" />
+                                    <label class="text-shadow" for="userName">Nombre de usuario</label>
+                                </div>
+                                <div class="form-floating my-3">
+                                    <input class="form-control" type="password" name="userPassword" id="userPassword"
+                                        placeholder="Contraseña" />
+                                    <label class="text-shadow" for="userPassword">Contraseña</label>
+                                </div>
+                                <button class="ms-primary-btn " type="submit">
+                                    Ingresar
+                                </button>
+                            </form>
+                        </div>
+                </article>
+                <% } else { %>
+                <h1>Hola usuario, hoy es un buen dia para hacer random</h1>
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container">
                         <h2 class="padding-10">Cursos actuales</h2>
                         <% for(let clase of clasesActuales){ %>
-                        <a class="clases-main-item" href="/products/<%= clase.id %> ">
-                            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %> "
-                                alt="<%= clase.titulo %> " />
-                            <h4 class="padding-10"><%= clase.titulo %></h4>
-                        </a>
-                        <% } %>
-                    </div>
-                </article>
-                <article class="col-12 col-md-6 cursos-main padding-10">
-                    <div class="clases-main-container">
-                        <h2 class="padding-10">Sugerencias</h2>
-                        <% for(let clase of recommendations){ %>
                         <a class="clases-main-item" href="/products/<%= clase.id %> ">
                             <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %> "
                                 alt="<%= clase.titulo %> " />
@@ -80,6 +122,21 @@
                                     <%= clase.titulo %>
                                 </h4>
                             </div>
+                        </a>
+                        <% } %>
+                    </div>
+                </article>
+                <% } %>
+
+
+                <article class="col-12 col-md-6 cursos-main padding-10">
+                    <div class="clases-main-container">
+                        <h2 class="padding-10">Sugerencias</h2>
+                        <% for(let clase of recommendations){ %>
+                        <a class="clases-main-item" href="/products/<%= clase.id %> ">
+                            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %> "
+                                alt="<%= clase.titulo %> " />
+                            <h4 class="padding-10"><%= clase.titulo %></h4>
                         </a>
                         <% } %>
                     </div>

@@ -1,216 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <%- include("./partials/head") %>
-    </head>
-    <body>
-        <header><%- include("./partials/header") %></header>
-        <main>
-            <div id="register-main">
-                <div id="register-with">
-                    <h2>EXPLORE SU CREATIVIDAD</h2>
-                    <h4>Empezá gratis</h4>
-                    <a class="restyled-link login-media" href="">
-                        <i class="fab fa-facebook"></i> Continua con Facebook
-                    </a>
-                    <a class="restyled-link login-media" href="">
-                        <i class="fab fa-google"></i> Continua con Google
-                    </a>
-                    <a class="restyled-link login-media" href="">
-                        <i class="fab fa-apple"></i> Continua con Apple
-                    </a>
 
-                    <div class="divider">
-                        <span>
-                            <hr />
-                        </span>
-                        <img
-                            class="img-logo-mini"
-                            src="/img/logo.png"
-                            alt="logo Mundo Sapien"
-                        />
-                        <span>
-                            <hr />
-                        </span>
+<head>
+    <%- include("./partials/head") %>
+</head>
+
+<body>
+    <header><%- include("./partials/header") %></header>
+    <main>
+        <div id="register-main">
+            <div id="register-with">
+                <!-- <h2>EXPLORÁ TU CREATIVIDAD</h2> -->
+                <!-- <h4>Empezá gratis</h4> -->
+                <!-- <a class="restyled-link login-media" href="">
+                    <i class="fab fa-facebook"></i> Continua con Facebook
+                </a>
+                <a class="restyled-link login-media" href="">
+                    <i class="fab fa-google"></i> Continua con Google
+                </a>
+                <a class="restyled-link login-media" href="">
+                    <i class="fab fa-apple"></i> Continua con Apple
+                </a> -->
+
+                <a class="restyled-link" href="/register">
+                    <h3>Registrate </h3>
+                </a>
+                <div class="divider">
+                    <span>
+                        <hr />
+                    </span>
+                    <img class="img-logo-mini" src="/img/logo.png" alt="logo Mundo Sapien" />
+                    <span>
+                        <hr />
+                    </span>
+                </div>
+                <div class="login-cred">
+                    <form action="/register" method="POST" enctype="multipart/form-data">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" name="userName" id="userName"
+                                placeholder="Nombre de usuario" />
+                            <label for="userName">Nombre de usuario</label>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" type="email" name="userEmail" id="userEmail"
+                                placeholder="Nombre de usuario" />
+                            <label for="userEmail">Correo electrónico</label>
+                        </div>
+                        <div class="form-upload">
+                            <label for="avatar" class="form-label">Avatar</label>
+                            <input class="form-control" type="file" id="avatar" placeholder="Avatar" name="avatar" />
+                        </div>
+
+                        <div class="form-floating">
+                            <input class="form-control" type="password" name="userPassword" id="userPassword"
+                                placeholder="Contraseña" />
+                            <label for="userPassword">Contraseña</label>
+                        </div>
+
+                        <div>
+                            <% for (let i = 1; i <= 1; i++) {%>
+                            <div>
+                                <h3>Hijo <%= i %> </h3>
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" name="childName<%= i %> "
+                                        id="childName<%= i %> " placeholder="Nombre de usuario del hijo" />
+                                    <label for="childName<%= i %> ">Nombre de usuario del hijo</label>
+                                </div>
+                                <div class="form-upload">
+                                    <label for="childAvatar<%=i%>" class="form-label">Avatar del hijo</label>
+                                    <input class="form-control" type="file" id="childAvatar<%= i %>"
+                                        placeholder="Avatar del hijo" name="childAvatar<%= i %>" />
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+
+
+                        <!-- <div class="form-floating">
+                            <input class="form-control" type="password" name="userPassword-confirmation"
+                                id="userPassword-confirmation" placeholder="Confirmá tu contraseña" />
+                            <label for="userPassword">Confirmá tu contraseña</label>
+                        </div> -->
+                        <button class="ms-primary-btn" type="submit">
+                            Registrarse
+                        </button>
+                    </form>
+                    <p class="terms">
+                        al registrarte aceptas nuestros
+                        <a href="">Terminos de servicio</a> y
+                        <a href="">Política de privacidad</a>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div id="iniciar-sesion">
+                    <!-- Button trigger modal -->
+                    <p>¿Ya tenés una cuenta?</p>
+                    <button type="button" class="btn ms-primary-btn" data-bs-toggle="modal"
+                        data-bs-target="#loginModal">
+                        INICIAR SESIÓN
+                    </button>
+                </div>
+
+                <div id="nuestro-proyecto" class="width300">
+                    <h2 class="padding-10"></h2>
+
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/img/backgrounds/TrelloBg.png" class="d-block w-100" alt="..." />
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/img/clases-preview/Fracciones5to.png" class="d-block w-100" alt="..." />
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/img/clases-preview/Sustantivos5to.png" class="d-block w-100" alt="..." />
+                            </div>
+                        </div>
                     </div>
-                    <a class="restyled-link" href="/register">
-                        <h3>Registrate usando correo electrónico</h3>
-                    </a>
-                    <div class="login-cred">
+                    <p>
+                        "El mundo es un rompecabezas y sólo conociendo sus
+                        partes podremos darle sentido"
+                    </p>
+                </div>
+            </div>
+            <!-- Modal -->
+        </div>
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            Iniciá sesión
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
                         <form action="/" method="get">
                             <div class="form-floating">
-                                <input
-                                    class="form-control"
-                                    type="text"
-                                    name="user-name"
-                                    id="user-name"
-                                    placeholder="Nombre de usuario"
-                                />
-                                <label for="user-name">Nombre de usuario</label>
+                                <input class="form-control" type="text" name="userName" id="userName"
+                                    placeholder="Nombre de usuario" />
+                                <label for="userName">Nombre de usuario</label>
                             </div>
                             <div class="form-floating">
-                                <input
-                                    class="form-control"
-                                    type="password"
-                                    name="user-password"
-                                    id="user-password"
-                                    placeholder="Contraseña"
-                                />
-                                <label for="user-password">Contraseña</label>
+                                <input class="form-control" type="password" name="userPassword" id="userPassword"
+                                    placeholder="Contraseña" />
+                                <label for="userPassword">Contraseña</label>
                             </div>
-                            <div class="form-floating">
-                                <input
-                                    class="form-control"
-                                    type="password"
-                                    name="user-password-confirmation"
-                                    id="user-password-confirmation"
-                                    placeholder="Confirmá tu contraseña"
-                                />
-                                <label for="user-password"
-                                    >Confirmá tu contraseña</label
-                                >
-                            </div>
-                            <button class="ms-primary-btn" type="submit">
-                                Entrar
-                            </button>
                         </form>
-                        <p class="terms">
-                            al registrarte aceptas nuestros
-                            <a href="">Terminos de servicio</a> y
-                            <a href="">Política de privacidad</a>
-                        </p>
+                        <!-- <h5 class="modal-title">
+                            Ingresa con tu cuenta de
+                        </h5>
+                        <div class="btn-group padding-10" id="login-media-modal" role="group"
+                            aria-label="Login social media example">
+                            <button type="button" class="btn">
+                                <i class="fab fa-facebook"></i>
+                            </button>
+                            <button type="button" class="btn">
+                                <i class="fab fa-google"></i>
+                            </button>
+                            <button type="button" class="btn">
+                                <i class="fab fa-apple"></i>
+                            </button>
+                        </div> -->
                     </div>
-                </div>
-                <div>
-                    <div id="iniciar-sesion">
-                        <!-- Button trigger modal -->
-                        <p>¿Ya tenés una cuenta?</p>
-                        <button
-                            type="button"
-                            class="btn ms-primary-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#loginModal"
-                        >
-                            INICIAR SESIÓN
+                    <div class="modal-footer">
+                        <button type="button" class="btn ms-primary-btn">
+                            Entrar
                         </button>
                     </div>
-
-                    <div id="nuestro-proyecto" class="width300">
-                        <h2 class="padding-10"></h2>
-
-                        <div
-                            id="carouselExampleSlidesOnly"
-                            class="carousel slide"
-                            data-bs-ride="carousel"
-                        >
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img
-                                        src="/img/backgrounds/TrelloBg.png"
-                                        class="d-block w-100"
-                                        alt="..."
-                                    />
-                                </div>
-                                <div class="carousel-item">
-                                    <img
-                                        src="/img/clases-preview/Fracciones5to.png"
-                                        class="d-block w-100"
-                                        alt="..."
-                                    />
-                                </div>
-                                <div class="carousel-item">
-                                    <img
-                                        src="/img/clases-preview/Sustantivos5to.png"
-                                        class="d-block w-100"
-                                        alt="..."
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <p>
-                            "El mundo es un rompecabezas y sólo conociendo sus
-                            partes podremos darle sentido"
-                        </p>
-                    </div>
-                </div>
-                <!-- Modal -->
-            </div>
-            <div
-                class="modal fade"
-                id="loginModal"
-                tabindex="-1"
-                aria-labelledby="loginModalLabel"
-                aria-hidden="true"
-            >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">
-                                Entrar con correo electrónico
-                            </h5>
-                            <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                            ></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/" method="get">
-                                <div class="form-floating">
-                                    <input
-                                        class="form-control"
-                                        type="text"
-                                        name="user-name"
-                                        id="user-name"
-                                        placeholder="Nombre de usuario"
-                                    />
-                                    <label for="user-name"
-                                        >Nombre de usuario</label
-                                    >
-                                </div>
-                                <div class="form-floating">
-                                    <input
-                                        class="form-control"
-                                        type="password"
-                                        name="user-password"
-                                        id="user-password"
-                                        placeholder="Contraseña"
-                                    />
-                                    <label for="user-password"
-                                        >Contraseña</label
-                                    >
-                                </div>
-                            </form>
-                            <h5 class="modal-title">
-                                Ingresa con tu cuenta de
-                            </h5>
-                            <div
-                                class="btn-group padding-10"
-                                id="login-media-modal"
-                                role="group"
-                                aria-label="Login social media example"
-                            >
-                                <button type="button" class="btn">
-                                    <i class="fab fa-facebook"></i>
-                                </button>
-                                <button type="button" class="btn">
-                                    <i class="fab fa-google"></i>
-                                </button>
-                                <button type="button" class="btn">
-                                    <i class="fab fa-apple"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn ms-primary-btn">
-                                Entrar
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </main>
-        <%- include("./partials/footer") %>
-    </body>
+        </div>
+    </main>
+    <%- include("./partials/footer") %>
+</body>
+
 </html>

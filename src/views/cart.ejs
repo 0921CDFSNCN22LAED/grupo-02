@@ -39,8 +39,8 @@
                                                     cursoEnCarrito.profesorApellido %>
                                         </h5>
                                         <div>
-                                            <% let stars=0; for(let i=0; i < Math.floor(cursoEnCarrito.rating);
-                                                    i++){ stars++; %>
+                                            <% let stars = 0;%>
+                                            <% for(let i = 0; i < Math.floor(cursoEnCarrito.rating); i++){ stars++; %>
                                             <i class="fas fa-star"></i>
                                             <% } %>
                                             <% if(cursoEnCarrito.rating % 1 !=0) { stars++; %>

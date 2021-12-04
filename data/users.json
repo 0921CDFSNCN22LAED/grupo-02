@@ -1,19 +1,20 @@
 [
-    {
-        "id": 0,
-        "nombre-completo": {
-            "nombre": "Juan",
-            "apellido": "Rodriguez"
-        },
-        "email": "juanrodriguez@mail.com",
-        "password": "12345678",
-        "rol": "docente",
-        "hijos": [
-            {
-                "id": "",
-                "nombre-completo": ""
-            }
-        ],
-        "avatar": "default.img"
-    }
+ {
+  "id": 1,
+  "userName": "Luios D",
+  "userEmail": "luiosd@mail.com",
+  "userPassword": "12345678"
+ },
+ {
+  "id": 2,
+  "userName": "Magui",
+  "userEmail": "mrobledo@mail.com",
+  "userPassword": "12345678"
+ },
+ {
+  "id": 3,
+  "userName": "Mariel",
+  "userEmail": "mariel@mail.com",
+  "userPassword": "12345678"
+ }
 ]

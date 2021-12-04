@@ -13,6 +13,9 @@ var storage = multer.diskStorage({
             case "preview":
                 cb(null, "public/img/clases-preview");
                 break;
+            case "avatar":
+            case "childAvatar1":
+                cb(null, "public/img/avatars");
         }
     },
     filename: function (req, file, cb) {

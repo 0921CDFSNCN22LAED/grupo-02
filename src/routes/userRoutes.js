@@ -1,10 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/multerMiddleware");
 
 const userController = require("../controllers/userController");
 
 router.get("/", userController.home);
-router.get("/register", userController.register);
+
+//Register from main page
+router.post("/register", userController.registerProcess);
+
+router.get("/:id/profile", userController.profile);
 router.get("/cart", userController.cart);
 router.get("/success", userController.success);
 

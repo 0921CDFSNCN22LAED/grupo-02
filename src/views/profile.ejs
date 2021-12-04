@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include("./partials/head") %>
+</head>
+
+<body>
+    <header><%- include("./partials/header") %></header>
+    <main id="profile" class="container-fluid">
+        <div id="main">
+            <section class="row z-index-1">
+                <article class="col-12 col-md-6 cursos-main padding-10">
+                    <div class="clases-main-container padding-10">
+                        <h2>Tus datos personales</h2>
+                        <form action="" class="clases-main-item">
+                            <fieldset disabled>
+
+                                <div class="form-floating my-3">
+                                    <input class="form-control disabled" type="text" name="userName" id="userName"
+                                        placeholder="Nombre de usuario"
+                                        <% if(locals.old && old.userName){ %>value="<%=old.userName%>" <%} %> />
+                                    <label for="userName">Nombre de usuario</label>
+                                </div>
+                                <div class="form-floating my-3">
+                                    <input class="form-control disabled" type="text" name="userEmail" id="userEmail"
+                                        placeholder="Correo electrónico"
+                                        <% if(locals.old && old.userEmail){ %>value="<%=old.userEmail%>" <%} %> />
+                                    <label for="userEmail">Correo electrónico</label>
+                                </div>
+
+                            </fieldset>
+                            <% if(locals.old && old.avatar) { %>
+                            <div class="d-flex my-3">
+                                <img class="img-thumbnail w-50 me-5 " src="/img/clases-video/<%= old.avatar %> "
+                                    alt="avatar ya cargado">
+                                <div class="form-upload">
+                                    <label for="avatar" class="form-label">Cambiá tu avatar</label>
+                                    <input class="form-control" type="file" id="avatar" placeholder="Cargá tu avatar"
+                                        name="avatar" />
+                                </div>
+                            </div>
+                            <% } else { %>
+                            <div class="form-upload my-3">
+                                <label for="avatar" class="form-label">Cargá tu avatar</label>
+                                <input class="form-control" type="file" id="avatar" placeholder="Cargá tu avatar"
+                                    name="avatar" />
+                            </div>
+                            <% } %>
+                            <fieldset disabled="disabled">
+                                <div class="form-floating my-3">
+                                    <input class="form-control" type="password" name="userPassword" id="userPassword"
+                                        placeholder="Contraseña" />
+                                    <label class="text-shadow" for="userPassword">Cambiá tu contraseña</label>
+                                </div>
+                            </fieldset>
+                            <button class="btn btn-primary btn-lg button-right">Editar</button>
+
+                        </form>
+                    </div>
+                </article>
+                <article class="col-12 col-md-6 cursos-main padding-10">
+                    <div class="clases-main-container padding-10">
+                        <h2>Progreso</h2>
+                        <div class="clases-main-item">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>Hijo</th>
+                                    <th>Clase</th>
+                                    <th>Progreso</th>
+                                </tr>
+                                <tr>
+                                    <td>Hijo 1</td>
+                                    <td>Clase 1</td>
+                                    <td>Barra de progreso</td>
+                                </tr>
+                                <tr>
+                                    <td>Hijo 2</td>
+                                    <td>Clase 2</td>
+                                    <td>Barra de progreso</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </article>
+                <% let i = 1 %>
+                <% for (; i <= 2; i++) {%>
+                <article class="col-12 col-md-6 cursos-main padding-10">
+                    <div class="clases-main-container padding-10">
+                        <h2>Datos de tu hijo</h2>
+                        <div class="clases-main-item">
+                            <h3>Hijo <%= i %> </h3>
+                            <div class="form-floating my-3">
+                                <input class="form-control" type="text" name="childName<%= i %> "
+                                    id="childName<%= i %> " placeholder="Nombre de usuario del hijo" />
+                                <label for="childName<%= i %> ">Nombre de usuario del hijo</label>
+                            </div>
+                            <div class="form-upload my-3">
+                                <label for="childAvatar<%=i%>" class="form-label">Avatar del hijo</label>
+                                <input class="form-control" type="file" id="childAvatar<%= i %>"
+                                    placeholder="Avatar del hijo" name="childAvatar<%= i %>" />
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <% } %>
+                <% if(i < 5) { %>
+                <article class="col-12 col-md-6 cursos-main padding-10">
+                    <div class="clases-main-container padding-10">
+                        <h2>Agregar hijo <i class="far fa-plus-square"></i></h2>
+
+                    </div>
+                </article>
+                <% } %>
+
+            </section>
+        </div>
+
+    </main>
+    <%- include("./partials/footer") %>
+</body>
+
+</html>
