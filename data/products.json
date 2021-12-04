@@ -172,7 +172,6 @@
   "hayMaterialExtra": true,
   "responsive": true,
   "certificado": false
-<<<<<<< HEAD
  },
  {
   "id": 7,
@@ -275,7 +274,33 @@
   "hayMaterialExtra": true,
   "responsive": true,
   "certificado": false
-=======
->>>>>>> ed0dc8da3dba3b51add06d61d92b04543c816301
+ },
+ {
+  "id": 10,
+  "titulo": "Placas tectónicas",
+  "materia": "Ciencias Naturales",
+  "grado": "7mo año",
+  "profesorNombre": "Ramón",
+  "profesorApellido": "Castillo",
+  "profesorEmail": "rcastillo@mail.com",
+  "profesorCv": "Ramón Antonio Castillo fue un abogado, juez, docente y político argentino conservador perteneciente al Partido Demócrata Nacional. En 1938 llegó a la vicepresidencia tras el triunfo de Roberto Marcelino Ortiz y, al fallecer este en 1942, asumió como el 23.º presidente de la Nación Argentina.",
+  "rating": "",
+  "precio": 300,
+  "preview": "preview-1638607620523.png",
+  "descripcion": "El mundo está partido, qué más decir",
+  "descripcionLong": "Vamos a utilizar nuestras herramientas para pegar al mundo, traé to cola preferida",
+  "contenidos": [
+   "Continentes",
+   "división"
+  ],
+  "resenas": [],
+  "clasesSimilares": [],
+  "video": "",
+  "duracionVideo": 60,
+  "duracionVideoHoras": "",
+  "materialExtra": "",
+  "hayMaterialExtra": true,
+  "responsive": true,
+  "certificado": false
  }
 ]

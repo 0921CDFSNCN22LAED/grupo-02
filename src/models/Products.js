@@ -27,11 +27,9 @@ const Products = {
         responsive: true,
         certificado: false,
     },
-    fileName: "./data/products.json",
+    fileName: path.join(__dirname, "../../data/products.json"),
     getData: function () {
-        let products = fs.readFileSync(
-            path.join(__dirname, "../data/products.json")
-        );
+        let products = fs.readFileSync(this.fileName);
         if (products == "") {
             products = [];
         } else {
