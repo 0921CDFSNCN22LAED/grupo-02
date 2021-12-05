@@ -13,7 +13,8 @@
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container padding-10">
                         <h2>Tus datos personales</h2>
-                        <form action="" class="clases-main-item">
+                        <form action="/<%= old.id %>/update?_method=PUT" method="post" enctype="multipart/form-data"
+                            class="clases-main-item">
                             <fieldset disabled>
 
                                 <div class="form-floating my-3">
@@ -32,7 +33,7 @@
                             </fieldset>
                             <% if(locals.old && old.avatar) { %>
                             <div class="d-flex my-3">
-                                <img class="img-thumbnail w-50 me-5 " src="/img/clases-video/<%= old.avatar %> "
+                                <img class="img-thumbnail w-50 me-5 " src="/img/avatars/<%= old.avatar %> "
                                     alt="avatar ya cargado">
                                 <div class="form-upload">
                                     <label for="avatar" class="form-label">Cambiá tu avatar</label>
@@ -54,7 +55,7 @@
                                     <label class="text-shadow" for="userPassword">Cambiá tu contraseña</label>
                                 </div>
                             </fieldset>
-                            <button class="btn btn-primary btn-lg button-right">Editar</button>
+                            <button class="btn btn-primary btn-lg button-right" type="submit">Editar</button>
 
                         </form>
                     </div>
@@ -70,12 +71,12 @@
                                     <th>Progreso</th>
                                 </tr>
                                 <tr>
-                                    <td>Hijo 1</td>
+                                    <td><% if(locals.old && old["childName1"]){ %><%=old["childName1"]%><%} %></td>
                                     <td>Clase 1</td>
                                     <td>Barra de progreso</td>
                                 </tr>
                                 <tr>
-                                    <td>Hijo 2</td>
+                                    <td><% if(locals.old && old["childName2"]){ %><%=old["childName2"]%><%} %></td>
                                     <td>Clase 2</td>
                                     <td>Barra de progreso</td>
                                 </tr>
@@ -89,17 +90,39 @@
                     <div class="clases-main-container padding-10">
                         <h2>Datos de tu hijo</h2>
                         <div class="clases-main-item">
-                            <h3>Hijo <%= i %> </h3>
-                            <div class="form-floating my-3">
-                                <input class="form-control" type="text" name="childName<%= i %> "
-                                    id="childName<%= i %> " placeholder="Nombre de usuario del hijo" />
-                                <label for="childName<%= i %> ">Nombre de usuario del hijo</label>
-                            </div>
-                            <div class="form-upload my-3">
-                                <label for="childAvatar<%=i%>" class="form-label">Avatar del hijo</label>
-                                <input class="form-control" type="file" id="childAvatar<%= i %>"
-                                    placeholder="Avatar del hijo" name="childAvatar<%= i %>" />
-                            </div>
+                            <h3>Hijo <%= i%> </h3>
+                            <form action="/<%= old.id %>/update?_method=PUT" method="post"
+                                enctype="multipart/form-data">
+                                <div class="form-floating my-3">
+                                    <input class="form-control" type="text" name="childName<%= i %>"
+                                        id="childName<%= i %> " placeholder="Nombre de usuario del hijo"
+                                        <% if(locals.old && old["childName"+i]){ %>value="<%=old["childName"+i]%>"
+                                        <%} %> />
+                                    <label for="childName<%= i %>">Nombre de usuario del hijo</label>
+                                </div>
+                                <% if(locals.old && old["childAvatar"+i]) { %>
+                                <div class="d-flex my-3">
+                                    <img class="img-thumbnail w-50 me-5 " src="/img/avatars/<%= old["childAvatar"+i]%> "
+                                        alt="avatar ya cargado">
+                                    <div class="form-upload my-3">
+                                        <label for="childAvatar<%=i%>" class="form-label">Avatar del hijo</label>
+                                        <input class="form-control" type="file" id="childAvatar<%= i %>"
+                                            placeholder="Avatar del hijo" name="childAvatar<%= i %>" />
+                                    </div>
+                                </div>
+                                <% } else { %>
+                                <div class="form-upload my-3">
+                                    <label for="childAvatar<%=i%>" class="form-label">Avatar del hijo</label>
+                                    <input class="form-control" type="file" id="childAvatar<%= i %>"
+                                        placeholder="Avatar del hijo" name="childAvatar<%= i %>" />
+                                </div>
+                                <% } %>
+
+                                <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar
+                                    hijo</button>
+                                <button class="btn btn-primary btn-lg button-right" type="button">Ingresar como
+                                    <%=old["childName"+i]%></button>
+                            </form>
                         </div>
                     </div>
                 </article>

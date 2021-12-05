@@ -1,11 +1,5 @@
 [
  {
-  "id": 1,
-  "userName": "Luios D",
-  "userEmail": "luiosd@mail.com",
-  "userPassword": "12345678"
- },
- {
   "id": 2,
   "userName": "Magui",
   "userEmail": "mrobledo@mail.com",
@@ -16,5 +10,19 @@
   "userName": "Mariel",
   "userEmail": "mariel@mail.com",
   "userPassword": "12345678"
+ },
+ {
+  "userName": "Luios D",
+  "userEmail": "luiosd@mail.com",
+  "userPassword": "12345678",
+  "id": 1,
+  "childName1": "José Carlos",
+  "childName2": "Ana María",
+  "avatar": "avatar-1638658384143.png",
+  "childAvatar1": "childAvatar1-1638658591625.png",
+  "childAvatar2": "childAvatar2-1638695249359.png",
+  "childAvatar3": "",
+  "childAvatar4": "",
+  "childAvatar5": ""
  }
 ]

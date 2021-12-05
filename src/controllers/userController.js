@@ -1,3 +1,4 @@
+const { localsName } = require("ejs");
 const fs = require("fs");
 const path = require("path");
 
@@ -49,9 +50,20 @@ const controller = {
         });
     },
     profile: (req, res) => {
+        let old = Users.findOneById(req.params.id);
         return res.render("profile", {
-            old: Users.findOneById(req.params.id),
+            old,
         });
+    },
+    update: (req, res) => {
+        let old;
+        let id = req.params.id;
+        if (id) {
+            old = Users.findOneById(id);
+        }
+        Users.destroy(id);
+        Users.createUser([req.body, req.files], id, old);
+        res.redirect(`/${id}/profile`);
     },
     success: (req, res) => {
         return res.render("success");

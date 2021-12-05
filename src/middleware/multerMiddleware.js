@@ -15,6 +15,10 @@ var storage = multer.diskStorage({
                 break;
             case "avatar":
             case "childAvatar1":
+            case "childAvatar2":
+            case "childAvatar3":
+            case "childAvatar4":
+            case "childAvatar5":
                 cb(null, "public/img/avatars");
         }
     },
