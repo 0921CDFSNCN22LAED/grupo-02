@@ -17,21 +17,36 @@
         <input type="search" name="main-search" id="main-search" placeholder="Busca clases, temas o profesores" />
         <button type="submit"><i class="fas fa-search"></i></button>
     </div>
-    <% if(locals.currUser) { %>
+    <% if(childIsLogged || parentIsLogged) { %>
     <nav class="nav-bar padding-10">
+        <% if(parentIsLoggedSecure){ %>
         <div id="cart" class="padding-10">
             <a class="position-relative restyled-link" href="/cart"><i class="fas fa-shopping-cart">
                     <!-- <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
-    <%= locals.inCart %> 
-      </span><span class="visually-hidden">unread messages</span> -->
+            <%= locals.inCart %> 
+            </span><span class="visually-hidden">unread messages</span> -->
                 </i></a>
         </div>
         <div id="notifications" class="padding-10">
             <a class="restyled-link" href=""><i class="fas fa-inbox"></i></a>
         </div>
         <div id="profile" class="padding-10">
-            <a class="restyled-link" href=<%= `/${locals.currUser.id}/profile` %>><i class="fas fa-user-circle"></i></a>
+            <a class="restyled-link" href=<%= `/user/${parentLogged.id}/profile` %>><i
+                    class="fas fa-user-circle"></i></a>
         </div>
+        <% } %>
+        <% if(childIsLogged) { %>
+        <div id="notifications" class="padding-10">
+            <a class="restyled-link" href=""><i class="fas fa-inbox"></i></a>
+        </div>
+        <div id="profile" class="padding-10">
+            <a class="restyled-link" href=<%= `/user/${childLogged.id}/profile` %>><i
+                    class="fas fa-user-circle"></i></a>
+        </div>
+        <a href="/user/changeUser">Cambiar de usuario</a>
+        <% } else if(!parentIsLogged) {%>
+        <a href="/">Otra cosa mariposa</a>
+        <% } %>
     </nav>
     <% } %>
     <div id="background-img-under-search-bar"></div>

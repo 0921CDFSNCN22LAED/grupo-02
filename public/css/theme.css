@@ -138,6 +138,14 @@ body {
     height: 100%;
 }
 
+.h1 {
+    font-family: "Gotham", sans-serif;
+    font-size: 36px;
+    margin: 0px;
+    padding: 10px;
+    color: var(--color-shadow);
+}
+
 body {
     /* display: flex;
     flex-direction: column; */

@@ -1,25 +1,34 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multerMiddleware");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const userController = require("../controllers/userController");
 
-router.get("/", userController.home);
+router.get("/userSelected/:id", userController.userSelected);
 
-//Register from main page
+//Register login and logout from main page
 router.post("/register", userController.registerProcess);
 router.post("/login", userController.loginProcess);
+router.get("/logout", userController.logout);
+router.get("/changeUser", userController.logoutSubUser);
 
-router.get("/:id/profile", userController.profile);
+router.get("/:id/profile", authMiddleware, userController.profile);
 
-router.put("/:id/update", upload.single("avatar"), userController.update);
+router.put(
+    "/:id/update",
+    authMiddleware,
+    upload.single("avatar"),
+    userController.update
+);
 router.put(
     "/:id/updateChildren",
+    authMiddleware,
     upload.single("avatar"),
     userController.updateChildren
 );
 
-router.get("/cart", userController.cart);
+router.get("/cart", authMiddleware, userController.cart);
 router.get("/success", userController.success);
 
 module.exports = router;

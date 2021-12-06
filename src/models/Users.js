@@ -37,7 +37,11 @@ const Users = {
         return userFound;
     },
     findOneById: function (id) {
-        return this.getData().find((user) => user.id == id);
+        let user = this.getData().find((user) => user.id == Math.floor(id));
+        if (id && id % 1 != 0) {
+            return user.children[id];
+        }
+        return user;
     },
     createUser: function (userData, id, old, childData) {
         let allUsers = this.findAll();

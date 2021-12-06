@@ -1,28 +1,15 @@
-const { localsName } = require("ejs");
-const fs = require("fs");
-const path = require("path");
+// const session = require("express-session");
+// const fs = require("fs");
+// const path = require("path");
 
 const Products = require("../models/Products");
 const Users = require("../models/Users");
 
 const cartIds = [1, 2];
-const clasesActualesId = [1];
-const comentarios = [
-    {
-        nombre: "Juan Rodriguez",
-        resena: "Muy linda la página, me gusta que cambien los fondos al pasar por el home",
-    },
-    {
-        nombre: "José Perez",
-        resena: "Va muy bien, a seguir trabajando!!!",
-    },
-];
 
 const controller = {
     home: (req, res) => {
-        let currUser = Users.findOneById(req.session.currUser);
         return res.render("home", {
-            currUser,
             clasesActuales: Products.findAll().filter((product) =>
                 clasesActualesId.includes(Number(product.id))
             ),
@@ -45,7 +32,30 @@ const controller = {
     },
     loginProcess: (req, res) => {
         const userToLogIn = Users.findByField("userEmail", req.body.userEmail);
-        req.session.currUser = userToLogIn.id;
+        req.session.parentLogged = userToLogIn;
+        if (req.body.rememberMe) {
+            res.cookie("userEmail", req.body.userEmail, {
+                maxAge: 1000 * 60 * 60,
+            });
+        }
+        res.redirect("/");
+    },
+    logout: (req, res) => {
+        res.clearCookie("userEmail");
+
+        req.session.destroy();
+        return res.redirect("/");
+    },
+    userSelected: (req, res) => {
+        if (req.params.id % 1 == 0) {
+            req.session.parentLogged = Users.findOneById(req.params.id);
+        } else {
+            req.session.childLogged = Users.findOneById(req.params.id);
+        }
+        res.redirect("/");
+    },
+    logoutSubUser: (req, res) => {
+        delete req.session.childLogged;
         res.redirect("/");
     },
     cart: (req, res) => {
