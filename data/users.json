@@ -1,28 +1,21 @@
 [
  {
-  "id": 2,
-  "userName": "Magui",
-  "userEmail": "mrobledo@mail.com",
-  "userPassword": "12345678"
- },
- {
-  "id": 3,
-  "userName": "Mariel",
-  "userEmail": "mariel@mail.com",
-  "userPassword": "12345678"
- },
- {
   "userName": "Luios D",
   "userEmail": "luiosd@mail.com",
   "userPassword": "12345678",
   "id": 1,
-  "childName1": "José Carlos",
-  "childName2": "Ana María",
-  "avatar": "avatar-1638658384143.png",
-  "childAvatar1": "childAvatar1-1638658591625.png",
-  "childAvatar2": "childAvatar2-1638695249359.png",
-  "childAvatar3": "",
-  "childAvatar4": "",
-  "childAvatar5": ""
+  "avatar": "avatar-1638783764305.png",
+  "children": {
+   "1.1": {
+    "childId": "1.1",
+    "name": "Pedro",
+    "avatar": "avatar-1638783498777.png"
+   },
+   "1.2": {
+    "childId": "1.2",
+    "name": "Ana",
+    "avatar": "avatar-1638783529728.png"
+   }
+  }
  }
 ]

@@ -20,7 +20,9 @@ const comentarios = [
 
 const controller = {
     home: (req, res) => {
+        let currUser = Users.findOneById(req.session.currUser);
         return res.render("home", {
+            currUser,
             clasesActuales: Products.findAll().filter((product) =>
                 clasesActualesId.includes(Number(product.id))
             ),
@@ -40,6 +42,11 @@ const controller = {
         let newUser = Users.createUser([req.body, req.files]);
         let id = newUser.id;
         res.redirect(`/${id}/profile`);
+    },
+    loginProcess: (req, res) => {
+        const userToLogIn = Users.findByField("userEmail", req.body.userEmail);
+        req.session.currUser = userToLogIn.id;
+        res.redirect("/");
     },
     cart: (req, res) => {
         return res.render("cart", {
@@ -62,8 +69,19 @@ const controller = {
             old = Users.findOneById(id);
         }
         Users.destroy(id);
-        Users.createUser([req.body, req.files], id, old);
-        res.redirect(`/${id}/profile`);
+        Users.createUser([req.body, req.file], id, old);
+        res.redirect(`/${req.params.id}/profile`);
+    },
+    updateChildren: (req, res) => {
+        let old;
+        let id = req.params.id;
+        if (id) {
+            old = Users.findOneById(id);
+        }
+        let childData = Users.createSubUser([req.body, req.file]);
+        Users.destroy(id);
+        Users.createUser("", id, old, childData);
+        res.redirect(`/${req.params.id}/profile`);
     },
     success: (req, res) => {
         return res.render("success");

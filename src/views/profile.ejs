@@ -71,12 +71,12 @@
                                     <th>Progreso</th>
                                 </tr>
                                 <tr>
-                                    <td><% if(locals.old && old["childName1"]){ %><%=old["childName1"]%><%} %></td>
+                                    <td>Hijo 1</td>
                                     <td>Clase 1</td>
                                     <td>Barra de progreso</td>
                                 </tr>
                                 <tr>
-                                    <td><% if(locals.old && old["childName2"]){ %><%=old["childName2"]%><%} %></td>
+                                    <td>Hijo 2</td>
                                     <td>Clase 2</td>
                                     <td>Barra de progreso</td>
                                 </tr>
@@ -90,38 +90,39 @@
                     <div class="clases-main-container padding-10">
                         <h2>Datos de tu hijo</h2>
                         <div class="clases-main-item">
-                            <h3>Hijo <%= i%> </h3>
-                            <form action="/<%= old.id %>/update?_method=PUT" method="post"
+                            <form action="/<%=old.id%>/updateChildren?_method=PUT" method="post"
                                 enctype="multipart/form-data">
+                                <input class="invisible" type="text" name="childId" value="<%=old.id + (i/10)%>">
                                 <div class="form-floating my-3">
-                                    <input class="form-control" type="text" name="childName<%= i %>"
-                                        id="childName<%= i %> " placeholder="Nombre de usuario del hijo"
-                                        <% if(locals.old && old["childName"+i]){ %>value="<%=old["childName"+i]%>"
+                                    <input class="form-control" type="text" name="name" id="name"
+                                        placeholder="Nombre de usuario del hijo"
+                                        <% if(locals.old.children && locals.old.children[old.id + (i/10)] && old.children[old.id + (i/10)].name){ %>value="<%=old.children[old.id + (i/10)].name%>"
                                         <%} %> />
-                                    <label for="childName<%= i %>">Nombre de usuario del hijo</label>
+                                    <label for="name">Nombre de usuario del hijo</label>
                                 </div>
-                                <% if(locals.old && old["childAvatar"+i]) { %>
+                                <% if(locals.old.children && locals.old.children[old.id + (i/10)] && old.children[old.id + (i/10)].avatar) { %>
                                 <div class="d-flex my-3">
-                                    <img class="img-thumbnail w-50 me-5 " src="/img/avatars/<%= old["childAvatar"+i]%> "
+                                    <img class="img-thumbnail w-50 me-5 "
+                                        src="/img/avatars/<%=old.children[old.id + (i/10)].avatar%>"
                                         alt="avatar ya cargado">
                                     <div class="form-upload my-3">
-                                        <label for="childAvatar<%=i%>" class="form-label">Avatar del hijo</label>
-                                        <input class="form-control" type="file" id="childAvatar<%= i %>"
-                                            placeholder="Avatar del hijo" name="childAvatar<%= i %>" />
+                                        <label for="avatar" class="form-label">Avatar del hijo</label>
+                                        <input class="form-control" type="file" id="avatar"
+                                            placeholder="Avatar del hijo" name="avatar" />
                                     </div>
                                 </div>
                                 <% } else { %>
                                 <div class="form-upload my-3">
-                                    <label for="childAvatar<%=i%>" class="form-label">Avatar del hijo</label>
-                                    <input class="form-control" type="file" id="childAvatar<%= i %>"
-                                        placeholder="Avatar del hijo" name="childAvatar<%= i %>" />
+                                    <label for="avatar" class="form-label">Avatar del hijo</label>
+                                    <input class="form-control" type="file" id="avatar" placeholder="Avatar del hijo"
+                                        name="avatar" />
                                 </div>
                                 <% } %>
 
                                 <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar
                                     hijo</button>
                                 <button class="btn btn-primary btn-lg button-right" type="button">Ingresar como
-                                    <%=old["childName"+i]%></button>
+                                    <%=old["name"+i]%></button>
                             </form>
                         </div>
                     </div>

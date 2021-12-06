@@ -17,7 +17,7 @@
         <input type="search" name="main-search" id="main-search" placeholder="Busca clases, temas o profesores" />
         <button type="submit"><i class="fas fa-search"></i></button>
     </div>
-    <% if(locals.logged) { %>
+    <% if(locals.currUser) { %>
     <nav class="nav-bar padding-10">
         <div id="cart" class="padding-10">
             <a class="position-relative restyled-link" href="/cart"><i class="fas fa-shopping-cart">
@@ -30,7 +30,7 @@
             <a class="restyled-link" href=""><i class="fas fa-inbox"></i></a>
         </div>
         <div id="profile" class="padding-10">
-            <a class="restyled-link" href=<%= `/${locals.loggedId}/profile` %>><i class="fas fa-user-circle"></i></a>
+            <a class="restyled-link" href=<%= `/${locals.currUser.id}/profile` %>><i class="fas fa-user-circle"></i></a>
         </div>
     </nav>
     <% } %>

@@ -14,11 +14,6 @@ var storage = multer.diskStorage({
                 cb(null, "public/img/clases-preview");
                 break;
             case "avatar":
-            case "childAvatar1":
-            case "childAvatar2":
-            case "childAvatar3":
-            case "childAvatar4":
-            case "childAvatar5":
                 cb(null, "public/img/avatars");
         }
     },
