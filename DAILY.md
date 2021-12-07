@@ -74,5 +74,6 @@
 <dt>7 de diciembre de 2021</dt>
 <dd>Luis: verificación parental en el home page creada</dd>
 <dd>Luis: merged to main</dd>
+<dd>Luis: Página error 404 creada</dd>
 
 </dl>
