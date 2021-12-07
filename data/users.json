@@ -1,21 +1,25 @@
 [
- {
-  "userName": "Luios D",
-  "userEmail": "luiosd@mail.com",
-  "userPassword": "12345678",
-  "id": 1,
-  "avatar": "avatar-1638783764305.png",
-  "children": {
-   "1.1": {
-    "childId": "1.1",
-    "name": "Pedro",
-    "avatar": "avatar-1638791177379.png"
-   },
-   "1.2": {
-    "childId": "1.2",
-    "name": "Ana",
-    "avatar": "avatar-1638783529728.png"
-   }
-  }
- }
+    {
+        "userName": "Luios D",
+        "userEmail": "luiosd@mail.com",
+        "userPassword": "12345678",
+        "id": 1,
+        "avatar": "avatar-1638783764305.png",
+        "children": {
+            "1.1": {
+                "childId": "1.1",
+                "name": "Pedro",
+                "avatar": "avatar-1638791177379.png",
+                "currentClasses": [1],
+                "lastClass": 1
+            },
+            "1.2": {
+                "childId": "1.2",
+                "name": "Ana",
+                "avatar": "avatar-1638783529728.png",
+                "currentClasses": [2, 3, 4, 5, 6, 7],
+                "lastClass": 2
+            }
+        }
+    }
 ]

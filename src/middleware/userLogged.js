@@ -3,7 +3,6 @@ const Users = require("../models/Users");
 function userLogged(req, res, next) {
     res.locals.childIsLogged = false;
     res.locals.parentIsLogged = false;
-    res.locals.parentIsLoggedSecure = true;
 
     let emailInCookie = req.cookies.userEmail;
     let userFromCookie = Users.findByField("userEmail", emailInCookie);
@@ -16,6 +15,7 @@ function userLogged(req, res, next) {
     if (req.session.parentLogged) {
         res.locals.childIsLogged = false;
         res.locals.parentIsLogged = true;
+        res.locals.parentIsLoggedSecure = req.session.parentIsLoggedSecure;
         res.locals.parentLogged = req.session.parentLogged;
     }
 
@@ -23,6 +23,7 @@ function userLogged(req, res, next) {
     if (req.session.childLogged) {
         res.locals.childIsLogged = true;
         res.locals.parentIsLogged = false;
+        res.locals.parentIsLoggedSecure = false;
         res.locals.childLogged = req.session.childLogged;
     }
 

@@ -8,20 +8,6 @@ const Users = require("../models/Users");
 const cartIds = [1, 2];
 
 const controller = {
-    home: (req, res) => {
-        return res.render("home", {
-            clasesActuales: Products.findAll().filter((product) =>
-                clasesActualesId.includes(Number(product.id))
-            ),
-            recommendations: [
-                Products.findAll()[
-                    Math.floor(Math.random() * Products.findAll().length)
-                ],
-            ],
-            clases: Products.findAll(),
-            comentarios: comentarios,
-        });
-    },
     register: (req, res) => {
         return res.render("register");
     },
@@ -29,6 +15,14 @@ const controller = {
         let newUser = Users.createUser([req.body, req.files]);
         let id = newUser.id;
         res.redirect(`/${id}/profile`);
+    },
+    parentLoginProcess: (req, res) => {
+        if (req.body.parentPassword == 12345678) {
+            req.session.parentIsLoggedSecure = true;
+        } else {
+            req.session.parentIsLoggedSecure = false;
+        }
+        return res.redirect("/");
     },
     loginProcess: (req, res) => {
         const userToLogIn = Users.findByField("userEmail", req.body.userEmail);
@@ -55,6 +49,7 @@ const controller = {
         res.redirect("/");
     },
     logoutSubUser: (req, res) => {
+        req.session.parentIsLoggedSecure = false;
         delete req.session.childLogged;
         res.redirect("/");
     },

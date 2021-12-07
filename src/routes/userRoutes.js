@@ -9,6 +9,7 @@ router.get("/userSelected/:id", userController.userSelected);
 
 //Register login and logout from main page
 router.post("/register", userController.registerProcess);
+router.post("/secure", userController.parentLoginProcess);
 router.post("/login", userController.loginProcess);
 router.get("/logout", userController.logout);
 router.get("/changeUser", userController.logoutSubUser);

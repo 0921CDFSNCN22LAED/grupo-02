@@ -57,7 +57,7 @@
                             </fieldset>
                             <button class="btn btn-primary btn-lg button-right" type="submit">Editar</button>
                             <button class="btn btn-warning btn-lg button-right" type="submit" formmethod="get"
-                                formaction="/logout">Cerrar sesión</button>
+                                formaction="/user/logout">Cerrar sesión</button>
 
                         </form>
                     </div>
@@ -123,8 +123,9 @@
 
                                 <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar
                                     hijo</button>
-                                <button class="btn btn-primary btn-lg button-right" type="button">Ingresar como
-                                    <%=old["name"+i]%></button>
+                                <button class="btn btn-primary btn-lg button-right" type="submit"
+                                    formaction="/user/userSelected/<%=old.id + (i/10)%>" formmethod="get">Ingresar como
+                                    <%=old.children[old.id + (i/10)].name%></button>
                             </form>
                         </div>
                     </div>

@@ -41,11 +41,38 @@
             </a>
         </ul>
     </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="parentVerificationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <button type="button" class="btn-close button-right " aria-label="Close"
+                        data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="padding-10" action="user/secure" method="post">
+                        <div class="form-floating my-3">
+                            <input class="form-control" type="password" name="parentPassword" id="parentPassword"
+                                placeholder="Contraseña" />
+                            <label class="text-shadow" for="parentPassword">Contraseña</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary button-right" data-bs-dismiss="modal">Continuar con
+                            privilegios
+                            de
+                            padre</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <main id="home" class="container-fluid">
         <div id="main">
             <section class="row">
+                <!-- 3 opciones para vista superior de la página de inicio -->
+                <!-- 1) Registro o Login -->
                 <% if(!parentIsLogged && !childIsLogged) { %>
-
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container padding-10">
                         <p class="pt-3  fw-bolder">¿No tenés cuenta?</p>
@@ -101,26 +128,29 @@
                             </form>
                         </div>
                 </article>
+                <!-- 2) Elección del subUsuario -->
                 <% } else if(!childIsLogged && parentIsLogged) { %>
                 <div class="cursos-main padding-10">
                     <div class="clases-main-container padding-10">
                         <h2 class="">Elegí tu usuario</h2>
                         <div class="row col-12">
                             <div class="card-deck d-flex flex-wrap justify-content-around">
-                                <a href="/user/userSelected/<%=parentLogged.id%>"
+                                <!-- Button trigger modal -->
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#parentVerificationModal"
                                     class="restyled-link card bg-transparent border-0 mx-2" style="width: 8rem;">
                                     <img class="card-img-top" src="/img/avatars/<%= parentLogged.avatar %> "
-                                        alt="Card image cap">
+                                        alt="parent avatar">
                                     <div class="card-body">
                                         <h3 class="card-text text-center"><%= parentLogged.userName %></h3>
                                     </div>
                                 </a>
+
                                 <% let children = parentLogged.children %>
                                 <% for(let child in children) {%>
                                 <a href="/user/userSelected/<%=children[child].childId%>"
                                     class="restyled-link card bg-transparent border-0 mx-2" style="width: 8rem;">
                                     <img class="card-img-top" src="/img/avatars/<%= children[child].avatar %> "
-                                        alt="Card image cap">
+                                        alt="child avatar">
                                     <div class="card-body">
                                         <h3 class="card-text text-center"><%= children[child].name %></h3>
                                     </div>
@@ -130,44 +160,43 @@
                         </div>
                     </div>
                 </div>
+                <!-- 3) cursos del hijo -->
                 <% } else if(childIsLogged) { %>
                 <div class="cursos-main padding-10">
                     <div class="clases-main-container padding-10">
                         <h2>¡Hola <%= childLogged.name %>!</h2>
-                        <h2>Hoy es un buen día hacer <%= recommendations[0].titulo %></h2>
+                        <h2>Hoy es un buen día para aprender <%= recommendations[0].titulo %></h2>
 
 
                     </div>
                 </div>
+
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container">
-                        <h2 class="padding-10">Cursos actuales</h2>
-                        <% for(let clase of clasesActuales){ %>
-                        <a class="clases-main-item" href="/products/<%= clase.id %> ">
-                            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %> "
-                                alt="<%= clase.titulo %> " />
-                            <h4 class="padding-10"><%= clase.titulo %></h4>
+                        <h2 class="padding-10">Curso actual</h2>
+                        <a class="clases-main-item" href="/products/<%= ultimaClase.id %>">
+                            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= ultimaClase.preview %>"
+                                alt="<%= ultimaClase.titulo %> " />
+                            <h4 class="padding-10"><%= ultimaClase.titulo %></h4>
                         </a>
-                        <% } %>
                     </div>
                 </article>
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container">
                         <h2 class="padding-10">Mi colección</h2>
                         <% for(let clase of clasesActuales){ %>
-                        <a href="/products/<%= clase.id %> ">
-                            <div class="clases-main-item">
-                                <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %> "
-                                    alt="<%= clase.titulo %> " />
-                                <h4 class="padding-10">
-                                    <%= clase.titulo %>
-                                </h4>
-                            </div>
+                        <a class="clases-main-item" href="/products/<%= clase.id %>">
+                            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %>"
+                                alt="<%= clase.titulo %> " />
+                            <h4 class="padding-10"><%= clase.titulo %></h4>
                         </a>
                         <% } %>
                     </div>
                 </article>
                 <% } %>
+
+
+
 
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container">
