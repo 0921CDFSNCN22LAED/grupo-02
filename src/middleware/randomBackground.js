@@ -4,8 +4,9 @@
 module.exports = (ap) => {
     return (req, res, next) => {
         if (req.path == "/") {
-            ap.locals.background = Math.floor(Math.random() * 4) + 1;
+            req.session.background = Math.floor(Math.random() * 4) + 1;
         }
+        ap.locals.background = req.session.background;
         next();
     };
 };

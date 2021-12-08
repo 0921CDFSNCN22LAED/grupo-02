@@ -32,8 +32,8 @@
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container padding-10">
                         <h2>Tus datos personales</h2>
-                        <form action="/<%= old.id %>/update?_method=PUT" method="post" enctype="multipart/form-data"
-                            class="clases-main-item">
+                        <form action="/user/<%= old.id %>/update?_method=PUT" method="post"
+                            enctype="multipart/form-data" class="clases-main-item">
                             <fieldset disabled>
 
                                 <div class="form-floating my-3">
@@ -52,8 +52,8 @@
                             </fieldset>
                             <% if(locals.old && old.avatar) { %>
                             <div class="d-flex my-3">
-                                <img class="img-thumbnail w-50 me-5 " src="/img/avatars/<%= old.avatar %> "
-                                    alt="avatar ya cargado">
+                                <img class="img-thumbnail w-50 me-5 rounded-circle"
+                                    src="/img/avatars/<%= old.avatar %> " alt="avatar ya cargado">
                                 <div class="form-upload">
                                     <label for="avatar" class="form-label">Cambiá tu avatar</label>
                                     <input class="form-control" type="file" id="avatar" placeholder="Cargá tu avatar"
@@ -74,7 +74,7 @@
                                     <label class="text-shadow" for="userPassword">Cambiá tu contraseña</label>
                                 </div>
                             </fieldset>
-                            <button class="btn btn-primary btn-lg button-right" type="submit">Editar</button>
+                            <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar</button>
                             <button class="btn btn-warning btn-lg button-right" type="submit" formmethod="get"
                                 formaction="/user/logout">Cerrar sesión</button>
 
@@ -118,7 +118,7 @@
                         </h2>
 
                         <div class="clases-main-item">
-                            <form action="/<%=old.id%>/updateChildren?_method=PUT" method="post"
+                            <form action="/user/<%=old.id%>/updateChildren?_method=PUT" method="post"
                                 enctype="multipart/form-data">
                                 <input class="invisible" type="text" name="childId" value="<%=old.id + (i/10)%>">
                                 <div class="form-floating my-3">
@@ -130,7 +130,7 @@
                                 </div>
                                 <% if(locals.old.children && locals.old.children[old.id + (i/10)] && old.children[old.id + (i/10)].avatar) { %>
                                 <div class="d-flex my-3">
-                                    <img class="img-thumbnail w-50 me-5 "
+                                    <img class="img-thumbnail w-50 me-5 rounded-circle"
                                         src="/img/avatars/<%=old.children[old.id + (i/10)].avatar%>"
                                         alt="avatar ya cargado">
                                     <div class="form-upload my-3">
@@ -151,7 +151,7 @@
                                     perfil</button>
                                 <button class="btn btn-primary btn-lg button-right" type="submit"
                                     formaction="/user/userSelected/<%=old.id + (i/10)%>" formmethod="get">Ingresar como
-                                    <%=old.children[old.id + (i/10)].name%></button>
+                                    <%= old.children.name ?  old.children[old.id + (i/10)].name : "invitado"%></button>
                             </form>
                         </div>
                     </div>

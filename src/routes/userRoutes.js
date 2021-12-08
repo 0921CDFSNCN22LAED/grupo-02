@@ -14,7 +14,8 @@ router.post("/login", userController.loginProcess);
 router.get("/logout", userController.logout);
 router.get("/changeUser", userController.logoutSubUser);
 
-router.get("/:id/profile", authMiddleware, userController.profile);
+//VER AUTH MIDDLEWARE EN ESTA RUTA
+router.get("/:id/profile", userController.profile);
 
 router.put(
     "/:id/update",

@@ -53,6 +53,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="padding-10" action="user/secure" method="post">
+                        <h5>Reingresá tu contraseña para continuar como padre</h5>
                         <div class="form-floating my-3">
                             <input class="form-control" type="password" name="parentPassword" id="parentPassword"
                                 placeholder="Contraseña" autofocus />
@@ -138,8 +139,8 @@
                                 <!-- Button trigger modal -->
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#parentVerificationModal"
                                     class="restyled-link card bg-transparent border-0 mx-2" style="width: 8rem;">
-                                    <img class="card-img-top" src="/img/avatars/<%= parentLogged.avatar %> "
-                                        alt="parent avatar">
+                                    <img class="card-img-top rounded-circle"
+                                        src="/img/avatars/<%= parentLogged.avatar %> " alt="parent avatar">
                                     <div class="card-body">
                                         <h3 class="card-text text-center"><%= parentLogged.userName %></h3>
                                     </div>
@@ -149,8 +150,8 @@
                                 <% for(let child in children) {%>
                                 <a href="/user/userSelected/<%=children[child].childId%>"
                                     class="restyled-link card bg-transparent border-0 mx-2" style="width: 8rem;">
-                                    <img class="card-img-top" src="/img/avatars/<%= children[child].avatar %> "
-                                        alt="child avatar">
+                                    <img class="card-img-top rounded-circle"
+                                        src="/img/avatars/<%= children[child].avatar %> " alt="child avatar">
                                     <div class="card-body">
                                         <h3 class="card-text text-center"><%= children[child].name %></h3>
                                     </div>
@@ -173,23 +174,31 @@
 
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container">
-                        <h2 class="padding-10">Curso actual</h2>
+                        <h2 class="padding-10">Clase actual</h2>
+                        <% if(ultimaClase) {%>
                         <a class="clases-main-item" href="/products/<%= ultimaClase.id %>">
                             <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= ultimaClase.preview %>"
                                 alt="<%= ultimaClase.titulo %> " />
                             <h4 class="padding-10"><%= ultimaClase.titulo %></h4>
                         </a>
+                        <% } else { %>
+                        <h3 class="padding-10">No estás tomando ninguna clase aún</h3>
+                        <% } %>
                     </div>
                 </article>
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container">
                         <h2 class="padding-10">Mi colección</h2>
+                        <% if(clasesActuales) {%>
                         <% for(let clase of clasesActuales){ %>
                         <a class="clases-main-item" href="/products/<%= clase.id %>">
                             <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %>"
                                 alt="<%= clase.titulo %> " />
                             <h4 class="padding-10"><%= clase.titulo %></h4>
                         </a>
+                        <% } %>
+                        <% } else { %>
+                        <h3 class="padding-10">No tenés clases en tu colección</h3>
                         <% } %>
                     </div>
                 </article>

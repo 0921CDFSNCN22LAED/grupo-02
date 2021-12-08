@@ -18,8 +18,6 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.listen(3000);
-
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -34,7 +32,10 @@ app.use(
 );
 
 app.use(randomBackground(app));
+
 app.use(userLogged);
+
+app.listen(3000);
 
 app.use("/", homeRoute);
 app.use("/user", userRoutes);

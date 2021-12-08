@@ -20,9 +20,11 @@ const controller = {
             ultimaClaseId = req.session.childLogged.lastClass;
         }
         return res.render("home", {
-            clasesActuales: Products.findAll().filter((product) =>
-                clasesActualesId.includes(Number(product.id))
-            ),
+            clasesActuales: clasesActualesId
+                ? Products.findAll().filter((product) =>
+                      clasesActualesId.includes(Number(product.id))
+                  )
+                : "",
             ultimaClase: Products.findAll().find(
                 (product) => product.id == ultimaClaseId
             ),

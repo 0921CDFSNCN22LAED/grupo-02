@@ -27,6 +27,8 @@ function userLogged(req, res, next) {
         res.locals.childLogged = req.session.childLogged;
     }
 
+    console.log(req.session);
+
     next();
 }
 

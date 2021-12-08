@@ -7,11 +7,12 @@ const controller = {
     },
     registerProcess: (req, res) => {
         let newUser = Users.createUser([req.body, req.files]);
+        req.session.parentLogged = newUser;
         let id = newUser.id;
-        res.redirect(`/${id}/profile`);
+        res.redirect(`/user/${id}/profile`);
     },
     parentLoginProcess: (req, res) => {
-        if (req.body.parentPassword == 12345678) {
+        if (req.body.parentPassword == req.session.parentLogged.userPassword) {
             req.session.parentIsLoggedSecure = true;
         } else {
             req.session.parentIsLoggedSecure = false;
@@ -61,8 +62,12 @@ const controller = {
             old = Users.findOneById(id);
         }
         Users.destroy(id);
-        Users.createUser([req.body, req.file], id, old);
-        res.redirect(`/${req.params.id}/profile`);
+        req.session.parentLogged = Users.createUser(
+            [req.body, req.file],
+            id,
+            old
+        );
+        res.redirect(`/user/${req.params.id}/profile`);
     },
     updateChildren: (req, res) => {
         let old;
@@ -72,8 +77,8 @@ const controller = {
         }
         let childData = Users.createSubUser([req.body, req.file]);
         Users.destroy(id);
-        Users.createUser("", id, old, childData);
-        res.redirect(`/${req.params.id}/profile`);
+        req.session.parentLogged = Users.createUser("", id, old, childData);
+        res.redirect(`/user/${req.params.id}/profile`);
     },
     success: (req, res) => {
         return res.render("success");

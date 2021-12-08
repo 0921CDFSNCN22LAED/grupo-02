@@ -3,6 +3,15 @@ const path = require("path");
 
 const Users = {
     fileName: path.join(__dirname, "../../data/users.json"),
+    userOld: {
+        userName: "",
+        userEmail: "luiosd@mail.com",
+        userPassword: "12345678",
+        id: 1,
+        avatar: "avatar-1638783764305.png",
+        cart: [],
+        children: {},
+    },
     getData: function () {
         let users = fs.readFileSync(this.fileName);
         if (users == "") {
@@ -46,8 +55,12 @@ const Users = {
     createUser: function (userData, id, old, childData) {
         let allUsers = this.findAll();
         let [userDataBody, userDataFiles] = userData;
-        let oldChildren = old.children;
+        let oldChildren;
+        if (old) {
+            oldChildren = old.children;
+        }
         let newUser = {
+            ...this.userOld,
             ...old,
             ...userDataBody,
             id: id ? Number(id) : this.generateId(),
