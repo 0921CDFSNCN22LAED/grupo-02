@@ -1,11 +1,5 @@
-// const session = require("express-session");
-// const fs = require("fs");
-// const path = require("path");
-
 const Products = require("../models/Products");
 const Users = require("../models/Users");
-
-const cartIds = [1, 2];
 
 const controller = {
     register: (req, res) => {
@@ -53,14 +47,7 @@ const controller = {
         delete req.session.childLogged;
         res.redirect("/");
     },
-    cart: (req, res) => {
-        return res.render("cart", {
-            enCarrito: Products.findAll().filter((product) =>
-                cartIds.includes(Number(product.id))
-            ),
-            recommendations: Products.findAll(),
-        });
-    },
+
     profile: (req, res) => {
         let old = Users.findOneById(req.params.id);
         return res.render("profile", {
@@ -90,6 +77,26 @@ const controller = {
     },
     success: (req, res) => {
         return res.render("success");
+    },
+    cart: (req, res) => {
+        let cartIds = req.session.parentLogged.cart;
+        let enCarrito = Products.findAll().filter((product) =>
+            cartIds.includes(Number(product.id))
+        );
+        return res.render("cart", {
+            enCarrito: Products.findAll().filter((product) =>
+                cartIds.includes(Number(product.id))
+            ),
+            recommendations: Products.findAll(),
+        });
+    },
+    addToCart: (req, res) => {
+        Users.addToCart(req.params.productId, req.session.parentLogged);
+        res.redirect("/user/cart");
+    },
+    removeFromCart: (req, res) => {
+        Users.removeFromCart(req.params.productId, req.session.parentLogged);
+        res.redirect("/user/cart");
     },
 };
 

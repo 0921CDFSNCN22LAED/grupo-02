@@ -30,6 +30,13 @@ router.put(
 );
 
 router.get("/cart", authMiddleware, userController.cart);
+router.post("/addToCart/:productId", authMiddleware, userController.addToCart);
+router.delete(
+    "/removeFromCart/:productId",
+    authMiddleware,
+    userController.removeFromCart
+);
+
 router.get("/success", userController.success);
 
 module.exports = router;

@@ -8,6 +8,25 @@
 <body>
     <header><%- include("./partials/header") %></header>
     <main id="profile" class="container-fluid">
+        <!-- Modal Eliminar subPerfil -->
+        <div class="modal fade" id="deleteSubUserModal" tabindex="-1" aria-labelledby="deleteSubUserModal"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content bg-light">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close button-right " aria-label="Close"
+                            data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>¿Está seguro que desea eliminar este perfil?</h4>
+                        <button type="button" class="btn btn-primary button-right" data-bs-dismiss="modal">No,
+                            volver atrás</button>
+                        <button type="button" class="btn btn-danger button-right" data-bs-dismiss="modal">Si,
+                            eliminar perfil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="main">
             <section class="row z-index-1">
                 <article class="col-12 col-md-6 cursos-main padding-10">
@@ -90,7 +109,14 @@
                 <% for (; i <= 2; i++) {%>
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container padding-10">
-                        <h2>Datos de tu hijo</h2>
+                        <h2>
+                            Datos de tu hijo
+                            <!-- Button trigger modal -->
+                            <button data-bs-toggle="modal" data-bs-target="#deleteSubUserModal"
+                                class="btn-close button-right mt-0" aria-label="Close" data-bs-dismiss="modal"
+                                type="submit"></button>
+                        </h2>
+
                         <div class="clases-main-item">
                             <form action="/<%=old.id%>/updateChildren?_method=PUT" method="post"
                                 enctype="multipart/form-data">
@@ -122,7 +148,7 @@
                                 <% } %>
 
                                 <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar
-                                    hijo</button>
+                                    perfil</button>
                                 <button class="btn btn-primary btn-lg button-right" type="submit"
                                     formaction="/user/userSelected/<%=old.id + (i/10)%>" formmethod="get">Ingresar como
                                     <%=old.children[old.id + (i/10)].name%></button>
@@ -134,7 +160,7 @@
                 <% if(i < 5) { %>
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container padding-10">
-                        <h2>Agregar hijo <i class="far fa-plus-square"></i></h2>
+                        <h2>Agregar hijo <i class="far fa-plus-square button-right mt-1"></i></h2>
 
                     </div>
                 </article>
