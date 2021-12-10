@@ -100,7 +100,9 @@ const Products = {
             ...productDataBody,
             id: id ? Number(id) : this.generateId(),
             precio: Number(productDataBody.precio),
-            contenidos: productDataBody.contenidos.split(/[\s,.]+/),
+            contenidos: productDataBody.contenidos
+                ? productDataBody.contenidos.split(/[\s,.]+/)
+                : "",
             preview:
                 productDataFiles && productDataFiles.preview
                     ? productDataFiles.preview[0].filename

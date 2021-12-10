@@ -32,28 +32,28 @@
                 <article class="col-12 col-md-6 cursos-main padding-10">
                     <div class="clases-main-container padding-10">
                         <h2>Tus datos personales</h2>
-                        <form action="/user/<%= old.id %>/update?_method=PUT" method="post"
+                        <form action="/user/<%= parentLogged.id %>/update?_method=PUT" method="post"
                             enctype="multipart/form-data" class="clases-main-item">
                             <fieldset disabled>
 
                                 <div class="form-floating my-3">
                                     <input class="form-control disabled" type="text" name="userName" id="userName"
-                                        placeholder="Nombre de usuario"
-                                        <% if(locals.old && old.userName){ %>value="<%=old.userName%>" <%} %> />
+                                        placeholder="Nombre de usuario" <% if(parentLogged.userName){ %>
+                                        value="<%=parentLogged.userName%>" <%} %> />
                                     <label for="userName">Nombre de usuario</label>
                                 </div>
                                 <div class="form-floating my-3">
                                     <input class="form-control disabled" type="text" name="userEmail" id="userEmail"
                                         placeholder="Correo electrónico"
-                                        <% if(locals.old && old.userEmail){ %>value="<%=old.userEmail%>" <%} %> />
+                                        <% if(parentLogged.userEmail){ %>value="<%=parentLogged.userEmail%>" <%} %> />
                                     <label for="userEmail">Correo electrónico</label>
                                 </div>
 
                             </fieldset>
-                            <% if(locals.old && old.avatar) { %>
+                            <% if(parentLogged.avatar) { %>
                             <div class="d-flex my-3">
                                 <img class="img-thumbnail w-50 me-5 rounded-circle"
-                                    src="/img/avatars/<%= old.avatar %> " alt="avatar ya cargado">
+                                    src="/img/avatars/<%= parentLogged.avatar %> " alt="avatar ya cargado">
                                 <div class="form-upload">
                                     <label for="avatar" class="form-label">Cambiá tu avatar</label>
                                     <input class="form-control" type="file" id="avatar" placeholder="Cargá tu avatar"
@@ -118,40 +118,35 @@
                         </h2>
 
                         <div class="clases-main-item">
-                            <form action="/user/<%=old.id%>/updateChildren?_method=PUT" method="post"
+                            <form action="/user/<%=parentLogged.id%>/updateChildren?_method=PUT" method="post"
                                 enctype="multipart/form-data">
-                                <input class="invisible" type="text" name="childId" value="<%=old.id + (i/10)%>">
+                                <% let childId =  parentLogged.id + (i/10)%>
+                                <input class="invisible" type="text" name="childId" value="<%=childId%>">
                                 <div class="form-floating my-3">
                                     <input class="form-control" type="text" name="name" id="name"
                                         placeholder="Nombre de usuario del hijo"
-                                        <% if(locals.old.children && locals.old.children[old.id + (i/10)] && old.children[old.id + (i/10)].name){ %>value="<%=old.children[old.id + (i/10)].name%>"
+                                        <% if(parentLogged.children[childId]  && parentLogged.children[childId].name){ %>value="<%=parentLogged.children[childId].name%>"
                                         <%} %> />
                                     <label for="name">Nombre de usuario del hijo</label>
                                 </div>
-                                <% if(locals.old.children && locals.old.children[old.id + (i/10)] && old.children[old.id + (i/10)].avatar) { %>
                                 <div class="d-flex my-3">
                                     <img class="img-thumbnail w-50 me-5 rounded-circle"
-                                        src="/img/avatars/<%=old.children[old.id + (i/10)].avatar%>"
-                                        alt="avatar ya cargado">
+                                        src="/img/avatars/<%=parentLogged.children[childId] ? parentLogged.children[childId].avatar : "default-avatar.png"%>"
+                                        alt="avatar">
                                     <div class="form-upload my-3">
                                         <label for="avatar" class="form-label">Avatar del hijo</label>
                                         <input class="form-control" type="file" id="avatar"
                                             placeholder="Avatar del hijo" name="avatar" />
                                     </div>
                                 </div>
-                                <% } else { %>
-                                <div class="form-upload my-3">
-                                    <label for="avatar" class="form-label">Avatar del hijo</label>
-                                    <input class="form-control" type="file" id="avatar" placeholder="Avatar del hijo"
-                                        name="avatar" />
-                                </div>
-                                <% } %>
 
                                 <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar
                                     perfil</button>
+                                <% if(parentLogged.children[childId]  && parentLogged.children[childId].name) {%>
                                 <button class="btn btn-primary btn-lg button-right" type="submit"
-                                    formaction="/user/userSelected/<%=old.id + (i/10)%>" formmethod="get">Ingresar como
-                                    <%= old.children.name ?  old.children[old.id + (i/10)].name : "invitado"%></button>
+                                    formaction="/user/userSelected/<%=childId%>" formmethod="get">Ingresar como
+                                    <%=parentLogged.children[childId].name%></button>
+                                <% } %>
                             </form>
                         </div>
                     </div>

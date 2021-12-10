@@ -118,6 +118,18 @@
     width: 100%;
 }
 
+.feedback {
+    color: red;
+    font-weight: 500;
+    font-stretch: wider;
+    border: red double 1px;
+    background-color: var(--color-1-light);
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
 .btn:focus,
 .btn:active {
     outline: 0;

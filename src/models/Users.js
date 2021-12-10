@@ -5,10 +5,10 @@ const Users = {
     fileName: path.join(__dirname, "../../data/users.json"),
     userOld: {
         userName: "",
-        userEmail: "luiosd@mail.com",
-        userPassword: "12345678",
-        id: 1,
-        avatar: "avatar-1638783764305.png",
+        userEmail: "",
+        userPassword: "",
+        id: "",
+        avatar: "default-avatar.png",
         cart: [],
         children: {},
     },
@@ -68,7 +68,7 @@ const Users = {
                 ? userDataFiles.filename
                 : old && old.avatar
                 ? old.avatar
-                : "",
+                : "default-avatar.png",
             children: { ...oldChildren, ...childData },
         };
         allUsers.push(newUser);
@@ -81,7 +81,9 @@ const Users = {
         const subUser = {
             [childKey]: {
                 ...userDataBody,
-                avatar: userDataFile ? userDataFile.filename : "",
+                avatar: userDataFile
+                    ? userDataFile.filename
+                    : "default-avatar.png",
             },
         };
         return subUser;

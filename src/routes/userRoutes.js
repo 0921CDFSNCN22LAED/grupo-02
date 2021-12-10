@@ -2,13 +2,20 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multerMiddleware");
 const authMiddleware = require("../middleware/authMiddleware");
+const userValidations = require("../middleware/validations/userValidations");
+const validation = require("../middleware/validation");
 
 const userController = require("../controllers/userController");
 
 router.get("/userSelected/:id", userController.userSelected);
 
 //Register login and logout from main page
-router.post("/register", userController.registerProcess);
+router.post(
+    "/register",
+    userValidations,
+    validation,
+    userController.registerProcess
+);
 router.post("/secure", userController.parentLoginProcess);
 router.post("/login", userController.loginProcess);
 router.get("/logout", userController.logout);
@@ -37,7 +44,5 @@ router.delete(
     authMiddleware,
     userController.removeFromCart
 );
-
-router.get("/success", userController.success);
 
 module.exports = router;

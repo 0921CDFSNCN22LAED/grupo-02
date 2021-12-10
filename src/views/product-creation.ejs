@@ -10,13 +10,13 @@
     <main class="container-fluid">
         <div class="row max1200px z-index-1">
             <div class="container px-4 padding-10" id="product-creation-main">
-                <form <%= locals.id ? "action=/products/"+id+"/edit?_method=PUT":"action=/products"%> method="post"
-                    enctype="multipart/form-data" class="
-                            row
-                            gx-5
-                            justify-content-center
-                            clases-main-container
-                        ">
+                <!-- enctype="multipart/form-data"  -->
+                <form action="/products" method="post" class="
+                                            row
+                                            gx-5
+                                            justify-content-center
+                                            clases-main-container
+                                        ">
                     <div class="col-md-6 padding-10 clases-main-item">
                         <div class="input-group">
                             <h2>Datos de la clase</h2>
@@ -24,6 +24,9 @@
                                 <input class="form-control" type="text" name="titulo" id="titulo" placeholder="titulo"
                                     <% if(locals.old && old.titulo){ %>value="<%=old.titulo%>" <%} %> />
                                 <label for="titulo">Título</label>
+                                <% if(locals.errors && errors.titulo) { %>
+                                <p class="feedback text-start"><%= errors.titulo.msg %> </p>
+                                <% } %>
                             </div>
                             <select class="form-select" aria-label="select año" name="grado">
                                 <option>Seleccioná el año</option>
@@ -34,6 +37,9 @@
                                     <%= grado %></option>
                                 <% } %>
                             </select>
+                            <% if(locals.errors && errors.grado) { %>
+                            <p class="feedback text-start"><%= errors.grado.msg %> </p>
+                            <% } %>
                             <select class="form-select" aria-label="select materia" name="materia">
                                 <option>
                                     Seleccioná la materia
@@ -41,22 +47,32 @@
                                 <% for(let materia of materias) { %>
 
                                 <option value="<%= materia %>"
-                                    <%  if(locals.old && old.materia == materia){ %><%="selected"%><% } %>><%=materia%>
+                                    <%  if(locals.old && old.materia == materia){ %><%="selected"%><% } %>>
+                                    <%=materia%>
                                 </option>
                                 <% } %>
                             </select>
+                            <% if(locals.errors && errors.materia) { %>
+                            <p class="feedback text-start"><%= errors.materia.msg %> </p>
+                            <% } %>
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="contenidos" id="contenidos"
                                     placeholder="contenidos" name="contenidos"
                                     <% if(locals.old && old.contenidos){ %>value="<%=old.contenidos.join(", ")%>"
                                     <%} %> />
                                 <label for="contenidos">Contenidos</label>
+                                <% if(locals.errors && errors.contenidos) { %>
+                                <p class="feedback text-start"><%= errors.contenidos.msg %> </p>
+                                <% } %>
                             </div>
-                            <div class="form-floating">
+                            <div class="form-floating " style="height: max-content;">
                                 <textarea class="form-control" rows="3" style="height:90%;" placeholder="descripcion"
                                     id="descripcion"
                                     name="descripcion"><%if(locals.old && old.descripcion){%><%=old.descripcion%><%}%></textarea>
                                 <label for="descripcion">Descripción breve</label>
+                                <% if(locals.errors && errors.descripcion) { %>
+                                <p class="feedback text-start"><%= errors.descripcion.msg %> </p>
+                                <% } %>
                             </div>
                             <div class="form-floating">
                                 <textarea class="form-control " rows="6" style="height:90%;"
@@ -69,6 +85,9 @@
                                     placeholder="precio" <% if(locals.old && old.precio){ %>value="<%=old.precio%>"
                                     <%} %> />
                                 <label for="precio">Precio</label>
+                                <% if(locals.errors && errors.precio) { %>
+                                <p class="feedback text-start"><%= errors.precio.msg %> </p>
+                                <% } %>
                             </div>
                             <% if(locals.old && old.video) { %>
                             <div class="d-flex my-3">
@@ -164,7 +183,8 @@
                             formaction="<%="/products/"+id+"/duplicate"%>">
                             Duplicar la clase
                         </button>
-                        <button class=" btn btn-success btn-lg" type="submit">
+                        <button class=" btn btn-success btn-lg" type="submit"
+                            formaction="<%="action=/products/"+id+"/edit?_method=PUT"%>" formmethod="post">
                             Actualizar la clase
                         </button>
 
@@ -173,6 +193,7 @@
                             Cargar la clase
                         </button>
                         <% } %>
+                    </div>
                 </form>
             </div>
         </div>

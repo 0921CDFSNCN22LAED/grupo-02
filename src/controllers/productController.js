@@ -29,31 +29,30 @@ const controller = {
         res.render("products-page", { products: Products.findAll() });
     },
     detail: (req, res) => {
-        return res.render("product-detail", {
-            chosenProduct: Products.findOneById(req.params.id),
+        chosenProduct = req.session.product = Products.findOneById(
+            req.params.id
+        );
+        res.render("product-detail", {
+            chosenProduct,
             id: req.params.id,
         });
     },
     productForm: (req, res) => {
-        let old;
+        // console.log(req.session.old);
+        // let old = req.session.old;
+        // if (req.params.id) {
+        //     old = Products.findOneById(req.params.id);
+        // }
 
-        if (req.params.id) {
-            old = Products.findOneById(req.params.id);
-        }
-        return res.render("product-creation", {
+        res.render("product-creation", {
             id: req.params.id,
-            old: old,
-            grados: grados,
-            materias: materias,
+            old: req.session.old,
+            grados,
+            materias,
         });
     },
     productFormProcess: (req, res) => {
         Products.createProduct([req.body, req.files]);
-        // res.render("product-creation", {
-        //     old: req.body,
-        //     grados: grados,
-        //     materias: materias,
-        // });
         res.redirect("/success");
     },
     productFormEdit: (req, res) => {

@@ -99,7 +99,7 @@
                             <h3>
                                 <%="$" + chosenProduct.precio.toFixed(2) %>
                             </h3>
-                            <% if(!locals.parentLogged.cart.includes(Number(chosenProduct.id))) {%>
+                            <% if(parentLogged && !parentLogged.cart.includes(Number(chosenProduct.id))) {%>
                             <form class="" action="/user/addToCart/<%=chosenProduct.id%>" method="post">
                                 <button class="btn btn-primary btn-lg" type="submit">
                                     Agregar al carrito

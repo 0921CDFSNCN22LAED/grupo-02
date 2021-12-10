@@ -20,6 +20,7 @@ const controller = {
             ultimaClaseId = req.session.childLogged.lastClass;
         }
         return res.render("home", {
+            old: req.session.old,
             clasesActuales: clasesActualesId
                 ? Products.findAll().filter((product) =>
                       clasesActualesId.includes(Number(product.id))
@@ -36,6 +37,9 @@ const controller = {
             clases: Products.findAll(),
             comentarios: comentarios,
         });
+    },
+    success: (req, res) => {
+        return res.render("success");
     },
 };
 

@@ -9,17 +9,12 @@
             </h1>
         </a>
     </div>
-    <!-- <div class="subscription">
-            <p>plan/suscripción</p>
-        </div> -->
-
     <div class="search padding-10">
         <input type="search" name="main-search" id="main-search" placeholder="Busca clases, temas o profesores" />
         <button type="submit"><i class="fas fa-search"></i></button>
     </div>
-    <% if(childIsLogged || parentIsLogged) { %>
+    <% if(parentLogged && parentIsLoggedSecure){ %>
     <nav class="nav-bar padding-10">
-        <% if(parentIsLoggedSecure){ %>
         <div id="cart" class="padding-10">
             <a class="position-relative restyled-link" href="/user/cart"><i class="fas fa-shopping-cart">
                     <!-- <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
@@ -27,9 +22,6 @@
             </span><span class="visually-hidden">unread messages</span> -->
                 </i></a>
         </div>
-        <!-- <div id="notifications" class="padding-10">
-            <a class="restyled-link" href=""><i class="fas fa-inbox"></i></a>
-        </div> -->
         <div id="profile" class="padding-10">
             <a class="restyled-link" href=<%= `/user/${parentLogged.id}/profile` %>><img class="img-header"
                     src="/img/avatars/<%= parentLogged.avatar %> " alt="parent avatar"></a>
@@ -37,8 +29,9 @@
         <div class="padding-10">
             <a class="restyled-link" href="/user/changeUser"><i class="fas fa-sign-out-alt"></i></a>
         </div>
-        <% } %>
-        <% if(childIsLogged) { %>
+    </nav>
+    <% } else if(childLogged) { %>
+    <nav class="nav-bar padding-10">
         <div id="notifications" class="padding-10">
             <a class="restyled-link" href=""><i class="fas fa-inbox"></i></a>
         </div>
@@ -49,9 +42,13 @@
         <div class="padding-10">
             <a class="restyled-link" href="/user/changeUser"><i class="fas fa-sign-out-alt"></i></a>
         </div>
-        <% } else if(!parentIsLogged) {%>
-        <a href="/">Otra cosa mariposa</a>
-        <% } %>
+    </nav>
+    <% } else if (parentLogged){%>
+    <nav class="nav-bar padding-10 justify-content-center">
+        <form action="/user/logout" method="get">
+            <button class="btn btn-primary btn-lg " type="submit">Cerrar
+                sesión</button>
+        </form>
     </nav>
     <% } %>
     <div id="background-img-under-search-bar"></div>

@@ -12,6 +12,7 @@ const homeRoute = require("./routes/homeRoute");
 //Cómo hacer para pasar la función chosenBackground al middleware randomBackground? El problema es el app
 const randomBackground = require("./middleware/randomBackground");
 const userLogged = require("./middleware/userLogged");
+const sessionData = require("./middleware/session-locals");
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(
     })
 );
 
+app.use(sessionData);
 app.use(randomBackground(app));
 
 app.use(userLogged);

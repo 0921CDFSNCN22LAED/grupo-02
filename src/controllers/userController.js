@@ -2,8 +2,20 @@ const Products = require("../models/Products");
 const Users = require("../models/Users");
 
 const controller = {
-    register: (req, res) => {
-        return res.render("register");
+    profile: (req, res) => {
+        res.render("profile");
+    },
+    cart: (req, res) => {
+        let cartIds = req.session.parentLogged.cart;
+        let enCarrito = Products.findAll().filter((product) =>
+            cartIds.includes(Number(product.id))
+        );
+        res.render("cart", {
+            enCarrito: Products.findAll().filter((product) =>
+                cartIds.includes(Number(product.id))
+            ),
+            recommendations: Products.findAll(),
+        });
     },
     registerProcess: (req, res) => {
         let newUser = Users.createUser([req.body, req.files]);
@@ -31,7 +43,6 @@ const controller = {
     },
     logout: (req, res) => {
         res.clearCookie("userEmail");
-
         req.session.destroy();
         return res.redirect("/");
     },
@@ -40,6 +51,7 @@ const controller = {
             req.session.parentLogged = Users.findOneById(req.params.id);
         } else {
             req.session.childLogged = Users.findOneById(req.params.id);
+            req.session.parentIsLoggedSecure = false;
         }
         res.redirect("/");
     },
@@ -49,12 +61,6 @@ const controller = {
         res.redirect("/");
     },
 
-    profile: (req, res) => {
-        let old = Users.findOneById(req.params.id);
-        return res.render("profile", {
-            old,
-        });
-    },
     update: (req, res) => {
         let old;
         let id = req.params.id;
@@ -80,21 +86,7 @@ const controller = {
         req.session.parentLogged = Users.createUser("", id, old, childData);
         res.redirect(`/user/${req.params.id}/profile`);
     },
-    success: (req, res) => {
-        return res.render("success");
-    },
-    cart: (req, res) => {
-        let cartIds = req.session.parentLogged.cart;
-        let enCarrito = Products.findAll().filter((product) =>
-            cartIds.includes(Number(product.id))
-        );
-        return res.render("cart", {
-            enCarrito: Products.findAll().filter((product) =>
-                cartIds.includes(Number(product.id))
-            ),
-            recommendations: Products.findAll(),
-        });
-    },
+
     addToCart: (req, res) => {
         Users.addToCart(req.params.productId, req.session.parentLogged);
         res.redirect("/user/cart");
