@@ -88,6 +88,14 @@ const Products = {
     findOneById: function (id) {
         return this.getData().find((product) => product.id == id);
     },
+    findOldAndId: function (posibleId) {
+        let old;
+        let id = posibleId;
+        if (id) {
+            old = Products.findOneById(id);
+        }
+        return { old, id };
+    },
     //createProduct se usa tanto para crear como para actualizar el producto.
     //Si no hay nada en old (que es el req.body), toma un template del producto vacío y lo llena
     //Si hay en el old, toma lo del old, actualiza los campos modificados, lo elimina (en el controller) de la DB y lo re sube

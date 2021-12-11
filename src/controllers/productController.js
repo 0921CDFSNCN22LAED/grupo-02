@@ -38,15 +38,10 @@ const controller = {
         });
     },
     productForm: (req, res) => {
-        // console.log(req.session.old);
-        // let old = req.session.old;
-        // if (req.params.id) {
-        //     old = Products.findOneById(req.params.id);
-        // }
-
+        let { old, id } = Products.findOldAndId(req.params.id);
         res.render("product-creation", {
-            id: req.params.id,
-            old: req.session.old,
+            id,
+            old,
             grados,
             materias,
         });
@@ -56,11 +51,7 @@ const controller = {
         res.redirect("/success");
     },
     productFormEdit: (req, res) => {
-        let old;
-        let id = req.params.id;
-        if (id) {
-            old = Products.findOneById(id);
-        }
+        let { old, id } = Products.findOldAndId(req.params.id);
         Products.destroy(id);
         Products.createProduct([req.body, req.files], id, old);
         res.redirect("/success");
@@ -70,12 +61,7 @@ const controller = {
         res.redirect("/");
     },
     productFormDuplicate: (req, res) => {
-        let old;
-        let id = req.params.id;
-        if (id) {
-            old = Products.findOneById(id);
-        }
-        id = undefined;
+        let { old, id } = Products.findOldAndId(req.params.id);
         Products.createProduct([req.body, req.files], id, old);
         res.redirect("/success");
     },

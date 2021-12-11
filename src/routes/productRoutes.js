@@ -27,9 +27,9 @@ router.get("/", productController.list);
 router.get("/create", productController.productForm);
 router.post(
     "/",
+    upload.fields(uploadFields),
     productValidations,
     validation,
-    upload.fields(uploadFields),
     productController.productFormProcess
 );
 
@@ -40,18 +40,18 @@ router.delete("/:id/delete", productController.delete);
 router.get("/:id/edit", productController.productForm);
 router.put(
     "/:id/edit",
+    upload.fields(uploadFields),
     productValidations,
     validation,
-    upload.fields(uploadFields),
     productController.productFormEdit
 );
 
 //duplicate
 router.post(
     "/:id/duplicate",
+    upload.fields(uploadFields),
     productValidations,
     validation,
-    upload.fields(uploadFields),
     productController.productFormDuplicate
 );
 

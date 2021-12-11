@@ -77,5 +77,7 @@
 <dd>Luis: Página error 404 creada</dd>
 <dt>8 de diciembre de 2021</dt>
 <dd>Luis: agregado de articulos al carrito por usuario</dd>
+<dt>11 de diciembre de 2021</dt>
+<dd>Luis: Cambio a una estructura basada en session, validación de datos, corrección de muchos errors</dd>
 
 </dl>
