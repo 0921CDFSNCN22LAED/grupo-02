@@ -133,7 +133,11 @@
                                 <div class="float-left checkbox mb-3 text-start">
                                     <input type="checkbox" value="rememberMe" name="rememberMe" />
                                     <label>Recordarme</label>
-                                    </label>
+                                </div>
+                                <div class="text-start">
+                                    <% if(errors && errors.invalidLogIn) { %>
+                                    <p class="feedback"><%= errors.invalidLogIn.msg %> </p>
+                                    <% } %>
                                 </div>
                                 <button class="ms-primary-btn " type="submit">
                                     Ingresar
@@ -146,6 +150,7 @@
                 <div class="cursos-main padding-10">
                     <div class="clases-main-container padding-10">
                         <h2 class="">Elegí tu usuario</h2>
+
                         <div class="row col-12">
                             <div class="card-deck d-flex flex-wrap justify-content-around">
                                 <!-- Button trigger modal -->

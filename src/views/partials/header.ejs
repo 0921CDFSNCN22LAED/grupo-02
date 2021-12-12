@@ -49,6 +49,11 @@
             <button class="btn btn-primary btn-lg " type="submit">Cerrar
                 sesión</button>
         </form>
+        <div class="text-start mx-2">
+            <% if(errors && errors.invalidLogIn) { %>
+            <p class="feedback">Contraseña parental incorrecta</p>
+            <% } %>
+        </div>
     </nav>
     <% } %>
     <div id="background-img-under-search-bar"></div>

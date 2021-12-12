@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 const Products = require("../models/Products");
 const Users = require("../models/Users");
 
@@ -24,27 +26,54 @@ const controller = {
         res.redirect(`/user/${id}/profile`);
     },
     parentLoginProcess: (req, res) => {
-        if (req.body.parentPassword == req.session.parentLogged.userPassword) {
-            req.session.parentIsLoggedSecure = true;
-        } else {
-            req.session.parentIsLoggedSecure = false;
+        if (req.body.parentPassword) {
+            let { userPassword } = Users.findByField(
+                "userEmail",
+                req.session.parentLogged.userEmail
+            );
+            if (bcrypt.compareSync(req.body.parentPassword, userPassword)) {
+                req.session.parentIsLoggedSecure = true;
+                return res.redirect("/");
+            }
         }
-        return res.redirect("/");
+        req.session.parentIsLoggedSecure = false;
+        req.session.errors = {
+            invalidLogIn: {
+                msg: "Las credenciales son incorrectas",
+            },
+        };
+        res.redirect("/");
     },
     loginProcess: (req, res) => {
         const userToLogIn = Users.findByField("userEmail", req.body.userEmail);
-        req.session.parentLogged = userToLogIn;
-        if (req.body.rememberMe) {
-            res.cookie("userEmail", req.body.userEmail, {
-                maxAge: 1000 * 60 * 60,
-            });
+        if (userToLogIn) {
+            if (
+                bcrypt.compareSync(
+                    req.body.userPassword,
+                    userToLogIn.userPassword
+                )
+            ) {
+                // delete userToLogIn.userPassword;
+                req.session.parentLogged = userToLogIn;
+                if (req.body.rememberMe) {
+                    res.cookie("userEmail", req.body.userEmail, {
+                        maxAge: 1000 * 60 * 60,
+                    });
+                }
+                return res.redirect("/");
+            }
         }
+        req.session.errors = {
+            invalidLogIn: {
+                msg: "Las credenciales son incorrectas",
+            },
+        };
         res.redirect("/");
     },
     logout: (req, res) => {
         res.clearCookie("userEmail");
         req.session.destroy();
-        return res.redirect("/");
+        res.redirect("/");
     },
     userSelected: (req, res) => {
         if (req.params.id % 1 == 0) {

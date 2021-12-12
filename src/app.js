@@ -32,10 +32,9 @@ app.use(
     })
 );
 
-app.use(sessionData);
 app.use(randomBackground(app));
-
 app.use(userLogged);
+app.use(sessionData);
 
 app.listen(3000);
 

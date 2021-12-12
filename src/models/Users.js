@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const bcrypt = require("bcryptjs");
 
 const Users = {
     fileName: path.join(__dirname, "../../data/users.json"),
@@ -55,6 +56,12 @@ const Users = {
     createUser: function (userData, id, old, childData) {
         let allUsers = this.findAll();
         let [userDataBody, userDataFiles] = userData;
+        if (userDataBody && userDataBody.userPassword) {
+            userDataBody = {
+                ...userDataBody,
+                userPassword: bcrypt.hashSync(userDataBody.userPassword, 10),
+            };
+        }
         let oldChildren;
         if (old) {
             oldChildren = old.children;
