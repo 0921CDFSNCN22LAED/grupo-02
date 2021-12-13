@@ -22,8 +22,7 @@ const controller = {
     registerProcess: (req, res) => {
         let newUser = Users.createUser([req.body, req.files]);
         req.session.parentLogged = newUser;
-        let id = newUser.id;
-        res.redirect(`/user/${id}/profile`);
+        res.redirect(`/user/profile`);
     },
     parentLoginProcess: (req, res) => {
         if (req.body.parentPassword) {
@@ -102,7 +101,7 @@ const controller = {
             id,
             old
         );
-        res.redirect(`/user/${req.params.id}/profile`);
+        res.redirect(`/user/profile`);
     },
     updateChildren: (req, res) => {
         let old;
@@ -113,7 +112,7 @@ const controller = {
         let childData = Users.createSubUser([req.body, req.file]);
         Users.destroy(id);
         req.session.parentLogged = Users.createUser("", id, old, childData);
-        res.redirect(`/user/${req.params.id}/profile`);
+        res.redirect(`/user/profile`);
     },
 
     addToCart: (req, res) => {

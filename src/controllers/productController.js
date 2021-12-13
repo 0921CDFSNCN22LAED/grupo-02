@@ -32,6 +32,7 @@ const controller = {
         chosenProduct = req.session.product = Products.findOneById(
             req.params.id
         );
+        if (!chosenProduct) res.render("not-found");
         res.render("product-detail", {
             chosenProduct,
             id: req.params.id,

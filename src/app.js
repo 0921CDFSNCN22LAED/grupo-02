@@ -32,6 +32,7 @@ app.use(
     })
 );
 
+//Enviar app como argumento ??
 app.use(randomBackground(app));
 app.use(userLogged);
 app.use(sessionData);

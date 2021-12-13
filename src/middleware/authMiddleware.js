@@ -1,7 +1,7 @@
 function authMiddleware(req, res, next) {
-    // if (!res.locals.childIsLogged && !res.locals.parentIsLogged) {
-    //     return res.redirect("/");
-    // }
+    if (!res.locals.parentLogged) {
+        return res.redirect("/");
+    }
 
     next();
 }

@@ -22,27 +22,17 @@ router.get("/logout", userController.logout);
 router.get("/changeUser", userController.logoutSubUser);
 
 //VER AUTH MIDDLEWARE EN ESTA RUTA
-router.get("/:id/profile", userController.profile);
+router.get("/profile", authMiddleware, userController.profile);
 
-router.put(
-    "/:id/update",
-    authMiddleware,
-    upload.single("avatar"),
-    userController.update
-);
+router.put("/:id/update", upload.single("avatar"), userController.update);
 router.put(
     "/:id/updateChildren",
-    authMiddleware,
     upload.single("avatar"),
     userController.updateChildren
 );
 
 router.get("/cart", authMiddleware, userController.cart);
-router.post("/addToCart/:productId", authMiddleware, userController.addToCart);
-router.delete(
-    "/removeFromCart/:productId",
-    authMiddleware,
-    userController.removeFromCart
-);
+router.post("/addToCart/:productId", userController.addToCart);
+router.delete("/removeFromCart/:productId", userController.removeFromCart);
 
 module.exports = router;

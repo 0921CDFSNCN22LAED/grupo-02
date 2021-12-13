@@ -1,3 +1,5 @@
+// Todo la data pasa por este controlador
+
 module.exports = (req, res, next) => {
     console.log(req.session);
     res.locals.parentLogged = req.session.parentLogged;
