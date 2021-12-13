@@ -1,0 +1,31 @@
+<div class="cursos-main padding-10">
+    <div class="clases-main-container padding-10">
+        <h2 class="">Elegí tu usuario</h2>
+
+        <div class="row col-12">
+            <div class="card-deck d-flex flex-wrap justify-content-around">
+                <!-- Button trigger modal -->
+                <a type="button" data-bs-toggle="modal" data-bs-target="#parentVerificationModal"
+                    class="restyled-link card bg-transparent border-0 mx-2" style="width: 8rem;">
+                    <img class="card-img-top rounded-circle" src="/img/avatars/<%= parentLogged.avatar %> "
+                        alt="parent avatar">
+                    <div class="card-body">
+                        <h3 class="card-text text-center"><%= parentLogged.userName %></h3>
+                    </div>
+                </a>
+
+                <% let children = parentLogged.children %>
+                <% for(let child in children) {%>
+                <a href="/user/userSelected/<%=children[child].childId%>"
+                    class="restyled-link card bg-transparent border-0 mx-2" style="width: 8rem;">
+                    <img class="card-img-top rounded-circle" src="/img/avatars/<%= children[child].avatar %> "
+                        alt="child avatar">
+                    <div class="card-body">
+                        <h3 class="card-text text-center"><%= children[child].name %></h3>
+                    </div>
+                </a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>

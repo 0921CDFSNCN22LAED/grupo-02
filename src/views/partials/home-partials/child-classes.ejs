@@ -1,0 +1,39 @@
+<div class="cursos-main padding-10">
+    <div class="clases-main-container padding-10">
+        <h2>¡Hola <%= childLogged.name %>!</h2>
+        <h2>Hoy es un buen día para aprender <%= recommendations[0].titulo %></h2>
+
+
+    </div>
+</div>
+
+<article class="col-12 col-md-6 cursos-main padding-10">
+    <div class="clases-main-container">
+        <h2 class="padding-10">Clase actual</h2>
+        <% if(ultimaClase) {%>
+        <a class="clases-main-item" href="/products/<%= ultimaClase.id %>">
+            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= ultimaClase.preview %>"
+                alt="<%= ultimaClase.titulo %> " />
+            <h4 class="padding-10"><%= ultimaClase.titulo %></h4>
+        </a>
+        <% } else { %>
+        <h3 class="padding-10">No estás tomando ninguna clase aún</h3>
+        <% } %>
+    </div>
+</article>
+<article class="col-12 col-md-6 cursos-main padding-10">
+    <div class="clases-main-container">
+        <h2 class="padding-10">Mi colección</h2>
+        <% if(clasesActuales) {%>
+        <% for(let clase of clasesActuales){ %>
+        <a class="clases-main-item" href="/products/<%= clase.id %>">
+            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %>"
+                alt="<%= clase.titulo %> " />
+            <h4 class="padding-10"><%= clase.titulo %></h4>
+        </a>
+        <% } %>
+        <% } else { %>
+        <h3 class="padding-10">No tenés clases en tu colección</h3>
+        <% } %>
+    </div>
+</article>
