@@ -286,7 +286,9 @@
   "userPassword": "$2a$10$mGJwoxmlpIQHVZLdZHesduQZYJeJhQZz/dIqiY6JkmsHc9B11DwgS",
   "id": 1,
   "avatar": "avatar-1638783764305.png",
-  "cart": [],
+  "cart": [
+   9
+  ],
   "children": {
    "1.1": {
     "childId": "1.1",
