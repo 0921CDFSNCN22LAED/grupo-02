@@ -41,7 +41,7 @@ const controller = {
                 req.session.parentLogged.children = [];
                 return res.redirect(`/user/profile`);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => console.error(e));
     },
     registerChild: (req, res) => {
         db.User.create()
@@ -67,7 +67,7 @@ const controller = {
                         return res.redirect(`/user/profile`);
                     });
             })
-            .catch((e) => console.log(e));
+            .catch((e) => console.error(e));
     },
     parentLoginProcess: (req, res) => {
         if (req.body.pass) {
@@ -86,7 +86,7 @@ const controller = {
                     res.redirect("/");
                 })
                 .catch((e) => {
-                    console.log(e);
+                    console.error(e);
                 });
         }
     },
@@ -118,7 +118,8 @@ const controller = {
                 res.redirect("/");
             })
             .catch((e) => {
-                console.log(e);
+                console.error(e);
+                res.render("error-page", { error: e });
             });
     },
     logout: (req, res) => {
@@ -171,10 +172,9 @@ const controller = {
                 req.session.parentLogged = parent.dataValues;
                 res.redirect(`/user/profile`);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => console.error(e));
     },
     updateChildren: (req, res) => {
-        console.log("File: ", req.file);
         db.Child.update(
             {
                 ...req.body,
@@ -201,7 +201,7 @@ const controller = {
                 req.session.parentLogged = parent.dataValues;
                 res.redirect(`/user/profile`);
             })
-            .catch((e) => console.log(e));
+            .catch((e) => console.error(e));
     },
 
     addToCart: (req, res) => {
