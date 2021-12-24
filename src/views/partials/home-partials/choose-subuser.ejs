@@ -10,18 +10,16 @@
                     <img class="card-img-top rounded-circle" src="/img/avatars/<%= parentLogged.avatar %> "
                         alt="parent avatar">
                     <div class="card-body">
-                        <h3 class="card-text text-center"><%= parentLogged.userName %></h3>
+                        <h3 class="card-text text-center"><%= parentLogged.name %></h3>
                     </div>
                 </a>
-
-                <% let children = parentLogged.children %>
-                <% for(let child in children) {%>
-                <a href="/user/userSelected/<%=children[child].childId%>"
+                <% for(let child in parentLogged.children) {%>
+                <a href="/user/userSelected/<%=parentLogged.children[child].id%>"
                     class="restyled-link card bg-transparent border-0 mx-2" style="width: 8rem;">
-                    <img class="card-img-top rounded-circle" src="/img/avatars/<%= children[child].avatar %> "
-                        alt="child avatar">
+                    <img class="card-img-top rounded-circle"
+                        src="/img/avatars/<%= parentLogged.children[child].avatar %> " alt="child avatar">
                     <div class="card-body">
-                        <h3 class="card-text text-center"><%= children[child].name %></h3>
+                        <h3 class="card-text text-center"><%= parentLogged.children[child].name %></h3>
                     </div>
                 </a>
                 <% } %>

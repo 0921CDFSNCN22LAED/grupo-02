@@ -4,7 +4,16 @@
 module.exports = () => {
     return (req, res, next) => {
         if (req.path == "/") {
-            req.session.background = Math.floor(Math.random() * 4) + 1;
+            function pickBackground() {
+                const oldBackground = req.session.background;
+                const newBackground = Math.floor(Math.random() * 4) + 1;
+                if (oldBackground == newBackground) {
+                    pickBackground();
+                } else {
+                    req.session.background = newBackground;
+                }
+            }
+            pickBackground();
         }
         res.locals.background = req.session.background;
         next();

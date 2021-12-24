@@ -1,4 +1,4 @@
-const Users = require("../models/Users");
+const Users = require("../services/Users");
 
 function userLogged(req, res, next) {
     let emailInCookie = req.cookies.userEmail;

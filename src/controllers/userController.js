@@ -1,11 +1,15 @@
 const bcrypt = require("bcryptjs");
 
-const Products = require("../models/Products");
-const Users = require("../models/Users");
+const Products = require("../services/Products");
+const Users = require("../services/Users");
+
+const db = require("../../database/models");
 
 const controller = {
     profile: (req, res) => {
-        res.render("profile");
+        db.Grade.findAll().then((grades) => {
+            res.render("profile", { grades });
+        });
     },
     cart: (req, res) => {
         let cartIds = req.session.parentLogged.cart;
@@ -19,55 +23,103 @@ const controller = {
             recommendations: Products.findAll(),
         });
     },
-    registerProcess: (req, res) => {
-        let newUser = Users.createUser([req.body, req.files]);
-        req.session.parentLogged = newUser;
-        res.redirect(`/user/profile`);
+    registerParent: (req, res) => {
+        db.User.create()
+            .then((user) => {
+                return user.dataValues.id;
+            })
+            .then((userId) => {
+                return db.Parent.create({
+                    ...req.body,
+                    pass: bcrypt.hashSync(req.body.pass, 10),
+                    avatar: "default-avatar.png",
+                    user_id: userId,
+                });
+            })
+            .then((parent) => {
+                req.session.parentLogged = parent.dataValues;
+                req.session.parentLogged.children = [];
+                return res.redirect(`/user/profile`);
+            })
+            .catch((e) => console.log(e));
+    },
+    registerChild: (req, res) => {
+        db.User.create()
+            .then((user) => {
+                return user.dataValues.id;
+            })
+            .then((userId) => {
+                db.Child.create({
+                    ...req.body,
+                    avatar: req.file
+                        ? req.file.originalname
+                        : "default-avatar.png",
+                    user_id: userId,
+                    parent_id: req.session.parentLogged.id,
+                })
+                    .then((child) => {
+                        return db.Parent.findByPk(child.parent_id, {
+                            include: [{ association: "children" }],
+                        });
+                    })
+                    .then((parent) => {
+                        req.session.parentLogged = parent.dataValues;
+                        return res.redirect(`/user/profile`);
+                    });
+            })
+            .catch((e) => console.log(e));
     },
     parentLoginProcess: (req, res) => {
-        if (req.body.parentPassword) {
-            let { userPassword } = Users.findByField(
-                "userEmail",
-                req.session.parentLogged.userEmail
-            );
-            if (bcrypt.compareSync(req.body.parentPassword, userPassword)) {
-                req.session.parentIsLoggedSecure = true;
-                return res.redirect("/");
-            }
+        if (req.body.pass) {
+            db.Parent.findByPk(req.session.parentLogged.id)
+                .then((parent) => {
+                    if (bcrypt.compareSync(req.body.pass, parent.pass)) {
+                        req.session.parentIsLoggedSecure = true;
+                        return res.redirect("/");
+                    }
+                    req.session.parentIsLoggedSecure = false;
+                    req.session.errors = {
+                        invalidLogIn: {
+                            msg: "Las credenciales son incorrectas",
+                        },
+                    };
+                    res.redirect("/");
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         }
-        req.session.parentIsLoggedSecure = false;
-        req.session.errors = {
-            invalidLogIn: {
-                msg: "Las credenciales son incorrectas",
-            },
-        };
-        res.redirect("/");
     },
-    loginProcess: (req, res) => {
-        const userToLogIn = Users.findByField("userEmail", req.body.userEmail);
-        if (userToLogIn) {
-            if (
-                bcrypt.compareSync(
-                    req.body.userPassword,
-                    userToLogIn.userPassword
-                )
-            ) {
-                // delete userToLogIn.userPassword;
-                req.session.parentLogged = userToLogIn;
-                if (req.body.rememberMe) {
-                    res.cookie("userEmail", req.body.userEmail, {
-                        maxAge: 1000 * 60 * 60,
-                    });
-                }
-                return res.redirect("/");
-            }
-        }
-        req.session.errors = {
-            invalidLogIn: {
-                msg: "Las credenciales son incorrectas",
+    login: (req, res) => {
+        db.Parent.findOne({
+            where: {
+                email: req.body.email,
             },
-        };
-        res.redirect("/");
+            include: [{ association: "children" }],
+        })
+            .then((logParent) => {
+                if (logParent) {
+                    if (bcrypt.compareSync(req.body.pass, logParent.pass)) {
+                        // delete logParent.pass;
+                        req.session.parentLogged = logParent.dataValues;
+                        if (req.body.rememberMe) {
+                            res.cookie("email", req.body.email, {
+                                maxAge: 1000 * 60 * 60,
+                            });
+                        }
+                        return res.redirect("/");
+                    }
+                }
+                req.session.errors = {
+                    invalidLogIn: {
+                        msg: "Las credenciales son incorrectas",
+                    },
+                };
+                res.redirect("/");
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     },
     logout: (req, res) => {
         res.clearCookie("userEmail");
@@ -75,12 +127,18 @@ const controller = {
         res.redirect("/");
     },
     userSelected: (req, res) => {
-        if (req.params.id % 1 == 0) {
-            req.session.parentLogged = Users.findOneById(req.params.id);
-        } else {
-            req.session.childLogged = Users.findOneById(req.params.id);
-            req.session.parentIsLoggedSecure = false;
-        }
+        db.Parent.findByPk(req.params.id).then((parent) => {
+            req.session.parentLogged = parent;
+        });
+
+        //Incluir Children
+
+        // if (req.params.id % 1 == 0) {
+        //     req.session.parentLogged = Users.findOneById(req.params.id);
+        // } else {
+        //     req.session.childLogged = Users.findOneById(req.params.id);
+        //     req.session.parentIsLoggedSecure = false;
+        // }
         res.redirect("/");
     },
     logoutSubUser: (req, res) => {
@@ -89,30 +147,61 @@ const controller = {
         res.redirect("/");
     },
 
-    update: (req, res) => {
-        let old;
-        let id = req.params.id;
-        if (id) {
-            old = Users.findOneById(id);
-        }
-        Users.destroy(id);
-        req.session.parentLogged = Users.createUser(
-            [req.body, req.file],
-            id,
-            old
-        );
-        res.redirect(`/user/profile`);
+    updateParent: (req, res) => {
+        db.Parent.update(
+            {
+                ...req.body,
+                // Si el spread da false por Short circuit todo da false y no se ve la propiedad
+                ...(req.file && {
+                    avatar: req.file.originalname,
+                }),
+            },
+            {
+                where: {
+                    id: req.params.id,
+                },
+            }
+        )
+            .then(() => {
+                return db.Parent.findByPk(req.params.id, {
+                    include: [{ association: "children" }],
+                });
+            })
+            .then((parent) => {
+                req.session.parentLogged = parent.dataValues;
+                res.redirect(`/user/profile`);
+            })
+            .catch((e) => console.log(e));
     },
     updateChildren: (req, res) => {
-        let old;
-        let id = req.params.id;
-        if (id) {
-            old = Users.findOneById(id);
-        }
-        let childData = Users.createSubUser([req.body, req.file]);
-        Users.destroy(id);
-        req.session.parentLogged = Users.createUser("", id, old, childData);
-        res.redirect(`/user/profile`);
+        console.log("File: ", req.file);
+        db.Child.update(
+            {
+                ...req.body,
+                // Si el spread da false por Short circuit todo da false y no se ve la propiedad
+                ...(req.file && {
+                    avatar: req.file.originalname,
+                }),
+            },
+            {
+                where: {
+                    id: req.params.id,
+                },
+            }
+        )
+            .then(() => {
+                return db.Child.findByPk(req.params.id);
+            })
+            .then((child) => {
+                return db.Parent.findByPk(child.parent_id, {
+                    include: [{ association: "children" }],
+                });
+            })
+            .then((parent) => {
+                req.session.parentLogged = parent.dataValues;
+                res.redirect(`/user/profile`);
+            })
+            .catch((e) => console.log(e));
     },
 
     addToCart: (req, res) => {

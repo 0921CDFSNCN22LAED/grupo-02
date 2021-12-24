@@ -5,27 +5,26 @@
         <div class=" bg-shadow-pill padding-10">
             <form class="padding-10" action="/user/register" method="post">
                 <div class="form-floating my-3 text-start">
-                    <input class="form-control" type="text" name="userName" id="userName"
-                        placeholder="Nombre de usuario" value="<%= old && old.userName ? old.userName : "" %>" />
-                    <label class="text-shadow" for="userName">Nombre de usuario</label>
-                    <% if(errors && errors.userName) { %>
-                    <p class="feedback "><%= errors.userName.msg %> </p>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Nombre de usuario"
+                        value="<%= old && old.name ? old.name : "" %>" />
+                    <label class="text-shadow" for="name">Nombre de usuario</label>
+                    <% if(errors && errors.name) { %>
+                    <p class="feedback "><%= errors.name.msg %> </p>
                     <% } %>
                 </div>
                 <div class="form-floating my-3 text-start">
-                    <input class="form-control" type="email" name="userEmail" id="userEmail"
-                        placeholder="Nombre de usuario" value="<%= old && old.userEmail ? old.userEmail : "" %>" />
-                    <label class="text-shadow" for="userEmail">Correo electrónico</label>
-                    <% if(errors && errors.userEmail) { %>
-                    <p class="feedback "><%= errors.userEmail.msg %> </p>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="Nombre de usuario"
+                        value="<%= old && old.email ? old.email : "" %>" />
+                    <label class="text-shadow" for="email">Correo electrónico</label>
+                    <% if(errors && errors.email) { %>
+                    <p class="feedback "><%= errors.email.msg %> </p>
                     <% } %>
                 </div>
                 <div class="form-floating my-3 text-start">
-                    <input class="form-control" type="password" name="userPassword" id="userPassword"
-                        placeholder="Contraseña" />
-                    <label class="text-shadow" for="userPassword">Contraseña</label>
-                    <% if(errors && errors.userPassword) { %>
-                    <p class="feedback "><%= errors.userPassword.msg %> </p>
+                    <input class="form-control" type="password" name="pass" id="pass" placeholder="Contraseña" />
+                    <label class="text-shadow" for="pass">Contraseña</label>
+                    <% if(errors && errors.pass) { %>
+                    <p class="feedback "><%= errors.pass.msg %> </p>
                     <% } %>
                 </div>
                 <button class="ms-primary-btn " type="submit">
@@ -42,14 +41,13 @@
         <div class=" bg-shadow-pill padding-10">
             <form class="padding-10" action="/user/login" method="post">
                 <div class="form-floating my-3">
-                    <input class="form-control" type="email" name="userEmail" id="userEmail"
-                        placeholder="Nombre de usuario" value="<%= old && old.userEmail ? old.userEmail : "" %>" />
-                    <label class="text-shadow" for="userEmail">Correo electrónico</label>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="Nombre de usuario"
+                        value="<%= old && old.email ? old.email : "" %>" />
+                    <label class="text-shadow" for="email">Correo electrónico</label>
                 </div>
                 <div class="form-floating my-3">
-                    <input class="form-control" type="password" name="userPassword" id="userPassword"
-                        placeholder="Contraseña" />
-                    <label class="text-shadow" for="userPassword">Contraseña</label>
+                    <input class="form-control" type="password" name="pass" id="pass" placeholder="Contraseña" />
+                    <label class="text-shadow" for="pass">Contraseña</label>
                 </div>
                 <div class="float-left checkbox mb-3 text-start">
                     <input type="checkbox" value="rememberMe" name="rememberMe" />

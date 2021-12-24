@@ -1,15 +1,13 @@
 const { body } = require("express-validator");
 
 module.exports = [
-    body("userName")
+    body("name")
         .notEmpty()
         .withMessage("Tenés que ingresar un nombre de usuario"),
-    body("userEmail")
+    body("email")
         .notEmpty()
         .withMessage("Tenés que ingresar un correo electrónico")
         .isEmail()
         .withMessage("Tenés que ingresar un correo electrónico valido"),
-    body("userPassword")
-        .notEmpty()
-        .withMessage("Tenés que ingresar una contraseña"),
+    body("pass").notEmpty().withMessage("Tenés que ingresar una contraseña"),
 ];

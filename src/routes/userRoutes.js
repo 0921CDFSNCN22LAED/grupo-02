@@ -14,17 +14,27 @@ router.post(
     "/register",
     userValidations,
     validation,
-    userController.registerProcess
+    userController.registerParent
 );
+router.post(
+    "/registerChild",
+    upload.single("avatar"),
+    userController.registerChild
+);
+
 router.post("/secure", userController.parentLoginProcess);
-router.post("/login", userController.loginProcess);
+router.post("/login", userController.login);
 router.get("/logout", userController.logout);
 router.get("/changeUser", userController.logoutSubUser);
 
 //VER AUTH MIDDLEWARE EN ESTA RUTA
 router.get("/profile", authMiddleware, userController.profile);
 
-router.put("/:id/update", upload.single("avatar"), userController.update);
+router.put(
+    "/:id/updateParent",
+    upload.single("avatar"),
+    userController.updateParent
+);
 router.put(
     "/:id/updateChildren",
     upload.single("avatar"),
