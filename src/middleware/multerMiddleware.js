@@ -7,7 +7,7 @@ var storage = multer.diskStorage({
             case "video":
                 cb(null, "public/img/clases-video");
                 break;
-            case "materialExtra":
+            case "bonus":
                 cb(null, "public/img/clases-material-extra");
                 break;
             case "preview":

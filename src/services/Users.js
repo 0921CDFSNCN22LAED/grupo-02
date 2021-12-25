@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const bcrypt = require("bcryptjs");
-const db = require("../../database/models");
-const User = require("../../database/models/User");
+const db = require("../database/models");
+const User = require("../database/models/user");
 
 const Users = {
     fileName: path.join(__dirname, "../../data/users.json"),

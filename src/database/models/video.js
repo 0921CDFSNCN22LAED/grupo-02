@@ -1,0 +1,32 @@
+module.exports = (sequelize, DataTypes) => {
+    const Video = sequelize.define(
+        "Video",
+        {
+            id: {
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
+                primaryKey: true,
+            },
+            location: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            len: {
+                type: DataTypes.INTEGER,
+            },
+        },
+        {
+            tableName: "videos",
+            timestamps: false,
+        }
+    );
+
+    Video.associate = (models) => {
+        Video.hasOne(models.Interactive, {
+            as: "interactive",
+            foreignKey: "video_id",
+        });
+    };
+
+    return Video;
+};

@@ -12,7 +12,7 @@ const uploadFields = [
         maxCount: 1,
     },
     {
-        name: "materialExtra",
+        name: "bonus",
         maxCount: 1,
     },
     {
@@ -28,8 +28,8 @@ router.get("/create", productController.productForm);
 router.post(
     "/",
     upload.fields(uploadFields),
-    productValidations,
-    validation,
+    // productValidations,
+    // validation,
     productController.productFormProcess
 );
 

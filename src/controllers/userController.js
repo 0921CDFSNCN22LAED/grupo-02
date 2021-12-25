@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const Products = require("../services/Products");
 const Users = require("../services/Users");
 
-const db = require("../../database/models");
+const db = require("../database/models");
 
 const controller = {
     profile: (req, res) => {
