@@ -1,7 +1,5 @@
 const db = require("../database/models");
-const subject = require("../database/models/subject");
 const Products = require("../services/Products");
-const interactive = require("../database/models/interactive");
 
 const grados = [
     "1er año",
@@ -47,43 +45,59 @@ const controller = {
                 { association: "description" },
             ],
         }).then((classes) => {
-            console.log(`classes`, classes);
             res.render("products-page", {
                 classes,
             });
         });
-
-        // res.render("products-page", { products: Products.findAll() });
     },
     detail: (req, res) => {
-        chosenProduct = req.session.product = Products.findOneById(
-            req.params.id
-        );
-        if (!chosenProduct) res.render("not-found");
-        res.render("product-detail", {
-            chosenProduct,
-            id: req.params.id,
+        db.Class.findOne({
+            raw: true,
+            where: {
+                id: req.params.id,
+            },
+            include: [
+                { association: "subject" },
+                { association: "grades" },
+                { association: "teacher" },
+                {
+                    model: db.Interactive,
+                    as: "interactive",
+                    include: [
+                        { association: "video" },
+                        { association: "preview" },
+                        { association: "bonus" },
+                    ],
+                },
+                { association: "description" },
+            ],
+        }).then((classSel) => {
+            req.session.class = classSel;
+            if (!classSel) res.render("not-found");
+            res.render("product-detail", {
+                classSel,
+                id: req.params.id,
+            });
         });
+
+        // chosenProduct = req.session.product = Products.findOneById(
+        //     req.params.id
+        // );
+        // if (!chosenProduct) res.render("not-found");
+        // res.render("product-detail", {
+        //     chosenProduct,
+        //     id: req.params.id,
+        // });
     },
     productForm: (req, res) => {
+        console.log(`req.session.old`, req.session.old);
         let grades = db.Grade.findAll({ raw: true });
         let subjects = db.Subject.findAll({ raw: true });
-        // if (req.params.id) {
-        //     db.Class.findByPk(req.params.id)
-        //         .then((classSel) => {
-        //             // console.log(classSel);
-        //             // res.render("product-creation", {
-        //             //     id: req.params.id,
-        //             //     old: classSel,
-        //             // })
-        //         })
-        //         .catch((e) => console.error(e));
-        // }
-        // let { old, id } = Products.findOldAndId(req.params.id);
         Promise.all([grades, subjects]).then(([grades, subjects]) => {
+            let old = req.session.old;
             res.render("product-creation", {
                 // id,
-                // old,
+                old,
                 grades,
                 subjects,
             });
@@ -107,7 +121,6 @@ const controller = {
             : "";
         const interactives = Promise.all([video, preview, bonus]).then(
             ([video, preview, bonus]) => {
-                console.log(video, preview, bonus);
                 return db.Interactive.create({
                     video_id: video ? video.dataValues.id : null,
                     preview_id: preview ? preview.dataValues.id : null,
@@ -132,7 +145,6 @@ const controller = {
         });
         Promise.all([teacher, interactives, description])
             .then(([teacher, interactives, description]) => {
-                console.log(interactives.dataValues);
                 return db.Class.create(
                     {
                         title: req.body.title,

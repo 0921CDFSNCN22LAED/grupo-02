@@ -28,8 +28,8 @@ router.get("/create", productController.productForm);
 router.post(
     "/",
     upload.fields(uploadFields),
-    // productValidations,
-    // validation,
+    productValidations,
+    validation,
     productController.productFormProcess
 );
 
