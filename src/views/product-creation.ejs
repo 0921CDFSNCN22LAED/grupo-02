@@ -201,18 +201,19 @@
                                 <label for="teacherCv">Breve presentación (cv)</label>
                             </div>
                         </div>
-                        <% if( locals.id) { %>
+                        <% if( locals.old && locals.old.id) { %>
 
                         <button class="btn btn-danger ms-2 btn-lg" type="submit" formmethod="post"
-                            formaction="<%="/products/"+id+"/delete?_method=DELETE"%>">
+                            formaction="<%="/products/"+old.id+"/delete?_method=DELETE"%>">
                             Eliminar clase
                         </button>
                         <button class=" btn btn-warning ms-2 btn-lg" type="submit" formmethod="post"
-                            formaction="<%="/products/"+id+"/duplicate"%>">
+                            formaction="<%="/products/duplicate"%>" formenctype="multipart/form-data">
                             Duplicar la clase
                         </button>
                         <button class=" btn btn-success btn-lg" type="submit"
-                            formaction="<%="action=/products/"+id+"/edit?_method=PUT"%>" formmethod="post">
+                            formaction="<%="/products/"+old.id+"/edit?_method=PUT"%>" formmethod="post"
+                            formenctype="multipart/form-data">
                             Actualizar la clase
                         </button>
 

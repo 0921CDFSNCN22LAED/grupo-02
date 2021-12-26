@@ -125,21 +125,21 @@ CREATE TABLE `Teachers` (
 DROP TABLE IF EXISTS `Bonus`;
 CREATE TABLE `Bonus` (
 	`id` varchar(255) NOT NULL,
-	`location` varchar(255) NOT NULL,
+	`location` varchar(255),
 	PRIMARY KEY (`id`)	
 );
 
 DROP TABLE IF EXISTS `Previews`;
 CREATE TABLE `Previews` (
 	`id` varchar(255) NOT NULL,
-	`location` varchar(255) NOT NULL,
+	`location` varchar(255),
 	PRIMARY KEY (`id`)	
 );
 
 DROP TABLE IF EXISTS `Videos`;
 CREATE TABLE `Videos` (
 	`id` varchar(255) NOT NULL,
-	`location` varchar(255) NOT NULL,
+	`location` varchar(255),
 	`len` varchar(255) NOT NULL,
 	PRIMARY KEY (`id`)	
 );

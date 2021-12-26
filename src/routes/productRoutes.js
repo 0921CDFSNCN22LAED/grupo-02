@@ -30,7 +30,16 @@ router.post(
     upload.fields(uploadFields),
     productValidations,
     validation,
-    productController.productFormProcess
+    productController.publish
+);
+
+//duplicate
+router.post(
+    "/duplicate",
+    upload.fields(uploadFields),
+    productValidations,
+    validation,
+    productController.duplicate
 );
 
 //Delete
@@ -41,18 +50,9 @@ router.get("/:id/edit", productController.productForm);
 router.put(
     "/:id/edit",
     upload.fields(uploadFields),
-    productValidations,
-    validation,
+    // productValidations,
+    // validation,
     productController.productFormEdit
-);
-
-//duplicate
-router.post(
-    "/:id/duplicate",
-    upload.fields(uploadFields),
-    productValidations,
-    validation,
-    productController.productFormDuplicate
 );
 
 //Read Detail

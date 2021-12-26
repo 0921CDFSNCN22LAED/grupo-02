@@ -1,7 +1,7 @@
 // Todo la data pasa por este controlador
 
 module.exports = (req, res, next) => {
-    // console.log(req.session);
+    console.log(req.session);
     // if (req.session.parentLogged) {
     //     console.log(req.session.parentLogged.children);
     // }
@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     // }
     res.locals.parentLogged = req.session.parentLogged;
     res.locals.childLogged = req.session.childLogged;
-    res.locals.class = req.session.product;
+    res.locals.class = req.session.class;
 
     res.locals.parentIsLoggedSecure = req.session.parentIsLoggedSecure;
 

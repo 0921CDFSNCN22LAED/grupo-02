@@ -1,143 +1,266 @@
+const req = require("express/lib/request");
 const fs = require("fs");
 const path = require("path");
+const db = require("../database/models");
 
 const Products = {
-    productOld: {
-        id: "",
-        titulo: "",
-        materia: "",
-        grado: "",
-        profesorNombre: "",
-        profesorApellido: "",
-        profesorEmail: "",
-        profesorCv: "",
-        rating: "",
-        precio: "",
-        preview: "",
-        descripcion: "",
-        descripcionLong: "",
-        contenidos: [],
-        resenas: [],
-        clasesSimilares: [],
-        video: "",
-        duracionVideo: 60,
-        duracionVideoHoras: "",
-        materialExtra: "",
-        hayMaterialExtra: true,
-        responsive: true,
-        certificado: false,
-    },
-    fileName: path.join(__dirname, "../../data/products.json"),
-    getData: function () {
-        let products = fs.readFileSync(this.fileName);
-        if (products == "") {
-            products = [];
-        } else {
-            products = JSON.parse(products);
-        }
-        let duracionVideoHoras = function (chosenProduct) {
-            if (chosenProduct.duracionVideo == "") {
-                return "";
-            }
-            let horas = Math.floor(chosenProduct.duracionVideo / 60);
-            let minutos = chosenProduct.duracionVideo % 60;
-            let minutosFraccionHora = minutos / 60;
-            return horas + minutosFraccionHora;
-        };
-
-        let rating = function (chosenProduct) {
-            if (chosenProduct.resenas == "") {
-                return "";
-            }
-            return (
-                Math.round(
-                    (chosenProduct.resenas.reduce(
-                        (a, b) => a.rating + b.rating
-                    ) /
-                        chosenProduct.resenas.length) *
-                        2
-                ) / 2
-            );
-        };
-        products.forEach((product) => {
-            // product.rating = rating(product);
-            // product.duracionVideoHoras = duracionVideoHoras(product);
-        });
-        return products;
-    },
-    saveData: function (data) {
-        fs.writeFileSync(this.fileName, JSON.stringify(data, null, " "));
-    },
-
-    generateId: function () {
-        let posibleIds = [];
-        let currentIds = [];
-        let products = this.getData();
-        for (let product of products) {
-            currentIds.push(product.id);
-        }
-        for (let i = 1; i <= products.length + 1; i++) {
-            if (!currentIds.includes(i)) {
-                return i;
-            }
-        }
-    },
     findAll: function () {
-        return this.getData();
+        return db.Class.findAll({
+            raw: true,
+            include: [
+                { association: "subject" },
+                { association: "grades" },
+                { association: "teacher" },
+                {
+                    model: db.Interactive,
+                    as: "interactive",
+                    include: [
+                        { association: "video" },
+                        { association: "preview" },
+                        { association: "bonus" },
+                    ],
+                },
+                { association: "description" },
+            ],
+        });
     },
-    findOneById: function (id) {
-        return this.getData().find((product) => product.id == id);
+    findOne: function (id) {
+        return db.Class.findOne({
+            raw: true,
+            where: {
+                id: id,
+            },
+            include: [
+                { association: "subject" },
+                { association: "grades" },
+                { association: "teacher" },
+                {
+                    model: db.Interactive,
+                    as: "interactive",
+                    include: [
+                        { association: "video" },
+                        { association: "preview" },
+                        { association: "bonus" },
+                    ],
+                },
+                { association: "description" },
+            ],
+        });
     },
-    findOldAndId: function (posibleId) {
-        let old;
-        let id = posibleId;
-        if (id) {
-            old = Products.findOneById(id);
-        }
-        return { old, id };
+    create: function (req) {
+        let old = req.session.old;
+        const video = req.files.video
+            ? db.Video.create({
+                  location: req.files.video[0].filename,
+              })
+            : old["interactive.video.location"]
+            ? old["interactive.video.location"]
+            : "";
+        const preview = req.files.preview
+            ? db.Preview.create({
+                  location: req.files.preview[0].filename,
+              })
+            : old["interactive.preview.location"]
+            ? old["interactive.preview.location"]
+            : "";
+        const bonus = req.files.bonus
+            ? db.Bonus.create({
+                  location: req.files.bonus[0].filename,
+              })
+            : old["interactive.bonus.location"]
+            ? old["interactive.bonus.location"]
+            : "";
+        const interactives = Promise.all([video, preview, bonus]).then(
+            ([video, preview, bonus]) => {
+                return db.Interactive.create({
+                    video_id: video ? video.dataValues.id : null,
+                    preview_id: preview ? preview.dataValues.id : null,
+                    bonus_id: bonus ? bonus.dataValues.id : null,
+                });
+            }
+        );
+        const teacher = db.Teacher.findOrCreate({
+            where: {
+                email: req.body.teacherEmail,
+            },
+            defaults: {
+                first_name: req.body.teacherFirstName,
+                last_name: req.body.teacherLastName,
+                cv: req.body.teacherCv,
+            },
+        });
+        const description = db.Description.create({
+            description_short: req.body.description_short,
+            description_long: req.body.description_short,
+            contents: req.body.contents,
+        });
+        return Promise.all([teacher, interactives, description]).then(
+            ([teacher, interactives, description]) => {
+                return db.Class.create(
+                    {
+                        title: req.body.title,
+                        subject_id: req.body.subject,
+                        grade_id: req.body.grade,
+                        teacher_id: teacher[0].dataValues.id,
+                        price: req.body.price,
+                        interactive_id: interactives.dataValues.id,
+                        description_id: description.dataValues.id,
+                    },
+                    {
+                        include: [{ association: "description" }],
+                    }
+                );
+            }
+        );
     },
-    //createProduct se usa tanto para crear como para actualizar el producto.
-    //Si no hay nada en old (que es el req.body), toma un template del producto vacío y lo llena
-    //Si hay en el old, toma lo del old, actualiza los campos modificados, lo elimina (en el controller) de la DB y lo re sube
-    createProduct: function (productData, id, old) {
-        let allClases = this.findAll();
-        let [productDataBody, productDataFiles] = productData;
-        let newClase = {
-            ...this.productOld,
-            ...old,
-            ...productDataBody,
-            id: id ? Number(id) : this.generateId(),
-            precio: Number(productDataBody.precio),
-            contenidos: productDataBody.contenidos
-                ? productDataBody.contenidos.split(/[\s,.]+/)
-                : "",
-            preview:
-                productDataFiles && productDataFiles.preview
-                    ? productDataFiles.preview[0].filename
-                    : old && old.preview
-                    ? old.preview
-                    : "",
-            video:
-                productDataFiles && productDataFiles.video
-                    ? productDataFiles.video[0].filename
-                    : old && old.video
-                    ? old.video
-                    : "",
-            materialExtra:
-                productDataFiles && productDataFiles.materialExtra
-                    ? productDataFiles.materialExtra[0].filename
-                    : old && old.materialExtra
-                    ? old.materialExtra
-                    : "",
-        };
-        allClases.push(newClase);
-        this.saveData(allClases);
-        return newClase;
+    edit: function (req) {
+        let old = req.session.old;
+        const video = db.Video.update(
+            {
+                location: req.files.video
+                    ? req.files.video[0].filename
+                    : old["interactive.video.location"],
+            },
+            {
+                where: {
+                    id: old["interactive.video.id"],
+                },
+            }
+        );
+        const preview = db.Preview.update(
+            {
+                location: req.files.preview
+                    ? req.files.preview[0].filename
+                    : old["interactive.preview.location"],
+            },
+            {
+                where: {
+                    id: old["interactive.preview.id"],
+                },
+            }
+        );
+        const bonus = db.Bonus.update(
+            {
+                location: req.files.bonus
+                    ? req.files.bonus[0].filename
+                    : old["interactive.bonus.location"],
+            },
+            {
+                where: {
+                    id: old["interactive.bonus.id"],
+                },
+            }
+        );
+        const interactives = Promise.all([video, preview, bonus]).then(
+            ([video, preview, bonus]) => {
+                return db.Interactive.update(
+                    {
+                        video_id: video ? video.dataValues.id : null,
+                        preview_id: preview ? preview.dataValues.id : null,
+                        bonus_id: bonus ? bonus.dataValues.id : null,
+                    },
+                    {
+                        where: {
+                            id: old["interactive.id"],
+                        },
+                    }
+                );
+            }
+        );
+        const teacher = db.Teacher.update(
+            {
+                first_name: req.body.teacherFirstName,
+                last_name: req.body.teacherLastName,
+                email: req.body.teacherEmail,
+                cv: req.body.teacherCv,
+            },
+            {
+                where: {
+                    id: old["teacher.id"],
+                },
+            }
+        );
+        const description = db.Description.update(
+            {
+                description_short: req.body.description_short,
+                description_long: req.body.description_short,
+                contents: req.body.contents,
+            },
+            {
+                where: {
+                    id: old["description.id"],
+                },
+            }
+        );
+        return Promise.all([teacher, interactives, description]).then(
+            ([teacher, interactives, description]) => {
+                return db.Class.update(
+                    {
+                        title: req.body.title,
+                        price: req.body.price,
+                    },
+                    {
+                        where: {
+                            id: old.id,
+                        },
+                    },
+                    {
+                        include: [{ association: "description" }],
+                    }
+                );
+            }
+        );
     },
-    destroy: function (id) {
-        let allClases = this.findAll();
-        allClases = allClases.filter((clase) => clase.id != id);
-        this.saveData(allClases);
+    delete: function (old) {
+        const classDelete = db.Class.destroy({
+            where: {
+                id: old.id,
+            },
+        });
+        const descriptionDelete = old["description.id"]
+            ? db.Description.destroy({
+                  where: {
+                      id: old["description.id"],
+                  },
+              })
+            : "";
+        const interactiveDelete = old["interactive.id"]
+            ? db.Interactive.destroy({
+                  where: {
+                      id: old["interactive.id"],
+                  },
+              })
+            : "";
+        const videoDelete = old["interactive.video_id"]
+            ? db.Video.destroy({
+                  where: {
+                      id: old["interactive.video_id"],
+                  },
+              })
+            : "";
+        const previewDelete = old["interactive.preview_id"]
+            ? db.Preview.destroy({
+                  where: {
+                      id: old["interactive.preview_id"],
+                  },
+              })
+            : "";
+        const bonusDelete = old["interactive.bonus_id"]
+            ? db.Bonus.destroy({
+                  where: {
+                      id: old["interactive.bonus_id"],
+                  },
+              })
+            : "";
+
+        return Promise.all([
+            videoDelete,
+            previewDelete,
+            bonusDelete,
+            interactiveDelete,
+            descriptionDelete,
+            classDelete,
+        ]).catch((e) => console.error(e));
     },
 };
 

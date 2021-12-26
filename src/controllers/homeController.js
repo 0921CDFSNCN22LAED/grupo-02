@@ -20,7 +20,7 @@ const controller = {
             clasesActualesId = req.session.childLogged.currentClasses;
             ultimaClaseId = req.session.childLogged.lastClass;
         }
-        db.Class.findAll().then((classes) => {
+        Products.findAll({ raw: true }).then((classes) => {
             res.render("home", {
                 old: req.session.old,
                 classes,

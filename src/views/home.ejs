@@ -70,9 +70,10 @@
                         <h2 class="padding-10">Sugerencias</h2>
                         <% for(let clase of recommendations){ %>
                         <a class="clases-main-item" href="/products/<%= clase.id %> ">
-                            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %> "
+                            <img class="padding-10 img-thumbnail"
+                                src="/img/clases-preview/<%=clase['interactive.preview.location']%>"
                                 alt="<%= clase.titulo %> " />
-                            <h4 class="padding-10"><%= clase.titulo %></h4>
+                            <h4 class="padding-10"><%= clase.title %></h4>
                         </a>
                         <% } %>
                     </div>
