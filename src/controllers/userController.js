@@ -11,31 +11,9 @@ const controller = {
             res.render("profile", { grades });
         });
     },
-    cart: (req, res) => {
-        let cartIds = req.session.parentLogged.cart;
-        let enCarrito = Products.findAll().filter((product) =>
-            cartIds.includes(Number(product.id))
-        );
-        res.render("cart", {
-            enCarrito: Products.findAll().filter((product) =>
-                cartIds.includes(Number(product.id))
-            ),
-            recommendations: Products.findAll(),
-        });
-    },
+
     registerParent: (req, res) => {
-        db.User.create()
-            .then((user) => {
-                return user.dataValues.id;
-            })
-            .then((userId) => {
-                return db.Parent.create({
-                    ...req.body,
-                    pass: bcrypt.hashSync(req.body.pass, 10),
-                    avatar: "default-avatar.png",
-                    user_id: userId,
-                });
-            })
+        Users.create(req)
             .then((parent) => {
                 req.session.parentLogged = parent.dataValues;
                 req.session.parentLogged.children = [];
@@ -44,6 +22,7 @@ const controller = {
             .catch((e) => console.error(e));
     },
     registerChild: (req, res) => {
+        // PREGUNTA: ¿Cómo refactorizo esto? el problema es el nesting de promesas.
         db.User.create()
             .then((user) => {
                 return user.dataValues.id;
@@ -75,7 +54,7 @@ const controller = {
                 .then((parent) => {
                     if (bcrypt.compareSync(req.body.pass, parent.pass)) {
                         req.session.parentIsLoggedSecure = true;
-                        return res.redirect("/");
+                        return res.redirect("/user/profile");
                     }
                     req.session.parentIsLoggedSecure = false;
                     req.session.errors = {
@@ -127,20 +106,12 @@ const controller = {
         req.session.destroy();
         res.redirect("/");
     },
-    userSelected: (req, res) => {
-        db.Parent.findByPk(req.params.id).then((parent) => {
-            req.session.parentLogged = parent;
+    selectChild: (req, res) => {
+        // console.log(`req.params.id`, req.params.id);
+        db.Child.findByPk(req.params.id, { raw: true }).then((child) => {
+            req.session.childLogged = child;
+            res.redirect("/");
         });
-
-        //Incluir Children
-
-        // if (req.params.id % 1 == 0) {
-        //     req.session.parentLogged = Users.findOneById(req.params.id);
-        // } else {
-        //     req.session.childLogged = Users.findOneById(req.params.id);
-        //     req.session.parentIsLoggedSecure = false;
-        // }
-        res.redirect("/");
     },
     logoutSubUser: (req, res) => {
         req.session.parentIsLoggedSecure = false;
@@ -149,25 +120,7 @@ const controller = {
     },
 
     updateParent: (req, res) => {
-        db.Parent.update(
-            {
-                ...req.body,
-                // Si el spread da false por Short circuit todo da false y no se ve la propiedad
-                ...(req.file && {
-                    avatar: req.file.originalname,
-                }),
-            },
-            {
-                where: {
-                    id: req.params.id,
-                },
-            }
-        )
-            .then(() => {
-                return db.Parent.findByPk(req.params.id, {
-                    include: [{ association: "children" }],
-                });
-            })
+        Users.updateParent(req)
             .then((parent) => {
                 req.session.parentLogged = parent.dataValues;
                 res.redirect(`/user/profile`);
@@ -175,42 +128,12 @@ const controller = {
             .catch((e) => console.error(e));
     },
     updateChildren: (req, res) => {
-        db.Child.update(
-            {
-                ...req.body,
-                // Si el spread da false por Short circuit todo da false y no se ve la propiedad
-                ...(req.file && {
-                    avatar: req.file.originalname,
-                }),
-            },
-            {
-                where: {
-                    id: req.params.id,
-                },
-            }
-        )
-            .then(() => {
-                return db.Child.findByPk(req.params.id);
-            })
-            .then((child) => {
-                return db.Parent.findByPk(child.parent_id, {
-                    include: [{ association: "children" }],
-                });
-            })
+        Users.updateChild(req)
             .then((parent) => {
                 req.session.parentLogged = parent.dataValues;
                 res.redirect(`/user/profile`);
             })
             .catch((e) => console.error(e));
-    },
-
-    addToCart: (req, res) => {
-        Users.addToCart(req.params.productId, req.session.parentLogged);
-        res.redirect("/user/cart");
-    },
-    removeFromCart: (req, res) => {
-        Users.removeFromCart(req.params.productId, req.session.parentLogged);
-        res.redirect("/user/cart");
     },
 };
 

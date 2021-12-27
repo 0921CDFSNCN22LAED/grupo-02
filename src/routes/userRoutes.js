@@ -7,7 +7,7 @@ const validation = require("../middleware/validation");
 
 const userController = require("../controllers/userController");
 
-router.get("/userSelected/:id", userController.userSelected);
+router.get("/userSelected/:id", userController.selectChild);
 
 //Register login and logout from main page
 router.post(
@@ -41,8 +41,8 @@ router.put(
     userController.updateChildren
 );
 
-router.get("/cart", authMiddleware, userController.cart);
-router.post("/addToCart/:productId", userController.addToCart);
-router.delete("/removeFromCart/:productId", userController.removeFromCart);
+// router.get("/cart", authMiddleware, userController.cart);
+// router.post("/addToCart/:productId", userController.addToCart);
+// router.delete("/removeFromCart/:productId", userController.removeFromCart);
 
 module.exports = router;

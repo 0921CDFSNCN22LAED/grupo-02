@@ -19,7 +19,6 @@ module.exports = [
         .withMessage("El precio debe ser un número"),
     check("preview").custom((value, { req }) => {
         if (req.body.previewLocation) {
-            // req.files.preview = [{ filename: req.body.previewLocation }];
             return true;
         }
 

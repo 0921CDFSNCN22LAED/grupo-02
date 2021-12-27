@@ -11,6 +11,7 @@ const controller = {
     },
     detail: (req, res) => {
         Products.findOne(req.params.id).then((classSel) => {
+            console.log(`classSel`, classSel);
             req.session.class = classSel;
             if (!classSel) res.render("not-found");
             res.render("product-detail", {

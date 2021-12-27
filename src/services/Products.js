@@ -4,6 +4,7 @@ const Products = {
     findAll: function () {
         return db.Class.findAll({
             raw: true,
+            nest: true,
             include: [
                 { association: "subject" },
                 { association: "grades" },
@@ -24,6 +25,7 @@ const Products = {
     findOne: function (id) {
         return db.Class.findOne({
             raw: true,
+            nest: true,
             where: {
                 id: id,
             },
@@ -46,25 +48,25 @@ const Products = {
     },
     create: function (req) {
         let old = req.session.old;
-        const video = old["interactive.video.location"]
+        const video = old.interactive.video.location
             ? db.Video.create({
                   location: req.files.video
                       ? req.files.video[0].filename
-                      : old["interactive.video.location"],
+                      : old.interactive.video.location,
               })
             : "";
-        const preview = old["interactive.preview.location"]
+        const preview = old.interactive.preview.location
             ? db.Preview.create({
                   location: req.files.preview
                       ? req.files.preview[0].filename
-                      : old["interactive.preview.location"],
+                      : old.interactive.preview.location,
               })
             : "";
-        const bonus = old["interactive.bonus.location"]
+        const bonus = old.interactive.bonus.location
             ? db.Bonus.create({
                   location: oreq.files.bonus
                       ? req.files.bonus[0].filename
-                      : old["interactive.bonus.location"],
+                      : old.interactive.bonus.location,
               })
             : "";
         const interactives = Promise.all([video, preview, bonus]).then(
@@ -116,11 +118,11 @@ const Products = {
             {
                 location: req.files.video
                     ? req.files.video[0].filename
-                    : old["interactive.video.location"],
+                    : old.interactive.video.location,
             },
             {
                 where: {
-                    id: old["interactive.video.id"],
+                    id: old.interactive.video.id,
                 },
             }
         );
@@ -128,11 +130,11 @@ const Products = {
             {
                 location: req.files.preview
                     ? req.files.preview[0].filename
-                    : old["interactive.preview.location"],
+                    : old.interactive.preview.location,
             },
             {
                 where: {
-                    id: old["interactive.preview.id"],
+                    id: old.interactive.preview.id,
                 },
             }
         );
@@ -140,11 +142,11 @@ const Products = {
             {
                 location: req.files.bonus
                     ? req.files.bonus[0].filename
-                    : old["interactive.bonus.location"],
+                    : old.interactive.bonus.location,
             },
             {
                 where: {
-                    id: old["interactive.bonus.id"],
+                    id: old.interactive.bonus.id,
                 },
             }
         );
@@ -152,13 +154,13 @@ const Products = {
             ([video, preview, bonus]) => {
                 return db.Interactive.update(
                     {
-                        video_id: old["interactive.video.id"],
-                        preview_id: old["interactive.preview.id"],
-                        bonus_id: old["interactive.bonus.id"],
+                        video_id: old.interactive.video.id,
+                        preview_id: old.interactive.preview.id,
+                        bonus_id: old.interactive.bonus.id,
                     },
                     {
                         where: {
-                            id: old["interactive.id"],
+                            id: old.interactive.id,
                         },
                     }
                 );
@@ -173,7 +175,7 @@ const Products = {
             },
             {
                 where: {
-                    id: old["teacher.id"],
+                    id: old.teacher.id,
                 },
             }
         );
@@ -185,7 +187,7 @@ const Products = {
             },
             {
                 where: {
-                    id: old["description.id"],
+                    id: old.description.id,
                 },
             }
         );
@@ -214,38 +216,38 @@ const Products = {
                 id: old.id,
             },
         });
-        const descriptionDelete = old["description.id"]
+        const descriptionDelete = old.description.id
             ? db.Description.destroy({
                   where: {
-                      id: old["description.id"],
+                      id: old.description.id,
                   },
               })
             : "";
-        const interactiveDelete = old["interactive.id"]
+        const interactiveDelete = old.interactive.id
             ? db.Interactive.destroy({
                   where: {
-                      id: old["interactive.id"],
+                      id: old.interactive.id,
                   },
               })
             : "";
-        const videoDelete = old["interactive.video_id"]
+        const videoDelete = old.interactive.video_id
             ? db.Video.destroy({
                   where: {
-                      id: old["interactive.video_id"],
+                      id: old.interactive.video_id,
                   },
               })
             : "";
-        const previewDelete = old["interactive.preview_id"]
+        const previewDelete = old.interactive.preview_id
             ? db.Preview.destroy({
                   where: {
-                      id: old["interactive.preview_id"],
+                      id: old.interactive.preview_id,
                   },
               })
             : "";
-        const bonusDelete = old["interactive.bonus_id"]
+        const bonusDelete = old.interactive.bonus_id
             ? db.Bonus.destroy({
                   where: {
-                      id: old["interactive.bonus_id"],
+                      id: old.interactive.bonus_id,
                   },
               })
             : "";

@@ -28,18 +28,18 @@
                                             ">
 
                                         <img class="img-thumbnail padding-10"
-                                            src="/img/clases-preview/<%=classSel['interactive.preview.location']%>"
+                                            src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
                                             alt="picture placeholder" />
                                         <div class="padding-10 ">
                                             <h5>
                                                 <%= classSel.title + " en "
-                                                        + classSel["subject.name"] %>
+                                                        + classSel.subject.name %>
                                             </h5>
-                                            <h5><%=classSel["grades.name"] %></h5>
+                                            <h5><%=classSel.grades.name %></h5>
                                             <h5>
-                                                <%=classSel["teacher.first_name"] +
+                                                <%=classSel.teacher.first_name +
                                                         " " +
-                                                        classSel["teacher.last_name"] %>
+                                                        classSel.teacher.last_name %>
                                             </h5>
                                             <div>
                                                 <% let stars = 0; %>
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="position-absolute bottom-0 descripcion padding-10">
                                             <h5>Más información</h5>
-                                            <p><%= classSel["description.description_long"] %></p>
+                                            <p><%= classSel.description.description_long %></p>
                                         </div>
                                     </div>
                                     <div class="

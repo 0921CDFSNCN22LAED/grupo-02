@@ -32,7 +32,7 @@
 
                                 <% for (let grade of grades) { %>
                                 <option value="<%= grade.id %>"
-                                    <%  if(old && old[ 'grades.id'] == grade.id){ %><%="selected"%> <%} %>>
+                                    <%  if(old && old.grades.id == grade.id){ %><%="selected"%> <%} %>>
                                     <%= grade.name %></option>
                                 <% } %>
                             </select>
@@ -46,7 +46,7 @@
                                 <% for(let subject of subjects) { %>
 
                                 <option value="<%= subject.id %>"
-                                    <%  if(old && old['subject.id'] == subject.id){ %><%="selected"%><% } %>>
+                                    <%  if(old && old.subject.id == subject.id){ %><%="selected"%><% } %>>
                                     <%=subject.name%>
                                 </option>
                                 <% } %>
@@ -57,7 +57,7 @@
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="contents" id="contents"
                                     placeholder="contents" name="contents"
-                                    value="<%= old && old['description.contents'] ? typeof old['description.contents'] === "string" ? old['description.contents'] : old['description.contents'].join(", ") : "" %>" />
+                                    value="<%= old && old.description.contents ? typeof old.description.contents === "string" ? old.description.contents : old.description.contents.join(", ") : "" %>" />
                                 <label for="contents">Contenidos</label>
                                 <% if(errors && errors.contents) { %>
                                 <p class="feedback text-start"><%= errors.contents.msg %> </p>
@@ -66,7 +66,7 @@
                             <div class="form-floating " style="height: max-content;">
                                 <textarea class="form-control" rows="3" style="height:90%;"
                                     placeholder="description_short" id="description_short"
-                                    name="description_short"><%= old && old['description.description_short'] ? old['description.description_short'] : "" %></textarea>
+                                    name="description_short"><%= old && old.description.description_short ? old.description.description_short : "" %></textarea>
                                 <label for="description_short">Descripción breve</label>
                                 <% if(errors && errors.description_short) { %>
                                 <p class="feedback text-start"><%= errors.description_short.msg %> </p>
@@ -75,7 +75,7 @@
                             <div class="form-floating">
                                 <textarea class="form-control " rows="6" style="height:90%;"
                                     placeholder="description_long" id="description_long"
-                                    name="description_long"><%= old && old['description.description_long'] ? old['description.description_long'] : "" %></textarea>
+                                    name="description_long"><%= old && old.description.description_long ? old.description.description_long : "" %></textarea>
                                 <label for="description_long">Descripción detallada</label>
                             </div>
                             <div class="form-floating">
@@ -87,12 +87,12 @@
                                 <% } %>
                             </div>
 
-                            <% if(old && old['interactive.video.location']) { %>
+                            <% if(old && old.interactive.video.location) { %>
                             <div class="d-flex my-3">
-                                <input class="d-block" type="text" name="videoLocation" id="videoLocation"
-                                    value="<%= old['interactive.video.location']%>">
+                                <input class="d-none" type="text" name="videoLocation" id="videoLocation"
+                                    value="<%= old.interactive.video.location%>">
                                 <img class="img-thumbnail w-50 me-5 "
-                                    src="/img/clases-video/<%= old['interactive.video.location'] %> "
+                                    src="/img/clases-video/<%= old.interactive.video.location %> "
                                     alt="error en la visualización del video">
                                 <div class="form-upload">
                                     <label for="video" class="form-label">Reemplazá la clase</label>
@@ -114,12 +114,12 @@
                             <% } %>
                             <% } %>
 
-                            <% if(old && old['interactive.preview.location']) { %>
+                            <% if(old && old.interactive.preview.location) { %>
                             <div class="d-flex my-3">
-                                <input class="d-block" type="text" name="previewLocation" id="previewLocation"
-                                    value="<%= old['interactive.preview.location']%>">
+                                <input class="d-none" type="text" name="previewLocation" id="previewLocation"
+                                    value="<%= old.interactive.preview.location%>">
                                 <img class="img-thumbnail w-50 me-5 "
-                                    src="/img/clases-preview/<%= old['interactive.preview.location']%>"
+                                    src="/img/clases-preview/<%= old.interactive.preview.location%>"
                                     alt="error en la visualización del video">
                                 <div class="form-upload">
                                     <label for="preview" class="form-label">Previsualización del curso</label>
@@ -141,12 +141,12 @@
                             <% } %>
                             <% } %>
 
-                            <% if(old && old['interactive.bonus.location']) { %>
+                            <% if(old && old.interactive.bonus.location) { %>
                             <div class="d-flex my-3">
-                                <input class="d-block" type="text" name="bonusLocation" id="bonusLocation"
-                                    value="<%= old['interactive.bonus.location']%>">
+                                <input class="d-none" type="text" name="bonusLocation" id="bonusLocation"
+                                    value="<%= old.interactive.bonus.location%>">
                                 <img class="img-thumbnail w-50 me-5 "
-                                    src="/img/clases-material-extra/<%= old['interactive.bonus.location'] %> "
+                                    src="/img/clases-material-extra/<%= old.interactive.bonus.location %> "
                                     alt="error en la visualización del video">
                                 <div class="form-upload">
                                     <label for="bonus" class="form-label">Reemplazá el material extra</label>
@@ -176,7 +176,7 @@
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="teacherFirstName" id="teacherFirstName"
                                     placeholder="Nombre"
-                                    value="<%= old && old["teacher.first_name"] ? old["teacher.first_name"] : "" %>" />
+                                    value="<%= old && old.teacher.first_name ? old.teacher.first_name : "" %>" />
                                 <label for="teacherFirstName">Nombre</label>
                                 <% if(errors && errors.teacherFirstName) { %>
                                 <p class="feedback text-start"><%= errors.teacherFirstName.msg %> </p>
@@ -185,7 +185,7 @@
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="teacherLastName" id="teacherLastName"
                                     placeholder="Apellido"
-                                    value="<%= old && old["teacher.last_name"] ? old["teacher.last_name"] : "" %>" />
+                                    value="<%= old && old.teacher.last_name ? old.teacher.last_name : "" %>" />
                                 <label for="teacherLastName">Apellido</label>
                                 <% if(errors && errors.teacherLastName) { %>
                                 <p class="feedback text-start"><%= errors.teacherLastName.msg %> </p>
@@ -194,7 +194,7 @@
                             <div class="form-floating">
                                 <input class="form-control" type="email" name="teacherEmail" id="teacherEmail"
                                     placeholder="Correo Electrónico"
-                                    value="<%= old && old["teacher.email"] ? old["teacher.email"] : "" %>" />
+                                    value="<%= old && old.teacher.email ? old.teacher.email : "" %>" />
                                 <label for="teacherEmail">Correo Electrónico</label>
                                 <% if(errors && errors.teacherEmail) { %>
                                 <p class="feedback text-start"><%= errors.teacherEmail.msg %> </p>
@@ -203,7 +203,7 @@
                             <div class="form-floating">
                                 <textarea class="form-control" rows="5" style="height:90%;" placeholder="cv"
                                     id="teacherCv"
-                                    name="teacherCv"><%if(locals.old && old["teacher.cv"]){%><%=old["teacher.cv"]%><%}%></textarea>
+                                    name="teacherCv"><%if(locals.old && old.teacher.cv){%><%=old.teacher.cv%><%}%></textarea>
                                 <label for="teacherCv">Breve presentación (cv)</label>
                             </div>
                         </div>

@@ -14,15 +14,15 @@
                 <div class="clases-main-container">
                     <article class="clases-main-item padding-10">
                         <div>
-                            <span> <%= classSel['grades.name'] %></span>
+                            <span> <%= classSel.grades.name %></span>
                             <i class="fas fa-caret-right"></i>
-                            <span> <%= classSel['subject.name'] %> </span>
+                            <span> <%= classSel.subject.name %> </span>
                         </div>
                         <h2><%= classSel.title %></h2>
                         <img class="img-thumbnail padding-10"
-                            src="/img/clases-preview/<%=classSel['interactive.preview.location']%>"
+                            src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
                             alt="picture placeholder" />
-                        <p><%=classSel['description.description_short'] %></p>
+                        <p><%=classSel.description.description_short %></p>
                         <div>
                             <% let stars = 0%> <% for(let i = 0; i <
                                 Math.floor(classSel.rating); i++){ stars++;
@@ -37,21 +37,21 @@
                             <% } %>
                         </div>
                         <h3>
-                            <%=classSel['teacher.first_name'] + " " +
-                                classSel['teacher.last_name'] %>
+                            <%=classSel.teacher.first_name + " " +
+                                classSel.teacher.last_name %>
                         </h3>
                     </article>
                     <article class="course-description padding-10">
                         <h4>Lo que aprenderás</h4>
                         <dl>
                             <dt>Descripción de la clase:</dt>
-                            <dd><%= classSel['description.description_long'] %></dd>
+                            <dd><%= classSel.description.description_long %></dd>
                             <dt>Contenidos de la clase</dt>
-                            <dd><%= classSel['description.contents'] %></dd>
+                            <dd><%= classSel.description.contents %></dd>
                             <dt>Profesor</dt>
                             <dd>
-                                <%=classSel['teacher.first_name'] + " " +
-                                    classSel['teacher.last_name'] %>
+                                <%=classSel.teacher.first_name + " " +
+                                    classSel.teacher.last_name %>
                             </dd>
 
                         </dl>
@@ -69,8 +69,8 @@
                         <h3>
                             <%= classSel.title %>
                         </h3>
-                        <h5><%= classSel['grades.name'] %></h5>
-                        <h5><%= classSel['subject.name'] %></h5>
+                        <h5><%= classSel.grades.name %></h5>
+                        <h5><%= classSel.subject.name %></h5>
                         <div class="bg-shadow-pill my-5">
                             <h3>
                                 <%="$" + classSel.price.toFixed(2) %>
@@ -98,7 +98,7 @@
                                     { %> horas <%} else { %> hora <% } %> de
                                 video
                             </li>
-                            <% if(classSel[ 'interactive.bonus.location']) { %>
+                            <% if(classSel.interactive.bonus.location) { %>
                             <li>Material extra descargable</li>
                             <% } %>
                             <li>Acceso de por vida</li>

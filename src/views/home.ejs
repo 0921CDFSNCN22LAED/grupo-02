@@ -71,7 +71,7 @@
                         <% for(let clase of recommendations){ %>
                         <a class="clases-main-item" href="/products/<%= clase.id %> ">
                             <img class="padding-10 img-thumbnail"
-                                src="/img/clases-preview/<%=clase['interactive.preview.location']%>"
+                                src="/img/clases-preview/<%=clase.interactive.preview.location%>"
                                 alt="<%= clase.titulo %> " />
                             <h4 class="padding-10"><%= clase.title %></h4>
                         </a>
