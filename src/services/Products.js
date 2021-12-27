@@ -1,6 +1,3 @@
-const req = require("express/lib/request");
-const fs = require("fs");
-const path = require("path");
 const db = require("../database/models");
 
 const Products = {
@@ -49,26 +46,26 @@ const Products = {
     },
     create: function (req) {
         let old = req.session.old;
-        const video = req.files.video
+        const video = old["interactive.video.location"]
             ? db.Video.create({
-                  location: req.files.video[0].filename,
+                  location: req.files.video
+                      ? req.files.video[0].filename
+                      : old["interactive.video.location"],
               })
-            : old["interactive.video.location"]
-            ? old["interactive.video.location"]
             : "";
-        const preview = req.files.preview
+        const preview = old["interactive.preview.location"]
             ? db.Preview.create({
-                  location: req.files.preview[0].filename,
+                  location: req.files.preview
+                      ? req.files.preview[0].filename
+                      : old["interactive.preview.location"],
               })
-            : old["interactive.preview.location"]
-            ? old["interactive.preview.location"]
             : "";
-        const bonus = req.files.bonus
+        const bonus = old["interactive.bonus.location"]
             ? db.Bonus.create({
-                  location: req.files.bonus[0].filename,
+                  location: oreq.files.bonus
+                      ? req.files.bonus[0].filename
+                      : old["interactive.bonus.location"],
               })
-            : old["interactive.bonus.location"]
-            ? old["interactive.bonus.location"]
             : "";
         const interactives = Promise.all([video, preview, bonus]).then(
             ([video, preview, bonus]) => {
@@ -91,7 +88,7 @@ const Products = {
         });
         const description = db.Description.create({
             description_short: req.body.description_short,
-            description_long: req.body.description_short,
+            description_long: req.body.description_long,
             contents: req.body.contents,
         });
         return Promise.all([teacher, interactives, description]).then(
@@ -155,9 +152,9 @@ const Products = {
             ([video, preview, bonus]) => {
                 return db.Interactive.update(
                     {
-                        video_id: video ? video.dataValues.id : null,
-                        preview_id: preview ? preview.dataValues.id : null,
-                        bonus_id: bonus ? bonus.dataValues.id : null,
+                        video_id: old["interactive.video.id"],
+                        preview_id: old["interactive.preview.id"],
+                        bonus_id: old["interactive.bonus.id"],
                     },
                     {
                         where: {

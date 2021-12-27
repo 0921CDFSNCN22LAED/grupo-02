@@ -53,6 +53,7 @@ const controller = {
     delete: (req, res) => {
         let old = req.session.old;
         Products.delete(old).then(() => {
+            req.session.old = null;
             res.redirect("/");
         });
     },

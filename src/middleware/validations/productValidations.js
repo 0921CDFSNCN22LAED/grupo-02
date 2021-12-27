@@ -18,6 +18,11 @@ module.exports = [
         .isNumeric()
         .withMessage("El precio debe ser un número"),
     check("preview").custom((value, { req }) => {
+        if (req.body.previewLocation) {
+            // req.files.preview = [{ filename: req.body.previewLocation }];
+            return true;
+        }
+
         let preview = req.files.preview;
         let acceptedExtensions = [".jpg", ".png", ".gif"];
         if (!preview) {

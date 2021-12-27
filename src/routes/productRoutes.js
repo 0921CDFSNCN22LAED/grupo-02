@@ -50,8 +50,8 @@ router.get("/:id/edit", productController.productForm);
 router.put(
     "/:id/edit",
     upload.fields(uploadFields),
-    // productValidations,
-    // validation,
+    productValidations,
+    validation,
     productController.productFormEdit
 );
 
