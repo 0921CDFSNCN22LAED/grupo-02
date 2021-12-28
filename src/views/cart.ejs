@@ -18,10 +18,10 @@
                         Mi carrito <i class="fas fa-shopping-cart"></i>
                     </h2>
                     <p class="padding-10 text-end">
-                        <%= enCarrito.length %> cursos en carrito
+                        <%= inCart.length %> cursos en carrito
                     </p>
                     <section class="d-flex flex-wrap justify-content-end">
-                        <% for(let product of enCarrito){ %>
+                        <% for(let product of inCart){ %>
                         <article class="col-12 col-sm-6 col-md-4  my-2">
                             <div class="clases-main-container m-1 ">
                                 <a class="restyled-link clases-main-item descripcionContainer"
@@ -82,12 +82,12 @@
                 <div class="padding-10">
                     <div class="pay bg-shadow-pill  padding-10 d-flex justify-content-end">
                         <p>
-                            <% if(enCarrito.length > 1) { %>
-                        <h3 class="padding-10">Total: $<%= enCarrito.reduce((a, b)=> a +
+                            <% if(inCart.length > 1) { %>
+                        <h3 class="padding-10">Total: $<%= inCart.reduce((a, b)=> a +
                                                         b.precio, 0).toFixed(2) %></h3>
                         <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
-                        <% } else if(enCarrito.length === 1){ %>
-                        <h3>Total: $<%= enCarrito[0].precio.toFixed(2) %>
+                        <% } else if(inCart.length === 1){ %>
+                        <h3>Total: $<%= inCart[0].precio.toFixed(2) %>
                         </h3>
                         <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
                         <% } else { %>

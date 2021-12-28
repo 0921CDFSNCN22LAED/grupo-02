@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const homeRoute = require("./routes/homeRoute");
+const saleRoutes = require("./routes/saleRoutes");
 
 //Cómo hacer para pasar la función chosenBackground al middleware randomBackground? El problema es el app
 const randomBackground = require("./middleware/randomBackground");
@@ -41,8 +42,8 @@ app.listen(3000);
 
 app.use("/", homeRoute);
 app.use("/user", userRoutes);
-
 app.use("/products", productRoutes);
+app.use("/sale", saleRoutes);
 
 app.use((req, res, next) => {
     res.status(404).render("not-found");

@@ -1,13 +1,9 @@
 // Todo la data pasa por este controlador
 
+const util = require("util");
+
 module.exports = (req, res, next) => {
-    console.log(req.session);
-    // if (req.session.parentLogged) {
-    //     console.log(req.session.parentLogged.children);
-    // }
-    // if (req.session.old) {
-    //     console.log(req.session.old.preview);
-    // }
+    console.log(util.inspect(req.session, false, null, true));
     res.locals.parentLogged = req.session.parentLogged;
     res.locals.childLogged = req.session.childLogged;
     res.locals.class = req.session.class;

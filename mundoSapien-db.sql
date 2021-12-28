@@ -185,9 +185,9 @@ CREATE TABLE `Classes` (
 	FOREIGN KEY (`description_id`) REFERENCES `Descriptions`(`id`)
 );
 
-DROP TABLE IF EXISTS `Class_sale`;
+DROP TABLE IF EXISTS `Classes_sales`;
 CREATE TABLE `Classes_sales` (
-	`id` varchar(255) NOT NULL,
+	`id` int(10) AUTO_INCREMENT NOT NULL ,
 	`class_id` varchar(255) NOT NULL,
 	`sale_id` varchar(255) NOT NULL,
 	PRIMARY KEY (`id`),

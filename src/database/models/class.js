@@ -71,6 +71,14 @@ module.exports = (sequelize, DataTypes) => {
             as: "description",
             foreignKey: "description_id",
         });
+        Class.associate = (models) => {
+            Class.belongsToMany(models.Sale, {
+                through: "classes_sales",
+                foreignKey: "class_id",
+                otherKey: "sale_id",
+                timestamps: false,
+            });
+        };
     };
 
     return Class;

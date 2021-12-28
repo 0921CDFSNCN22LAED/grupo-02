@@ -75,20 +75,11 @@
                             <h3>
                                 <%="$" + classSel.price.toFixed(2) %>
                             </h3>
-                            <% if(parentLogged && !parentLogged.cart.includes(Number(classSel.id))) {%>
-                            <form class="" action="/user/addToCart/<%=classSel.id%>" method="post">
+                            <form class="" action="/sale/addToCart/<%=classSel.id%>" method="get">
                                 <button class="btn btn-primary btn-lg" type="submit">
                                     Agregar al carrito
                                 </button>
                             </form>
-                            <% } else { %>
-                            <h5>Esta clase ya se encuentra en el carrito</h5>
-                            <a href="/products">
-                                <button class="btn btn-primary btn-lg" type="button">
-                                    Volver a la página de clases
-                                </button>
-                            </a>
-                            <% } %>
                         </div>
                         <h5>Esta clase incluye</h5>
                         <ul>

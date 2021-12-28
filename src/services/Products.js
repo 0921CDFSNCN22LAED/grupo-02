@@ -46,35 +46,42 @@ const Products = {
             ],
         });
     },
-    create: function (req) {
+    create: async function (req) {
+        const videoFile = req.files.video ? req.files.video[0].filename : null;
+        const previewFile = req.files.preview
+            ? req.files.preview[0].filename
+            : null;
+        const bonusFile = req.files.bonus ? req.files.bonus[0].filename : null;
         let old = req.session.old;
-        const video = old.interactive.video.location
-            ? db.Video.create({
-                  location: req.files.video
-                      ? req.files.video[0].filename
-                      : old.interactive.video.location,
-              })
-            : "";
-        const preview = old.interactive.preview.location
-            ? db.Preview.create({
-                  location: req.files.preview
-                      ? req.files.preview[0].filename
-                      : old.interactive.preview.location,
-              })
-            : "";
-        const bonus = old.interactive.bonus.location
-            ? db.Bonus.create({
-                  location: oreq.files.bonus
-                      ? req.files.bonus[0].filename
-                      : old.interactive.bonus.location,
-              })
-            : "";
+
+        const oldVideoFile =
+            old && old.interactive.video
+                ? old.interactive.video.location
+                : null;
+        const oldPreviewFile =
+            old && old.interactive.preview
+                ? old.interactive.preview.location
+                : null;
+        const oldBonusFile =
+            old && old.interactive.bonus
+                ? old.interactive.bonus.location
+                : null;
+
+        const video = db.Video.create({
+            location: videoFile ?? oldVideoFile ?? "",
+        });
+        const preview = db.Preview.create({
+            location: previewFile ?? oldPreviewFile ?? "",
+        });
+        const bonus = db.Bonus.create({
+            location: bonusFile ?? oldBonusFile ?? "",
+        });
         const interactives = Promise.all([video, preview, bonus]).then(
             ([video, preview, bonus]) => {
                 return db.Interactive.create({
-                    video_id: video ? video.dataValues.id : null,
-                    preview_id: preview ? preview.dataValues.id : null,
-                    bonus_id: bonus ? bonus.dataValues.id : null,
+                    video_id: video.dataValues.id,
+                    preview_id: preview.dataValues.id,
+                    bonus_id: bonus.dataValues.id,
                 });
             }
         );

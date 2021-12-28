@@ -1,24 +1,18 @@
-// cart: (req, res) => {
-//     let cartIds = req.session.parentLogged.cart;
-//     let enCarrito = Products.findAll().filter((product) =>
-//         cartIds.includes(Number(product.id))
-//     );
-//     res.render("cart", {
-//         enCarrito: Products.findAll().filter((product) =>
-//             cartIds.includes(Number(product.id))
-//         ),
-//         recommendations: Products.findAll(),
-//     });
-// },
-// cart: (req, res) => {
-//     let cartIds = req.session.parentLogged.cart;
-//     let enCarrito = Products.findAll().filter((product) =>
-//         cartIds.includes(Number(product.id))
-//     );
-//     res.render("cart", {
-//         enCarrito: Products.findAll().filter((product) =>
-//             cartIds.includes(Number(product.id))
-//         ),
-//         recommendations: Products.findAll(),
-//     });
-// },
+const db = require("../database/models");
+const sale = require("../database/models/sale");
+
+module.exports = {
+    addToCart: async (req, res) => {
+        if (!req.session.cart) {
+            req.session.cart = [];
+        }
+        req.session.cart.push(req.session.class.id);
+        try {
+            const sale = await db.Sale.create();
+            await sale.addClasses(req.session.cart);
+            res.redirect("/");
+        } catch (error) {
+            console.log(`error`, error);
+        }
+    },
+};
