@@ -12,7 +12,7 @@ function userLogged(req, res, next) {
                     req.session.parentLogged = userFromCookie;
                 }
             })
-            .catch((e) => console.error(e));
+            .catch((e) => res.render("error-page", { error: e }));
     }
 
     // PREGUNTA: Este Next se dispara antes de cumplir la promesa??

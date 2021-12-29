@@ -266,7 +266,7 @@ const Products = {
             interactiveDelete,
             descriptionDelete,
             classDelete,
-        ]).catch((e) => console.error(e));
+        ]).catch((e) => res.render("error-page", { error: e }));
     },
 };
 

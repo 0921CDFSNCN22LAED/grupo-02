@@ -19,7 +19,7 @@ const controller = {
                 req.session.parentLogged.children = [];
                 return res.redirect(`/user/profile`);
             })
-            .catch((e) => console.error(e));
+            .catch((e) => res.render("error-page", { error: e }));
     },
     registerChild: (req, res) => {
         // PREGUNTA: ¿Cómo refactorizo esto? el problema es el nesting de promesas.
@@ -46,7 +46,7 @@ const controller = {
                         return res.redirect(`/user/profile`);
                     });
             })
-            .catch((e) => console.error(e));
+            .catch((e) => res.render("error-page", { error: e }));
     },
     parentLoginProcess: (req, res) => {
         if (req.body.pass) {
@@ -64,9 +64,7 @@ const controller = {
                     };
                     res.redirect("/");
                 })
-                .catch((e) => {
-                    console.error(e);
-                });
+                .catch((e) => res.render("error-page", { error: e }));
         }
     },
     login: (req, res) => {
@@ -97,7 +95,6 @@ const controller = {
                 res.redirect("/");
             })
             .catch((e) => {
-                console.error(e);
                 res.render("error-page", { error: e });
             });
     },
@@ -125,7 +122,7 @@ const controller = {
                 req.session.parentLogged = parent.dataValues;
                 res.redirect(`/user/profile`);
             })
-            .catch((e) => console.error(e));
+            .catch((e) => res.render("error-page", { error: e }));
     },
     updateChildren: (req, res) => {
         Users.updateChild(req)
@@ -133,7 +130,7 @@ const controller = {
                 req.session.parentLogged = parent.dataValues;
                 res.redirect(`/user/profile`);
             })
-            .catch((e) => console.error(e));
+            .catch((e) => res.render("error-page", { error: e }));
     },
 };
 

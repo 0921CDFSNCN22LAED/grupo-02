@@ -1,18 +1,59 @@
+const { redirect } = require("express/lib/response");
 const db = require("../database/models");
-const sale = require("../database/models/sale");
+const Products = require("../services/Products");
+const Sales = require("../services/Sales");
 
 module.exports = {
     addToCart: async (req, res) => {
-        if (!req.session.cart) {
-            req.session.cart = [];
-        }
-        req.session.cart.push(req.session.class.id);
         try {
-            const sale = await db.Sale.create();
-            await sale.addClasses(req.session.cart);
-            res.redirect("/");
+            const [sale, created] = await db.Sale.findOrCreate({
+                where: {
+                    bought: null,
+                    user_id: req.session.parentLogged.user_id,
+                },
+            });
+
+            await sale.addClasses([req.session.class.id]);
+            res.redirect("/sale/cart");
         } catch (error) {
-            console.log(`error`, error);
+            res.render("error-page", { error });
+        }
+    },
+    viewCart: (req, res) => {
+        try {
+            const cart = Sales.findAllInCart(req);
+            const recommendations = Products.findAll();
+            Promise.all([cart, recommendations]).then(
+                ([cart, recommendations]) => {
+                    const totalPrice = cart
+                        .reduce((a, b) => a + b.classes.price, 0)
+                        .toFixed(2);
+
+                    res.render("cart", { cart, recommendations, totalPrice });
+                }
+            );
+        } catch (error) {
+            res.render("error-page", { error });
+        }
+    },
+    removeFromCart: async (req, res) => {
+        try {
+            const cart = await Sales.findAllInCart(req);
+            const sale = await db.Sale.findByPk(cart[0].id);
+            if (cart.length > 1) {
+                await sale.removeClass(req.params.id);
+            } else {
+                await sale.removeClass(req.params.id);
+                await db.Sale.destroy({
+                    where: {
+                        id: cart[0].id,
+                    },
+                    cascade: true,
+                });
+            }
+            res.redirect("/sale/cart");
+        } catch (error) {
+            res.render("error-page", { error });
         }
     },
 };

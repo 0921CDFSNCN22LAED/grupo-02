@@ -64,18 +64,10 @@ CREATE TABLE `Sales` (
 	`created_at` timestamp NULL DEFAULT NULL,
 	`updated_at` timestamp NULL DEFAULT NULL, 
 	`bought` tinyInt(1),
+	`user_id` varchar(255) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-DROP TABLE IF EXISTS `Sale_user`;
-CREATE TABLE `Sale_user` ( 
-	`id` varchar(255) NOT NULL,
-	`user_id` varchar(255) NOT NULL,
-	`sale_id` varchar(255) NOT NULL,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`),
-	FOREIGN KEY (`sale_id`) REFERENCES `Sales`(`id`)
-);
 
 DROP TABLE IF EXISTS `Subjects`;
 CREATE TABLE `Subjects` (

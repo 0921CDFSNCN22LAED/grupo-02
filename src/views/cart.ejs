@@ -12,20 +12,20 @@
     <main class="container-fluid padding-10">
 
         <div class="row max1200px padding-10 z-index-1">
-            <div class="clases-main-container justify-content-end ">
+            <div class="clases-main-container ">
                 <div class="cursos-main padding-10 col-12">
-                    <h2 class="padding-10 text-end">
+                    <h2 class="padding-10 ">
                         Mi carrito <i class="fas fa-shopping-cart"></i>
                     </h2>
-                    <p class="padding-10 text-end">
-                        <%= inCart.length %> cursos en carrito
+                    <p class="padding-10 ">
+                        <%= cart.length %> cursos en carrito
                     </p>
-                    <section class="d-flex flex-wrap justify-content-end">
-                        <% for(let product of inCart){ %>
+                    <section class="d-flex flex-wrap">
+                        <% for(let product of cart){ %>
                         <article class="col-12 col-sm-6 col-md-4  my-2">
                             <div class="clases-main-container m-1 ">
                                 <a class="restyled-link clases-main-item descripcionContainer"
-                                    href="/products/<%= product.id %>">
+                                    href="/products/<%= product.classes.id %>">
                                     <div class="
                                                 d-flex
                                                 flex-column
@@ -37,18 +37,18 @@
                                                     pb-5
                                                 ">
                                             <img class="img-thumbnail padding-10"
-                                                src="/img/clases-preview/<%=product.preview%>"
+                                                src="/img/clases-preview/<%=product.classes.interactive.preview.location%>"
                                                 alt="picture placeholder" />
                                             <div class="padding-10 ">
                                                 <h5>
-                                                    <%= product.titulo + " en "
-                                                            + product.materia %>
+                                                    <%= product.classes.title + " en "
+                                                            + product.classes.grades.name %>
                                                 </h5>
-                                                <h5><%=product.grado %></h5>
+                                                <h5><%=product.classes.subject.name %></h5>
                                                 <h5>
-                                                    <%=product.profesorNombre +
+                                                    <%=product.classes.teacher.first_name +
                                                             " " +
-                                                            product.profesorApellido %>
+                                                            product.classes.teacher.last_name %>
                                                 </h5>
                                             </div>
                                         </div>
@@ -61,11 +61,11 @@
                                                 ">
                                             <h3 class="padding-10">
                                                 <%="$" +
-                                                    product.precio.toFixed(2) %>
+                                                    product.classes.price.toFixed(2) %>
                                             </h3>
                                             <div class="padding-10">
                                             </div>
-                                            <form action="/user/removeFromCart/<%=product.id%>?_method=DELETE"
+                                            <form action="/sale/removeFromCart/<%=product.classes.id%>?_method=DELETE"
                                                 method="post">
                                                 <button class="btn btn-danger btn-sm" type="submit">eliminar</button>
                                             </form>
@@ -82,13 +82,8 @@
                 <div class="padding-10">
                     <div class="pay bg-shadow-pill  padding-10 d-flex justify-content-end">
                         <p>
-                            <% if(inCart.length > 1) { %>
-                        <h3 class="padding-10">Total: $<%= inCart.reduce((a, b)=> a +
-                                                        b.precio, 0).toFixed(2) %></h3>
-                        <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
-                        <% } else if(inCart.length === 1){ %>
-                        <h3>Total: $<%= inCart[0].precio.toFixed(2) %>
-                        </h3>
+                            <% if(totalPrice) { %>
+                        <h3 class="padding-10">Total: $<%= totalPrice %></h3>
                         <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
                         <% } else { %>
                         <a class="restyled-link" href="/products">
@@ -115,10 +110,10 @@
                         <div class="clases-main-container m-1 ">
                             <a class="restyled-link clases-main-item" href="/products/<%= recommendation.id %> ">
                                 <img class="padding-10 img-thumbnail"
-                                    src="/img/clases-preview/<%=recommendation.preview %> "
-                                    alt="<%= recommendation.titulo %> " />
+                                    src="/img/clases-preview/<%=recommendation.interactive.preview.location %> "
+                                    alt="<%= recommendation.title %> " />
                                 <h4 class="padding-10">
-                                    <%= recommendation.titulo %>
+                                    <%= recommendation.title %>
                                 </h4>
                             </a>
                         </div>
