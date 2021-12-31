@@ -1,5 +1,6 @@
 const db = require("../database/models");
 const Products = require("../services/Products");
+const Sales = require("../services/Sales");
 
 const controller = {
     list: (req, res) => {
@@ -9,13 +10,20 @@ const controller = {
             });
         });
     },
-    detail: (req, res) => {
+    detail: async (req, res) => {
+        const idsInCart = await Sales.idsInCart(req);
+
         Products.findOne(req.params.id).then((classSel) => {
             req.session.class = classSel;
+            let inCart = false;
+            if (idsInCart && idsInCart.includes(classSel.id)) {
+                inCart = true;
+            }
             if (!classSel) res.render("not-found");
             res.render("product-detail", {
                 classSel,
                 id: req.params.id,
+                inCart,
             });
         });
     },

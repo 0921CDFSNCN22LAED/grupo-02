@@ -23,13 +23,22 @@ module.exports = {
         try {
             const cart = Sales.findAllInCart(req);
             const recommendations = Products.findAll();
+            const children = req.session.parentLogged.children;
+            const childLogged = req.session.childLogged;
+
             Promise.all([cart, recommendations]).then(
                 ([cart, recommendations]) => {
                     const totalPrice = cart
                         .reduce((a, b) => a + b.classes.price, 0)
                         .toFixed(2);
 
-                    res.render("cart", { cart, recommendations, totalPrice });
+                    res.render("cart", {
+                        cart,
+                        recommendations,
+                        totalPrice,
+                        children,
+                        childLogged,
+                    });
                 }
             );
         } catch (error) {
@@ -55,5 +64,14 @@ module.exports = {
         } catch (error) {
             res.render("error-page", { error });
         }
+    },
+    payment: (req, res) => {
+        req.session.childLogged = req.session.parentLogged.children.find(
+            (child) => child.id == req.body.selectChild
+        );
+        res.redirect("/sale/payment");
+    },
+    paymentPage: (req, res) => {
+        res.render("payment");
     },
 };

@@ -32,7 +32,24 @@ module.exports = {
             ],
         });
     },
-
+    idsInCart: async function (req) {
+        if (req.session.parentLogged) {
+            let ids = await db.Sale.findAll({
+                where: {
+                    user_id: req.session.parentLogged.user_id,
+                },
+                attributes: ["id"],
+                raw: true,
+                nest: true,
+                include: [{ association: "classes" }],
+            });
+            classesIds = [];
+            for (let classSel of ids) {
+                classesIds.push(classSel.classes.classes_sales.class_id);
+            }
+            return classesIds;
+        }
+    },
     addToCart: function (productId, old) {},
     removeFromCart: function (productId, old) {},
 };

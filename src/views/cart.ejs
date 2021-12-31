@@ -12,15 +12,20 @@
     <main class="container-fluid padding-10">
 
         <div class="row max1200px padding-10 z-index-1">
+
             <div class="clases-main-container ">
-                <div class="cursos-main padding-10 col-12">
-                    <h2 class="padding-10 ">
-                        Mi carrito <i class="fas fa-shopping-cart"></i>
-                    </h2>
+                <div class="cursos-main padding-10 col-12 container-fluid">
+
+                    <div class="col-md-8 col-12">
+                        <h2 class="padding-10">
+                            Mi carrito <i class="fas fa-shopping-cart"></i>
+                        </h2>
+                    </div>
+
                     <p class="padding-10 ">
                         <%= cart.length %> cursos en carrito
                     </p>
-                    <section class="d-flex flex-wrap">
+                    <section class="d-flex flex-wrap justify-content-center">
                         <% for(let product of cart){ %>
                         <article class="col-12 col-sm-6 col-md-4  my-2">
                             <div class="clases-main-container m-1 ">
@@ -79,22 +84,47 @@
                     </section>
 
                 </div>
-                <div class="padding-10">
-                    <div class="pay bg-shadow-pill  padding-10 d-flex justify-content-end">
-                        <p>
-                            <% if(totalPrice) { %>
-                        <h3 class="padding-10">Total: $<%= totalPrice %></h3>
-                        <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
-                        <% } else { %>
-                        <a class="restyled-link" href="/products">
-                            <h3>¡Elegí alguna de nuestras clases en nuestra página
-                                de
-                                clases!</h3>
-                        </a>
-                        <% } %>
-                        </p>
+                <form class="w-100" action="/sale/payment" method="post">
+                    <div class="row padding-10">
+                        <div class="padding-10 col-md-6 col-12  ">
+                            <div class="bg-shadow-pill">
+                                <div class="d-flex">
+                                    <h5 class="p-1">Asignar curso<%= cart.length > 1 ? "s" : "" %> a:</h5>
+                                    <div class="d-inline flex-grow-1">
+                                        <select class="form-select " aria-label="select child" name="selectChild"
+                                            id="selectChild">
+                                            <option value="" selected>Elegí un hijo</option>
+                                            <% for(let child of children) { %>
+                                            <option value="<%= child.id %>"
+                                                <%= childLogged ? child.id == childLogged.id ? "selected" : "" : ""%>>
+                                                <%= child.name %></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <% if(errors && errors.subject) { %>
+                                <p class="feedback text-start"><%= errors.subject.msg %> </p>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="padding-10 col-md-6 col-12">
+                            <div class="pay bg-shadow-pill  padding-10 d-flex justify-content-end">
+                                <p>
+                                    <% if(totalPrice) { %>
+                                <h3 class="padding-10">Total: $<%= totalPrice %></h3>
+                                <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
+                                <% } else { %>
+                                <a class="restyled-link" href="/products">
+                                    <h3>¡Elegí alguna de nuestras clases en nuestra página
+                                        de
+                                        clases!</h3>
+                                </a>
+                                <% } %>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 

@@ -24,15 +24,14 @@
                             alt="picture placeholder" />
                         <p><%=classSel.description.description_short %></p>
                         <div>
-                            <% let stars = 0%> <% for(let i = 0; i <
-                                Math.floor(classSel.rating); i++){ stars++;
-                                %>
+                            <% let stars = 0%>
+                            <% for(let i = 0; i < Math.floor(classSel.rating); i++){ stars++; %>
                             <i class="fas fa-star"></i>
-                            <% } %> <% if(classSel.rating % 1 != 0) {
-                                stars++; %>
+                            <% } %>
+                            <% if(classSel.rating % 1 != 0) { stars++; %>
                             <i class="fas fa-star-half-alt"></i>
-                            <% } %> <% for(let i = 0; i < 5 - stars ; i++){
-                                %>
+                            <% } %>
+                            <% for(let i = 0; i < 5 - stars ; i++){%>
                             <i class="far fa-star"></i>
                             <% } %>
                         </div>
@@ -75,19 +74,38 @@
                             <h3>
                                 <%="$" + classSel.price.toFixed(2) %>
                             </h3>
+                            <% if (inCart) { %>
+                            <h5 class="mb-3">Esta clase ya fue comprada o se encuentra en tu carrito</h5>
+                            <form class="mb-3" action="/sale/cart" method="get">
+                                <button class="btn btn-primary btn-lg " type="submit">
+                                    Ir al carrito
+                                </button>
+                            </form>
+                            <a class="mb-3 restyled-link" href="/products">Seguir buscando más clases</a>
+                            <% } else if(!parentLogged) { %>
+                            <form class="mb-3 " action="/" method="get">
+                                <button class="btn btn-primary btn-lg" type="submit">
+                                    Iniciá sesión para comprar
+                                </button>
+                            </form>
+                            <% } else { %>
                             <form class="" action="/sale/addToCart/<%=classSel.id%>" method="get">
                                 <button class="btn btn-primary btn-lg" type="submit">
                                     Agregar al carrito
                                 </button>
                             </form>
+                            <% } %>
                         </div>
                         <h5>Esta clase incluye</h5>
                         <ul>
                             <li>
-                                <%= classSel.duracionVideoHoras %> <%
-                                    if(classSel.duracionVideoHoras / 1 > 1)
-                                    { %> horas <%} else { %> hora <% } %> de
-                                video
+                                <%= classSel.duracionVideoHoras %>
+                                <% if(classSel.duracionVideoHoras / 1 > 1) { %>
+                                <span>horas</span>
+                                <% } else { %>
+                                <span>hora</span>
+                                <% } %>
+                                de video
                             </li>
                             <% if(classSel.interactive.bonus.location) { %>
                             <li>Material extra descargable</li>

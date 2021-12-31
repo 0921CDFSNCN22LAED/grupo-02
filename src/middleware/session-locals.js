@@ -3,7 +3,7 @@
 const util = require("util");
 
 module.exports = (req, res, next) => {
-    // console.log(util.inspect(req.session, false, null, true));
+    console.log(util.inspect(req.session, false, null, true));
     res.locals.parentLogged = req.session.parentLogged;
     res.locals.childLogged = req.session.childLogged;
     res.locals.class = req.session.class;
