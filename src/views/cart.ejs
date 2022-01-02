@@ -93,17 +93,25 @@
                                     <div class="d-inline flex-grow-1">
                                         <select class="form-select " aria-label="select child" name="selectChild"
                                             id="selectChild">
+                                            <%if(children.length == 1){ %>
+                                            <option value="<%= children[0].id %>" selected><%= children[0].name %>
+                                            </option>
+                                            <% } else { %>
                                             <option value="" selected>Elegí un hijo</option>
                                             <% for(let child of children) { %>
                                             <option value="<%= child.id %>"
                                                 <%= childLogged ? child.id == childLogged.id ? "selected" : "" : ""%>>
                                                 <%= child.name %></option>
                                             <% } %>
+                                            <% } %>
+
+
+
                                         </select>
                                     </div>
                                 </div>
-                                <% if(errors && errors.subject) { %>
-                                <p class="feedback text-start"><%= errors.subject.msg %> </p>
+                                <% if(errors && errors.selectChild) { %>
+                                <p class="feedback text-start"><%= errors.selectChild.msg %> </p>
                                 <% } %>
                             </div>
                         </div>

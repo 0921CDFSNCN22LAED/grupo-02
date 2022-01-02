@@ -1,7 +1,7 @@
-const { redirect } = require("express/lib/response");
 const db = require("../database/models");
 const Products = require("../services/Products");
 const Sales = require("../services/Sales");
+const Users = require("../services/Users");
 
 module.exports = {
     addToCart: async (req, res) => {
@@ -28,6 +28,7 @@ module.exports = {
 
             Promise.all([cart, recommendations]).then(
                 ([cart, recommendations]) => {
+                    req.session.cart = cart;
                     const totalPrice = cart
                         .reduce((a, b) => a + b.classes.price, 0)
                         .toFixed(2);
@@ -72,6 +73,30 @@ module.exports = {
         res.redirect("/sale/payment");
     },
     paymentPage: (req, res) => {
-        res.render("payment");
+        const cart = Sales.findAllInCart(req);
+        cart.then((cart) => {
+            const totalPrice = cart
+                .reduce((a, b) => a + b.classes.price, 0)
+                .toFixed(2);
+
+            res.render("payment", { cart, totalPrice });
+        });
+    },
+    endPurchase: async (req, res) => {
+        const saleId = req.session.cart[0].id;
+        await db.Sale.update(
+            {
+                user_id: req.session.childLogged.user_id,
+                bought: 1,
+            },
+            {
+                where: {
+                    id: saleId,
+                },
+            }
+        );
+        await Users.selectChild(req.session.childLogged.id, req);
+
+        res.redirect("/");
     },
 };

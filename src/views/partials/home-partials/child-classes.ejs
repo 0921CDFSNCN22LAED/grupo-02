@@ -24,12 +24,13 @@
 <article class="col-12 col-md-6 cursos-main padding-10">
     <div class="clases-main-container">
         <h2 class="padding-10">Mi colección</h2>
-        <% if(locals.clasesActuales) {%>
+        <% if(childClasses.length > 0) {%>
         <% for(let clase of clasesActuales){ %>
-        <a class="clases-main-item" href="/products/<%= clase.id %>">
-            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= clase.preview %>"
-                alt="<%= clase.titulo %> " />
-            <h4 class="padding-10"><%= clase.titulo %></h4>
+        <a class="clases-main-item" href="/products/<%= clase.classes.id%>">
+            <img class="padding-10 img-thumbnail"
+                src="/img/clases-preview/<%= clase.classes.interactive.preview.location %>"
+                alt="<%= clase.classes.title %> " />
+            <h4 class="padding-10"><%= clase.classes.title %></h4>
         </a>
         <% } %>
         <% } else { %>

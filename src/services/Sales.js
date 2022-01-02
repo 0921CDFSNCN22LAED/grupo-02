@@ -50,6 +50,4 @@ module.exports = {
             return classesIds;
         }
     },
-    addToCart: function (productId, old) {},
-    removeFromCart: function (productId, old) {},
 };

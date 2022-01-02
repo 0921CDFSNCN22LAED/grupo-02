@@ -4,6 +4,7 @@ const Products = require("../services/Products");
 const Users = require("../services/Users");
 
 const db = require("../database/models");
+const user = require("../database/models/user");
 
 const controller = {
     profile: (req, res) => {
@@ -104,9 +105,7 @@ const controller = {
         res.redirect("/");
     },
     selectChild: (req, res) => {
-        // console.log(`req.params.id`, req.params.id);
-        db.Child.findByPk(req.params.id, { raw: true }).then((child) => {
-            req.session.childLogged = child;
+        Users.selectChild(null, req).then(() => {
             res.redirect("/");
         });
     },

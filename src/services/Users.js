@@ -61,4 +61,46 @@ module.exports = {
                 });
             });
     },
+    selectChild: async function (id, req) {
+        const child = await db.Child.findByPk(id ?? req.params.id, {
+            raw: true,
+            nest: true,
+            include: [
+                {
+                    model: db.User,
+                    as: "users",
+                },
+            ],
+        });
+
+        const userId = child.user_id;
+        const classes = await db.Sale.findAll({
+            raw: true,
+            nest: true,
+            where: {
+                user_id: userId,
+                bought: 1,
+            },
+            include: [
+                {
+                    model: db.Class,
+                    as: "classes",
+                    include: [
+                        {
+                            model: db.Interactive,
+                            as: "interactive",
+                            include: [
+                                { association: "video" },
+                                { association: "preview" },
+                                { association: "bonus" },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        });
+        req.session.childClasses = classes;
+        req.session.childLogged = child;
+        return child;
+    },
 };

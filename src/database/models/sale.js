@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
             },
+            bought: {
+                type: DataTypes.BOOLEAN,
+            },
             createdAt: {
                 type: DataTypes.DATE,
                 field: "created_at",
