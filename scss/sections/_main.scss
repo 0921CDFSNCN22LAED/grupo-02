@@ -1,0 +1,101 @@
+@use "../custom" as *;
+
+#main-nav {
+    position: fixed;
+    right: 0;
+    margin: 40px 20px;
+    z-index: 20;
+    float: right;
+    @media (min-width: 769px) {
+        padding-right: 0px;
+    }
+    @media (min-width: 1200px) {
+        right: calc((100vw - 1200px) / 2 - 20px);
+    }
+    .nav-item {
+        background-color: var(--color-shadow);
+        margin-bottom: 20px;
+        border-radius: 5px;
+        color: var(--color-1-strong);
+        i {
+            padding: 5px;
+            width: 100%;
+            text-align: center;
+            @media (min-width: 769px) {
+                padding: 5px;
+                width: auto;
+                text-align: center;
+            }
+        }
+    }
+    .nav-link {
+        display: none;
+        color: var(--color-1-strong);
+        @media (min-width: 769px) {
+            display: inline-block;
+        }
+        .nav-link:focus,
+        .nav-link:hover {
+            color: var(--color-2-strong);
+        }
+    }
+}
+main {
+    padding-right: 40px;
+    position: relative;
+    z-index: 1;
+    @media (min-width: 769px) {
+        padding-right: 160px;
+    }
+    @media (min-width: 1200px) {
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    #otros-cursos {
+        display: flex;
+        flex-wrap: wrap;
+        div {
+            border: var(--color-shadow) dashed 1px;
+            padding: 5px;
+            margin: 5px;
+            flex: 1 0 auto;
+        }
+        .other-clases {
+            width: fit-content;
+            font-size: 100%;
+            font-family: "Gotham", sans-serif;
+            background-color: var(--color-shadow);
+            color: var(--color-2-strong);
+            border-radius: 10px;
+        }
+    }
+    p {
+        font-size: 24px;
+        padding: 0.5rem 1rem;
+    }
+}
+.reviews {
+    .users-comment {
+        background-color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 10px;
+        border-radius: 10px;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        p:first-child {
+            font-size: 24px;
+            padding: 0.5rem 1rem;
+        }
+        p:nth-child(2) {
+            text-align: right;
+            padding: 0.5rem 1rem;
+        }
+    }
+    form {
+        width: 100%;
+        padding: 0.5rem 1rem;
+    }
+    input {
+        margin-bottom: 10px;
+    }
+}

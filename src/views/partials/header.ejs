@@ -1,6 +1,6 @@
 <div id="background-img-left-border"></div>
-<div id="header">
-    <div class="logo-title padding-10">
+<div id="header" class="mb-3">
+    <div class="logo-title ">
         <a href="/">
             <img class="img-logo" src="/img/logo.png" alt="logo Mundo Sapien" />
             <h1>
@@ -9,42 +9,42 @@
             </h1>
         </a>
     </div>
-    <div class="search padding-10">
+    <div class="search ">
         <input type="search" name="main-search" id="main-search" placeholder="Busca clases, temas o profesores" />
         <button type="submit"><i class="fas fa-search"></i></button>
     </div>
     <% if(parentLogged && parentIsLoggedSecure){ %>
-    <nav class="nav-bar padding-10">
-        <div id="cart" class="padding-10">
-            <a class="position-relative restyled-link" href="/sale/cart"><i class="fas fa-shopping-cart">
+    <nav class="nav-bar ">
+        <div id="cart">
+            <a class="position-relative " href="/sale/cart"><i class="fas fa-shopping-cart">
                     <!-- <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
             <%= locals.inCart %> 
             </span><span class="visually-hidden">unread messages</span> -->
                 </i></a>
         </div>
-        <div id="profile" class="padding-10">
-            <a class="restyled-link" href=<%= `/user/profile` %>><img class="img-header"
-                    src="/img/avatars/<%= parentLogged.avatar %> " alt="parent avatar"></a>
+        <div id="profile">
+            <a href=<%= `/user/profile` %>><img class="img-header" src="/img/avatars/<%= parentLogged.avatar %> "
+                    alt="parent avatar"></a>
         </div>
-        <div class="padding-10">
-            <a class="restyled-link" href="/user/changeUser"><i class="fas fa-sign-out-alt"></i></a>
+        <div>
+            <a href="/user/changeUser"><i class="fas fa-sign-out-alt"></i></a>
         </div>
     </nav>
     <% } else if(childLogged) { %>
-    <nav class="nav-bar padding-10">
-        <div id="notifications" class="padding-10">
-            <a class="restyled-link" href=""><i class="fas fa-inbox"></i></a>
+    <nav class="nav-bar ">
+        <div id="notifications">
+            <a href=""><i class="fas fa-inbox"></i></a>
         </div>
-        <div id="profile" class="padding-10">
-            <a class="restyled-link" href=<%= `/user/profile` %>><img class="img-header"
-                    src="/img/avatars/<%= childLogged.avatar %> " alt="child avatar"></a>
+        <div id="profile">
+            <a href=<%= `/user/profile` %>><img class="img-header" src="/img/avatars/<%= childLogged.avatar %> "
+                    alt="child avatar"></a>
         </div>
-        <div class="padding-10">
-            <a class="restyled-link" href="/user/changeUser"><i class="fas fa-sign-out-alt"></i></a>
+        <div>
+            <a href="/user/changeUser"><i class="fas fa-sign-out-alt"></i></a>
         </div>
     </nav>
     <% } else if (parentLogged){%>
-    <nav class="nav-bar padding-10 justify-content-center">
+    <nav class="nav-bar justify-content-center">
         <form action="/user/logout" method="get">
             <button class="btn btn-primary btn-lg " type="submit">Cerrar
                 sesión</button>

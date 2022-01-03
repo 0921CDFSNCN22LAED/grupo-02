@@ -1,0 +1,12 @@
+@use "../custom" as *;
+
+.ms-primary-btn {
+    color: var(--color-shadow);
+    text-align: center;
+    font-family: "Gotham Black", sans-serif;
+    background-color: var(--color-1-strong)-light;
+    border: var(--color-shadow) solid 1px;
+    padding: 7px;
+    margin-bottom: 20px;
+    width: 100%;
+}

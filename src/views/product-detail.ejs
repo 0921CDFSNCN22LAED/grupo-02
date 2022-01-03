@@ -10,17 +10,16 @@
     <main class="container-fluid">
         <div class="row max1200px z-index-1">
             <div class="col-12 col-md-2"></div>
-            <section class="col-12 col-md-4 cursos-main padding-10">
-                <div class="clases-main-container">
-                    <article class="clases-main-item padding-10">
+            <section class="col-12 col-md-4  ">
+                <div class="container">
+                    <article class="item ">
                         <div>
                             <span> <%= classSel.grades.name %></span>
                             <i class="fas fa-caret-right"></i>
                             <span> <%= classSel.subject.name %> </span>
                         </div>
                         <h2><%= classSel.title %></h2>
-                        <img class="img-thumbnail padding-10"
-                            src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
+                        <img class="img-thumbnail " src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
                             alt="picture placeholder" />
                         <p><%=classSel.description.description_short %></p>
                         <div>
@@ -40,7 +39,7 @@
                                 classSel.teacher.last_name %>
                         </h3>
                     </article>
-                    <article class="course-description padding-10">
+                    <article class="course-description ">
                         <h4>Lo que aprenderás</h4>
                         <dl>
                             <dt>Descripción de la clase:</dt>
@@ -60,17 +59,17 @@
             <section class="
                         col-12 col-md-4
                         align-self-start
-                        cursos-main
-                        padding-10
+                        
+                        
                     ">
-                <div class="clases-main-container padding-10">
-                    <div class="clases-main-item">
+                <div class="container ">
+                    <div class="item">
                         <h3>
                             <%= classSel.title %>
                         </h3>
                         <h5><%= classSel.grades.name %></h5>
                         <h5><%= classSel.subject.name %></h5>
-                        <div class="bg-shadow-pill my-5">
+                        <div class="shadow-pill my-5">
                             <h3>
                                 <%="$" + classSel.price.toFixed(2) %>
                             </h3>
@@ -81,7 +80,7 @@
                                     Ir al carrito
                                 </button>
                             </form>
-                            <a class="mb-3 restyled-link" href="/products">Seguir buscando más clases</a>
+                            <a class="mb-3 " href="/products">Seguir buscando más clases</a>
                             <% } else if(!parentLogged) { %>
                             <form class="mb-3 " action="/" method="get">
                                 <button class="btn btn-primary btn-lg" type="submit">
@@ -89,7 +88,7 @@
                                 </button>
                             </form>
                             <% } else { %>
-                            <form class="" action="/sale/addToCart/<%=classSel.id%>" method="get">
+                            <form action="/sale/addToCart/<%=classSel.id%>" method="get">
                                 <button class="btn btn-primary btn-lg" type="submit">
                                     Agregar al carrito
                                 </button>

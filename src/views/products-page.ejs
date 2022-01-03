@@ -8,14 +8,13 @@
 <body>
     <header><%- include("./partials/header") %></header>
     <main class="container-fluid">
-        <div class="row max1200px padding-10 z-index-1">
-            <div class="cursos-main padding-10">
+        <div class="row max1200px  z-index-1">
+            <div class=" ">
                 <section class="d-flex flex-wrap">
                     <% for(let classSel of classes){ %>
                     <article class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 ">
-                        <div class="clases-main-container m-1 ">
-                            <a class="restyled-link clases-main-item descripcionContainer"
-                                href="/products/<%= classSel.id %>">
+                        <div class="container m-1 ">
+                            <a class=" item descripcionContainer" href="/products/<%= classSel.id %>">
                                 <div class="
                                             d-flex
                                             flex-column
@@ -27,10 +26,10 @@
                                                 pb-5
                                             ">
 
-                                        <img class="img-thumbnail padding-10"
+                                        <img class="img-thumbnail "
                                             src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
                                             alt="picture placeholder" />
-                                        <div class="padding-10 ">
+                                        <div class=" ">
                                             <h5>
                                                 <%= classSel.title + " en "
                                                         + classSel.subject.name %>
@@ -56,19 +55,19 @@
                                                 <% } %>
                                             </div>
                                         </div>
-                                        <div class="position-absolute bottom-0 descripcion padding-10">
+                                        <div class="position-absolute bottom-0 descripcion ">
                                             <h5>Más información</h5>
                                             <p><%= classSel.description.description_long %></p>
                                         </div>
                                     </div>
                                     <div class="
                                                 price-and-options
-                                                bg-shadow-pill
+                                                shadow-pill
                                                 align-self-end
                                                 text-end
                                                 mb-2
                                             ">
-                                        <h3 class="padding-10">
+                                        <h3>
                                             <%="$" +
                                                 classSel.price.toFixed(2) %>
                                         </h3>

@@ -1,5 +1,5 @@
-<div class="cursos-main padding-10">
-    <div class="clases-main-container padding-10">
+<div class="mb-3">
+    <div class="container">
         <h2>¡Hola <%= childLogged.name %>!</h2>
         <h2>Hoy es un buen día para aprender <%= recommendations[0].titulo %></h2>
 
@@ -7,34 +7,33 @@
     </div>
 </div>
 
-<article class="col-12 col-md-6 cursos-main padding-10">
-    <div class="clases-main-container">
-        <h2 class="padding-10">Clase actual</h2>
+<article class="col-12 col-md-6">
+    <div class="container">
+        <h2>Clase actual</h2>
         <% if(locals.ultimaClase) {%>
-        <a class="clases-main-item" href="/products/<%= ultimaClase.id %>">
-            <img class="padding-10 img-thumbnail" src="/img/clases-preview/<%= ultimaClase.preview %>"
+        <a class="item" href="/products/<%= ultimaClase.id %>">
+            <img class="img-thumbnail" src="/img/clases-preview/<%= ultimaClase.preview %>"
                 alt="<%= ultimaClase.titulo %> " />
-            <h4 class="padding-10"><%= ultimaClase.titulo %></h4>
+            <h4 class="subtitle"><%= ultimaClase.titulo %></h4>
         </a>
         <% } else { %>
-        <h3 class="padding-10">No estás tomando ninguna clase aún</h3>
+        <h3>No estás tomando ninguna clase aún</h3>
         <% } %>
     </div>
 </article>
-<article class="col-12 col-md-6 cursos-main padding-10">
-    <div class="clases-main-container">
-        <h2 class="padding-10">Mi colección</h2>
+<article class="col-12 col-md-6  ">
+    <div class="container">
+        <h2>Mi colección</h2>
         <% if(childClasses.length > 0) {%>
         <% for(let clase of clasesActuales){ %>
-        <a class="clases-main-item" href="/products/<%= clase.classes.id%>">
-            <img class="padding-10 img-thumbnail"
-                src="/img/clases-preview/<%= clase.classes.interactive.preview.location %>"
+        <a class="item" href="/products/<%= clase.classes.id%>">
+            <img class=" img-thumbnail" src="/img/clases-preview/<%= clase.classes.interactive.preview.location %>"
                 alt="<%= clase.classes.title %> " />
-            <h4 class="padding-10"><%= clase.classes.title %></h4>
+            <h4 class="subtitle"><%= clase.classes.title %></h4>
         </a>
         <% } %>
         <% } else { %>
-        <h3 class="padding-10">No tenés clases en tu colección</h3>
+        <h3>No tenés clases en tu colección</h3>
         <% } %>
     </div>
 </article>

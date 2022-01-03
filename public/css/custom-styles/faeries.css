@@ -8,7 +8,7 @@
     --color-shadow: #3a3a3f;
 }
 
-main {
+body {
     flex: 1 0 auto;
     background: repeat center/contain url("/img/backgrounds/faeries-05.png"),
         linear-gradient(

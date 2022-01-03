@@ -1,0 +1,68 @@
+@use "../custom" as *;
+
+.item {
+    position: relative;
+    margin: 0.5rem;
+    flex: 1 1 10rem;
+}
+
+.container {
+    background-color: var(--color-1-light-rgba);
+    border: 1px solid var(--color-shadow);
+    border-radius: 1rem;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 0.5rem 1rem;
+    h2 {
+        font-family: "Gotham Black", sans-serif;
+        color: var(--color-2-strong);
+        text-shadow: 2px 2px 4px white;
+        width: 100%;
+        padding: 0.5rem 1rem;
+    }
+}
+
+.subtitle {
+    float: inline-end;
+    width: fit-content;
+    font-size: 100%;
+    font-family: "Gotham", sans-serif;
+    background-color: var(--color-shadow);
+    color: var(--color-2-strong);
+    padding: 0.5rem 1rem;
+    transform: translateY(-2.2rem);
+    border-radius: 0.25rem;
+    &--center {
+        @extend .subtitle;
+        transform: translateY(0);
+    }
+}
+
+.shadow-pill {
+    background-color: var(--color-shadow);
+    padding: 20px;
+    border-radius: 20px;
+    color: var(--color-1-strong)-light;
+    font-family: "Gotham Light", sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+label {
+    color: var(--color-shadow);
+}
+
+.feedback {
+    color: red;
+    font-weight: 500;
+    font-stretch: wider;
+    border: red double 1px;
+    background-color: var(--color-1-light);
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}

@@ -5,49 +5,49 @@
     <%- include("./partials/head") %>
 </head>
 
-<body>
-    <header id="top"><%- include("./partials/header") %></header>
+<body class="container-fluid">
+    <header><%- include("./partials/header") %></header>
     <nav id="main-nav">
         <ul class="nav flex-column">
-            <a class="restyled-link" href="#top">
-                <li class="nav-item">
+            <li class="nav-item">
+                <a href="#top">
                     <i class="far fa-caret-square-up"></i>
                     <span class="nav-link">Volver arriba</span>
-                </li>
-            </a>
-            <a class="restyled-link" href="#main">
-                <li class="nav-item">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#main">
                     <i class="fas fa-chalkboard-teacher"></i>
                     <span class="nav-link"><%=parentLogged?"Tus clases":"Ingresá" %></span>
-                </li>
-            </a>
-            <a class="restyled-link" href="#sobre-nosotros">
-                <li class="nav-item">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#sobre-nosotros">
                     <i class="fas fa-child"></i>
                     <span class="nav-link">Sobre nosotros</span>
-                </li>
-            </a>
-            <a class="restyled-link" href="#comentarios">
-                <li class="nav-item">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#comentarios">
                     <i class="far fa-comments"></i>
                     <span class="nav-link">Comentarios</span>
-                </li>
-            </a>
-            <a class="restyled-link" href="#contacto">
-                <li class="nav-item">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#contacto">
                     <i class="far fa-paper-plane"></i>
                     <span class="nav-link">Contactate</span>
-                </li>
-            </a>
+                </a>
+            </li>
         </ul>
     </nav>
 
     <!-- Modal -->
 
     <%- include("./partials/home-partials/parent-logsecure-modal") %>
-    <main id="home" class="container-fluid">
+    <main>
         <div id="main">
-            <section class="row">
+            <section class="row mb-3">
                 <!-- 3 opciones para vista superior de la página de inicio -->
                 <!-- 1) Registro o Login -->
                 <% if(!parentLogged && !childLogged) { %>
@@ -61,49 +61,46 @@
                 <% } else if(childLogged) { %>
                 <%- include("./partials/home-partials/child-classes") %>
                 <% } %>
-
-
-
-
-                <article class="col-12 col-md-6 cursos-main padding-10">
-                    <div class="clases-main-container">
-                        <h2 class="padding-10">Sugerencias</h2>
+            </section>
+            <section class="row mb-3">
+                <article class="col-12 col-md-6">
+                    <div class="container">
+                        <h2>Sugerencias</h2>
                         <% for(let clase of recommendations){ %>
-                        <a class="clases-main-item" href="/products/<%= clase.id %> ">
-                            <img class="padding-10 img-thumbnail"
-                                src="/img/clases-preview/<%=clase.interactive.preview.location%>"
+                        <a class="item" href="/products/<%= clase.id %> ">
+                            <img class="img-thumbnail" src="/img/clases-preview/<%=clase.interactive.preview.location%>"
                                 alt="<%= clase.titulo %> " />
-                            <h4 class="padding-10"><%= clase.title %></h4>
+                            <h4 class="subtitle"><%= clase.title %></h4>
                         </a>
                         <% } %>
                         <div class="w-100 text-end">
                             <a href="/products">
-                                <h4 class="subtitle padding-10 ">más cursos</h4>
+                                <h4 class="subtitle">más cursos</h4>
                             </a>
                         </div>
                     </div>
                 </article>
-                <article class="col-12 col-md-6 cursos-main padding-10">
-                    <div id="otros-cursos" class="clases-main-container">
-                        <h2 class="padding-10">Otros cursos</h2>
+                <article class="col-12 col-md-6 ">
+                    <div id="otros-cursos" class="container">
+                        <h2>Otros cursos</h2>
                         <% for(let clase of classes){ %>
-                        <a class="restyled-link" href="/products/<%= clase.id %> ">
+                        <a href="/products/<%= clase.id %> ">
                             <div class="other-clases">
                                 <%= clase.title %>
                             </div>
                         </a>
                         <% } %>
-                        <a class="restyled-link" href="/products">
+                        <a href="/products">
                             <div class="other-clases">Más cursos</div>
                         </a>
                     </div>
                 </article>
             </section>
-            <section class="row" id="sobre-nosotros">
-                <article class="col-12 cursos-main">
-                    <div class="clases-main-container">
-                        <h2 class="padding-10">Sobre nosotros</h2>
-                        <p class="padding-10">
+            <section class="row mb-3 reviews">
+                <article class="col-12 ">
+                    <div class="container">
+                        <h2>Sobre nosotros</h2>
+                        <p>
                             Mundo Sapien es un market place donde docentes
                             pueden ofrecer clases sobre distintos temas de
                             la curricula escolar. Pensado para alumnos del
@@ -116,26 +113,26 @@
                     </div>
                 </article>
             </section>
-            <section class="row" id="comentarios">
-                <article class="col-12 col-md-6 cursos-main padding-10">
-                    <div class="clases-main-container padding-10">
-                        <h2 class="padding-10">Comentarios</h2>
+            <section class="row mb-3 reviews">
+                <article class="col-12 col-md-6">
+                    <div class="container ">
+                        <h2>Comentarios</h2>
                         <% for(let comentario of comentarios){ %>
-                        <div class="users-comment padding-10">
-                            <p class="padding-10">
+                        <div class="users-comment ">
+                            <p>
                                 <%= comentario.resena %>
                             </p>
-                            <p class="padding-10">
+                            <p>
                                 <%= comentario.nombre %>
                             </p>
                         </div>
                         <% } %>
                     </div>
                 </article>
-                <article class="col-12 col-md-6 cursos-main padding-10">
-                    <div class="clases-main-container">
-                        <h2 class="padding-10">Deja tu comentario</h2>
-                        <form class="padding-10" action="" method="post">
+                <article class="col-12 col-md-6">
+                    <div class="container">
+                        <h2>Deja tu comentario</h2>
+                        <form action="" method="post">
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="nombre" id="nombre"
                                     placeholder="nombre" />
@@ -150,11 +147,11 @@
                     </div>
                 </article>
             </section>
-            <section class="row" id="contacto">
-                <article class="col-12 col-md-6 cursos-main">
-                    <div class="clases-main-container">
-                        <h2 class="padding-10">Quiero saber más</h2>
-                        <form class="padding-10" action="" method="post">
+            <section class="row mb-3 reviews">
+                <article class="col-12 col-md-6 ">
+                    <div class="container">
+                        <h2>Quiero saber más</h2>
+                        <form action="" method="post">
                             <div class="form-floating">
                                 <input class="form-control" type="text" name="nombre" id="nombre"
                                     placeholder="nombre" />

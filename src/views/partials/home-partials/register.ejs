@@ -1,13 +1,13 @@
-<article class="col-12 col-md-6 cursos-main padding-10">
-    <div class="clases-main-container padding-10">
-        <p class="pt-3  fw-bolder">¿No tenés cuenta?</p>
-        <h2 class="">Registrate</h2>
-        <div class=" bg-shadow-pill padding-10">
-            <form class="padding-10" action="/user/register" method="post">
+<article class="col-12 col-md-6">
+    <div class="container">
+        <p class="pt-3 fw-bolder small mb-0">¿No tenés cuenta?</p>
+        <h2>Registrate</h2>
+        <div class="shadow-pill">
+            <form action="/user/register" method="post">
                 <div class="form-floating my-3 text-start">
                     <input class="form-control" type="text" name="name" id="name" placeholder="Nombre de usuario"
                         value="<%= old && old.name ? old.name : "" %>" />
-                    <label class="text-shadow" for="name">Nombre de usuario</label>
+                    <label for="name">Nombre de usuario</label>
                     <% if(errors && errors.name) { %>
                     <p class="feedback "><%= errors.name.msg %> </p>
                     <% } %>
@@ -34,12 +34,12 @@
         </div>
     </div>
 </article>
-<article class="col-12 col-md-6 cursos-main padding-10">
-    <div class="clases-main-container padding-10">
-        <p class="pt-3  fw-bolder">¿Ya tenés cuenta?</p>
-        <h2 class="">Ingresá</h2>
-        <div class=" bg-shadow-pill padding-10">
-            <form class="padding-10" action="/user/login" method="post">
+<article class="col-12 col-md-6  ">
+    <div class="container ">
+        <p class="pt-3  fw-bolder small mb-0">¿Ya tenés cuenta?</p>
+        <h2>Ingresá</h2>
+        <div class=" shadow-pill ">
+            <form action="/user/login" method="post">
                 <div class="form-floating my-3">
                     <input class="form-control" type="email" name="email" id="email" placeholder="Nombre de usuario"
                         value="<%= old && old.email ? old.email : "" %>" />
@@ -51,14 +51,14 @@
                 </div>
                 <div class="float-left checkbox mb-3 text-start">
                     <input type="checkbox" value="rememberMe" name="rememberMe" />
-                    <label>Recordarme</label>
+                    <label class="text-white ">Recordarme</label>
                 </div>
                 <div class="text-start">
                     <% if(errors && errors.invalidLogIn) { %>
                     <p class="feedback"><%= errors.invalidLogIn.msg %> </p>
                     <% } %>
                 </div>
-                <button class="ms-primary-btn " type="submit">
+                <button class="ms-primary-btn" type="submit">
                     Ingresar
                 </button>
             </form>

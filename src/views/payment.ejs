@@ -8,11 +8,10 @@
 <body>
     <header><%- include("./partials/header") %></header>
     <main>
-        <div class="container-fluid padding-10">
-            <form action="/sale/endPurchase" method="post"
-                class="row max1200px padding-10 z-index-1 clases-main-container">
+        <div class="container-fluid ">
+            <form action="/sale/endPurchase" method="post" class="row max1200px  z-index-1 container">
                 <div class="col-6  ">
-                    <div class="accordion cursos-main" id="accordionPaymentOptions">
+                    <div class="accordion " id="accordionPaymentOptions">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -44,7 +43,7 @@
                     </div>
                 </div>
                 <div class="col-6 ">
-                    <div class="card cursos-main">
+                    <div class="card ">
                         <div class=" p-3">
                             <h5> Clases</h5>
                             <hr class="mt-0 line">
@@ -83,7 +82,7 @@
                             <div class="d-flex flex-column"> <span>Total</span>
                             </div> <span>$<%= totalPrice %></span>
                         </div>
-                        <div class="p-3"> <button type="submit" class="bg-shadow-pill">Pagar</button>
+                        <div class="p-3"> <button type="submit" class="shadow-pill">Pagar</button>
                             <a href="/sale/cart">Volver</a>
                         </div>
                     </div>

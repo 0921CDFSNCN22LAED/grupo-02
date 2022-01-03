@@ -29,11 +29,11 @@
         </div>
         <div id="main">
             <section class="row z-index-1">
-                <article class="col-12 col-md-6 cursos-main padding-10">
-                    <div class="clases-main-container padding-10">
+                <article class="col-12 col-md-6  ">
+                    <div class="container ">
                         <h2>Tus datos personales</h2>
                         <form action="/user/<%= parentLogged.id %>/updateParent?_method=PUT" method="post"
-                            enctype="multipart/form-data" class="clases-main-item">
+                            enctype="multipart/form-data" class="item">
                             <fieldset>
 
                                 <div class="form-floating my-3">
@@ -76,10 +76,10 @@
                     </form>
         </div>
         </article>
-        <article class="col-12 col-md-6 cursos-main padding-10">
-            <div class="clases-main-container padding-10">
+        <article class="col-12 col-md-6  ">
+            <div class="container ">
                 <h2>Progreso</h2>
-                <div class="clases-main-item">
+                <div class="item">
                     <table class="table table-hover">
                         <tr>
                             <th>Hijo</th>
@@ -114,8 +114,8 @@
                     childGrade = parentLogged.children[i].grade_id; 
                 } %>
 
-        <article class="col-12 col-md-6 cursos-main padding-10">
-            <div class="clases-main-container padding-10">
+        <article class="col-12 col-md-6  ">
+            <div class="container ">
                 <h2>
                     Datos de <%= childName ? childName : "tu hijo"%>
 
@@ -126,7 +126,7 @@
                 </h2>
 
 
-                <div class="clases-main-item">
+                <div class="item">
                     <form action="/user/<%= childId %>/updateChildren?_method=PUT" method="post"
                         enctype="multipart/form-data">
 
