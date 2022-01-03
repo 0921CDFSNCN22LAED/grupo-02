@@ -50,76 +50,59 @@
                                 </div>
 
                             </fieldset>
-                            <div class="col-sm-12">
-                                <div class="form-upload text-center mb-3">
-                                    <label for="avatar" class="form-label"><img
-                                            class="img-thumbnail w-50 me-5 rounded-circle"
-                                            src="/img/avatars/<%=parentLogged.avatar ? parentLogged.avatar : "default-avatar.png"%>"
-                                            alt="avatar">
-                                        <div>Seleccioná el avatar</div>
-                                    </label>
-                                    <input class="form-control d-none" type="file" id="avatar"
-                                        placeholder="Avatar del padre" name="avatar" />
-                                </div>
-                            </div>
-                            <% if(parentLogged.avatar) { %>
-                            <div class="d-flex my-3">
-                                <img class="img-thumbnail w-50 me-5 rounded-circle"
-                                    src="/img/avatars/<%= parentLogged.avatar %> " alt="avatar ya cargado">
-                                <div class="form-upload">
-                                    <label for="avatar" class="form-label">Cambiá tu avatar</label>
-                                    <input class="form-control" type="file" id="avatar" placeholder="Cargá tu avatar"
-                                        name="avatar" />
-                                </div>
-                            </div>
-                            <% } else { %>
-                            <div class="form-upload my-3">
-                                <label for="avatar" class="form-label">Cargá tu avatar</label>
-                                <input class="form-control" type="file" id="avatar" placeholder="Cargá tu avatar"
+                            <div>
+                                <label for="avatarParent" class="d-flex my-3">
+                                    <img class="img-thumbnail w-50 me-5 rounded-circle"
+                                        src="/img/avatars/<%= parentLogged.avatar %> " alt="avatar ya cargado"
+                                        id="avatarParentImg">
+                                    <div class="form-upload">
+                                        <div class="form-label">Cambiá tu avatar</div>
+                                </label>
+                                <input class="form-control" type="file" id="avatarParent" placeholder="Cargá tu avatar"
                                     name="avatar" />
                             </div>
-                            <% } %>
-                            <fieldset disabled="disabled">
-                                <div class="form-floating my-3">
-                                    <input class="form-control" type="password" name="pass" id="pass"
-                                        placeholder="Contraseña" />
-                                    <label class="text-shadow" for="pass">Cambiá tu contraseña</label>
-                                </div>
-                            </fieldset>
-                            <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar</button>
-                            <button class="btn btn-warning btn-lg button-right" type="submit" formmethod="get"
-                                formaction="/user/logout">Cerrar sesión</button>
-
-                        </form>
                     </div>
-                </article>
-                <article class="col-12 col-md-6 cursos-main padding-10">
-                    <div class="clases-main-container padding-10">
-                        <h2>Progreso</h2>
-                        <div class="clases-main-item">
-                            <table class="table table-hover">
-                                <tr>
-                                    <th>Hijo</th>
-                                    <th>Clase</th>
-                                    <th>Progreso</th>
-                                </tr>
-                                <tr>
-                                    <td>Hijo 1</td>
-                                    <td>Clase 1</td>
-                                    <td>Barra de progreso</td>
-                                </tr>
-                                <tr>
-                                    <td>Hijo 2</td>
-                                    <td>Clase 2</td>
-                                    <td>Barra de progreso</td>
-                                </tr>
-                            </table>
+                    <fieldset disabled="disabled">
+                        <div class="form-floating my-3">
+                            <input class="form-control" type="password" name="pass" id="pass"
+                                placeholder="Contraseña" />
+                            <label class="text-shadow" for="pass">Cambiá tu contraseña</label>
                         </div>
-                    </div>
-                </article>
+                    </fieldset>
+                    <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar</button>
+                    <button class="btn btn-warning btn-lg button-right" type="submit" formmethod="get"
+                        formaction="/user/logout">Cerrar sesión</button>
 
-                <% for(let i = 0; (i < parentLogged.children.length + 1 && i < 5); i++) {%>
-                <%  let childId;
+                    </form>
+        </div>
+        </article>
+        <article class="col-12 col-md-6 cursos-main padding-10">
+            <div class="clases-main-container padding-10">
+                <h2>Progreso</h2>
+                <div class="clases-main-item">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Hijo</th>
+                            <th>Clase</th>
+                            <th>Progreso</th>
+                        </tr>
+                        <tr>
+                            <td>Hijo 1</td>
+                            <td>Clase 1</td>
+                            <td>Barra de progreso</td>
+                        </tr>
+                        <tr>
+                            <td>Hijo 2</td>
+                            <td>Clase 2</td>
+                            <td>Barra de progreso</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </article>
+
+        <% for(let i = 0; (i < parentLogged.children.length + 1 && i < 5); i++) {%>
+        <%  let childId;
                     let childName;
                     let childAvatar;
                     let childGrade;
@@ -131,80 +114,80 @@
                     childGrade = parentLogged.children[i].grade_id; 
                 } %>
 
-                <article class="col-12 col-md-6 cursos-main padding-10">
-                    <div class="clases-main-container padding-10">
-                        <h2>
-                            Datos de <%= childName ? childName : "tu hijo"%>
+        <article class="col-12 col-md-6 cursos-main padding-10">
+            <div class="clases-main-container padding-10">
+                <h2>
+                    Datos de <%= childName ? childName : "tu hijo"%>
 
-                            <!-- Button trigger modal -->
-                            <button data-bs-toggle="modal" data-bs-target="#deleteSubUserModal"
-                                class="btn-close button-right mt-0" aria-label="Close" data-bs-dismiss="modal"
-                                type="submit"></button>
-                        </h2>
+                    <!-- Button trigger modal -->
+                    <button data-bs-toggle="modal" data-bs-target="#deleteSubUserModal"
+                        class="btn-close button-right mt-0" aria-label="Close" data-bs-dismiss="modal"
+                        type="submit"></button>
+                </h2>
 
 
-                        <div class="clases-main-item">
-                            <form action="/user/<%= childId %>/updateChildren?_method=PUT" method="post"
-                                enctype="multipart/form-data">
+                <div class="clases-main-item">
+                    <form action="/user/<%= childId %>/updateChildren?_method=PUT" method="post"
+                        enctype="multipart/form-data">
 
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-upload text-center mb-3">
-                                            <label for="avatar-<%=childId%>" class="form-label"><img
-                                                    class="img-thumbnail rounded-circle"
-                                                    src="/img/avatars/<%=childAvatar ? childAvatar : "default-avatar.png"%>"
-                                                    alt="avatar">
-                                                <div>Seleccioná el avatar</div>
-                                            </label>
-                                            <div class="file-input-container">
-                                                <input class="form-control " type="file" id="avatar-<%=childId%>"
-                                                    placeholder="Avatar del hijo" name="avatar" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="form-floating">
-                                            <input class="form-control" type="text" name="name" id="name-<%=childId%>"
-                                                placeholder="Nombre de usuario del hijo"
-                                                <% if(childName){ %>value="<%=childName%>" <%} %> />
-                                            <label for="name-<%=childId%>">Nombre del hijo</label>
-                                        </div>
-                                        <select class="form-select align-self-start my-3" aria-label="select año"
-                                            name="grade_id">
-                                            <option>Seleccioná el año</option>
-                                            <% for (let grade in grades) { %>
-                                            <option value="<%= grades[grade].id %>"
-                                                <%= grades[grade].id == childGrade ? "selected" : "" %>>
-                                                <%= grades[grade].name %></option>
-                                            <% } %>
-                                        </select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-upload text-center mb-3">
+                                    <label for="avatar-<%=i%>" class="form-label"><img
+                                            class="img-thumbnail rounded-circle " id="avatarChildImg-<%=i%>"
+                                            src="/img/avatars/<%=childAvatar ? childAvatar : "default-avatar.png"%>"
+                                            alt="avatar">
+                                        <div>Seleccioná el avatar</div>
+                                    </label>
+                                    <div class="file-input-container">
+                                        <input class="form-control  avatarChildInput" type="file" id="avatar-<%=i%>"
+                                            placeholder="Avatar del hijo" name="avatar" />
                                     </div>
                                 </div>
-                                <% if(childId) {%>
-                                <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar
-                                    perfil</button>
-                                <% } else { %>
-                                <button class="btn btn-primary btn-lg button-right" type="submit"
-                                    formaction="/user/registerChild" formmethod="post"
-                                    formenctype="multipart/form-data">Crear
-                                    perfil</button>
-                                <% } %>
-                                <% if(childId) {%>
-                                <button class="btn btn-primary btn-lg button-right" type="submit"
-                                    formaction="/user/userSelected/<%=childId%>" formmethod="get">Ingresar como
-                                    <%=childName%></button>
-                                <% } %>
-                            </form>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" name="name" id="name-<%=childId%>"
+                                        placeholder="Nombre de usuario del hijo"
+                                        <% if(childName){ %>value="<%=childName%>" <%} %> />
+                                    <label for="name-<%=childId%>">Nombre del hijo</label>
+                                </div>
+                                <select class="form-select align-self-start my-3" aria-label="select año"
+                                    name="grade_id">
+                                    <option>Seleccioná el año</option>
+                                    <% for (let grade in grades) { %>
+                                    <option value="<%= grades[grade].id %>"
+                                        <%= grades[grade].id == childGrade ? "selected" : "" %>>
+                                        <%= grades[grade].name %></option>
+                                    <% } %>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </article>
-                <% } %>
+                        <% if(childId) {%>
+                        <button class="btn btn-primary btn-lg button-right" type="submit">Actualizar
+                            perfil</button>
+                        <% } else { %>
+                        <button class="btn btn-primary btn-lg button-right" type="submit"
+                            formaction="/user/registerChild" formmethod="post" formenctype="multipart/form-data">Crear
+                            perfil</button>
+                        <% } %>
+                        <% if(childId) {%>
+                        <button class="btn btn-primary btn-lg button-right" type="submit"
+                            formaction="/user/userSelected/<%=childId%>" formmethod="get">Ingresar como
+                            <%=childName%></button>
+                        <% } %>
+                    </form>
+                </div>
+            </div>
+        </article>
+        <% } %>
 
-            </section>
+        </section>
         </div>
 
     </main>
     <%- include("./partials/footer") %>
+    <script src="/script/imgInputPreview.js"></script>
 </body>
 
 </html>

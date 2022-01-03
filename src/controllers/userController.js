@@ -29,6 +29,7 @@ const controller = {
                 return user.dataValues.id;
             })
             .then((userId) => {
+                console.log(`userId`, userId);
                 db.Child.create({
                     ...req.body,
                     avatar: req.file
@@ -38,14 +39,17 @@ const controller = {
                     parent_id: req.session.parentLogged.id,
                 })
                     .then((child) => {
+                        console.log(`child`, child);
                         return db.Parent.findByPk(child.parent_id, {
                             include: [{ association: "children" }],
                         });
                     })
                     .then((parent) => {
+                        console.log(`parent`, parent);
                         req.session.parentLogged = parent.dataValues;
                         return res.redirect(`/user/profile`);
-                    });
+                    })
+                    .catch((e) => res.render("error-page", { error: e }));
             })
             .catch((e) => res.render("error-page", { error: e }));
     },
@@ -55,7 +59,7 @@ const controller = {
                 .then((parent) => {
                     if (bcrypt.compareSync(req.body.pass, parent.pass)) {
                         req.session.parentIsLoggedSecure = true;
-                        return res.redirect("/user/profile");
+                        return res.redirect("back");
                     }
                     req.session.parentIsLoggedSecure = false;
                     req.session.errors = {

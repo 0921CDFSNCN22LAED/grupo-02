@@ -10,7 +10,7 @@
         <%- include("./partials/header") %>
     </header>
     <main class="container-fluid padding-10">
-
+        <%- include("./partials/home-partials/parent-logsecure-modal") %>
         <div class="row max1200px padding-10 z-index-1">
 
             <div class="clases-main-container ">
@@ -117,8 +117,11 @@
                         </div>
                         <div class="padding-10 col-md-6 col-12">
                             <div class="pay bg-shadow-pill  padding-10 d-flex justify-content-end">
-                                <p>
-                                    <% if(totalPrice) { %>
+                                <% if(!parentIsLoggedSecure) { %>
+                                <h3 class="padding-10">Total: $<%= totalPrice %></h3>
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#parentVerificationModal"
+                                    class="restyled-link btn btn-primary btn-lg">Continuar como padre </a>
+                                <% } else if(totalPrice) { %>
                                 <h3 class="padding-10">Total: $<%= totalPrice %></h3>
                                 <button class="btn btn-primary btn-lg" type="submit">Pagar</button>
                                 <% } else { %>
@@ -128,7 +131,6 @@
                                         clases!</h3>
                                 </a>
                                 <% } %>
-                                </p>
                             </div>
                         </div>
                     </div>

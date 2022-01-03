@@ -89,6 +89,15 @@
     color: var(--color-2-strong);
 }
 
+.subtitle {
+    float: inline-end;
+    width: fit-content;
+    font-size: 100%;
+    font-family: "Gotham", sans-serif;
+    background-color: var(--color-shadow);
+    color: var(--color-2-strong);
+}
+
 #otros-cursos {
     display: flex;
     flex-wrap: wrap;

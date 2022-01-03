@@ -22,10 +22,12 @@ const controller = {
         }
 
         Products.findAll().then((classes) => {
+            const recommendations = classes.slice(0, 4);
+
             res.render("home", {
                 old: req.session.old,
                 classes,
-                recommendations: classes,
+                recommendations,
                 comentarios,
                 clasesActuales,
             });

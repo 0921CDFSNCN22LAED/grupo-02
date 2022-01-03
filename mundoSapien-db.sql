@@ -27,7 +27,7 @@ CREATE TABLE `Parents` (
 DROP TABLE IF EXISTS `Grades`;
 CREATE TABLE `Grades` ( 
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-	`name` char(7) NOT NULL,
+	`name` char(7) DEFAULT "1",
 	PRIMARY KEY (`id`)
 );
 

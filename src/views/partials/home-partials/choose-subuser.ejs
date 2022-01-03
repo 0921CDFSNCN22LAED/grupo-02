@@ -5,14 +5,19 @@
         <div class="row col-12">
             <div class="card-deck d-flex flex-wrap justify-content-around">
                 <!-- Button trigger modal -->
-                <a type="button" data-bs-toggle="modal" data-bs-target="#parentVerificationModal"
-                    class="restyled-link card bg-transparent border-0 mx-2">
-                    <img class="card-img-top rounded-circle" src="/img/avatars/<%= parentLogged.avatar %> "
-                        alt="parent avatar" style="width: 8rem;">
-                    <div class="card-body">
-                        <h3 class="card-text text-center"><%= parentLogged.name %></h3>
-                    </div>
-                </a>
+                <div>
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#parentVerificationModal"
+                        class="restyled-link card bg-transparent border-0 mx-2 text-center">
+                        <img class="card-img-top rounded-circle mx-auto" src="/img/avatars/<%= parentLogged.avatar %> "
+                            alt="parent avatar" style="width: 8rem;">
+                        <div class="card-body">
+                            <h3 class="card-text text-center"><%= parentLogged.name %></h3>
+                        </div>
+                    </a>
+                    <% if(parentIsLoggedSecure) {%>
+                    <a class="restyled-link subtitle padding-10" href="/user/profile">Administrar perfiles</a>
+                    <% } %>
+                </div>
                 <% for(let child in parentLogged.children) {%>
                 <a href="/user/userSelected/<%=parentLogged.children[child].id%>"
                     class="restyled-link card bg-transparent border-0 mx-2">
