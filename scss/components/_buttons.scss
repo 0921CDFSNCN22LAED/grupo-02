@@ -4,9 +4,14 @@
     color: var(--color-shadow);
     text-align: center;
     font-family: "Gotham Black", sans-serif;
-    background-color: var(--color-1-strong)-light;
+    background-color: var(--color-1-light);
     border: var(--color-shadow) solid 1px;
     padding: 7px;
     margin-bottom: 20px;
     width: 100%;
+}
+
+.button-right {
+    margin-top: 40px;
+    float: right;
 }

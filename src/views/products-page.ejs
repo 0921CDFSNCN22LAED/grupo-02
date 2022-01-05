@@ -8,77 +8,55 @@
 <body>
     <header><%- include("./partials/header") %></header>
     <main class="container-fluid">
-        <div class="row max1200px  z-index-1">
-            <div class=" ">
-                <section class="d-flex flex-wrap">
-                    <% for(let classSel of classes){ %>
-                    <article class="col-12 col-sm-6 col-md-4 col-lg-3 my-2 ">
-                        <div class="container m-1 ">
-                            <a class=" item descripcionContainer" href="/products/<%= classSel.id %>">
-                                <div class="
-                                            d-flex
-                                            flex-column
-                                            product-in-products-page
-                                        ">
-                                    <div class="
-                                                m-1
-                                                product-in-products-page-detail position-relative
-                                                pb-5
-                                            ">
-
-                                        <img class="img-thumbnail "
-                                            src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
-                                            alt="picture placeholder" />
-                                        <div class=" ">
-                                            <h5>
-                                                <%= classSel.title + " en "
-                                                        + classSel.subject.name %>
-                                            </h5>
-                                            <h5><%=classSel.grades.name %></h5>
-                                            <h5>
-                                                <%=classSel.teacher.first_name +
-                                                        " " +
-                                                        classSel.teacher.last_name %>
-                                            </h5>
-                                            <div>
-                                                <% let stars = 0; %>
-                                                <%for(let i = 0; i < Math.floor(classSel.rating); i++){ %>
-                                                <% stars++; %>
-                                                <i class="fas fa-star"></i>
-                                                <% } %>
-                                                <% if(classSel.rating % 1 !=0) { %>
-                                                <% stars++; %>
-                                                <i class="fas fa-star-half-alt"></i>
-                                                <% } %>
-                                                <% for(let i=0; i < 5 - stars ; i++){ %>
-                                                <i class="far fa-star"></i>
-                                                <% } %>
-                                            </div>
-                                        </div>
-                                        <div class="position-absolute bottom-0 descripcion ">
-                                            <h5>Más información</h5>
-                                            <p><%= classSel.description.description_long %></p>
-                                        </div>
-                                    </div>
-                                    <div class="
-                                                price-and-options
-                                                shadow-pill
-                                                align-self-end
-                                                text-end
-                                                mb-2
-                                            ">
-                                        <h3>
-                                            <%="$" +
-                                                classSel.price.toFixed(2) %>
-                                        </h3>
-                                    </div>
+        <div class="row position-relative on-top">
+            <section class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
+                <% for(let classSel of classes){ %>
+                <article class="p-2">
+                    <div class="descriptionContainer container_noFlex ">
+                        <a class=" d-flex flex-column h-100 justify-content-between position-relative"
+                            href="/products/<%= classSel.id %>">
+                            <div class="p-1">
+                                <img class="img-thumbnail"
+                                    src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
+                                    alt="picture placeholder" />
+                            </div>
+                            <div class="lh-lg p-1">
+                                <h5>
+                                    <%= classSel.title + " en " + classSel.subject.name %>
+                                </h5>
+                                <h5><%=classSel.grades.name %></h5>
+                                <h5>
+                                    <%=classSel.teacher.first_name + " " + classSel.teacher.last_name %>
+                                </h5>
+                                <div>
+                                    <% let stars = 0; %>
+                                    <%for(let i = 0; i < Math.floor(classSel.rating); i++){ %>
+                                    <% stars++; %>
+                                    <i class="fas fa-star"></i>
+                                    <% } %>
+                                    <% if(classSel.rating % 1 !=0) { %>
+                                    <% stars++; %>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <% } %>
+                                    <% for(let i=0; i < 5 - stars ; i++){ %>
+                                    <i class="far fa-star"></i>
+                                    <% } %>
                                 </div>
-                            </a>
-                        </div>
-                    </article>
-                    <% } %>
-                </section>
-            </div>
+                            </div>
+                            <div class="shadow-pill text-end mb-5">
+                                <h3>
+                                    <%="$" + classSel.price.toFixed(2) %>
+                                </h3>
+                            </div>
+                            <div class="position-absolute bottom-0 description">
+                                <h5>Más información</h5>
+                                <p><%= classSel.description.description_long %></p>
+                            </div>
+                        </a>
+                    </div>
+                </article>
+                <% } %>
+            </section>
         </div>
     </main>
     <%- include("./partials/footer") %>

@@ -45,7 +45,7 @@
     <!-- Modal -->
 
     <%- include("./partials/home-partials/parent-logsecure-modal") %>
-    <main>
+    <main class="main">
         <div id="main">
             <section class="row mb-3">
                 <!-- 3 opciones para vista superior de la página de inicio -->
@@ -62,8 +62,8 @@
                 <%- include("./partials/home-partials/child-classes") %>
                 <% } %>
             </section>
-            <section class="row mb-3">
-                <article class="col-12 col-md-6">
+            <section class="row">
+                <article class="col-12 col-md-6 mb-3">
                     <div class="container">
                         <h2>Sugerencias</h2>
                         <% for(let clase of recommendations){ %>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </article>
-                <article class="col-12 col-md-6 ">
+                <article class="col-12 col-md-6 mb-3">
                     <div id="otros-cursos" class="container">
                         <h2>Otros cursos</h2>
                         <% for(let clase of classes){ %>
@@ -96,8 +96,8 @@
                     </div>
                 </article>
             </section>
-            <section class="row mb-3 reviews">
-                <article class="col-12 ">
+            <section class="row reviews">
+                <article class="col-12 mb-3">
                     <div class="container">
                         <h2>Sobre nosotros</h2>
                         <p>
@@ -113,8 +113,8 @@
                     </div>
                 </article>
             </section>
-            <section class="row mb-3 reviews">
-                <article class="col-12 col-md-6">
+            <section class="row reviews">
+                <article class="col-12 col-md-6 mb-3">
                     <div class="container ">
                         <h2>Comentarios</h2>
                         <% for(let comentario of comentarios){ %>
@@ -129,7 +129,7 @@
                         <% } %>
                     </div>
                 </article>
-                <article class="col-12 col-md-6">
+                <article class="col-12 col-md-6 mb-3">
                     <div class="container">
                         <h2>Deja tu comentario</h2>
                         <form action="" method="post">
@@ -148,7 +148,7 @@
                 </article>
             </section>
             <section class="row mb-3 reviews">
-                <article class="col-12 col-md-6 ">
+                <article class="col-12 col-md-6 mb-3">
                     <div class="container">
                         <h2>Quiero saber más</h2>
                         <form action="" method="post">
@@ -173,6 +173,7 @@
         </div>
     </main>
     <%- include("./partials/footer") %>
+    <script src="/script/hideLateralNavbar.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,8 @@
 @use "../custom" as *;
 
 #main-nav {
-    position: fixed;
+    position: sticky;
+    top: 20px;
     right: 0;
     margin: 40px 20px;
     z-index: 20;
@@ -40,16 +41,12 @@
         }
     }
 }
-main {
+.main {
     padding-right: 40px;
     position: relative;
     z-index: 1;
     @media (min-width: 769px) {
         padding-right: 160px;
-    }
-    @media (min-width: 1200px) {
-        max-width: 1200px;
-        margin: auto;
     }
 
     #otros-cursos {

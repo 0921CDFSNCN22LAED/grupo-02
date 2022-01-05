@@ -1,0 +1,22 @@
+.descriptionContainer {
+    .description {
+        background-color: var(--color-2-light);
+        color: var(--color-shadow);
+        padding: 0.7rem;
+        height: 3em;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 20px;
+        transition-property: all;
+        transition-duration: 2s;
+        transition-delay: 250ms;
+        position: relative;
+        z-index: 1;
+    }
+    :hover {
+        color: black;
+    }
+    :hover .description {
+        height: 100%;
+    }
+}

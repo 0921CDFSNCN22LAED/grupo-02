@@ -1,11 +1,5 @@
 @use "../custom" as *;
 
-.item {
-    position: relative;
-    margin: 0.5rem;
-    flex: 1 1 10rem;
-}
-
 .container {
     background-color: var(--color-1-light-rgba);
     border: 1px solid var(--color-shadow);
@@ -16,6 +10,11 @@
     align-items: flex-start;
     align-content: flex-start;
     padding: 0.5rem 1rem;
+    z-index: 1;
+    @media (min-width: 1200px) {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
     h2 {
         font-family: "Gotham Black", sans-serif;
         color: var(--color-2-strong);
@@ -23,6 +22,17 @@
         width: 100%;
         padding: 0.5rem 1rem;
     }
+    &_noFlex {
+        @extend .container;
+        display: inline-block;
+        align-self: flex-start;
+    }
+}
+
+.item {
+    position: relative;
+    margin: 0.5rem;
+    flex: 1 1 10rem;
 }
 
 .subtitle {
@@ -45,7 +55,7 @@
     background-color: var(--color-shadow);
     padding: 20px;
     border-radius: 20px;
-    color: var(--color-1-strong)-light;
+    color: var(--color-1-light);
     font-family: "Gotham Light", sans-serif;
     text-align: center;
     width: 100%;
@@ -65,4 +75,11 @@ label {
     margin-top: 5px;
     border-radius: 5px;
     display: inline-block;
+}
+
+.form-upload {
+    background-color: white;
+    padding: 1rem 0.75rem;
+    border-radius: 0.25rem !important;
+    width: 100%;
 }
