@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Sale = sequelize.define(
-        "Sale",
+        'Sale',
         {
             id: {
                 type: DataTypes.UUID,
@@ -12,31 +12,30 @@ module.exports = (sequelize, DataTypes) => {
             },
             createdAt: {
                 type: DataTypes.DATE,
-                field: "created_at",
+                field: 'created_at',
             },
             updatedAt: {
                 type: DataTypes.DATE,
-                field: "updated_at",
+                field: 'updated_at',
             },
         },
         {
-            tableName: "sales",
+            tableName: 'sales',
             timestamps: true,
         }
     );
 
     Sale.associate = (models) => {
         Sale.belongsToMany(models.Class, {
-            as: "classes",
-            through: "classes_sales",
-            foreignKey: "sale_id",
-            otherKey: "class_id",
+            as: 'classes',
+            through: 'classes_sales',
+            foreignKey: 'class_id',
+            otherKey: 'sale_id',
             timestamps: false,
-            onDelete: "cascade",
         });
         Sale.belongsTo(models.User, {
-            as: "users",
-            foreignKey: "user_id",
+            as: 'users',
+            foreignKey: 'user_id',
         });
     };
 

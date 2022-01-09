@@ -1,4 +1,4 @@
-const db = require("../database/models");
+const db = require('../database/models');
 
 const Products = {
     findAll: function () {
@@ -6,19 +6,19 @@ const Products = {
             raw: true,
             nest: true,
             include: [
-                { association: "subject" },
-                { association: "grades" },
-                { association: "teacher" },
+                { association: 'subject' },
+                { association: 'grades' },
+                { association: 'teacher' },
                 {
                     model: db.Interactive,
-                    as: "interactive",
+                    as: 'interactive',
                     include: [
-                        { association: "video" },
-                        { association: "preview" },
-                        { association: "bonus" },
+                        { association: 'video' },
+                        { association: 'preview' },
+                        { association: 'bonus' },
                     ],
                 },
-                { association: "description" },
+                { association: 'description' },
             ],
         });
     },
@@ -30,19 +30,19 @@ const Products = {
                 id: id,
             },
             include: [
-                { association: "subject" },
-                { association: "grades" },
-                { association: "teacher" },
+                { association: 'subject' },
+                { association: 'grades' },
+                { association: 'teacher' },
                 {
                     model: db.Interactive,
-                    as: "interactive",
+                    as: 'interactive',
                     include: [
-                        { association: "video" },
-                        { association: "preview" },
-                        { association: "bonus" },
+                        { association: 'video' },
+                        { association: 'preview' },
+                        { association: 'bonus' },
                     ],
                 },
-                { association: "description" },
+                { association: 'description' },
             ],
         });
     },
@@ -68,13 +68,13 @@ const Products = {
                 : null;
 
         const video = db.Video.create({
-            location: videoFile ?? oldVideoFile ?? "",
+            location: videoFile ?? oldVideoFile ?? '',
         });
         const preview = db.Preview.create({
-            location: previewFile ?? oldPreviewFile ?? "",
+            location: previewFile ?? oldPreviewFile ?? '',
         });
         const bonus = db.Bonus.create({
-            location: bonusFile ?? oldBonusFile ?? "",
+            location: bonusFile ?? oldBonusFile ?? '',
         });
         const interactives = Promise.all([video, preview, bonus]).then(
             ([video, preview, bonus]) => {
@@ -113,13 +113,13 @@ const Products = {
                         description_id: description.dataValues.id,
                     },
                     {
-                        include: [{ association: "description" }],
+                        include: [{ association: 'description' }],
                     }
                 );
             }
         );
     },
-    edit: function (req) {
+    edit: async function (req) {
         let old = req.session.old;
         const video = db.Video.update(
             {
@@ -198,26 +198,23 @@ const Products = {
                 },
             }
         );
-        return Promise.all([teacher, interactives, description]).then(
-            ([teacher, interactives, description]) => {
-                return db.Class.update(
-                    {
-                        title: req.body.title,
-                        price: req.body.price,
-                    },
-                    {
-                        where: {
-                            id: old.id,
-                        },
-                    },
-                    {
-                        include: [{ association: "description" }],
-                    }
-                );
+        await Promise.all([teacher, interactives, description]);
+        return db.Class.update(
+            {
+                title: req.body.title,
+                price: req.body.price,
+            },
+            {
+                where: {
+                    id: old.id,
+                },
+            },
+            {
+                include: [{ association: 'description' }],
             }
         );
     },
-    delete: function (old) {
+    delete: async function (old) {
         const classDelete = db.Class.destroy({
             where: {
                 id: old.id,
@@ -229,44 +226,48 @@ const Products = {
                       id: old.description.id,
                   },
               })
-            : "";
+            : '';
         const interactiveDelete = old.interactive.id
             ? db.Interactive.destroy({
                   where: {
                       id: old.interactive.id,
                   },
               })
-            : "";
+            : '';
         const videoDelete = old.interactive.video_id
             ? db.Video.destroy({
                   where: {
                       id: old.interactive.video_id,
                   },
               })
-            : "";
+            : '';
         const previewDelete = old.interactive.preview_id
             ? db.Preview.destroy({
                   where: {
                       id: old.interactive.preview_id,
                   },
               })
-            : "";
+            : '';
         const bonusDelete = old.interactive.bonus_id
             ? db.Bonus.destroy({
                   where: {
                       id: old.interactive.bonus_id,
                   },
               })
-            : "";
+            : '';
 
-        return Promise.all([
-            videoDelete,
-            previewDelete,
-            bonusDelete,
-            interactiveDelete,
-            descriptionDelete,
-            classDelete,
-        ]).catch((e) => res.render("error-page", { error: e }));
+        try {
+            return await Promise.all([
+                videoDelete,
+                previewDelete,
+                bonusDelete,
+                interactiveDelete,
+                descriptionDelete,
+                classDelete,
+            ]);
+        } catch (e) {
+            return res.render('error-page', { error: e });
+        }
     },
 };
 

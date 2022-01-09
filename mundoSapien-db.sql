@@ -31,7 +31,23 @@ CREATE TABLE `Grades` (
 	PRIMARY KEY (`id`)
 );
 
-INSERT INTO `Grades` VALUES (DEFAULT, "1er año"), (DEFAULT, "2do año"),(DEFAULT, "3er año"),(DEFAULT, "4to año"),(DEFAULT, "5to año"),(DEFAULT, "6to año"),(DEFAULT, "7mo año");
+/*INSERT
+	INTO
+	`Grades`
+VALUES (DEFAULT,
+"1er año"),
+(DEFAULT,
+"2do año"),
+(DEFAULT,
+"3er año"),
+(DEFAULT,
+"4to año"),
+(DEFAULT,
+"5to año"),
+(DEFAULT,
+"6to año"),
+(DEFAULT,
+"7mo año");*/
 
 DROP TABLE IF EXISTS `Children`;
 CREATE TABLE `Children` ( 
@@ -76,6 +92,7 @@ CREATE TABLE `Subjects` (
 	PRIMARY KEY (`id`)	
 );
 
+/*
 INSERT
 	INTO
 	`Subjects` 
@@ -103,6 +120,7 @@ VALUES (DEFAULT,
 "Educación Tecnológica"),
 (DEFAULT,
 "Formación Ética y Ciudadana");
+*/
 
 DROP TABLE IF EXISTS `Teachers`;
 CREATE TABLE `Teachers` (
@@ -179,7 +197,7 @@ CREATE TABLE `Classes` (
 
 DROP TABLE IF EXISTS `Classes_sales`;
 CREATE TABLE `Classes_sales` (
-	`id` int(10) AUTO_INCREMENT NOT NULL ,
+	`id` varchar(255) NOT NULL ,
 	`class_id` varchar(255) NOT NULL,
 	`sale_id` varchar(255) NOT NULL,
 	PRIMARY KEY (`id`),

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Class = sequelize.define(
-        "Class",
+        'Class',
         {
             id: {
                 type: DataTypes.UUID,
@@ -37,47 +37,46 @@ module.exports = (sequelize, DataTypes) => {
             },
             createdAt: {
                 type: DataTypes.DATE,
-                field: "created_at",
+                field: 'created_at',
             },
             updatedAt: {
                 type: DataTypes.DATE,
-                field: "updated_at",
+                field: 'updated_at',
             },
         },
         {
-            tableName: "classes",
+            tableName: 'classes',
             timestamps: true,
         }
     );
 
     Class.associate = (models) => {
         Class.belongsTo(models.Subject, {
-            as: "subject",
-            foreignKey: "subject_id",
+            as: 'subject',
+            foreignKey: 'subject_id',
         });
         Class.belongsTo(models.Grade, {
-            as: "grades",
-            foreignKey: "grade_id",
+            as: 'grades',
+            foreignKey: 'grade_id',
         });
         Class.belongsTo(models.Teacher, {
-            as: "teacher",
-            foreignKey: "teacher_id",
+            as: 'teacher',
+            foreignKey: 'teacher_id',
         });
         Class.belongsTo(models.Interactive, {
-            as: "interactive",
-            foreignKey: "interactive_id",
+            as: 'interactive',
+            foreignKey: 'interactive_id',
         });
         Class.belongsTo(models.Description, {
-            as: "description",
-            foreignKey: "description_id",
+            as: 'description',
+            foreignKey: 'description_id',
         });
         Class.belongsToMany(models.Sale, {
-            as: "classes",
-            through: "classes_sales",
-            foreignKey: "class_id",
-            otherKey: "sale_id",
+            as: 'classes',
+            through: 'classes_sales',
+            foreignKey: 'sale_id',
+            otherKey: 'class_id',
             timestamps: false,
-            onDelete: "cascade",
         });
     };
 
