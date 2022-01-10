@@ -1,4 +1,4 @@
-@use "../custom" as *;
+@use '../custom' as *;
 
 #main-nav {
     position: sticky;
@@ -61,7 +61,7 @@
         .other-clases {
             width: fit-content;
             font-size: 100%;
-            font-family: "Gotham", sans-serif;
+            font-family: 'Gotham', sans-serif;
             background-color: var(--color-shadow);
             color: var(--color-2-strong);
             border-radius: 10px;
@@ -70,6 +70,7 @@
     p {
         font-size: 24px;
         padding: 0.5rem 1rem;
+        text-shadow: 2px 2px 4px white;
     }
 }
 .reviews {

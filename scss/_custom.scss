@@ -20,11 +20,11 @@ $primary-light-rgba: rgba(249, 209, 48, 0.7);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "EB Garamond", serif;
+    font-family: 'EB Garamond', serif;
 }
 
 // IMPORT BOOTSTRAP
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
 
 //Custom properties
 
@@ -40,7 +40,7 @@ main {
     }
 }
 
-.container-fluid {
+.container-c-fluid {
     padding: 0;
 }
 

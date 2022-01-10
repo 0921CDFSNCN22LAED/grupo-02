@@ -9,9 +9,9 @@
     <header>
         <%- include("./partials/header") %>
     </header>
-    <main class="container-fluid">
+    <main class="container-c-fluid">
         <%- include("./partials/home-partials/parent-logsecure-modal") %>
-        <div class="container position-relative fit-content mb-5">
+        <div class="container-c position-relative fit-content mb-5">
             <div class="w-100">
                 <h2>
                     Mi carrito <i class="fas fa-shopping-cart"></i>
@@ -23,7 +23,7 @@
             <section class="d-flex flex-wrap">
                 <% for(let product of cart){ %>
                 <article class="p-2 cart-article mb-5">
-                    <div class="container_noFlex position-relative">
+                    <div class="container-c_noFlex position-relative">
                         <a class="d-flex flex-column h-100 justify-content-between"
                             href="/products/<%= product.classes.id %>">
                             <div>
@@ -113,12 +113,12 @@
 
         </div>
 
-        <section class="container mb-5 position-relative">
+        <section class="container-c mb-5 position-relative">
             <h2>También podría gustarte...</h2>
             <section class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
                 <% for(let recommendation of recommendations){ %>
                 <article class="p-2">
-                    <div class="container">
+                    <div class="container-c">
                         <a class=" item" href="/products/<%= recommendation.id %> ">
                             <img class=" img-thumbnail"
                                 src="/img/clases-preview/<%=recommendation.interactive.preview.location %> "

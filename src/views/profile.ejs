@@ -26,10 +26,10 @@
             </div>
         </div>
     </div>
-    <main class="container-fluid">
+    <main class="container-c-fluid">
         <section class="row">
             <article class="col-12 col-md-6 mb-3">
-                <div class="container">
+                <div class="container-c">
                     <h2>Tus datos personales</h2>
                     <form action="/user/<%= parentLogged.id %>/updateParent?_method=PUT" method="post"
                         enctype="multipart/form-data" class="item">
@@ -75,7 +75,7 @@
                 </div>
             </article>
             <article class="col-12 col-md-6 mb-3">
-                <div class="container ">
+                <div class="container-c ">
                     <h2>Progreso</h2>
                     <div class="item">
                         <table class="table table-hover">
@@ -113,7 +113,7 @@
                 } %>
 
             <article class="col-12 col-md-6  mb-3">
-                <div class="container ">
+                <div class="container-c ">
                     <h2>
                         Datos de <%= childName ? childName : "tu hijo"%>
 
@@ -137,7 +137,7 @@
                                                 alt="avatar">
                                             <div>Seleccioná el avatar</div>
                                         </label>
-                                        <div class="file-input-container">
+                                        <div class="file-input-container-c">
                                             <input class="form-control  avatarChildInput" type="file" id="avatar-<%=i%>"
                                                 placeholder="Avatar del hijo" name="avatar" />
                                         </div>

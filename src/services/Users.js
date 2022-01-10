@@ -1,6 +1,6 @@
-const bcrypt = require("bcryptjs");
-const db = require("../database/models");
-const User = require("../database/models/user");
+const bcrypt = require('bcryptjs');
+const db = require('../database/models');
+const User = require('../database/models/user');
 
 module.exports = {
     create: function (req) {
@@ -12,7 +12,7 @@ module.exports = {
                 return db.Parent.create({
                     ...req.body,
                     pass: bcrypt.hashSync(req.body.pass, 10),
-                    avatar: "default-avatar.png",
+                    avatar: 'default-avatar.png',
                     user_id: userId,
                 });
             });
@@ -33,7 +33,7 @@ module.exports = {
             }
         ).then(() => {
             return db.Parent.findByPk(req.params.id, {
-                include: [{ association: "children" }],
+                include: [{ association: 'children' }],
             });
         });
     },
@@ -57,7 +57,7 @@ module.exports = {
             })
             .then((child) => {
                 return db.Parent.findByPk(child.parent_id, {
-                    include: [{ association: "children" }],
+                    include: [{ association: 'children' }],
                 });
             });
     },
@@ -68,7 +68,7 @@ module.exports = {
             include: [
                 {
                     model: db.User,
-                    as: "users",
+                    as: 'users',
                 },
             ],
         });
@@ -84,15 +84,15 @@ module.exports = {
             include: [
                 {
                     model: db.Class,
-                    as: "classes",
+                    as: 'classes',
                     include: [
                         {
                             model: db.Interactive,
-                            as: "interactive",
+                            as: 'interactive',
                             include: [
-                                { association: "video" },
-                                { association: "preview" },
-                                { association: "bonus" },
+                                { association: 'video' },
+                                { association: 'preview' },
+                                { association: 'bonus' },
                             ],
                         },
                     ],
@@ -102,5 +102,33 @@ module.exports = {
         req.session.childClasses = classes;
         req.session.childLogged = child;
         return child;
+    },
+    createPageComment: async function (id, comment) {
+        await db.PageComment.create({
+            user_id: id,
+            comment: comment,
+        });
+    },
+    allPageComments: async function () {
+        const comments = await db.PageComment.findAll({
+            raw: true,
+            nest: true,
+            include: [
+                {
+                    model: db.User,
+                    as: 'users',
+                    include: [
+                        {
+                            association: 'parents',
+                        },
+                        {
+                            association: 'children',
+                        },
+                    ],
+                },
+            ],
+        });
+        comments.sort(() => Math.random() - Math.random());
+        return comments;
     },
 };

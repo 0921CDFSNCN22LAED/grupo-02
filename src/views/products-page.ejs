@@ -7,12 +7,12 @@
 
 <body>
     <header><%- include("./partials/header") %></header>
-    <main class="container-fluid">
+    <main class="container-c-fluid">
         <div class="row position-relative on-top">
             <section class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
                 <% for(let classSel of classes){ %>
                 <article class="p-2">
-                    <div class="descriptionContainer container_noFlex ">
+                    <div class="descriptioncontainer-c container-c_noFlex ">
                         <a class=" d-flex flex-column h-100 justify-content-between position-relative"
                             href="/products/<%= classSel.id %>">
                             <div class="p-1">

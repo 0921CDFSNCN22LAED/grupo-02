@@ -1,5 +1,5 @@
 <div class="mb-3">
-    <div class="container">
+    <div class="container-c">
         <h2>¡Hola <%= childLogged.name %>!</h2>
         <h2>Hoy es un buen día para aprender <%= recommendations[0].titulo %></h2>
 
@@ -8,7 +8,7 @@
 </div>
 
 <article class="col-12 col-md-6">
-    <div class="container">
+    <div class="container-c">
         <h2>Clase actual</h2>
         <% if(locals.ultimaClase) {%>
         <a class="item" href="/products/<%= ultimaClase.id %>">
@@ -22,7 +22,7 @@
     </div>
 </article>
 <article class="col-12 col-md-6  ">
-    <div class="container">
+    <div class="container-c">
         <h2>Mi colección</h2>
         <% if(childClasses.length > 0) {%>
         <% for(let clase of clasesActuales){ %>

@@ -5,7 +5,7 @@
     <%- include("./partials/head") %>
 </head>
 
-<body class="container-fluid">
+<body class="container-c-fluid">
     <header><%- include("./partials/header") %></header>
     <nav id="main-nav">
         <ul class="nav flex-column">
@@ -64,7 +64,7 @@
             </section>
             <section class="row">
                 <article class="col-12 col-md-6 mb-3">
-                    <div class="container">
+                    <div class="container-c">
                         <h2>Sugerencias</h2>
                         <% for(let clase of recommendations){ %>
                         <a class="item" href="/products/<%= clase.id %> ">
@@ -81,7 +81,7 @@
                     </div>
                 </article>
                 <article class="col-12 col-md-6 mb-3">
-                    <div id="otros-cursos" class="container">
+                    <div id="otros-cursos" class="container-c">
                         <h2>Otros cursos</h2>
                         <% for(let clase of classes){ %>
                         <a href="/products/<%= clase.id %> ">
@@ -98,7 +98,7 @@
             </section>
             <section class="row reviews">
                 <article class="col-12 mb-3">
-                    <div class="container">
+                    <div class="container-c">
                         <h2>Sobre nosotros</h2>
                         <p>
                             Mundo Sapien es un market place donde docentes
@@ -115,41 +115,66 @@
             </section>
             <section class="row reviews">
                 <article class="col-12 col-md-6 mb-3">
-                    <div class="container ">
+                    <div class="container-c ">
                         <h2>Comentarios</h2>
-                        <% for(let comentario of comentarios){ %>
-                        <div class="users-comment ">
-                            <p>
-                                <%= comentario.resena %>
-                            </p>
-                            <p>
-                                <%= comentario.nombre %>
-                            </p>
+                        <div class="carouselVertical">
+                            <% for(let i = 0; i < comentarios.length; i+=2){ %>
+                            <div class="carouselVerticalItemGroup">
+                                <div class="carouselVerticalItem">
+                                    <p><%= comentarios[i].comment %> </p>
+                                    <p><%= comentarios[i].commenter %> </p>
+                                </div>
+                                <% if(i+1 < comentarios.length) {%>
+                                <div class="carouselVerticalItem">
+                                    <p><%= comentarios[i+1].comment %> </p>
+                                    <p><%= comentarios[i+1].commenter %> </p>
+                                </div>
+                                <% } %>
+                            </div>
+                            <% } %>
                         </div>
-                        <% } %>
+                        <!-- <h2>Comentarios</h2>
+                        <div id="carouselVertical" class="v-carousel slide vertical">
+                            <div class="v-carousel-inner">
+                                <% for(let i = 0; i < comentarios.length; i++){ %>
+                                <div class="v-carousel-item">
+                                    <div>
+                                        <p><%= comentarios[i].comment %> </p>
+                                        <p><%= comentarios[i].commenter %> </p>
+                                    </div>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div> -->
                     </div>
                 </article>
                 <article class="col-12 col-md-6 mb-3">
-                    <div class="container">
+                    <div class="container-c">
                         <h2>Deja tu comentario</h2>
-                        <form action="" method="post">
+                        <form
+                            action=<%= parentLogged ? `/user/${childLogged ? childLogged.user_id : parentLogged.user_id}/comment` : "" %>
+                            method="post">
                             <div class="form-floating">
-                                <input class="form-control" type="text" name="nombre" id="nombre"
-                                    placeholder="nombre" />
-                                <label for="nombre">Nombre</label>
+                                <% if(!parentLogged && !childLogged) { %>
+                                <p>Tenés que ingresar para dejar un comentario</p>
+                                <% } else { %>
+                                <p>¡Buen día <%= childLogged ? childLogged.name : parentLogged.name %>, contanos que te
+                                    parece la página!</p>
+                                <% } %>
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" name="comentario" id="comentario"
-                                    placeholder="comentario"></textarea>
-                                <label for="comentario">Comentario</label>
+                                <textarea class="form-control" name="comment" id="comment" placeholder="comment"
+                                    rows="4" style="height: 100%; font-size: 24px;"></textarea>
+                                <label for="comment">Comentario</label>
                             </div>
+                            <button class="btn btn-primary btn-lg button-right" type="submit">Enviar</button>
                         </form>
                     </div>
                 </article>
             </section>
             <section class="row mb-3 reviews">
                 <article class="col-12 col-md-6 mb-3">
-                    <div class="container">
+                    <div class="container-c">
                         <h2>Quiero saber más</h2>
                         <form action="" method="post">
                             <div class="form-floating">
@@ -171,9 +196,11 @@
                 </article>
             </section>
         </div>
+
     </main>
     <%- include("./partials/footer") %>
     <script src="/script/hideLateralNavbar.js"></script>
+    <script src="/script/verticalCarousel.js"></script>
 </body>
 
 </html>

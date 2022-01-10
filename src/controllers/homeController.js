@@ -1,19 +1,9 @@
-const db = require("../database/models");
-const Products = require("../services/Products");
-
-const comentarios = [
-    {
-        nombre: "Juan Rodriguez",
-        resena: "Muy linda la página, me gusta que cambien los fondos al pasar por el home",
-    },
-    {
-        nombre: "José Perez",
-        resena: "Va muy bien, a seguir trabajando!!!",
-    },
-];
+const db = require('../database/models');
+const Products = require('../services/Products');
+const Users = require('../services/Users');
 
 const controller = {
-    home: (req, res) => {
+    home: async (req, res) => {
         let clasesActuales = [];
         let ultimaClaseId;
         if (req.session.childLogged) {
@@ -21,20 +11,26 @@ const controller = {
             // ultimaClaseId = req.session.childLogged.users.sales.classes;
         }
 
-        Products.findAll().then((classes) => {
-            const recommendations = classes.slice(0, 4);
+        const classes = await Products.findAll();
+        const recommendations = classes.slice(0, 4);
+        const comentarios = await Users.allPageComments();
+        comentarios.forEach((comentario) => {
+            comentario.commenter = comentario.users.children.id
+                ? comentario.users.children.name
+                : comentario.users.parents.name;
+        });
+        console.log(`comentarios`, comentarios);
 
-            res.render("home", {
-                old: req.session.old,
-                classes,
-                recommendations,
-                comentarios,
-                clasesActuales,
-            });
+        res.render('home', {
+            old: req.session.old,
+            classes,
+            recommendations,
+            comentarios,
+            clasesActuales,
         });
     },
     success: (req, res) => {
-        return res.render("success");
+        return res.render('success');
     },
 };
 

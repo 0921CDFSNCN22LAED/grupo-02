@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define(
-        "User",
+        'User',
         {
             id: {
                 type: DataTypes.UUID,
@@ -9,23 +9,27 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            tableName: "users",
+            tableName: 'users',
             timestamps: false,
         }
     );
 
     User.associate = (models) => {
         User.hasOne(models.Parent, {
-            as: "parents",
-            foreignKey: "user_id",
+            as: 'parents',
+            foreignKey: 'user_id',
         });
         User.hasOne(models.Child, {
-            as: "children",
-            foreignKey: "user_id",
+            as: 'children',
+            foreignKey: 'user_id',
         });
         User.hasMany(models.Sale, {
-            as: "sales",
-            foreignKey: "user_id",
+            as: 'sales',
+            foreignKey: 'user_id',
+        });
+        User.hasMany(models.PageComment, {
+            as: 'pageComments',
+            foreignKey: 'user_id',
         });
     };
 
