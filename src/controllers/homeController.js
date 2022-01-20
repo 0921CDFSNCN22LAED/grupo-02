@@ -19,10 +19,8 @@ const controller = {
                 ? comentario.users.children.name
                 : comentario.users.parents.name;
         });
-        console.log(`comentarios`, comentarios);
 
         res.render('home', {
-            old: req.session.old,
             classes,
             recommendations,
             comentarios,

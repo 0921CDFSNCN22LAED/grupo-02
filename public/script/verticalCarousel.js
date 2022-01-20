@@ -34,7 +34,7 @@ function* carousel(elements) {
 
 function runCarousel(genObj) {
     if (!genObj.next().done) {
-        setTimeout(runCarousel, 3000, genObj);
+        setTimeout(runCarousel, 8000, genObj);
     }
 }
 

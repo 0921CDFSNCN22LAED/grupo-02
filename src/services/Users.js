@@ -131,4 +131,12 @@ module.exports = {
         comments.sort(() => Math.random() - Math.random());
         return comments;
     },
+    findByEmail: async function (email) {
+        const parent = await db.Parent.findOne({
+            raw: true,
+            nest: true,
+            where: { email: email },
+        });
+        return parent;
+    },
 };

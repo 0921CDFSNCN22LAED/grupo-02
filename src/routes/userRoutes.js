@@ -3,6 +3,7 @@ const router = express.Router();
 const upload = require('../middleware/multerMiddleware');
 const authMiddleware = require('../middleware/authMiddleware');
 const userValidations = require('../middleware/validations/userValidations');
+const userValidationsImage = require('../middleware/validations/userValidationsImage');
 const validation = require('../middleware/validation');
 
 const userController = require('../controllers/userController');
@@ -33,11 +34,15 @@ router.get('/profile', authMiddleware, userController.profile);
 router.put(
     '/:id/updateParent',
     upload.single('avatar'),
+    userValidationsImage,
+    validation,
     userController.updateParent
 );
 router.put(
     '/:id/updateChildren',
     upload.single('avatar'),
+    userValidationsImage,
+    validation,
     userController.updateChildren
 );
 

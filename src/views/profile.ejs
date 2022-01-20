@@ -59,6 +59,9 @@
                             </label>
                             <input class="form-control" type="file" id="avatarParent" placeholder="Cargá tu avatar"
                                 name="avatar" />
+                            <% if(errors && errors.avatar) { %>
+                            <p class="feedback "><%= errors.avatar.msg %> </p>
+                            <% } %>
                         </div>
                 </div>
                 <fieldset disabled="disabled">
@@ -140,6 +143,9 @@
                                         <div class="file-input-container-c">
                                             <input class="form-control  avatarChildInput" type="file" id="avatar-<%=i%>"
                                                 placeholder="Avatar del hijo" name="avatar" />
+                                            <% if(errors && errors.avatar) { %>
+                                            <p class="feedback "><%= errors.avatar.msg %> </p>
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
