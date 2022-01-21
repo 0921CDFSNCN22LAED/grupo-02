@@ -8,7 +8,7 @@
                     <input class="form-control" type="text" name="name" id="name" placeholder="Nombre de usuario"
                         value="<%= old && old.name ? old.name : "" %>" />
                     <label for="name">Nombre de usuario</label>
-                    <p class="feedback d-none" id="nameError"></p>
+                    <p class="feedback d-none w-100" id="nameError"></p>
                     <% if(errors && errors.name) { %>
                     <p class="feedback "><%= errors.name.msg %> </p>
                     <% } %>
@@ -17,7 +17,7 @@
                     <input class="form-control" type="email" name="email" id="email" placeholder="Nombre de usuario"
                         value="<%= old && old.email ? old.email : "" %>" />
                     <label class="text-shadow" for="email">Correo electrónico</label>
-                    <p class="feedback d-none" id="emailError"></p>
+                    <p class="feedback d-none w-100" id="emailError"></p>
                     <% if(errors && errors.email) { %>
                     <p class="feedback "><%= errors.email.msg %> </p>
                     <% } %>
@@ -25,7 +25,7 @@
                 <div class="form-floating my-3 text-start">
                     <input class="form-control" type="password" name="pass" id="passReg" placeholder="Contraseña" />
                     <label class="text-shadow" for="passReg">Contraseña</label>
-                    <p class="feedback d-none" id="passError"></p>
+                    <p class="feedback d-none w-100" id="passError"></p>
                     <% if(errors && errors.pass) { %>
                     <p class="feedback "><%= errors.pass.msg %> </p>
                     <% } %>
@@ -43,14 +43,16 @@
         <h2>Ingresá</h2>
         <div class=" shadow-pill ">
             <form action="/user/login" method="post" id="login">
-                <div class="form-floating my-3">
+                <div class="form-floating my-3  text-start ">
                     <input class="form-control" type="email" name="email" id="emailLog" placeholder="Nombre de usuario"
                         value="<%= old && old.email ? old.email : "" %>" />
                     <label class="text-shadow" for="emailLog">Correo electrónico</label>
+                    <p class="feedback d-none w-100" id="emailErrorLog"></p>
                 </div>
-                <div class="form-floating my-3">
+                <div class="form-floating my-3  text-start">
                     <input class="form-control" type="password" name="pass" id="passLog" placeholder="Contraseña" />
                     <label class="text-shadow" for="passLog">Contraseña</label>
+                    <p class="feedback d-none w-100" id="passErrorLog"></p>
                 </div>
                 <div class="float-left checkbox mb-3 text-start">
                     <input type="checkbox" value="rememberMe" name="rememberMe" />

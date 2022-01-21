@@ -90,12 +90,59 @@ window.addEventListener('load', () => {
 
     //LOGIN
 
-    const email = document.querySelector('#login #emailLog');
+    const emailLog = document.querySelector('#login #emailLog');
     const passLog = document.querySelector('#login #passLog');
     const loginButton = document.querySelector('#login button');
     const login = document.querySelector('#login');
 
     const logErrors = {};
+
+    emailLog.addEventListener('blur', () => {
+        delete logErrors.emailLog;
+
+        //FALTA COMPROBAR SI EXISTE EN LA BASE DE DATOS
+
+        if (!validator.isEmail(emailLog.value)) {
+            logErrors.emailLog =
+                'Tenés que ingresar un correo electrónico valido';
+        }
+        if (validator.isEmpty(emailLog.value)) {
+            logErrors.emailLog = 'Tenés que ingresar un correo electrónico';
+        }
+        if (logErrors.emailLog) {
+            emailErrorLog.classList.remove('d-none');
+            emailErrorLog.innerHTML = logErrors.emailLog;
+        } else {
+            emailErrorLog.classList.add('d-none');
+            emailErrorLog.innerHTML = '';
+        }
+    });
+    passLog.addEventListener('blur', () => {
+        delete logErrors.passLog;
+        if (!validator.isStrongPassword(passLog.value)) {
+            logErrors.passReg =
+                'La contraseña debe tener letras mayúsculas, minúsculas, un número y un carácter especial';
+        }
+        if (passReg.value.length < 8) {
+            logErrors.passLog =
+                'La contraseña debe tener por lo menos 8 caracteres';
+        }
+        if (validator.isEmpty(passLog.value)) {
+            logErrors.passLog = 'Tenés que ingresar una contraseña';
+        }
+        if (logErrors.passLog) {
+            passErrorLog.classList.remove('d-none');
+            passErrorLog.innerHTML = logErrors.passLog;
+        } else {
+            passErrorLog.classList.add('d-none');
+            passErrorLog.innerHTML = '';
+        }
+    });
+
+    loginButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (Object.values(logErrors).length == 0) login.submit();
+    });
 });
 
 // const emailLog = document.querySelector('#emailLog');
