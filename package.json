@@ -38,7 +38,8 @@
         "postcss": "^8.4.5",
         "postcss-cli": "^9.1.0",
         "sequelize": "^6.12.5",
-        "sequelize-cli": "^6.3.0"
+        "sequelize-cli": "^6.3.0",
+        "validator": "^13.7.0"
     },
     "devDependencies": {
         "nodemon": "^2.0.15",

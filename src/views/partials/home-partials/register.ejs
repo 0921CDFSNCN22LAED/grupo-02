@@ -3,11 +3,12 @@
         <p class="pt-3 fw-bolder small mb-0">¿No tenés cuenta?</p>
         <h2>Registrate</h2>
         <div class="shadow-pill">
-            <form action="/user/register" method="post">
+            <form action="/user/register" method="post" id="register">
                 <div class="form-floating my-3 text-start">
                     <input class="form-control" type="text" name="name" id="name" placeholder="Nombre de usuario"
                         value="<%= old && old.name ? old.name : "" %>" />
                     <label for="name">Nombre de usuario</label>
+                    <p class="feedback d-none" id="nameError"></p>
                     <% if(errors && errors.name) { %>
                     <p class="feedback "><%= errors.name.msg %> </p>
                     <% } %>
@@ -16,13 +17,15 @@
                     <input class="form-control" type="email" name="email" id="email" placeholder="Nombre de usuario"
                         value="<%= old && old.email ? old.email : "" %>" />
                     <label class="text-shadow" for="email">Correo electrónico</label>
+                    <p class="feedback d-none" id="emailError"></p>
                     <% if(errors && errors.email) { %>
                     <p class="feedback "><%= errors.email.msg %> </p>
                     <% } %>
                 </div>
                 <div class="form-floating my-3 text-start">
-                    <input class="form-control" type="password" name="pass" id="pass" placeholder="Contraseña" />
-                    <label class="text-shadow" for="pass">Contraseña</label>
+                    <input class="form-control" type="password" name="pass" id="passReg" placeholder="Contraseña" />
+                    <label class="text-shadow" for="passReg">Contraseña</label>
+                    <p class="feedback d-none" id="passError"></p>
                     <% if(errors && errors.pass) { %>
                     <p class="feedback "><%= errors.pass.msg %> </p>
                     <% } %>
@@ -39,15 +42,15 @@
         <p class="pt-3  fw-bolder small mb-0">¿Ya tenés cuenta?</p>
         <h2>Ingresá</h2>
         <div class=" shadow-pill ">
-            <form action="/user/login" method="post">
+            <form action="/user/login" method="post" id="login">
                 <div class="form-floating my-3">
-                    <input class="form-control" type="email" name="email" id="email" placeholder="Nombre de usuario"
+                    <input class="form-control" type="email" name="email" id="emailLog" placeholder="Nombre de usuario"
                         value="<%= old && old.email ? old.email : "" %>" />
-                    <label class="text-shadow" for="email">Correo electrónico</label>
+                    <label class="text-shadow" for="emailLog">Correo electrónico</label>
                 </div>
                 <div class="form-floating my-3">
-                    <input class="form-control" type="password" name="pass" id="pass" placeholder="Contraseña" />
-                    <label class="text-shadow" for="pass">Contraseña</label>
+                    <input class="form-control" type="password" name="pass" id="passLog" placeholder="Contraseña" />
+                    <label class="text-shadow" for="passLog">Contraseña</label>
                 </div>
                 <div class="float-left checkbox mb-3 text-start">
                     <input type="checkbox" value="rememberMe" name="rememberMe" />
