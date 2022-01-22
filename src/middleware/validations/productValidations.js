@@ -1,5 +1,6 @@
 const path = require('path');
 const { check } = require('express-validator');
+const db = require('../../database/models');
 
 module.exports = [
     check('title')
@@ -9,8 +10,24 @@ module.exports = [
         .withMessage(
             'El título de la clase debe tener por lo menos 5 caracteres'
         ),
-    check('grade').notEmpty().withMessage('Tenés que elegir un grado'),
-    check('subject').notEmpty().withMessage('Tenés que elegir una materia'),
+    check('grade')
+        .notEmpty()
+        .withMessage('Tenés que elegir un grado')
+        .custom(async (value) => {
+            const grades = await db.Grade.findAll();
+            if (!grades.includes(value)) {
+                throw new Error('Debes elegir un grado existente');
+            }
+        }),
+    check('subject')
+        .notEmpty()
+        .withMessage('Tenés que elegir una materia')
+        .custom(async (value) => {
+            const subjects = await db.Subject.findAll();
+            if (!subjects.includes(value)) {
+                throw new Error('Debes elegir una materia existente');
+            }
+        }),
     check('contents').notEmpty().withMessage('Ingresá al menos un contenido'),
     check('description_short')
         .notEmpty()
