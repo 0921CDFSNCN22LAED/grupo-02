@@ -37,6 +37,14 @@ const controller = {
             });
         });
     },
+    publish: (req, res) => {
+        Products.create(req)
+            .then(() => {
+                req.session.old = null;
+                return res.redirect('/success');
+            })
+            .catch((e) => res.render('error-page', { error: e }));
+    },
     productFormEdit: async (req, res) => {
         let grades = await db.Grade.findAll({ raw: true });
         let subjects = await db.Subject.findAll({ raw: true });
@@ -46,14 +54,6 @@ const controller = {
             grades,
             subjects,
         });
-    },
-    publish: (req, res) => {
-        Products.create(req)
-            .then(() => {
-                req.session.old = null;
-                return res.redirect('/success');
-            })
-            .catch((e) => res.render('error-page', { error: e }));
     },
     productFormUpdate: (req, res) => {
         Products.edit(req)

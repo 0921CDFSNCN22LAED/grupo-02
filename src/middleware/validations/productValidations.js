@@ -1,48 +1,57 @@
 const path = require('path');
-const { check } = require('express-validator');
+const { body } = require('express-validator');
 const db = require('../../database/models');
 
 module.exports = [
-    check('title')
+    body('title')
         .notEmpty()
         .withMessage('Tenés que ingresar el nombre o tema de la clase')
         .isLength({ min: 5 })
         .withMessage(
             'El título de la clase debe tener por lo menos 5 caracteres'
         ),
-    check('grade')
+    body('grade')
         .notEmpty()
         .withMessage('Tenés que elegir un grado')
         .custom(async (value) => {
-            const grades = await db.Grade.findAll();
-            if (!grades.includes(value)) {
+            const grades = await db.Grade.findAll({ raw: true, nest: true });
+            let found = Object.values(grades).find(
+                (grade) => grade.id == value
+            );
+            if (!found) {
                 throw new Error('Debes elegir un grado existente');
             }
         }),
-    check('subject')
+    body('subject')
         .notEmpty()
         .withMessage('Tenés que elegir una materia')
         .custom(async (value) => {
-            const subjects = await db.Subject.findAll();
-            if (!subjects.includes(value)) {
+            const subjects = await db.Subject.findAll({
+                raw: true,
+                nest: true,
+            });
+            let found = Object.values(subjects).find(
+                (subject) => subject.id == value
+            );
+            if (!found) {
                 throw new Error('Debes elegir una materia existente');
             }
         }),
-    check('contents').notEmpty().withMessage('Ingresá al menos un contenido'),
-    check('description_short')
+    body('contents').notEmpty().withMessage('Ingresá al menos un contenido'),
+    body('description_short')
         .notEmpty()
         .withMessage('Describí brevemente de qué se trata la clase')
         .isLength({ min: 20 })
         .withMessage(
             'La descripción corta deberá tener por lo menos 20 caracteres'
         ),
-    check('price')
+    body('price')
         .notEmpty()
         .withMessage('Ingresá el precio de la clase')
         .bail()
         .isNumeric()
         .withMessage('El precio debe ser un número'),
-    check('preview').custom((value, { req }) => {
+    body('preview').custom((value, { req }) => {
         if (req.body.previewLocation) {
             return true;
         }
@@ -64,9 +73,9 @@ module.exports = [
             }
         }
     }),
-    check('teacherFirstName').notEmpty().withMessage('Ingresá tu nombre'),
-    check('teacherLastName').notEmpty().withMessage('Ingresá tu apellido'),
-    check('teacherEmail')
+    body('teacherFirstName').notEmpty().withMessage('Ingresá tu nombre'),
+    body('teacherLastName').notEmpty().withMessage('Ingresá tu apellido'),
+    body('teacherEmail')
         .notEmpty()
         .withMessage('Ingresá tu email')
         .isEmail()

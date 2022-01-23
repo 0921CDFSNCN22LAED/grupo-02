@@ -54,27 +54,27 @@ const Products = {
         const bonusFile = req.files.bonus ? req.files.bonus[0].filename : null;
         let old = req.session.old;
 
-        const oldVideoFile =
-            old && old.interactive.video
-                ? old.interactive.video.location
-                : null;
-        const oldPreviewFile =
-            old && old.interactive.preview
-                ? old.interactive.preview.location
-                : null;
-        const oldBonusFile =
-            old && old.interactive.bonus
-                ? old.interactive.bonus.location
-                : null;
+        // const oldVideoFile =
+        //     old && old.interactive.video
+        //         ? old.interactive.video.location
+        //         : null;
+        // const oldPreviewFile =
+        //     old && old.interactive.preview
+        //         ? old.interactive.preview.location
+        //         : null;
+        // const oldBonusFile =
+        //     old && old.interactive.bonus
+        //         ? old.interactive.bonus.location
+        //         : null;
 
         const video = db.Video.create({
-            location: videoFile ?? oldVideoFile ?? '',
+            location: videoFile ?? '',
         });
         const preview = db.Preview.create({
             location: previewFile ?? oldPreviewFile ?? '',
         });
         const bonus = db.Bonus.create({
-            location: bonusFile ?? oldBonusFile ?? '',
+            location: bonusFile ?? '',
         });
         const interactives = Promise.all([video, preview, bonus]).then(
             ([video, preview, bonus]) => {
