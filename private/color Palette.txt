@@ -1,0 +1,26 @@
+Neutral + Earthtones
+
+
+Jewel
+S 83-73
+B 76-56
+
+Pastel 
+S 14-21
+B 89-96
+
+Neutral 
+S 1 - 10
+B 99 -70
+
+EarthTones
+S 36- 46
+B 77- 36
+
+Fluorecent
+S 100-63
+B 100-82
+
+Shades
+S 0-0
+B 0 -100
