@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Video = sequelize.define(
-        "Video",
+        'Video',
         {
             id: {
                 type: DataTypes.UUID,
@@ -12,18 +12,19 @@ module.exports = (sequelize, DataTypes) => {
             },
             len: {
                 type: DataTypes.INTEGER,
+                defaultValue: 0,
             },
         },
         {
-            tableName: "videos",
+            tableName: 'videos',
             timestamps: false,
         }
     );
 
     Video.associate = (models) => {
         Video.hasOne(models.Interactive, {
-            as: "interactive",
-            foreignKey: "video_id",
+            as: 'interactive',
+            foreignKey: 'video_id',
         });
     };
 

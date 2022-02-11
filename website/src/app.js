@@ -9,6 +9,8 @@ const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const homeRoute = require('./routes/homeRoute');
 const saleRoutes = require('./routes/saleRoutes');
+const apiUserRoutes = require('./api/routes/apiUserRoutes');
+const apiProductRoutes = require('./api/routes/apiProductRoutes');
 
 //Cómo hacer para pasar la función chosenBackground al middleware randomBackground? El problema es el app
 const randomBackground = require('./middleware/randomBackground');
@@ -44,6 +46,8 @@ app.use('/', homeRoute);
 app.use('/user', userRoutes);
 app.use('/products', productRoutes);
 app.use('/sale', saleRoutes);
+app.use('/api/users', apiUserRoutes);
+app.use('/api/products', apiProductRoutes);
 
 app.use((req, res, next) => {
     res.status(404).render('not-found');
