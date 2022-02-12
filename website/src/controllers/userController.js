@@ -7,21 +7,37 @@ const db = require('../database/models');
 const user = require('../database/models/user');
 
 const controller = {
+    register: async (req, res) => {
+        await Users.create(req);
+        return res.redirect(`/user/profile`);
+    },
+    login: async (req, res) => {
+        const user = await Users.findByEmail(req.body.email);
+        if (user) {
+            if (bcrypt.compareSync(req.body.pass, user.pass)) {
+                // delete logParent.pass;
+                req.session.user = user;
+                if (req.body.rememberMe) {
+                    res.cookie('email', req.body.email, {
+                        maxAge: 1000 * 60 * 60,
+                    });
+                }
+                return res.redirect('/');
+            }
+        }
+        req.session.errors = {
+            invalidLogIn: {
+                msg: 'Las credenciales son incorrectas',
+            },
+        };
+        res.redirect('/');
+    },
     profile: (req, res) => {
         db.Grade.findAll().then((grades) => {
             res.render('profile', { grades });
         });
     },
 
-    registerParent: (req, res) => {
-        Users.create(req)
-            .then((parent) => {
-                req.session.parentLogged = parent.dataValues;
-                req.session.parentLogged.children = [];
-                return res.redirect(`/user/profile`);
-            })
-            .catch((e) => res.render('error-page', { error: e }));
-    },
     registerChild: (req, res) => {
         // PREGUNTA: ¿Cómo refactorizo esto? el problema es el nesting de promesas.
         db.User.create()
@@ -69,37 +85,7 @@ const controller = {
                 .catch((e) => res.render('error-page', { error: e }));
         }
     },
-    login: (req, res) => {
-        db.Parent.findOne({
-            where: {
-                email: req.body.email,
-            },
-            include: [{ association: 'children' }],
-        })
-            .then((logParent) => {
-                if (logParent) {
-                    if (bcrypt.compareSync(req.body.pass, logParent.pass)) {
-                        // delete logParent.pass;
-                        req.session.parentLogged = logParent.dataValues;
-                        if (req.body.rememberMe) {
-                            res.cookie('email', req.body.email, {
-                                maxAge: 1000 * 60 * 60,
-                            });
-                        }
-                        return res.redirect('/');
-                    }
-                }
-                req.session.errors = {
-                    invalidLogIn: {
-                        msg: 'Las credenciales son incorrectas',
-                    },
-                };
-                res.redirect('/');
-            })
-            .catch((e) => {
-                res.render('error-page', { error: e });
-            });
-    },
+
     logout: (req, res) => {
         res.clearCookie('userEmail');
         req.session.destroy();

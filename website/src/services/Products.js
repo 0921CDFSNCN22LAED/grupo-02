@@ -1,8 +1,9 @@
-const db = require('../database/models');
+const { Class, Interactive } = require('../database/models');
+const Sequelize = require('sequelize');
 
 const Products = {
     findAll: function () {
-        return db.Class.findAll({
+        const products = Class.findAll({
             raw: true,
             nest: true,
             include: [
@@ -10,7 +11,7 @@ const Products = {
                 { association: 'grades' },
                 { association: 'teacher' },
                 {
-                    model: db.Interactive,
+                    model: Interactive,
                     as: 'interactive',
                     include: [
                         { association: 'video' },
@@ -21,9 +22,34 @@ const Products = {
                 { association: 'description' },
             ],
         });
+        return products;
+    },
+    findRandom: function (n) {
+        const products = Class.findAll({
+            raw: true,
+            nest: true,
+            include: [
+                { association: 'subject' },
+                { association: 'grades' },
+                { association: 'teacher' },
+                {
+                    model: Interactive,
+                    as: 'interactive',
+                    include: [
+                        { association: 'video' },
+                        { association: 'preview' },
+                        { association: 'bonus' },
+                    ],
+                },
+                { association: 'description' },
+            ],
+            order: Sequelize.literal('rand()'),
+            limit: n,
+        });
+        return products;
     },
     findOne: function (id) {
-        return db.Class.findOne({
+        return Class.findOne({
             raw: true,
             nest: true,
             where: {

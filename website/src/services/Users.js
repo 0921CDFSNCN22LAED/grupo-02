@@ -1,21 +1,33 @@
 const bcrypt = require('bcryptjs');
 const db = require('../database/models');
-const User = require('../database/models/user');
+const { User, Profile } = require('../database/models/');
 
 module.exports = {
-    create: function (req) {
-        return db.User.create()
-            .then((user) => {
-                return user.dataValues.id;
-            })
-            .then((userId) => {
-                return db.Parent.create({
-                    ...req.body,
-                    pass: bcrypt.hashSync(req.body.pass, 10),
-                    avatar: 'default-avatar.png',
-                    user_id: userId,
-                });
-            });
+    create: async (req) => {
+        const user = await User.create(
+            {
+                email: req.body.email,
+                pass: bcrypt.hashSync(req.body.pass, 10),
+            },
+            { raw: true, nest: true }
+        );
+        const profile = await Profile.create({
+            isParent: true,
+            name: req.body.name,
+        });
+        await profile.setUser(user.id);
+        req.session.user = user;
+        req.session.profiles = [profile];
+    },
+
+    findByEmail: async function (email) {
+        const user = await User.findOne({
+            raw: true,
+            nest: true,
+            where: { email: email },
+        });
+
+        return user;
     },
     updateParent: function (req) {
         return db.Parent.update(
@@ -115,28 +127,11 @@ module.exports = {
             nest: true,
             include: [
                 {
-                    model: db.User,
-                    as: 'users',
-                    include: [
-                        {
-                            association: 'parents',
-                        },
-                        {
-                            association: 'children',
-                        },
-                    ],
+                    association: 'profiles',
                 },
             ],
         });
         comments.sort(() => Math.random() - Math.random());
         return comments;
-    },
-    findByEmail: async function (email) {
-        const parent = await db.Parent.findOne({
-            raw: true,
-            nest: true,
-            where: { email: email },
-        });
-        return parent;
     },
 };

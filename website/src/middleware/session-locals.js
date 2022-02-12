@@ -3,9 +3,9 @@
 const util = require('util');
 
 module.exports = (req, res, next) => {
-    // console.log(util.inspect(req.session, false, null, true));
-    res.locals.parentLogged = req.session.parentLogged;
-    res.locals.childLogged = req.session.childLogged;
+    console.log(util.inspect(req.session, false, null, true));
+    res.locals.user = req.session.user;
+    res.locals.profiles = req.session.profiles;
     res.locals.childClasses = req.session.childClasses;
     res.locals.class = req.session.class;
 

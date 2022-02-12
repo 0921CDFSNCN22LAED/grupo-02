@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             isParent: {
                 type: DataTypes.BOOLEAN,
+                defaultValue: false,
             },
             name: {
                 type: DataTypes.STRING,
@@ -19,9 +20,11 @@ module.exports = (sequelize, DataTypes) => {
             },
             avatar: {
                 type: DataTypes.STRING,
+                defaultValue: 'default-avatar.png',
             },
             gradeId: {
                 type: DataTypes.INTEGER,
+                defaultValue: null,
             },
         },
         {

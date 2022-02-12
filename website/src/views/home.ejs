@@ -21,7 +21,7 @@
             <li class="nav-item">
                 <a href="#main">
                     <i class="fas fa-chalkboard-teacher"></i>
-                    <span class="nav-link"><%=parentLogged?"Tus clases":"Ingresá" %></span>
+                    <span class="nav-link"><%=profiles?"Tus clases":"Ingresá" %></span>
                 </a>
             </li>
             <li class="nav-item">
@@ -53,15 +53,15 @@
             <section class="row mb-3">
                 <!-- 3 opciones para vista superior de la página de inicio -->
                 <!-- 1) Registro o Login -->
-                <% if(!parentLogged && !childLogged) { %>
+                <% if(!user) { %>
                 <%- include("./partials/home-partials/register") %>
                 <%- include("./partials/home-partials/parent-logsecure-modal") %>
                 <!-- 2) Elección del subUsuario -->
-                <% } else if(!childLogged && parentLogged) { %>
-                <%- include("./partials/home-partials/choose-subuser") %>
+                <% } else if(!profile) { %>
+                <%- include("./partials/home-partials/choose-profile") %>
 
                 <!-- 3) cursos del hijo -->
-                <% } else if(childLogged) { %>
+                <% } else if(profile) { %>
                 <%- include("./partials/home-partials/child-classes") %>
                 <% } %>
             </section>
@@ -125,12 +125,12 @@
                             <div class="carouselVerticalItemGroup">
                                 <div class="carouselVerticalItem">
                                     <p><%= comentarios[i].comment %> </p>
-                                    <p><%= comentarios[i].commenter %> </p>
+                                    <p><%= comentarios[i].profiles.name %> </p>
                                 </div>
                                 <% if(i+1 < comentarios.length) {%>
                                 <div class="carouselVerticalItem">
                                     <p><%= comentarios[i+1].comment %> </p>
-                                    <p><%= comentarios[i+1].commenter %> </p>
+                                    <p><%= comentarios[i+1].profiles.name %> </p>
                                 </div>
                                 <% } %>
                             </div>
@@ -154,11 +154,9 @@
                 <article class="col-12 col-md-6 mb-3">
                     <div class="container-c">
                         <h2>Deja tu comentario</h2>
-                        <form
-                            action=<%= parentLogged ? `/user/${childLogged ? childLogged.user_id : parentLogged.user_id}/comment` : "" %>
-                            method="post">
+                        <form action=<%= user ? `/user/${profiles.id}/comment` : "" %> method="post">
                             <div class="form-floating">
-                                <% if(!parentLogged && !childLogged) { %>
+                                <% if(!profiles) { %>
                                 <p>Tenés que ingresar para dejar un comentario</p>
                                 <% } else { %>
                                 <p>¡Buen día <%= childLogged ? childLogged.name : parentLogged.name %>, contanos que te

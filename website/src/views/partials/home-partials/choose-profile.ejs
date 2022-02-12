@@ -14,11 +14,11 @@
                             <h3 class="card-text text-center"><%= parentLogged.name %></h3>
                         </div>
                     </a>
-                    <% if(parentIsLoggedSecure) {%>
+                    <% if(user) {%>
                     <a class=" subtitle--center " href="/user/profile">Administrar perfiles</a>
                     <% } %>
                 </div>
-                <% for(let child in parentLogged.children) {%>
+                <% for(let profile in parentLogged.children) {%>
                 <a href="/user/userSelected/<%=parentLogged.children[child].id%>"
                     class="card bg-transparent border-0 mx-2">
                     <img class="card-img-top rounded-circle"

@@ -11,12 +11,8 @@ const userController = require('../controllers/userController');
 router.get('/userSelected/:id', userController.selectChild);
 
 //Register login and logout from main page
-router.post(
-    '/register',
-    userValidations,
-    validation,
-    userController.registerParent
-);
+router.post('/register', userValidations, validation, userController.register);
+router.post('/login', userController.login);
 router.post(
     '/registerChild',
     upload.single('avatar'),
@@ -24,12 +20,15 @@ router.post(
 );
 
 router.post('/secure', userController.parentLoginProcess);
-router.post('/login', userController.login);
 router.get('/logout', userController.logout);
 router.get('/changeUser', userController.logoutSubUser);
 
 //VER AUTH MIDDLEWARE EN ESTA RUTA
-router.get('/profile', authMiddleware, userController.profile);
+router.get(
+    '/profile',
+    // authMiddleware,
+    userController.profile
+);
 
 router.put(
     '/:id/updateParent',

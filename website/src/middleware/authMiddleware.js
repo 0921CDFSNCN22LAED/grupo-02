@@ -1,6 +1,6 @@
 function authMiddleware(req, res, next) {
-    if (!res.locals.parentLogged) {
-        return res.redirect("/");
+    if (!res.locals.user) {
+        return res.redirect('/');
     }
 
     next();

@@ -5,20 +5,10 @@ const Users = require('../services/Users');
 const controller = {
     home: async (req, res) => {
         let clasesActuales = [];
-        let ultimaClaseId;
-        if (req.session.childLogged) {
-            clasesActuales = req.session.childClasses;
-            // ultimaClaseId = req.session.childLogged.users.sales.classes;
-        }
 
         const classes = await Products.findAll();
-        const recommendations = classes.slice(0, 4);
+        const recommendations = await Products.findRandom(4);
         const comentarios = await Users.allPageComments();
-        comentarios.forEach((comentario) => {
-            comentario.commenter = comentario.users.children.id
-                ? comentario.users.children.name
-                : comentario.users.parents.name;
-        });
 
         res.render('home', {
             classes,
