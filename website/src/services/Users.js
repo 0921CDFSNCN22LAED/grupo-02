@@ -19,15 +19,17 @@ module.exports = {
         req.session.user = user;
         req.session.profiles = [profile];
     },
-
-    findByEmail: async function (email) {
-        const user = await User.findOne({
+    findByEmail: function (email) {
+        const user = User.findOne({
             raw: true,
             nest: true,
             where: { email: email },
         });
-
         return user;
+    },
+    findOneProfile: function (id) {
+        const profile = Profile.findByPk(id, { raw: true, nest: true });
+        return profile;
     },
     updateParent: function (req) {
         return db.Parent.update(

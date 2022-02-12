@@ -117,27 +117,27 @@ window.addEventListener('load', () => {
             emailErrorLog.innerHTML = '';
         }
     });
-    passLog.addEventListener('blur', () => {
-        delete logErrors.passLog;
-        if (!validator.isStrongPassword(passLog.value)) {
-            logErrors.passReg =
-                'La contraseña debe tener letras mayúsculas, minúsculas, un número y un carácter especial';
-        }
-        if (passReg.value.length < 8) {
-            logErrors.passLog =
-                'La contraseña debe tener por lo menos 8 caracteres';
-        }
-        if (validator.isEmpty(passLog.value)) {
-            logErrors.passLog = 'Tenés que ingresar una contraseña';
-        }
-        if (logErrors.passLog) {
-            passErrorLog.classList.remove('d-none');
-            passErrorLog.innerHTML = logErrors.passLog;
-        } else {
-            passErrorLog.classList.add('d-none');
-            passErrorLog.innerHTML = '';
-        }
-    });
+    // passLog.addEventListener('blur', () => {
+    //     delete logErrors.passLog;
+    //     if (!validator.isStrongPassword(passLog.value)) {
+    //         logErrors.passReg =
+    //             'La contraseña debe tener letras mayúsculas, minúsculas, un número y un carácter especial';
+    //     }
+    //     if (passReg.value.length < 8) {
+    //         logErrors.passLog =
+    //             'La contraseña debe tener por lo menos 8 caracteres';
+    //     }
+    //     if (validator.isEmpty(passLog.value)) {
+    //         logErrors.passLog = 'Tenés que ingresar una contraseña';
+    //     }
+    //     if (logErrors.passLog) {
+    //         passErrorLog.classList.remove('d-none');
+    //         passErrorLog.innerHTML = logErrors.passLog;
+    //     } else {
+    //         passErrorLog.classList.add('d-none');
+    //         passErrorLog.innerHTML = '';
+    //     }
+    // });
 
     loginButton.addEventListener('click', (e) => {
         e.preventDefault();
