@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Grade = sequelize.define(
-        "Grade",
+        'Grade',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -9,23 +9,22 @@ module.exports = (sequelize, DataTypes) => {
             },
             name: {
                 type: DataTypes.STRING,
-                defaultValue: "1",
+                defaultValue: '1',
             },
         },
         {
-            tableName: "grades",
             timestamps: false,
         }
     );
 
     Grade.associate = (models) => {
-        Grade.hasMany(models.Child, {
-            as: "children",
-            foreignKey: "grade_id",
+        Grade.hasMany(models.Profile, {
+            as: 'profiles',
+            foreignKey: 'gradeId',
         });
         Grade.hasMany(models.Class, {
-            as: "classes",
-            foreignKey: "grade_id",
+            as: 'classes',
+            foreignKey: 'gradeId',
         });
     };
 

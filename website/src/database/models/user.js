@@ -7,29 +7,35 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
             },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+            },
+            pass: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            createdAt: {
+                type: DataTypes.DATE,
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+            },
         },
         {
-            tableName: 'users',
-            timestamps: false,
+            timestamps: true,
         }
     );
 
     User.associate = (models) => {
-        User.hasOne(models.Parent, {
-            as: 'parents',
-            foreignKey: 'user_id',
-        });
-        User.hasOne(models.Child, {
-            as: 'children',
-            foreignKey: 'user_id',
+        User.hasMany(models.Profile, {
+            as: 'profiles',
+            foreignKey: 'userId',
         });
         User.hasMany(models.Sale, {
             as: 'sales',
-            foreignKey: 'user_id',
-        });
-        User.hasMany(models.PageComment, {
-            as: 'pageComments',
-            foreignKey: 'user_id',
+            foreignKey: 'userId',
         });
     };
 

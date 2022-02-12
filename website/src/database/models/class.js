@@ -11,15 +11,15 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            subject_id: {
+            subjectId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            grade_id: {
+            gradeId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            teacher_id: {
+            teacherId: {
                 type: DataTypes.UUID,
                 allowNull: false,
             },
@@ -27,25 +27,20 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.DOUBLE,
                 allowNull: false,
             },
-            interactive_id: {
+            interactiveId: {
                 type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
             },
-            description_id: {
+            descriptionId: {
                 type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
             },
             createdAt: {
                 type: DataTypes.DATE,
-                field: 'created_at',
             },
             updatedAt: {
                 type: DataTypes.DATE,
-                field: 'updated_at',
             },
         },
         {
-            tableName: 'classes',
             timestamps: true,
         }
     );
@@ -53,30 +48,27 @@ module.exports = (sequelize, DataTypes) => {
     Class.associate = (models) => {
         Class.belongsTo(models.Subject, {
             as: 'subject',
-            foreignKey: 'subject_id',
+            foreignKey: 'subjectId',
         });
         Class.belongsTo(models.Grade, {
             as: 'grades',
-            foreignKey: 'grade_id',
+            foreignKey: 'gradeId',
         });
         Class.belongsTo(models.Teacher, {
             as: 'teacher',
-            foreignKey: 'teacher_id',
+            foreignKey: 'teacherId',
         });
         Class.belongsTo(models.Interactive, {
             as: 'interactive',
-            foreignKey: 'interactive_id',
+            foreignKey: 'interactiveId',
         });
         Class.belongsTo(models.Description, {
             as: 'description',
-            foreignKey: 'description_id',
+            foreignKey: 'descriptionId',
         });
-        Class.belongsToMany(models.Sale, {
-            as: 'classes',
-            through: 'classes_sales',
-            foreignKey: 'sale_id',
-            otherKey: 'class_id',
-            timestamps: false,
+        Class.hasMany(models.ClassSale, {
+            as: 'classesSales',
+            foreignKey: 'saleId',
         });
     };
 

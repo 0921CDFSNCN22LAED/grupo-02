@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Preview = sequelize.define(
-        "Preview",
+        'Preview',
         {
             id: {
                 type: DataTypes.UUID,
@@ -12,15 +12,14 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            tableName: "previews",
             timestamps: false,
         }
     );
 
     Preview.associate = (models) => {
         Preview.hasOne(models.Interactive, {
-            as: "interactive",
-            foreignKey: "preview_id",
+            as: 'interactive',
+            foreignKey: 'previewId',
         });
     };
 

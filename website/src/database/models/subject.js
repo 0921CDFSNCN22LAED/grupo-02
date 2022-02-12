@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Subject = sequelize.define(
-        "Subject",
+        'Subject',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -13,15 +13,14 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            tableName: "subjects",
             timestamps: false,
         }
     );
 
     Subject.associate = (models) => {
         Subject.hasMany(models.Class, {
-            as: "classes",
-            foreignKey: "subject_id",
+            as: 'classes',
+            foreignKey: 'subjectId',
         });
     };
 

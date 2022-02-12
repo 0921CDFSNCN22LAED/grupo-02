@@ -1,14 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
-    const Sale = sequelize.define(
-        'Sale',
+    const ClassSale = sequelize.define(
+        'ClassSale',
         {
             id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
             },
-            bought: {
-                type: DataTypes.BOOLEAN,
+            classId: {
+                type: DataTypes.UUID,
+                onDelete: 'cascade',
+            },
+            saleId: {
+                type: DataTypes.UUID,
+            },
+            historicPrice: {
+                type: DataTypes.DOUBLE,
             },
             createdAt: {
                 type: DataTypes.DATE,
@@ -22,16 +29,16 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
-    Sale.associate = (models) => {
-        Sale.hasMany(models.ClassSale, {
-            as: 'classesSales',
+    ClassSale.associate = (models) => {
+        ClassSale.belongsTo(models.Class, {
+            as: 'classes',
             foreignKey: 'classId',
         });
-        Sale.belongsTo(models.User, {
+        ClassSale.belongsTo(models.User, {
             as: 'users',
             foreignKey: 'userId',
         });
     };
 
-    return Sale;
+    return ClassSale;
 };

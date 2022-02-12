@@ -1,44 +1,43 @@
 module.exports = (sequelize, DataTypes) => {
     const Interactive = sequelize.define(
-        "Interactive",
+        'Interactive',
         {
             id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
             },
-            video_id: {
+            videoId: {
                 type: DataTypes.UUID,
             },
-            preview_id: {
+            previewId: {
                 type: DataTypes.UUID,
             },
-            bonus_id: {
+            bonusId: {
                 type: DataTypes.UUID,
             },
         },
         {
-            tableName: "interactives",
             timestamps: false,
         }
     );
 
     Interactive.associate = (models) => {
         Interactive.hasOne(models.Class, {
-            as: "class",
-            foreignKey: "interactive_id",
+            as: 'interactive',
+            foreignKey: 'interactiveId',
         });
         Interactive.belongsTo(models.Video, {
-            as: "video",
-            foreignKey: "video_id",
+            as: 'video',
+            foreignKey: 'videoId',
         });
         Interactive.belongsTo(models.Preview, {
-            as: "preview",
-            foreignKey: "preview_id",
+            as: 'preview',
+            foreignKey: 'previewId',
         });
         Interactive.belongsTo(models.Bonus, {
-            as: "bonus",
-            foreignKey: "bonus_id",
+            as: 'bonus',
+            foreignKey: 'bonusId',
         });
     };
 

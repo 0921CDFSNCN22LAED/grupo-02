@@ -1,16 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
     const Description = sequelize.define(
-        "Description",
+        'Description',
         {
             id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
             },
-            description_short: {
+            descriptionShort: {
                 type: DataTypes.STRING,
             },
-            description_long: {
+            descriptionLong: {
                 type: DataTypes.STRING,
             },
             contents: {
@@ -18,15 +18,14 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            tableName: "descriptions",
             timestamps: false,
         }
     );
 
     Description.associate = (models) => {
         Description.hasOne(models.Class, {
-            as: "classes",
-            foreignKey: "description_id",
+            as: 'classes',
+            foreignKey: 'descriptionId',
         });
     };
 

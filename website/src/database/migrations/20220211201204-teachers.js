@@ -1,7 +1,8 @@
-module.exports = (sequelize, DataTypes) => {
-    const Teacher = sequelize.define(
-        'Teacher',
-        {
+'use strict';
+
+module.exports = {
+    up: async (queryInterface, DataTypes) => {
+        await queryInterface.createTable('teachers', {
             id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
@@ -23,19 +24,10 @@ module.exports = (sequelize, DataTypes) => {
             cv: {
                 type: DataTypes.TEXT,
             },
-        },
-        {
-            tableName: 'teachers',
-            timestamps: false,
-        }
-    );
-
-    Teacher.associate = (models) => {
-        Teacher.hasMany(models.Class, {
-            as: 'classes',
-            foreignKey: 'teacherId',
         });
-    };
+    },
 
-    return Teacher;
+    down: async (queryInterface, DataTypes) => {
+        await queryInterface.dropTable('teachers');
+    },
 };

@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            tableName: 'videos',
             timestamps: false,
         }
     );
@@ -24,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     Video.associate = (models) => {
         Video.hasOne(models.Interactive, {
             as: 'interactive',
-            foreignKey: 'video_id',
+            foreignKey: 'videoId',
         });
     };
 

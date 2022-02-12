@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Bonus = sequelize.define(
-        "Bonus",
+        'Bonus',
         {
             id: {
                 type: DataTypes.UUID,
@@ -12,15 +12,14 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            tableName: "bonus",
             timestamps: false,
         }
     );
 
     Bonus.associate = (models) => {
         Bonus.hasOne(models.Interactive, {
-            as: "interactive",
-            foreignKey: "bonus_id",
+            as: 'interactive',
+            foreignKey: 'bonusId',
         });
     };
 

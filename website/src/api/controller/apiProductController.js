@@ -38,9 +38,6 @@ module.exports = {
     selProduct: async (req, res) => {
         const id = req.params.id;
         const product = await Products.findOne(id);
-        const mappedProduct = {
-            ...product,
-        };
-        res.json(mappedProduct);
+        res.json(product);
     },
 };

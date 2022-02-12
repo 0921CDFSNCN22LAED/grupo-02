@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
             },
-            user_id: {
+            profileId: {
                 type: DataTypes.UUID,
             },
             comment: {
@@ -15,15 +15,14 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-            tableName: 'page_comments',
             timestamps: false,
         }
     );
 
     PageComment.associate = (models) => {
-        PageComment.belongsTo(models.User, {
-            as: 'users',
-            foreignKey: 'user_id',
+        PageComment.belongsTo(models.Profile, {
+            as: 'profiles',
+            foreignKey: 'profileId',
         });
     };
 

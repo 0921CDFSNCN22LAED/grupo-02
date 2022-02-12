@@ -5,8 +5,8 @@ module.exports = {
         await queryInterface.bulkInsert('Teachers', [
             {
                 id: '544aa1a4-73e9-421d-bf96-4f5762492e14',
-                first_name: 'Ramón',
-                last_name: 'Castillo',
+                firstName: 'Ramón',
+                lastName: 'Castillo',
                 email: 'rcastillo@mail.com',
             },
         ]);
