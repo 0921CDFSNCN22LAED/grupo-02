@@ -8,7 +8,7 @@ const validation = require('../middleware/validation');
 
 const userController = require('../controllers/userController');
 
-router.get('/userSelected/:id', userController.selectChild);
+router.get('/selProfile/:id', userController.selProfile);
 
 //Register login and logout from main page
 router.post('/register', userValidations, validation, userController.register);

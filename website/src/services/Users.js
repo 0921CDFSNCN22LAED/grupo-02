@@ -31,6 +31,28 @@ module.exports = {
         const profile = Profile.findByPk(id, { raw: true, nest: true });
         return profile;
     },
+    findCurrentProfiles: async (req) => {
+        const id = req.session.user.id;
+        let profiles = await User.findAll({
+            raw: true,
+            nest: true,
+            include: [{ association: 'profiles' }],
+            where: {
+                id: id,
+            },
+        });
+        profiles = profiles
+            .map((user) => {
+                return {
+                    email: user.email,
+                    pass: user.pass,
+                    ...user.profiles,
+                };
+            })
+            .sort((a, b) => b.isParent - a.isParent);
+        console.log('profiles', profiles);
+        return profiles;
+    },
     updateParent: function (req) {
         return db.Parent.update(
             {

@@ -32,17 +32,7 @@ module.exports = {
         res.json(profile);
     },
     currUser: async (req, res) => {
-        const id = req.session.user.id;
-        console.log('id', id);
-        const users = await User.findAll({
-            raw: true,
-            nest: true,
-            include: [{ association: 'profiles' }],
-            where: {
-                id: id,
-            },
-        });
-        console.log('users', users);
+        const users = await Users.findCurrentProfiles(req);
         res.json(users);
     },
 };

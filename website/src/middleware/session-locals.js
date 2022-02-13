@@ -6,6 +6,7 @@ module.exports = (req, res, next) => {
     console.log(util.inspect(req.session, false, null, true));
     res.locals.user = req.session.user;
     res.locals.profiles = req.session.profiles;
+    res.locals.profile = req.session.profile;
     res.locals.childClasses = req.session.childClasses;
     res.locals.class = req.session.class;
 

@@ -47,22 +47,23 @@
 
     <!-- Modal -->
 
-    <%- include("./partials/home-partials/parent-logsecure-modal") %>
+    <%- include("./partials/partials-home/parent-logsecure-modal") %>
     <main class="main">
         <div id="main">
             <section class="row mb-3">
+
                 <!-- 3 opciones para vista superior de la página de inicio -->
                 <!-- 1) Registro o Login -->
-                <% if(!user) { %>
-                <%- include("./partials/home-partials/register") %>
-                <%- include("./partials/home-partials/parent-logsecure-modal") %>
+                <% if(!locals.user) { %>
+                <%- include("./partials/partials-home/register") %>
+                <%- include("./partials/partials-home/parent-logsecure-modal") %>
                 <!-- 2) Elección del subUsuario -->
-                <% } else if(!profile) { %>
-                <%- include("./partials/home-partials/choose-profile") %>
+                <% } else if(!locals.profile) { %>
+                <%- include("./partials/partials-home/choose-profile") %>
 
                 <!-- 3) cursos del hijo -->
-                <% } else if(profile) { %>
-                <%- include("./partials/home-partials/child-classes") %>
+                <% } else if(locals.profile) { %>
+                <%- include("./partials/partials-home/child-classes") %>
                 <% } %>
             </section>
             <section class="row">
@@ -159,7 +160,7 @@
                                 <% if(!profiles) { %>
                                 <p>Tenés que ingresar para dejar un comentario</p>
                                 <% } else { %>
-                                <p>¡Buen día <%= childLogged ? childLogged.name : parentLogged.name %>, contanos que te
+                                <p>¡Buen día <%= profiles.name %>, contanos que te
                                     parece la página!</p>
                                 <% } %>
                             </div>

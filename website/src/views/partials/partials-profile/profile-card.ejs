@@ -1,0 +1,45 @@
+<article class="col-12 col-md-6  mb-3">
+    <div class="container-c ">
+        <h2>
+            <%= child.name %>
+            <button data-bs-toggle="modal" data-bs-target="#deleteSubUserModal" class="btn-close button-right mt-0"
+                aria-label="Close" data-bs-dismiss="modal" type="submit"></button>
+        </h2>
+        <div class="item">
+            <form action="/user/<%= child.id %>/updateChildren?_method=PUT" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-upload text-center mb-3">
+                            <label for="avatar-<%=child.id%>" class="form-label">
+                                <img class="img-thumbnail rounded-circle " id="avatarChildImg-<%=child.avatar%>"
+                                    src="/img/avatars/<%= child.avatar %>" alt="avatar" />
+                                <div>Seleccioná el avatar</div>
+                            </label>
+                            <div class="file-input-container-c">
+                                <input class="form-control  avatarChildInput" type="file" id="avatar-<%=child.id%>"
+                                    placeholder="Avatar del hijo" name="avatar" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" name="name" id="name-<%=child.id%>"
+                                placeholder="Nombre de usuario del hijo" value=<%= child.name %> />
+                            <label for="name-<%=child.id%>">
+                                Nombre del hijo
+                            </label>
+                        </div>
+                        <select class="form-select align-self-start my-3" aria-label="select año" name="grade_id">
+                            <option>Seleccioná el año</option>
+                            <% for(let grade of grades) {%>
+                            <option value=<%= grade.id %>>
+                                <%= grade.name %>
+                            </option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</article>

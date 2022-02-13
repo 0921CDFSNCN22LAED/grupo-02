@@ -3,8 +3,7 @@ const bcrypt = require('bcryptjs');
 const Products = require('../services/Products');
 const Users = require('../services/Users');
 
-const db = require('../database/models');
-const user = require('../database/models/user');
+const { User, Grade } = require('../database/models');
 
 const controller = {
     register: async (req, res) => {
@@ -17,12 +16,14 @@ const controller = {
             if (bcrypt.compareSync(req.body.pass, user.pass)) {
                 // delete logParent.pass;
                 req.session.user = user;
+                const profiles = await Users.findCurrentProfiles(req);
+                req.session.profiles = profiles;
                 if (req.body.rememberMe) {
                     res.cookie('email', req.body.email, {
                         maxAge: 1000 * 60 * 60,
                     });
                 }
-                return res.redirect('/');
+                return res.redirect(`/user/profile`);
             }
         }
         req.session.errors = {
@@ -32,9 +33,16 @@ const controller = {
         };
         res.redirect('/');
     },
-    profile: (req, res) => {
-        db.Grade.findAll().then((grades) => {
-            res.render('profile', { grades });
+    profile: async (req, res) => {
+        const grades = await Grade.findAll({ raw: true, nest: true });
+        const profiles = await Users.findCurrentProfiles(req);
+        const parent = profiles.filter((profile) => profile.isParent == 1);
+        const children = profiles.filter((profile) => profile.isParent == 0);
+
+        res.render('profile', {
+            grades,
+            parent: parent[0],
+            children,
         });
     },
 
@@ -91,7 +99,7 @@ const controller = {
         req.session.destroy();
         res.redirect('/');
     },
-    selectChild: (req, res) => {
+    selProfile: (req, res) => {
         Users.selectChild(null, req).then(() => {
             res.redirect('/');
         });

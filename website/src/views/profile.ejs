@@ -11,19 +11,15 @@
 
     <main class="container-c-fluid">
         <section class="row">
-            <article class="col-12 col-md-6 mb-3" id="personal-data"></article>
-            <article class="col-12 col-md-6 mb-3" id="progress-bars"></article>
+            <%- include("./partials/partials-profile/personal-data") %>
+            <%- include("./partials/partials-profile/progress-bar") %>
+            <% children.forEach(function(child){ %>
+            <%- include("./partials/partials-profile/profile-card", {child: child}); %>
+            <% }); %>
+
         </section>
         <div id="profiles-cards"></div>
     </main>
-    <%- include("./partials/footer") %>
-    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script type="text/babel" src="/script/react/user-dashboard.jsx"></script>
-    <script type="text/babel" src="/script/react/personal-data.jsx"></script>
-    <script type="text/babel" src="/script/react/progress-bars.jsx"></script>
-    <script type="text/babel" src="/script/react/profile-cards.jsx"></script>
 </body>
 
 </html>
