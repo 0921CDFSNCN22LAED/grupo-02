@@ -8,4 +8,4 @@
 
 ## Nueva estructura de usuarios con usuario y perfiles
 
-## Corregir down de migrations para borrar con constrains
+## migrations date now() no funciona
