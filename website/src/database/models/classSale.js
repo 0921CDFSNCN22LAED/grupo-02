@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
             },
             classId: {
                 type: DataTypes.UUID,
-                onDelete: 'cascade',
             },
             saleId: {
                 type: DataTypes.UUID,

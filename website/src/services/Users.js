@@ -1,6 +1,13 @@
 const bcrypt = require('bcryptjs');
 const db = require('../database/models');
-const { User, Profile } = require('../database/models/');
+const {
+    User,
+    Profile,
+    Progress,
+    Class,
+    Interactive,
+    Preview,
+} = require('../database/models/');
 
 module.exports = {
     create: async (req) => {
@@ -52,6 +59,30 @@ module.exports = {
             .sort((a, b) => b.isParent - a.isParent);
         console.log('profiles', profiles);
         return profiles;
+    },
+    selectProfile: async function (id) {
+        const profile = await Profile.findByPk(id, {
+            include: [
+                {
+                    model: Progress,
+                    as: 'progress',
+                    include: [
+                        {
+                            model: Class,
+                            as: 'classes',
+                            include: [
+                                {
+                                    model: Interactive,
+                                    as: 'interactive',
+                                    include: [{ association: 'preview' }],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        });
+        return profile;
     },
     updateParent: function (req) {
         return db.Parent.update(

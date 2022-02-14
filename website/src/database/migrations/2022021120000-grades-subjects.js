@@ -26,7 +26,7 @@ module.exports = {
     },
 
     down: async (queryInterface, DataTypes) => {
-        await queryInterface.dropTable('grades');
         await queryInterface.dropTable('subjects');
+        await queryInterface.dropTable('grades');
     },
 };

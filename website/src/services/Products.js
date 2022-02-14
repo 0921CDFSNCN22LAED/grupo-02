@@ -2,27 +2,31 @@ const { Class, Interactive } = require('../database/models');
 const Sequelize = require('sequelize');
 
 const Products = {
-    findAll: function () {
-        const products = Class.findAll({
-            raw: true,
-            nest: true,
-            include: [
-                { association: 'subject' },
-                { association: 'grades' },
-                { association: 'teacher' },
-                {
-                    model: Interactive,
-                    as: 'interactive',
-                    include: [
-                        { association: 'video' },
-                        { association: 'preview' },
-                        { association: 'bonus' },
-                    ],
-                },
-                { association: 'description' },
-            ],
-        });
-        return products;
+    findAll: async function () {
+        try {
+            const products = await Class.findAll({
+                raw: true,
+                nest: true,
+                include: [
+                    { association: 'subject' },
+                    { association: 'grades' },
+                    { association: 'teacher' },
+                    {
+                        model: Interactive,
+                        as: 'interactive',
+                        include: [
+                            { association: 'video' },
+                            { association: 'preview' },
+                            { association: 'bonus' },
+                        ],
+                    },
+                    { association: 'description' },
+                ],
+            });
+            return products;
+        } catch (error) {
+            console.log('error', error);
+        }
     },
     findRandom: function (n) {
         const products = Class.findAll({

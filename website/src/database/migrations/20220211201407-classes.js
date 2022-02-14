@@ -160,11 +160,11 @@ module.exports = {
     },
 
     down: async (queryInterface, DataTypes) => {
-        await queryInterface.dropTable('videos');
-        await queryInterface.dropTable('previews');
-        await queryInterface.dropTable('bonuses');
-        await queryInterface.dropTable('interactives');
-        await queryInterface.dropTable('descriptions');
         await queryInterface.dropTable('classes');
+        await queryInterface.dropTable('descriptions');
+        await queryInterface.dropTable('interactives');
+        await queryInterface.dropTable('bonuses');
+        await queryInterface.dropTable('previews');
+        await queryInterface.dropTable('videos');
     },
 };

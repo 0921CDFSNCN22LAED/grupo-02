@@ -45,6 +45,10 @@ module.exports = (sequelize, DataTypes) => {
             as: 'pageComments',
             foreignKey: 'profileId',
         });
+        Profile.hasMany(models.Progress, {
+            as: 'progress',
+            foreignKey: 'profileId',
+        });
     };
 
     return Profile;

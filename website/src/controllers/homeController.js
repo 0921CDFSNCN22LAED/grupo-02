@@ -4,7 +4,10 @@ const Users = require('../services/Users');
 
 const controller = {
     home: async (req, res) => {
-        let clasesActuales = [];
+        let clasesActuales =
+            req.session.profile && req.session.profile.progress
+                ? req.session.profile.progress
+                : [];
 
         const classes = await Products.findAll();
         const recommendations = await Products.findRandom(4);

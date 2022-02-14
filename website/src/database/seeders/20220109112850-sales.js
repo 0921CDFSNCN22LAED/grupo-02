@@ -65,30 +65,6 @@ module.exports = {
                 createdAt: Date.now(),
                 updatedAt: Date.now(),
             },
-            {
-                id: 'ea5e6eae-1b54-42cd-9d79-5a15eb6d901d',
-                classId: '8c45cb7b-6a5b-4c55-9cf1-89d9c1c69817',
-                saleId: 'a16e849b-8ab2-4f72-b98c-09f558422a0b',
-                historicPrice: 450.0,
-                createdAt: Date.now(),
-                updatedAt: Date.now(),
-            },
-            {
-                id: 'f45ba955-2aac-4834-8833-5e5094145176',
-                classId: 'bc3bbbcf-bb24-4ad0-b11c-63888f8218e2',
-                saleId: 'a16e849b-8ab2-4f72-b98c-09f558422a0b',
-                historicPrice: 450.0,
-                createdAt: Date.now(),
-                updatedAt: Date.now(),
-            },
-            {
-                id: '5ae5a249-95a3-4c2f-9514-3345383b4f63',
-                classId: '984dd460-3013-49de-84af-42566f2cbc22',
-                saleId: 'a16e849b-8ab2-4f72-b98c-09f558422a0b',
-                historicPrice: 450.0,
-                createdAt: Date.now(),
-                updatedAt: Date.now(),
-            },
         ]);
     },
 

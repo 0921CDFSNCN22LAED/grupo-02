@@ -77,17 +77,20 @@ module.exports = {
                 onDelete: 'cascade',
             },
             progress: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER(3).UNSIGNED,
             },
-            review: {
-                type: DataTypes.TEXT,
+            createdAt: {
+                type: DataTypes.DATE,
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
             },
         });
     },
 
     down: async (queryInterface, DataTypes) => {
-        await queryInterface.dropTable('pageComments');
-        await queryInterface.dropTable('classReviews');
         await queryInterface.dropTable('progress');
+        await queryInterface.dropTable('classReviews');
+        await queryInterface.dropTable('pageComments');
     },
 };

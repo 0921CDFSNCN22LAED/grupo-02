@@ -70,6 +70,10 @@ module.exports = (sequelize, DataTypes) => {
             as: 'classesSales',
             foreignKey: 'saleId',
         });
+        Class.hasMany(models.Progress, {
+            as: 'progresses',
+            foreignKey: 'classId',
+        });
     };
 
     return Class;

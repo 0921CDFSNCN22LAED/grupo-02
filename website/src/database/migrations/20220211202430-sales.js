@@ -13,6 +13,12 @@ module.exports = {
             },
             userId: {
                 type: DataTypes.UUID,
+                references: {
+                    model: 'users',
+                    key: 'id',
+                },
+                onUpdate: 'cascade',
+                onDelete: 'cascade',
             },
             createdAt: {
                 type: DataTypes.DATE,
@@ -58,7 +64,7 @@ module.exports = {
     },
 
     down: async (queryInterface, DataTypes) => {
-        await queryInterface.dropTable('sales');
         await queryInterface.dropTable('classesSales');
+        await queryInterface.dropTable('sales');
     },
 };

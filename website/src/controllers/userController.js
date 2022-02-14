@@ -45,6 +45,10 @@ const controller = {
             children,
         });
     },
+    selProfile: async (req, res) => {
+        req.session.profile = await Users.selectProfile(req.params.id);
+        res.redirect('/');
+    },
 
     registerChild: (req, res) => {
         // PREGUNTA: ¿Cómo refactorizo esto? el problema es el nesting de promesas.
@@ -99,11 +103,7 @@ const controller = {
         req.session.destroy();
         res.redirect('/');
     },
-    selProfile: (req, res) => {
-        Users.selectChild(null, req).then(() => {
-            res.redirect('/');
-        });
-    },
+
     logoutSubUser: (req, res) => {
         req.session.parentIsLoggedSecure = false;
         delete req.session.childLogged;
