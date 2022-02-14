@@ -49,35 +49,29 @@ const controller = {
         req.session.profile = await Users.selectProfile(req.params.id);
         res.redirect('/');
     },
-
-    registerChild: (req, res) => {
-        // PREGUNTA: ¿Cómo refactorizo esto? el problema es el nesting de promesas.
-        db.User.create()
-            .then((user) => {
-                return user.dataValues.id;
-            })
-            .then((userId) => {
-                db.Child.create({
-                    ...req.body,
-                    avatar: req.file
-                        ? req.file.originalname
-                        : 'default-avatar.png',
-                    user_id: userId,
-                    parent_id: req.session.parentLogged.id,
-                })
-                    .then((child) => {
-                        return db.Parent.findByPk(child.parent_id, {
-                            include: [{ association: 'children' }],
-                        });
-                    })
-                    .then((parent) => {
-                        req.session.parentLogged = parent.dataValues;
-                        return res.redirect(`/user/profile`);
-                    })
-                    .catch((e) => res.render('error-page', { error: e }));
-            })
-            .catch((e) => res.render('error-page', { error: e }));
+    logout: (req, res) => {
+        res.clearCookie('userEmail');
+        req.session.destroy();
+        res.redirect('/');
     },
+    logoutProfile: (req, res) => {
+        req.session.parentIsLoggedSecure = false;
+        delete req.session.profile;
+        res.redirect('/');
+    },
+    registerProfile: async (req, res) => {
+        await Users.createProfile(req.session.user.id, req);
+        res.redirect('/user/profile');
+    },
+    updateProfile: async (req, res) => {
+        await Users.update(req);
+        res.redirect(`/user/profile`);
+    },
+    deleteProfile: async (req, res) => {
+        await Users.deleteProfile(req);
+        res.redirect(`/user/profile`);
+    },
+
     parentLoginProcess: (req, res) => {
         if (req.body.pass) {
             db.Parent.findByPk(req.session.parentLogged.id)
@@ -98,41 +92,9 @@ const controller = {
         }
     },
 
-    logout: (req, res) => {
-        res.clearCookie('userEmail');
-        req.session.destroy();
-        res.redirect('/');
-    },
-
-    logoutSubUser: (req, res) => {
-        req.session.parentIsLoggedSecure = false;
-        delete req.session.childLogged;
-        res.redirect('/');
-    },
-
-    updateParent: (req, res) => {
-        Users.updateParent(req)
-            .then((parent) => {
-                req.session.parentLogged = parent.dataValues;
-                res.redirect(`/user/profile`);
-            })
-            .catch((e) => res.render('error-page', { error: e }));
-    },
-    updateChildren: (req, res) => {
-        Users.updateChild(req)
-            .then((parent) => {
-                req.session.parentLogged = parent.dataValues;
-                res.redirect(`/user/profile`);
-            })
-            .catch((e) => res.render('error-page', { error: e }));
-    },
     comment: async (req, res) => {
-        try {
-            await Users.createPageComment(req.params.id, req.body.comment);
-            res.redirect('/');
-        } catch (error) {
-            res.render('error-page', { error });
-        }
+        await Users.createPageComment(req.params.id, req.body.comment);
+        res.redirect('/');
     },
 };
 

@@ -6,11 +6,10 @@ const {
     Progress,
     Class,
     Interactive,
-    Preview,
 } = require('../database/models/');
 
-module.exports = {
-    create: async (req) => {
+const Users = {
+    create: async function (req) {
         const user = await User.create(
             {
                 email: req.body.email,
@@ -18,13 +17,22 @@ module.exports = {
             },
             { raw: true, nest: true }
         );
-        const profile = await Profile.create({
-            isParent: true,
-            name: req.body.name,
-        });
-        await profile.setUser(user.id);
         req.session.user = user;
-        req.session.profiles = [profile];
+        this.createProfile(user.id, req, true);
+    },
+    createProfile: async function (userId, req, isParent = false) {
+        const profile = await Profile.create({
+            isParent,
+            name: req.body.name,
+            ...(req.body.gradeId && {
+                gradeId: req.body.gradeId,
+            }),
+            ...(req.file && {
+                avatar: req.file.filename,
+            }),
+        });
+        await profile.setUser(userId);
+        req.session.profiles = await this.findCurrentProfiles(req);
     },
     findByEmail: function (email) {
         const user = User.findOne({
@@ -34,6 +42,7 @@ module.exports = {
         });
         return user;
     },
+
     findOneProfile: function (id) {
         const profile = Profile.findByPk(id, { raw: true, nest: true });
         return profile;
@@ -57,7 +66,6 @@ module.exports = {
                 };
             })
             .sort((a, b) => b.isParent - a.isParent);
-        console.log('profiles', profiles);
         return profiles;
     },
     selectProfile: async function (id) {
@@ -84,13 +92,12 @@ module.exports = {
         });
         return profile;
     },
-    updateParent: function (req) {
-        return db.Parent.update(
+    update: async function (req) {
+        await Profile.update(
             {
                 ...req.body,
-                // Si el spread da false por Short circuit todo da false y no se ve la propiedad
                 ...(req.file && {
-                    avatar: req.file.originalname,
+                    avatar: req.file.filename,
                 }),
             },
             {
@@ -98,81 +105,21 @@ module.exports = {
                     id: req.params.id,
                 },
             }
-        ).then(() => {
-            return db.Parent.findByPk(req.params.id, {
-                include: [{ association: 'children' }],
-            });
-        });
+        );
+        req.session.profiles = await this.findCurrentProfiles(req);
     },
-    updateChild(req) {
-        return db.Child.update(
-            {
-                ...req.body,
-                // Si el spread da false por Short circuit todo da false y no se ve la propiedad
-                ...(req.file && {
-                    avatar: req.file.originalname,
-                }),
-            },
-            {
-                where: {
-                    id: req.params.id,
-                },
-            }
-        )
-            .then(() => {
-                return db.Child.findByPk(req.params.id);
-            })
-            .then((child) => {
-                return db.Parent.findByPk(child.parent_id, {
-                    include: [{ association: 'children' }],
-                });
-            });
-    },
-    selectChild: async function (id, req) {
-        const child = await db.Child.findByPk(id ?? req.params.id, {
-            raw: true,
-            nest: true,
-            include: [
-                {
-                    model: db.User,
-                    as: 'users',
-                },
-            ],
-        });
-
-        const userId = child.user_id;
-        const classes = await db.Sale.findAll({
-            raw: true,
-            nest: true,
+    deleteProfile: async function (req) {
+        await Profile.destroy({
             where: {
-                user_id: userId,
-                bought: 1,
+                id: req.params.id,
             },
-            include: [
-                {
-                    model: db.Class,
-                    as: 'classes',
-                    include: [
-                        {
-                            model: db.Interactive,
-                            as: 'interactive',
-                            include: [
-                                { association: 'video' },
-                                { association: 'preview' },
-                                { association: 'bonus' },
-                            ],
-                        },
-                    ],
-                },
-            ],
         });
-        req.session.childClasses = classes;
-        req.session.childLogged = child;
-        return child;
+        req.session.profiles = await this.findCurrentProfiles(req);
     },
+
     createPageComment: async function (id, comment) {
         await db.PageComment.create({
-            user_id: id,
+            profileId: id,
             comment: comment,
         });
     },
@@ -190,3 +137,5 @@ module.exports = {
         return comments;
     },
 };
+
+module.exports = Users;

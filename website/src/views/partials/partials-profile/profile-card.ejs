@@ -2,11 +2,13 @@
     <div class="container-c ">
         <h2>
             <%= child.name %>
-            <button data-bs-toggle="modal" data-bs-target="#deleteSubUserModal" class="btn-close button-right mt-0"
-                aria-label="Close" data-bs-dismiss="modal" type="submit"></button>
+            <form action="/user/<%= child.id %>/delete?_method=DELETE" method="POST"
+                enctype="application/x-www-form-urlencoded" class="deleteForm">
+                <button class="btn-close button-right mt-0 " type="submit"></button>
+            </form>
         </h2>
         <div class="item">
-            <form action="/user/<%= child.id %>/updateChildren?_method=PUT" method="post" enctype="multipart/form-data">
+            <form action="/user/<%= child.id %>/update?_method=PUT" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-upload text-center mb-3">
@@ -16,29 +18,34 @@
                                 <div>Seleccioná el avatar</div>
                             </label>
                             <div class="file-input-container-c">
-                                <input class="form-control  avatarChildInput" type="file" id="avatar-<%=child.id%>"
+                                <input class="form-control  avatarInput" type="file" id="avatar-<%=child.id%>"
                                     placeholder="Avatar del hijo" name="avatar" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-8">
-                        <div class="form-floating">
-                            <input class="form-control" type="text" name="name" id="name-<%=child.id%>"
-                                placeholder="Nombre de usuario del hijo" value=<%= child.name %> />
-                            <label for="name-<%=child.id%>">
-                                Nombre del hijo
-                            </label>
+                    <div class="col-sm-8 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="form-floating">
+                                <input class="form-control" type="text" name="name" id="name-<%=child.id%>"
+                                    placeholder="Nombre de usuario del hijo" value=<%= child.name %> />
+                                <label for="name-<%=child.id%>">
+                                    Nombre del hijo
+                                </label>
+                            </div>
+                            <select class="form-select align-self-start my-3" aria-label="select año" name="grade_id">
+                                <option disabled>Seleccioná el año</option>
+                                <% for(let grade of grades) {%>
+                                <option <%= grade.id == child.gradeId ? "selected" : ""%> value="<%= grade.id %>">
+                                    <%= grade.name %>
+                                </option>
+                                <% } %>
+                            </select>
                         </div>
-                        <select class="form-select align-self-start my-3" aria-label="select año" name="grade_id">
-                            <option>Seleccioná el año</option>
-                            <% for(let grade of grades) {%>
-                            <option value=<%= grade.id %>>
-                                <%= grade.name %>
-                            </option>
-                            <% } %>
-                        </select>
+                        <button class="btn btn-success btn-lg button-right my-3 align-self-end" type="submit">Actualizar
+                            perfil</button>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>

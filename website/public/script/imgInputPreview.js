@@ -1,20 +1,15 @@
 window.addEventListener('load', () => {
-    avatarParent.addEventListener('change', () => {
-        const [file] = avatarParent.files;
-        if (file) {
-            avatarParentImg.src = URL.createObjectURL(file);
-        }
-    });
+    const avatarInput = document.querySelectorAll('.avatarInput');
 
-    const avatarChildInput = document.querySelectorAll('.avatarChildInput');
-
-    for (let i = 0; i < avatarChildInput.length; i++) {
-        avatarChildInput[i].addEventListener(
+    for (let i = 0; i < avatarInput.length; i++) {
+        avatarInput[i].addEventListener(
             'change',
             function () {
                 const [file] = this.files;
                 if (file) {
-                    document.querySelector(`#avatarChildImg-${i}`).src =
+                    avatarInput[
+                        i
+                    ].parentElement.previousElementSibling.firstElementChild.src =
                         URL.createObjectURL(file);
                 }
             },

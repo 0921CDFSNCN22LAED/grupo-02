@@ -62,6 +62,15 @@ module.exports = {
                 onUpdate: 'cascade',
                 onDelete: 'cascade',
             },
+            createdAt: {
+                type: DataTypes.DATE,
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+            },
+            deletedAt: {
+                type: DataTypes.DATE,
+            },
         });
     },
 

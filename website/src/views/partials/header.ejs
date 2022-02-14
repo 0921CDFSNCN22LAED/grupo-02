@@ -13,8 +13,7 @@
         <input type="search" name="main-search" id="main-search" placeholder="Busca clases, temas o profesores" />
         <button type="submit"><i class="fas fa-search"></i></button>
     </div>
-    <!-- BUG IF USER IS PARENT -->
-    <% if(user){ %>
+    <% if(profile && profile.isParent){ %>
     <nav class="nav-bar ">
         <div id="cart">
             <a class="position-relative " href="/sale/cart"><i class="fas fa-shopping-cart">
@@ -24,24 +23,24 @@
                 </i></a>
         </div>
         <div id="profile">
-            <a href=<%=// `/user/profile` %>><img class="img-header" src="/img/avatars/<%=// profile.avatar %> "
+            <a href=<%= `/user/profile` %>><img class="img-header" src="/img/avatars/<%= profile.avatar %> "
                     alt="parent avatar"></a>
         </div>
         <div>
-            <a href="/user/changeUser"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="/user/changeProfile"><i class="fas fa-sign-out-alt"></i></a>
         </div>
     </nav>
-    <% } else if(profiles) { %>
+    <% } else if(profile && !profile.isParent) { %>
     <nav class="nav-bar ">
         <div id="notifications">
             <a href=""><i class="fas fa-inbox"></i></a>
         </div>
         <div id="profile">
-            <a href=<%= `/user/profile` %>><img class="img-header" src="/img/avatars/<%= childLogged.avatar %> "
+            <a href=<%= `/user/profile` %>><img class="img-header" src="/img/avatars/<%= profile.avatar %> "
                     alt="child avatar"></a>
         </div>
         <div>
-            <a href="/user/changeUser"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="/user/changeProfile"><i class="fas fa-sign-out-alt"></i></a>
         </div>
     </nav>
     <% } else if (user){%>

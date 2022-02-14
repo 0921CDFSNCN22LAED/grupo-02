@@ -29,6 +29,9 @@ module.exports = {
                 name: 'Luios',
                 avatar: 'avatar-1641152356809.png',
                 gradeId: null,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                deletedAt: null,
             },
             {
                 id: '1c0e8356-4f3f-47a5-93f1-d60b35ac8f63',
@@ -37,6 +40,9 @@ module.exports = {
                 name: 'Jacob',
                 avatar: 'default-avatar.png',
                 gradeId: null,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                deletedAt: null,
             },
             {
                 id: '98717d0c-e37b-4881-8061-bc732b0de6fa',
@@ -45,6 +51,9 @@ module.exports = {
                 name: 'Josefina',
                 avatar: 'default-avatar.png',
                 gradeId: 4,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                deletedAt: null,
             },
             {
                 id: '17ceaf56-4e72-4af6-a328-5a3efcfcbe44',
@@ -53,6 +62,9 @@ module.exports = {
                 name: 'Pedro',
                 avatar: 'default-avatar.png',
                 gradeId: 7,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                deletedAt: null,
             },
             {
                 id: '4b8b544f-9a30-40a3-8dd1-87aa8d0fc17c',
@@ -61,6 +73,9 @@ module.exports = {
                 name: 'Anibal',
                 avatar: 'default-avatar.png',
                 gradeId: 2,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                deletedAt: null,
             },
         ]);
         await queryInterface.bulkInsert('PageComments', [

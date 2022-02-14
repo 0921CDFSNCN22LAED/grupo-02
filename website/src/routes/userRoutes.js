@@ -8,20 +8,27 @@ const validation = require('../middleware/validation');
 
 const userController = require('../controllers/userController');
 
-router.get('/selProfile/:id', userController.selProfile);
-
 //Register login and logout from main page
 router.post('/register', userValidations, validation, userController.register);
 router.post('/login', userController.login);
-router.post(
-    '/registerChild',
+router.get('/selProfile/:id', userController.selProfile);
+router.get('/logout', userController.logout);
+router.get('/changeProfile', userController.logoutProfile);
+router.put(
+    '/:id/update',
     upload.single('avatar'),
-    userController.registerChild
+    // userValidationsImage,
+    // validation,
+    userController.updateProfile
+);
+
+router.post(
+    '/registerProfile',
+    upload.single('avatar'),
+    userController.registerProfile
 );
 
 router.post('/secure', userController.parentLoginProcess);
-router.get('/logout', userController.logout);
-router.get('/changeUser', userController.logoutSubUser);
 
 //VER AUTH MIDDLEWARE EN ESTA RUTA
 router.get(
@@ -30,20 +37,7 @@ router.get(
     userController.profile
 );
 
-router.put(
-    '/:id/updateParent',
-    upload.single('avatar'),
-    userValidationsImage,
-    validation,
-    userController.updateParent
-);
-router.put(
-    '/:id/updateChildren',
-    upload.single('avatar'),
-    userValidationsImage,
-    validation,
-    userController.updateChildren
-);
+router.delete('/:id/delete', userController.deleteProfile);
 
 // Comment
 

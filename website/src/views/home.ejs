@@ -155,12 +155,15 @@
                 <article class="col-12 col-md-6 mb-3">
                     <div class="container-c">
                         <h2>Deja tu comentario</h2>
-                        <form action=<%= user ? `/user/${profiles.id}/comment` : "" %> method="post">
+                        <form
+                            action=<%= user ? `/user/${locals.profile && profile.id ? profile.id : "anonymous"}/comment` : "" %>
+                            method="post">
                             <div class="form-floating">
                                 <% if(!profiles) { %>
                                 <p>Tenés que ingresar para dejar un comentario</p>
                                 <% } else { %>
-                                <p>¡Buen día <%= profiles.name %>, contanos que te
+                                <p>¡Buen día<%= locals.profile && profile.name ? ` ${profile.name}` : "" %>, contanos
+                                    que te
                                     parece la página!</p>
                                 <% } %>
                             </div>
