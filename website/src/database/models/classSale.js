@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
+            tableName: 'classesSales',
             timestamps: true,
         }
     );
@@ -33,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
             as: 'classes',
             foreignKey: 'classId',
         });
-        ClassSale.belongsTo(models.User, {
-            as: 'users',
-            foreignKey: 'userId',
+        ClassSale.belongsTo(models.Sale, {
+            as: 'sales',
+            foreignKey: 'saleId',
         });
     };
 

@@ -74,7 +74,7 @@ const controller = {
 
     parentLoginProcess: (req, res) => {
         if (req.body.pass) {
-            db.Parent.findByPk(req.session.parentLogged.id)
+            db.Parent.findByPk(req.session.user.id)
                 .then((parent) => {
                     if (bcrypt.compareSync(req.body.pass, parent.pass)) {
                         req.session.parentIsLoggedSecure = true;

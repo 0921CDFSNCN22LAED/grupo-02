@@ -10,7 +10,7 @@
         <%- include("./partials/header") %>
     </header>
     <main class="container-c-fluid">
-        <%- include("./partials/home-partials/parent-logsecure-modal") %>
+        <%- include("./partials/partials-home/parent-logsecure-modal") %>
         <div class="container-c position-relative fit-content mb-5">
             <div class="w-100">
                 <h2>
@@ -25,30 +25,30 @@
                 <article class="p-2 cart-article mb-5">
                     <div class="container-c_noFlex position-relative">
                         <a class="d-flex flex-column h-100 justify-content-between"
-                            href="/products/<%= product.classes.id %>">
+                            href="/products/<%= product.classesSales.classes.id %>">
                             <div>
                                 <div class="p-1">
                                     <img class="img-thumbnail "
-                                        src="/img/clases-preview/<%=product.classes.interactive.preview.location%>"
+                                        src="/img/clases-preview/<%=product.classesSales.classes.interactive.preview.location%>"
                                         alt="picture placeholder" />
                                 </div>
                                 <div class="lh-lg p-1">
                                     <h5>
-                                        <%= product.classes.title + " en " + product.classes.grades.name %>
+                                        <%= product.classesSales.classes.title + " en " + product.classesSales.classes.grades.name %>
                                     </h5>
-                                    <h5><%=product.classes.subject.name %></h5>
+                                    <h5><%=product.classesSales.classes.subject.name %></h5>
                                     <h5>
-                                        <%=product.classes.teacher.first_name + " " + product.classes.teacher.last_name %>
+                                        <%=product.classesSales.classes.teacher.firstName + " " + product.classesSales.classes.teacher.lastName %>
                                     </h5>
                                 </div>
                             </div>
                             <div class="shadow-pill text-end mb-2">
                                 <h3>
-                                    <%="$" + product.classes.price.toFixed(2) %>
+                                    <%="$" + product.classesSales.classes.price.toFixed(2) %>
                                 </h3>
                                 <div>
                                 </div>
-                                <form action="/sale/removeFromCart/<%=product.classes.id%>?_method=DELETE"
+                                <form action="/sale/removeFromCart/<%=product.classesSales.classes.id%>?_method=DELETE"
                                     method="post">
                                     <button class="btn btn-danger btn-sm" type="submit">eliminar</button>
                                 </form>
@@ -69,14 +69,14 @@
                                     <div class="d-inline flex-grow-1">
                                         <select class="form-select" aria-label="select child" name="selectChild"
                                             id="selectChild">
-                                            <%if(children.length == 1){ %>
-                                            <option value="<%= children[0].id %>" selected><%= children[0].name %>
+                                            <%if(profiles.length == 1){ %>
+                                            <option value="<%= profiles[0].id %>" selected><%= profiles[0].name %>
                                             </option>
                                             <% } else { %>
                                             <option value="" selected>Elegí un hijo</option>
-                                            <% for(let child of children) { %>
+                                            <% for(let child of profiles) { %>
                                             <option value="<%= child.id %>"
-                                                <%= childLogged ? child.id == childLogged.id ? "selected" : "" : ""%>>
+                                                <%= profile ? child.id == profile.id ? "selected" : "" : ""%>>
                                                 <%= child.name %></option>
                                             <% } %>
                                             <% } %>

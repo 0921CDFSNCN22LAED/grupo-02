@@ -1,5 +1,5 @@
-const Users = require("../services/Users");
-const db = require("../database/models");
+const Users = require('../services/Users');
+const db = require('../database/models');
 
 function userLogged(req, res, next) {
     let emailInCookie = req.cookies.userEmail;
@@ -9,10 +9,10 @@ function userLogged(req, res, next) {
         })
             .then((userFromCookie) => {
                 if (userFromCookie) {
-                    req.session.parentLogged = userFromCookie;
+                    req.session.user = userFromCookie;
                 }
             })
-            .catch((e) => res.render("error-page", { error: e }));
+            .catch((e) => res.render('error-page', { error: e }));
     }
 
     // PREGUNTA: Este Next se dispara antes de cumplir la promesa??

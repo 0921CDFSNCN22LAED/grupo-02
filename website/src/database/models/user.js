@@ -33,10 +33,6 @@ module.exports = (sequelize, DataTypes) => {
             as: 'profiles',
             foreignKey: 'userId',
         });
-        User.hasMany(models.Sale, {
-            as: 'sales',
-            foreignKey: 'userId',
-        });
     };
 
     return User;

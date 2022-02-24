@@ -173,7 +173,7 @@
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="teacherFirstName" id="teacherFirstName"
                             placeholder="Nombre"
-                            value="<%= locals.old && old.teacher && old.teacher.first_name ? old.teacher.first_name : "" %>" />
+                            value="<%= locals.old && old.teacher && old.teacher.firstName ? old.teacher.firstName : "" %>" />
                         <label for="teacherFirstName">Nombre</label>
                         <p class="feedback d-none" id="teacherFirstNameError"></p>
                         <% if(errors && errors.teacherFirstName) { %>
@@ -183,7 +183,7 @@
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="teacherLastName" id="teacherLastName"
                             placeholder="Apellido"
-                            value="<%= locals.old && old.teacher && old.teacher.last_name ? old.teacher.last_name : "" %>" />
+                            value="<%= locals.old && old.teacher && old.teacher.lastName ? old.teacher.lastName : "" %>" />
                         <label for="teacherLastName">Apellido</label>
                         <p class="feedback d-none" id="teacherLastNameError"></p>
                         <% if(errors && errors.teacherLastName) { %>

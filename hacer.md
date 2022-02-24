@@ -9,3 +9,5 @@
 ## Nueva estructura de usuarios con usuario y perfiles
 
 ## migrations date now() no funciona
+
+## ver Ids in cart

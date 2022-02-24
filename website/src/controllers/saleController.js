@@ -1,49 +1,37 @@
-const db = require("../database/models");
-const Products = require("../services/Products");
-const Sales = require("../services/Sales");
-const Users = require("../services/Users");
+const Products = require('../services/Products');
+const Sales = require('../services/Sales');
+const Users = require('../services/Users');
 
 module.exports = {
     addToCart: async (req, res) => {
-        try {
-            const [sale, created] = await db.Sale.findOrCreate({
-                where: {
-                    bought: null,
-                    user_id: req.session.parentLogged.user_id,
-                },
-            });
-
-            await sale.addClasses([req.session.class.id]);
-            res.redirect("/sale/cart");
-        } catch (error) {
-            res.render("error-page", { error });
-        }
+        Sales.addToCart(req);
+        res.redirect('/sale/cart');
     },
     viewCart: (req, res) => {
         try {
             const cart = Sales.findAllInCart(req);
             const recommendations = Products.findAll();
-            const children = req.session.parentLogged.children;
-            const childLogged = req.session.childLogged;
-
+            const profiles = req.session.profiles;
+            const profile = req.session.profile;
             Promise.all([cart, recommendations]).then(
                 ([cart, recommendations]) => {
+                    console.log('cart', cart);
                     req.session.cart = cart;
                     const totalPrice = cart
-                        .reduce((a, b) => a + b.classes.price, 0)
+                        .reduce((a, b) => a + b.classesSales.historicPrice, 0)
                         .toFixed(2);
 
-                    res.render("cart", {
+                    res.render('cart', {
                         cart,
                         recommendations,
                         totalPrice,
-                        children,
-                        childLogged,
+                        profiles,
+                        profile,
                     });
                 }
             );
         } catch (error) {
-            res.render("error-page", { error });
+            res.render('error-page', { error });
         }
     },
     removeFromCart: async (req, res) => {
@@ -61,16 +49,16 @@ module.exports = {
                     cascade: true,
                 });
             }
-            res.redirect("/sale/cart");
+            res.redirect('/sale/cart');
         } catch (error) {
-            res.render("error-page", { error });
+            res.render('error-page', { error });
         }
     },
     payment: (req, res) => {
-        req.session.childLogged = req.session.parentLogged.children.find(
+        req.session.profile = req.session.profiles.find(
             (child) => child.id == req.body.selectChild
         );
-        res.redirect("/sale/payment");
+        res.redirect('/sale/payment');
     },
     paymentPage: (req, res) => {
         const cart = Sales.findAllInCart(req);
@@ -79,14 +67,14 @@ module.exports = {
                 .reduce((a, b) => a + b.classes.price, 0)
                 .toFixed(2);
 
-            res.render("payment", { cart, totalPrice });
+            res.render('payment', { cart, totalPrice });
         });
     },
     endPurchase: async (req, res) => {
         const saleId = req.session.cart[0].id;
         await db.Sale.update(
             {
-                user_id: req.session.childLogged.user_id,
+                user_id: req.session.profile.user_id,
                 bought: 1,
             },
             {
@@ -95,8 +83,8 @@ module.exports = {
                 },
             }
         );
-        await Users.selectChild(req.session.childLogged.id, req);
+        await Users.selectChild(req.session.profile.id, req);
 
-        res.redirect("/");
+        res.redirect('/');
     },
 };

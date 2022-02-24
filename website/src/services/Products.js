@@ -1,32 +1,35 @@
-const { Class, Interactive } = require('../database/models');
+const {
+    Class,
+    Interactive,
+    Video,
+    Preview,
+    Bonus,
+    Teacher,
+} = require('../database/models');
 const Sequelize = require('sequelize');
 
 const Products = {
     findAll: async function () {
-        try {
-            const products = await Class.findAll({
-                raw: true,
-                nest: true,
-                include: [
-                    { association: 'subject' },
-                    { association: 'grades' },
-                    { association: 'teacher' },
-                    {
-                        model: Interactive,
-                        as: 'interactive',
-                        include: [
-                            { association: 'video' },
-                            { association: 'preview' },
-                            { association: 'bonus' },
-                        ],
-                    },
-                    { association: 'description' },
-                ],
-            });
-            return products;
-        } catch (error) {
-            console.log('error', error);
-        }
+        const products = await Class.findAll({
+            raw: true,
+            nest: true,
+            include: [
+                { association: 'subject' },
+                { association: 'grades' },
+                { association: 'teacher' },
+                {
+                    model: Interactive,
+                    as: 'interactive',
+                    include: [
+                        { association: 'video' },
+                        { association: 'preview' },
+                        { association: 'bonus' },
+                    ],
+                },
+                { association: 'description' },
+            ],
+        });
+        return products;
     },
     findRandom: function (n) {
         const products = Class.findAll({
@@ -64,7 +67,7 @@ const Products = {
                 { association: 'grades' },
                 { association: 'teacher' },
                 {
-                    model: db.Interactive,
+                    model: Interactive,
                     as: 'interactive',
                     include: [
                         { association: 'video' },
@@ -97,42 +100,42 @@ const Products = {
         //         ? old.interactive.bonus.location
         //         : null;
 
-        const video = db.Video.create({
+        const video = Video.create({
             location: videoFile ?? '',
         });
-        const preview = db.Preview.create({
+        const preview = Preview.create({
             location: previewFile ?? oldPreviewFile ?? '',
         });
-        const bonus = db.Bonus.create({
+        const bonus = Bonus.create({
             location: bonusFile ?? '',
         });
         const interactives = Promise.all([video, preview, bonus]).then(
             ([video, preview, bonus]) => {
-                return db.Interactive.create({
+                return Interactive.create({
                     video_id: video.dataValues.id,
                     preview_id: preview.dataValues.id,
                     bonus_id: bonus.dataValues.id,
                 });
             }
         );
-        const teacher = db.Teacher.findOrCreate({
+        const teacher = Teacher.findOrCreate({
             where: {
                 email: req.body.teacherEmail,
             },
             defaults: {
-                first_name: req.body.teacherFirstName,
-                last_name: req.body.teacherLastName,
+                firstName: req.body.teacherFirstName,
+                lastName: req.body.teacherLastName,
                 cv: req.body.teacherCv,
             },
         });
-        const description = db.Description.create({
+        const description = Description.create({
             description_short: req.body.description_short,
             description_long: req.body.description_long,
             contents: req.body.contents,
         });
         return Promise.all([teacher, interactives, description]).then(
             ([teacher, interactives, description]) => {
-                return db.Class.create(
+                return Class.create(
                     {
                         title: req.body.title,
                         subject_id: req.body.subject,
@@ -151,7 +154,7 @@ const Products = {
     },
     edit: async function (req) {
         let old = req.session.old;
-        const video = db.Video.update(
+        const video = Video.update(
             {
                 location: req.files.video
                     ? req.files.video[0].filename
@@ -163,7 +166,7 @@ const Products = {
                 },
             }
         );
-        const preview = db.Preview.update(
+        const preview = Preview.update(
             {
                 location: req.files.preview
                     ? req.files.preview[0].filename
@@ -175,7 +178,7 @@ const Products = {
                 },
             }
         );
-        const bonus = db.Bonus.update(
+        const bonus = Bonus.update(
             {
                 location: req.files.bonus
                     ? req.files.bonus[0].filename
@@ -189,7 +192,7 @@ const Products = {
         );
         const interactives = Promise.all([video, preview, bonus]).then(
             ([video, preview, bonus]) => {
-                return db.Interactive.update(
+                return Interactive.update(
                     {
                         video_id: old.interactive.video.id,
                         preview_id: old.interactive.preview.id,
@@ -203,10 +206,10 @@ const Products = {
                 );
             }
         );
-        const teacher = db.Teacher.update(
+        const teacher = Teacher.update(
             {
-                first_name: req.body.teacherFirstName,
-                last_name: req.body.teacherLastName,
+                firstName: req.body.teacherFirstName,
+                lastName: req.body.teacherLastName,
                 email: req.body.teacherEmail,
                 cv: req.body.teacherCv,
             },
@@ -216,7 +219,7 @@ const Products = {
                 },
             }
         );
-        const description = db.Description.update(
+        const description = Description.update(
             {
                 description_short: req.body.description_short,
                 description_long: req.body.description_short,
@@ -229,7 +232,7 @@ const Products = {
             }
         );
         await Promise.all([teacher, interactives, description]);
-        return db.Class.update(
+        return Class.update(
             {
                 title: req.body.title,
                 price: req.body.price,
@@ -245,59 +248,55 @@ const Products = {
         );
     },
     delete: async function (old) {
-        const classDelete = db.Class.destroy({
+        const classDelete = Class.destroy({
             where: {
                 id: old.id,
             },
         });
         const descriptionDelete = old.description.id
-            ? db.Description.destroy({
+            ? Description.destroy({
                   where: {
                       id: old.description.id,
                   },
               })
             : '';
         const interactiveDelete = old.interactive.id
-            ? db.Interactive.destroy({
+            ? Interactive.destroy({
                   where: {
                       id: old.interactive.id,
                   },
               })
             : '';
         const videoDelete = old.interactive.video_id
-            ? db.Video.destroy({
+            ? Video.destroy({
                   where: {
                       id: old.interactive.video_id,
                   },
               })
             : '';
         const previewDelete = old.interactive.preview_id
-            ? db.Preview.destroy({
+            ? Preview.destroy({
                   where: {
                       id: old.interactive.preview_id,
                   },
               })
             : '';
         const bonusDelete = old.interactive.bonus_id
-            ? db.Bonus.destroy({
+            ? Bonus.destroy({
                   where: {
                       id: old.interactive.bonus_id,
                   },
               })
             : '';
 
-        try {
-            return await Promise.all([
-                videoDelete,
-                previewDelete,
-                bonusDelete,
-                interactiveDelete,
-                descriptionDelete,
-                classDelete,
-            ]);
-        } catch (e) {
-            return res.render('error-page', { error: e });
-        }
+        return await Promise.all([
+            videoDelete,
+            previewDelete,
+            bonusDelete,
+            interactiveDelete,
+            descriptionDelete,
+            classDelete,
+        ]);
     },
 };
 

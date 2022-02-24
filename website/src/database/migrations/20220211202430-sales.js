@@ -11,10 +11,10 @@ module.exports = {
             bought: {
                 type: DataTypes.BOOLEAN,
             },
-            userId: {
+            profileId: {
                 type: DataTypes.UUID,
                 references: {
-                    model: 'users',
+                    model: 'profiles',
                     key: 'id',
                 },
                 onUpdate: 'cascade',

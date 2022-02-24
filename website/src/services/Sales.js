@@ -1,52 +1,74 @@
-const db = require("../database/models");
+const { Sale, Class, ClassSale } = require('../database/models');
+const db = require('../database/models');
 
 module.exports = {
+    addToCart: async function (req) {
+        const saleData = await Sale.create({
+            bought: null,
+            profileId: req.session.profile.id,
+        });
+        const sale = saleData.dataValues;
+        const selClass = await Class.findByPk(req.session.class.id, {
+            raw: true,
+            nest: true,
+        });
+        const classSaleData = await ClassSale.create({
+            classId: selClass.id,
+            saleId: sale.id,
+            historicPrice: selClass.price,
+        });
+        const classSale = classSaleData.dataValues;
+        return classSale;
+    },
     findAllInCart: function (req) {
         return db.Sale.findAll({
             raw: true,
             nest: true,
             where: {
                 bought: null,
-                user_id: req.session.parentLogged.user_id,
+                profileId: req.session.profile.id,
             },
             include: [
                 {
-                    model: db.Class,
-                    as: "classes",
+                    model: db.ClassSale,
+                    as: 'classesSales',
                     include: [
-                        { association: "subject" },
-                        { association: "grades" },
-                        { association: "teacher" },
                         {
-                            model: db.Interactive,
-                            as: "interactive",
+                            model: db.Class,
+                            as: 'classes',
                             include: [
-                                { association: "video" },
-                                { association: "preview" },
-                                { association: "bonus" },
+                                { association: 'subject' },
+                                { association: 'grades' },
+                                { association: 'teacher' },
+                                {
+                                    model: db.Interactive,
+                                    as: 'interactive',
+                                    include: [
+                                        { association: 'video' },
+                                        { association: 'preview' },
+                                        { association: 'bonus' },
+                                    ],
+                                },
+                                { association: 'description' },
                             ],
                         },
-                        { association: "description" },
                     ],
                 },
             ],
         });
     },
     idsInCart: async function (req) {
-        if (req.session.parentLogged) {
-            let ids = await db.Sale.findAll({
+        if (req.session.profile) {
+            let sales = await db.Sale.findAll({
                 where: {
-                    user_id: req.session.parentLogged.user_id,
+                    profileId: req.session.profile.id,
                 },
-                attributes: ["id"],
+                attributes: ['id'],
                 raw: true,
                 nest: true,
-                include: [{ association: "classes" }],
+                include: [{ association: 'classesSales' }],
             });
-            classesIds = [];
-            for (let classSel of ids) {
-                classesIds.push(classSel.classes.classes_sales.class_id);
-            }
+            classesIds = sales.map((sale) => sale.classesSales.classId);
             return classesIds;
         }
     },

@@ -50,6 +50,10 @@ module.exports = (sequelize, DataTypes) => {
             as: 'progress',
             foreignKey: 'profileId',
         });
+        Profile.hasMany(models.Sale, {
+            as: 'sales',
+            foreignKey: 'profileId',
+        });
     };
 
     return Profile;

@@ -19,9 +19,7 @@ module.exports = {
                 info: [
                     product.subject.name,
                     product.grades.name,
-                    product.teacher.first_name +
-                        ' ' +
-                        product.teacher.last_name,
+                    product.teacher.firstName + ' ' + product.teacher.lastName,
                 ],
                 price: product.price,
                 detail: `/api/products/${product.id}`,

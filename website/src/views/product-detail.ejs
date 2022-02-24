@@ -35,8 +35,8 @@
                             <% } %>
                         </div>
                         <h3>
-                            <%=classSel.teacher.first_name + " " +
-                                classSel.teacher.last_name %>
+                            <%=classSel.teacher.firstName + " " +
+                                classSel.teacher.lastName %>
                         </h3>
                     </article>
                     <article class="m-2">
@@ -48,8 +48,8 @@
                             <dd><%= classSel.description.contents %></dd>
                             <dt>Profesor</dt>
                             <dd>
-                                <%=classSel.teacher.first_name + " " +
-                                    classSel.teacher.last_name %>
+                                <%=classSel.teacher.firstName + " " +
+                                    classSel.teacher.lastName %>
                             </dd>
 
                         </dl>
@@ -76,7 +76,7 @@
                                 </button>
                             </form>
                             <a class="mb-3 " href="/products">Seguir buscando más clases</a>
-                            <% } else if(!parentLogged) { %>
+                            <% } else if(!profile) { %>
                             <form class="mb-3 " action="/" method="get">
                                 <button class="btn btn-success btn-lg text-white" type="submit">
                                     Iniciá sesión para comprar

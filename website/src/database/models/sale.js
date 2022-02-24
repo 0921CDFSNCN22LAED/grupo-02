@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
             bought: {
                 type: DataTypes.BOOLEAN,
             },
+            profileId: {
+                type: DataTypes.UUID,
+            },
             createdAt: {
                 type: DataTypes.DATE,
             },
@@ -25,11 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     Sale.associate = (models) => {
         Sale.hasMany(models.ClassSale, {
             as: 'classesSales',
-            foreignKey: 'classId',
+            foreignKey: 'saleId',
         });
-        Sale.belongsTo(models.User, {
-            as: 'users',
-            foreignKey: 'userId',
+        Sale.belongsTo(models.Profile, {
+            as: 'profiles',
+            foreignKey: 'profileId',
         });
     };
 
