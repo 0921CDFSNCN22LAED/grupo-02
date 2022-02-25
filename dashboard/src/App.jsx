@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
 import Table from './components/Table';
 import { Route, Routes } from 'react-router-dom';
-import Empty from './components/Empty';
+import Choose from './components/Choose';
 
 function App() {
     return (
@@ -11,22 +11,32 @@ function App() {
             <header>
                 <Navbar />
             </header>
-            <main>
-                <Routes>
-                    <Route path="/" element={Empty} />
-                    <Route
-                        path="/productsTable"
-                        element={
-                            <Table url="http://localhost:3001/api/products/flattened" />
-                        }
-                    />
-                    <Route
-                        path="/usersTable"
-                        element={
-                            <Table url="http://localhost:3001/api/users/flattened" />
-                        }
-                    />
-                </Routes>
+            <main className="main">
+                <div>
+                    <Routes>
+                        <Route path="/" element={<Choose />} />
+                        <Route
+                            path="/productsTable"
+                            element={
+                                <Table
+                                    key="tableProducts"
+                                    url="http://localhost:3001/api/products/flattened"
+                                    initArray={['id', 'title', 'price']}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/usersTable"
+                            element={
+                                <Table
+                                    key="tableUsers"
+                                    url="http://localhost:3001/api/users/flattened"
+                                    initArray={['id', 'email', 'profiles.name']}
+                                />
+                            }
+                        />
+                    </Routes>
+                </div>
             </main>
         </div>
     );

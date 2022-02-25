@@ -3,9 +3,9 @@ import TableData from './TableData';
 import TableHeaders from './TableHeaders';
 
 function Table(props) {
-    const wantedHeaders = ['id', 'title', 'price'];
     const [data, setData] = useState('');
     const [dataKeys, setDataKeys] = useState('');
+    const [headers, setHeaders] = useState(props.initArray);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -15,12 +15,11 @@ function Table(props) {
                 data = data.data;
                 const dataKeys = Object.keys(data[0]).filter((key) => {
                     return key;
-                    wantedHeaders.includes(key);
                 });
 
                 data = data.map((product) => {
                     for (let property of Object.keys(product)) {
-                        if (!dataKeys.includes(property)) {
+                        if (!headers.includes(property)) {
                             delete product[property];
                         }
                     }
@@ -34,12 +33,16 @@ function Table(props) {
         };
 
         fetchData();
-    }, []);
-
+    }, [dataKeys]);
+    useEffect(() => () => {}, []);
     return (
         <React.Fragment>
-            <TableHeaders dataKeys={dataKeys} />
-            <TableData dataKeys={dataKeys} data={data} />
+            <TableHeaders
+                dataKeys={dataKeys}
+                headers={headers}
+                setHeaders={setHeaders}
+            />
+            <TableData headers={headers} data={data} />
         </React.Fragment>
     );
 }

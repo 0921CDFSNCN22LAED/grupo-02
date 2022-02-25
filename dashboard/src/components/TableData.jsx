@@ -6,11 +6,11 @@ export default function TableData(props) {
             <table className="table table-hover">
                 <thead className="thead-dark">
                     <tr>
-                        {props.dataKeys ? (
-                            props.dataKeys.map((dataKey, i) => {
+                        {props.headers ? (
+                            props.headers.map((header, i) => {
                                 return (
-                                    <th scope="col" key={dataKey + i}>
-                                        {dataKey}
+                                    <th scope="col" key={header + i}>
+                                        {header}
                                     </th>
                                 );
                             })
@@ -23,7 +23,7 @@ export default function TableData(props) {
                     {props.data ? (
                         props.data.map((data, i) => {
                             return (
-                                <TableRow {...data} cellNumber={i} key={i} />
+                                <TableRow data={data} cellNumber={i} key={i} />
                             );
                         })
                     ) : (

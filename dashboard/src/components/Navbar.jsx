@@ -36,7 +36,7 @@ function Sidebar() {
                     type="search"
                     name="main-search"
                     id="main-search"
-                    placeholder="Busca clases, temas o profesores"
+                    placeholder="Implementar búsqueda"
                 />
                 <button type="submit">
                     <i className="fas fa-search"></i>

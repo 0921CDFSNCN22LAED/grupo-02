@@ -15,14 +15,31 @@
     font-family: 'EB Garamond', serif;
 }
 
-.container-c-fluid {
-    padding: 0;
-    /* background-color: var(--color-shadow); */
-}
-
 .links {
     text-decoration: none;
     color: var(--color-shadow);
     font-size: x-large;
     font-weight: bolder;
+}
+
+.main {
+    position: relative;
+    z-index: 1;
+}
+
+@media (min-width: 1200px) {
+    main {
+        max-width: 1200px;
+        margin: auto;
+    }
+}
+
+.main > div {
+    overflow-x: hidden;
+}
+
+.tableTitle {
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: var(--color-1-strong);
 }

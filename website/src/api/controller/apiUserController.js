@@ -1,4 +1,4 @@
-const { User } = require('../../database/models');
+const { User, Profile } = require('../../database/models');
 const Users = require('../../services/Users');
 
 function flattenObject(ob) {
@@ -50,7 +50,13 @@ module.exports = {
         const users = await User.findAll({
             raw: true,
             nest: true,
-            include: [{ association: 'profiles' }],
+            include: [
+                {
+                    model: Profile,
+                    as: 'profiles',
+                    include: [{ association: 'grade' }],
+                },
+            ],
         });
         const flattenedUsers = users.map((user) => flattenObject(user));
         flattenedUsers.forEach((user) => delete user.pass);
