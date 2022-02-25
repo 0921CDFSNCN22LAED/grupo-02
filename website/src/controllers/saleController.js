@@ -1,10 +1,11 @@
 const Products = require('../services/Products');
 const Sales = require('../services/Sales');
 const Users = require('../services/Users');
+const { ClassSale, Sale } = require('../database/models/');
 
 module.exports = {
     addToCart: async (req, res) => {
-        Sales.addToCart(req);
+        await Sales.addToCart(req);
         res.redirect('/sale/cart');
     },
     viewCart: (req, res) => {
@@ -15,7 +16,6 @@ module.exports = {
             const profile = req.session.profile;
             Promise.all([cart, recommendations]).then(
                 ([cart, recommendations]) => {
-                    console.log('cart', cart);
                     req.session.cart = cart;
                     const totalPrice = cart
                         .reduce((a, b) => a + b.classesSales.historicPrice, 0)
@@ -35,24 +35,8 @@ module.exports = {
         }
     },
     removeFromCart: async (req, res) => {
-        try {
-            const cart = await Sales.findAllInCart(req);
-            const sale = await db.Sale.findByPk(cart[0].id);
-            if (cart.length > 1) {
-                await sale.removeClass(req.params.id);
-            } else {
-                await sale.removeClass(req.params.id);
-                await db.Sale.destroy({
-                    where: {
-                        id: cart[0].id,
-                    },
-                    cascade: true,
-                });
-            }
-            res.redirect('/sale/cart');
-        } catch (error) {
-            res.render('error-page', { error });
-        }
+        await Sales.removeFromCart(req);
+        res.redirect('/sale/cart');
     },
     payment: (req, res) => {
         req.session.profile = req.session.profiles.find(

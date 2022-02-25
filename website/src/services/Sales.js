@@ -3,9 +3,11 @@ const db = require('../database/models');
 
 module.exports = {
     addToCart: async function (req) {
-        const saleData = await Sale.create({
-            bought: null,
-            profileId: req.session.profile.id,
+        const [saleData, created] = await Sale.findOrCreate({
+            where: {
+                bought: null,
+                profileId: req.session.profile.id,
+            },
         });
         const sale = saleData.dataValues;
         const selClass = await Class.findByPk(req.session.class.id, {
@@ -70,6 +72,29 @@ module.exports = {
             });
             classesIds = sales.map((sale) => sale.classesSales.classId);
             return classesIds;
+        }
+    },
+    removeFromCart: async function (req) {
+        const saleDeleted = await ClassSale.findByPk(req.params.id, {
+            raw: true,
+            nest: true,
+        });
+
+        await ClassSale.destroy({
+            where: { id: req.params.id },
+        });
+        const isEmptySale = await ClassSale.findOne(
+            {
+                where: { saleId: saleDeleted.saleId },
+            },
+            {
+                raw: true,
+                nest: true,
+            }
+        );
+
+        if (!isEmptySale) {
+            await Sale.destroy({ where: { id: saleDeleted.saleId } });
         }
     },
 };

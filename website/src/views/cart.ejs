@@ -44,11 +44,11 @@
                             </div>
                             <div class="shadow-pill text-end mb-2">
                                 <h3>
-                                    <%="$" + product.classesSales.classes.price.toFixed(2) %>
+                                    <%="$" + product.classesSales.classes.price %>
                                 </h3>
                                 <div>
                                 </div>
-                                <form action="/sale/removeFromCart/<%=product.classesSales.classes.id%>?_method=DELETE"
+                                <form action="/sale/removeFromCart/<%=product.classesSales.id%>?_method=DELETE"
                                     method="post">
                                     <button class="btn btn-danger btn-sm" type="submit">eliminar</button>
                                 </form>
