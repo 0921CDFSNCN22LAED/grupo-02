@@ -1,5 +1,25 @@
 const Products = require('../../services/Products');
 
+function flattenObject(ob) {
+    const toReturn = {};
+
+    for (let i in ob) {
+        if (!ob.hasOwnProperty(i)) continue;
+
+        if (typeof ob[i] == 'object' && ob[i] !== null) {
+            const flatObject = flattenObject(ob[i]);
+            for (let x in flatObject) {
+                if (!flatObject.hasOwnProperty(x)) continue;
+
+                toReturn[i + '.' + x] = flatObject[x];
+            }
+        } else {
+            toReturn[i] = ob[i];
+        }
+    }
+    return toReturn;
+}
+
 module.exports = {
     allProducts: async (req, res) => {
         const products = await Products.findAll();
@@ -32,6 +52,20 @@ module.exports = {
         };
 
         res.json(jsonProducts);
+    },
+    flattenedList: async (req, res) => {
+        const products = await Products.findAll();
+        const flattenedProducts = products.map((product) =>
+            flattenObject(product)
+        );
+        res.json({
+            meta: {
+                status: 200,
+                total: products.length,
+                url: '/api/products/flattened',
+            },
+            data: flattenedProducts,
+        });
     },
     selProduct: async (req, res) => {
         const id = req.params.id;

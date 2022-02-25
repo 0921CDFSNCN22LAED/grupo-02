@@ -1,6 +1,26 @@
 const { User } = require('../../database/models');
 const Users = require('../../services/Users');
 
+function flattenObject(ob) {
+    const toReturn = {};
+
+    for (let i in ob) {
+        if (!ob.hasOwnProperty(i)) continue;
+
+        if (typeof ob[i] == 'object' && ob[i] !== null) {
+            const flatObject = flattenObject(ob[i]);
+            for (let x in flatObject) {
+                if (!flatObject.hasOwnProperty(x)) continue;
+
+                toReturn[i + '.' + x] = flatObject[x];
+            }
+        } else {
+            toReturn[i] = ob[i];
+        }
+    }
+    return toReturn;
+}
+
 module.exports = {
     allUsers: async (req, res) => {
         const users = await User.findAll({
@@ -25,6 +45,23 @@ module.exports = {
         };
 
         res.json(jsonUsers);
+    },
+    flattenedList: async (req, res) => {
+        const users = await User.findAll({
+            raw: true,
+            nest: true,
+            include: [{ association: 'profiles' }],
+        });
+        const flattenedUsers = users.map((user) => flattenObject(user));
+        flattenedUsers.forEach((user) => delete user.pass);
+        res.json({
+            meta: {
+                status: 200,
+                total: users.length,
+                url: '/api/users/flattened',
+            },
+            data: flattenedUsers,
+        });
     },
     selProfile: async (req, res) => {
         const id = req.params.id;

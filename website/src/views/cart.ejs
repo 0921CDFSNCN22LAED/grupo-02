@@ -91,7 +91,7 @@
                         <% } %>
                         <div class="mb-3">
                             <div class="pay-flex shadow-pill d-flex justify-content-between">
-                                <% if(!parentIsLoggedSecure && totalPrice > 0) { %>
+                                <% if(!userIsLoggedSecure && totalPrice > 0) { %>
                                 <h3 class="mt-1">Total: $<%= totalPrice %></h3>
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#parentVerificationModal"
                                     class=" btn btn-primary btn-lg">Continuar como padre </a>

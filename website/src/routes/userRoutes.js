@@ -28,7 +28,7 @@ router.post(
     userController.registerProfile
 );
 
-router.post('/secure', userController.parentLoginProcess);
+router.post('/secure', userController.userLoginProcess);
 
 //VER AUTH MIDDLEWARE EN ESTA RUTA
 router.get(

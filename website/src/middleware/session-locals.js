@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     res.locals.childClasses = req.session.childClasses;
     res.locals.class = req.session.class;
 
-    res.locals.parentIsLoggedSecure = req.session.parentIsLoggedSecure;
+    res.locals.userIsLoggedSecure = req.session.userIsLoggedSecure;
 
     res.locals.old = req.session.old;
     req.session.old = null;

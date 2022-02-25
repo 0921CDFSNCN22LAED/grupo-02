@@ -55,7 +55,7 @@ const controller = {
         res.redirect('/');
     },
     logoutProfile: (req, res) => {
-        req.session.parentIsLoggedSecure = false;
+        req.session.userIsLoggedSecure = false;
         delete req.session.profile;
         res.redirect('/');
     },
@@ -72,15 +72,15 @@ const controller = {
         res.redirect(`/user/profile`);
     },
 
-    parentLoginProcess: (req, res) => {
+    userLoginProcess: (req, res) => {
         if (req.body.pass) {
-            db.Parent.findByPk(req.session.user.id)
-                .then((parent) => {
-                    if (bcrypt.compareSync(req.body.pass, parent.pass)) {
-                        req.session.parentIsLoggedSecure = true;
+            User.findByPk(req.session.user.id)
+                .then((user) => {
+                    if (bcrypt.compareSync(req.body.pass, user.pass)) {
+                        req.session.userIsLoggedSecure = true;
                         return res.redirect('back');
                     }
-                    req.session.parentIsLoggedSecure = false;
+                    req.session.userIsLoggedSecure = false;
                     req.session.errors = {
                         invalidLogIn: {
                             msg: 'Las credenciales son incorrectas',
