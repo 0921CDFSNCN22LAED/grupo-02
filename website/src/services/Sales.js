@@ -1,5 +1,11 @@
-const { Sale, Class, ClassSale } = require('../database/models');
-const db = require('../database/models');
+const {
+    Sale,
+    Class,
+    ClassSale,
+    Interactive,
+    Progress,
+} = require('../database/models');
+const Users = require('./Users');
 
 module.exports = {
     addToCart: async function (req) {
@@ -23,7 +29,7 @@ module.exports = {
         return classSale;
     },
     findAllInCart: function (req) {
-        return db.Sale.findAll({
+        return Sale.findAll({
             raw: true,
             nest: true,
             where: {
@@ -32,18 +38,18 @@ module.exports = {
             },
             include: [
                 {
-                    model: db.ClassSale,
+                    model: ClassSale,
                     as: 'classesSales',
                     include: [
                         {
-                            model: db.Class,
+                            model: Class,
                             as: 'classes',
                             include: [
                                 { association: 'subject' },
                                 { association: 'grades' },
                                 { association: 'teacher' },
                                 {
-                                    model: db.Interactive,
+                                    model: Interactive,
                                     as: 'interactive',
                                     include: [
                                         { association: 'video' },
@@ -61,7 +67,7 @@ module.exports = {
     },
     idsInCart: async function (req) {
         if (req.session.profile) {
-            let sales = await db.Sale.findAll({
+            let sales = await Sale.findAll({
                 where: {
                     profileId: req.session.profile.id,
                 },
@@ -96,5 +102,33 @@ module.exports = {
         if (!isEmptySale) {
             await Sale.destroy({ where: { id: saleDeleted.saleId } });
         }
+    },
+    assignSoldAndProgress: async function (req) {
+        const saleId = req.session.cart[0].id;
+        const classes = await ClassSale.findAll({
+            where: { saleId: saleId },
+            raw: true,
+            nest: true,
+            include: [{ association: 'sales' }],
+        });
+        await Sale.update(
+            {
+                user_id: req.session.profile.user_id,
+                bought: 1,
+            },
+            {
+                where: {
+                    id: saleId,
+                },
+            }
+        );
+
+        for (let classSel of classes) {
+            await Progress.create({
+                classId: classSel.classId,
+                profileId: classSel.sales.profileId,
+            });
+        }
+        req.session.profile = await Users.selectProfile(req.params.id);
     },
 };

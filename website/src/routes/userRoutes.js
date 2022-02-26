@@ -17,8 +17,8 @@ router.get('/changeProfile', userController.logoutProfile);
 router.put(
     '/:id/update',
     upload.single('avatar'),
-    // userValidationsImage,
-    // validation,
+    userValidationsImage,
+    validation,
     userController.updateProfile
 );
 
@@ -31,11 +31,7 @@ router.post(
 router.post('/secure', userController.userLoginProcess);
 
 //VER AUTH MIDDLEWARE EN ESTA RUTA
-router.get(
-    '/profile',
-    // authMiddleware,
-    userController.profile
-);
+router.get('/profile', authMiddleware, userController.profile);
 
 router.delete('/:id/delete', userController.deleteProfile);
 

@@ -3,9 +3,16 @@
 const util = require('util');
 
 module.exports = (req, res, next) => {
-    // console.log(util.inspect(req.session, false, null, true));
-    res.locals.user = req.session.user;
-    res.locals.profiles = req.session.profiles;
+    console.log(util.inspect(req.session, false, null, true));
+    const user = req.session.user;
+    delete user?.pass;
+    res.locals.user = user;
+    let profiles = req.session.profiles;
+    profiles = profiles?.map((profile) => {
+        delete profile.pass;
+        return profile;
+    });
+    res.locals.profiles = profiles;
     res.locals.profile = req.session.profile;
     res.locals.childClasses = req.session.childClasses;
     res.locals.class = req.session.class;

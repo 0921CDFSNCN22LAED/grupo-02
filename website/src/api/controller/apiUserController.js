@@ -28,7 +28,6 @@ module.exports = {
             nest: true,
             include: [{ association: 'profiles' }],
         });
-        console.log('users', users);
         const mappedUsers = users.map((user) => {
             return {
                 id: user.id,
@@ -77,5 +76,9 @@ module.exports = {
     currUser: async (req, res) => {
         const users = await Users.findCurrentProfiles(req);
         res.json(users);
+    },
+    findByEmail: async (req, res) => {
+        const user = await Users.findByEmail(req.query.email);
+        res.json(user);
     },
 };

@@ -1,7 +1,7 @@
 const Products = require('../services/Products');
 const Sales = require('../services/Sales');
 const Users = require('../services/Users');
-const { ClassSale, Sale } = require('../database/models/');
+const { Sale, ClassSale, Progress } = require('../database/models/');
 
 module.exports = {
     addToCart: async (req, res) => {
@@ -44,31 +44,16 @@ module.exports = {
         );
         res.redirect('/sale/payment');
     },
-    paymentPage: (req, res) => {
-        const cart = Sales.findAllInCart(req);
-        cart.then((cart) => {
-            const totalPrice = cart
-                .reduce((a, b) => a + b.classes.price, 0)
-                .toFixed(2);
+    paymentPage: async (req, res) => {
+        const cart = await Sales.findAllInCart(req);
+        const totalPrice = cart
+            .reduce((a, b) => a + b.classesSales.historicPrice, 0)
+            .toFixed(2);
 
-            res.render('payment', { cart, totalPrice });
-        });
+        res.render('payment', { cart, totalPrice });
     },
     endPurchase: async (req, res) => {
-        const saleId = req.session.cart[0].id;
-        await db.Sale.update(
-            {
-                user_id: req.session.profile.user_id,
-                bought: 1,
-            },
-            {
-                where: {
-                    id: saleId,
-                },
-            }
-        );
-        await Users.selectChild(req.session.profile.id, req);
-
+        await Sales.assignSoldAndProgress(req);
         res.redirect('/');
     },
 };

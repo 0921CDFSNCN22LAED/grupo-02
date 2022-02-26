@@ -11,10 +11,11 @@ const controller = {
         return res.redirect(`/user/profile`);
     },
     login: async (req, res) => {
+        console.log('aca');
         const user = await Users.findByEmail(req.body.email);
         if (user) {
             if (bcrypt.compareSync(req.body.pass, user.pass)) {
-                // delete logParent.pass;
+                console.log('user', user);
                 req.session.user = user;
                 const profiles = await Users.findCurrentProfiles(req);
                 req.session.profiles = profiles;
@@ -25,6 +26,7 @@ const controller = {
                 }
                 return res.redirect(`/user/profile`);
             }
+            res.redirect('/');
         }
         req.session.errors = {
             invalidLogIn: {
@@ -50,7 +52,7 @@ const controller = {
         res.redirect('/');
     },
     logout: (req, res) => {
-        res.clearCookie('userEmail');
+        res.clearCookie('email');
         req.session.destroy();
         res.redirect('/');
     },

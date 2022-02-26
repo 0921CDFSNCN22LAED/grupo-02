@@ -1,6 +1,5 @@
 window.addEventListener('load', () => {
     const deleteForms = document.querySelectorAll('.deleteForm');
-    console.log('deleteForms', deleteForms);
 
     for (let delForm of deleteForms) {
         delForm.addEventListener('submit', function (e) {

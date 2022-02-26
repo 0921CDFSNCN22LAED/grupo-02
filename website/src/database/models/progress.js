@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             progress: {
                 type: DataTypes.INTEGER(3).UNSIGNED,
+                defaultValue: 0,
             },
             classId: {
                 type: DataTypes.UUID,

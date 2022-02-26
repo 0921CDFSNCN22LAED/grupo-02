@@ -18,7 +18,7 @@ const Users = {
             { raw: true, nest: true }
         );
         req.session.user = user;
-        this.createProfile(user.id, req, true);
+        await this.createProfile(user.id, req, true);
     },
     createProfile: async function (userId, req, isParent = false) {
         const profile = await Profile.create({
@@ -34,21 +34,21 @@ const Users = {
         await profile.setUser(userId);
         req.session.profiles = await this.findCurrentProfiles(req);
     },
-    findByEmail: function (email) {
-        const user = User.findOne({
+    findByEmail: async function (email) {
+        const user = await User.findOne({
+            where: { email: email },
             raw: true,
             nest: true,
-            where: { email: email },
         });
         return user;
     },
 
-    findOneProfile: function (id) {
-        const profile = Profile.findByPk(id, { raw: true, nest: true });
+    findOneProfile: async function (id) {
+        const profile = await Profile.findByPk(id, { raw: true, nest: true });
         return profile;
     },
-    findCurrentProfiles: async (req) => {
-        const id = req.session.user.id;
+    findCurrentProfiles: async (req, searchedId) => {
+        const id = req.session.user.id ?? searchedId;
         let profiles = await User.findAll({
             raw: true,
             nest: true,

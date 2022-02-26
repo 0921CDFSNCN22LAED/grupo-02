@@ -11,7 +11,7 @@
         <div class="container-c-fluid">
             <form action="/sale/endPurchase" method="post" class="row container-c position-relative on-top">
                 <div class="col-md-6 p-2">
-                    <div class="container-c_noFlex ">
+                    <div class="container-c_noFlex w-100">
                         <div class="accordion" id="accordionPaymentOptions">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
@@ -45,13 +45,13 @@
                     </div>
                 </div>
                 <div class="col-md-6 p-2">
-                    <div class="container-c_noFlex">
+                    <div class="container-c_noFlex w-100">
                         <div class="card">
                             <div class="p-3 ">
                                 <h5 class="fs-3"> Clases</h5>
                                 <hr class="mt-0">
                                 <div>
-                                    <h5 class="fs-3">Para <%= childLogged.name %> </h5>
+                                    <h5 class="fs-3">Para <%= profile.name %> </h5>
                                 </div>
                                 <hr class="mt-0">
                                 <div class="mt-1 fs-5">
@@ -62,8 +62,9 @@
                                         </tr>
                                         <% for(let product of cart){ %>
                                         <tr>
-                                            <td><%= product.classes.title %> </td>
-                                            <td class="text-end"><%= product.classes.price.toFixed(2) %> </td>
+                                            <td><%= product.classesSales.classes.title %> </td>
+                                            <td class="text-end"><%= product.classesSales.classes.price.toFixed(2) %>
+                                            </td>
                                         </tr>
                                         <% } %>
                                     </table>
@@ -89,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-            </form action="sale/end-purchase" method="post">
+            </form>
         </div>
 
 

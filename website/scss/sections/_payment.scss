@@ -1,4 +1,4 @@
-@use "../custom" as *;
+@use '../custom' as *;
 
 .payment {
     .accordion-item {
@@ -10,7 +10,7 @@
         border: none;
     }
     .accordion-button {
-        background-color: white;
+        background-color: var(--color-2-light);
         border: none;
     }
     .card {

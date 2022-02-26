@@ -4,6 +4,7 @@ const {
     Video,
     Preview,
     Bonus,
+    Description,
     Teacher,
 } = require('../database/models');
 const Sequelize = require('sequelize');

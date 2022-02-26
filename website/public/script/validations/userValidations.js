@@ -28,24 +28,16 @@ window.addEventListener('load', () => {
             nameError.innerHTML = '';
         }
     });
-    email.addEventListener('blur', () => {
+    email.addEventListener('blur', async () => {
         delete errors.email;
-        // BUG FALTA CREAR API PRIVADA PARA UTILIZAR EN EL FRONT
-        // const user = async () => {
-        //     const parent = await db.Parent.findOne({
-        //         raw: true,
-        //         nest: true,
-        //         where: { email: email },
-        //     });
-        //     console.log('parent', parent);
-        //     return parent;
-        // };
-        // console.log('user', user());
-        // if (user) {
-        //     emailError.classList.remove('d-none');
-        //     emailError.innerHTML =
-        //         'Ya hay un usuario registrado con este correo electrónico';
-        // }
+        const response = await fetch(
+            `http://localhost:3001/api/users/email?email=${email.value}`
+        );
+        const user = await response.json();
+        if (user !== null) {
+            errors.email =
+                'Ya hay un usuario registrado con este correo electrónico';
+        }
 
         if (!validator.isEmail(email.value)) {
             errors.email = 'Tenés que ingresar un correo electrónico valido';
@@ -98,54 +90,50 @@ window.addEventListener('load', () => {
     const logErrors = {};
 
     emailLog.addEventListener('blur', () => {
-        delete logErrors.emailLog;
-
-        //FALTA COMPROBAR SI EXISTE EN LA BASE DE DATOS
+        delete logErrors.emailLogError;
 
         if (!validator.isEmail(emailLog.value)) {
-            logErrors.emailLog =
+            logErrors.emailLogError =
                 'Tenés que ingresar un correo electrónico valido';
         }
         if (validator.isEmpty(emailLog.value)) {
-            logErrors.emailLog = 'Tenés que ingresar un correo electrónico';
+            logErrors.emailLogError =
+                'Tenés que ingresar un correo electrónico';
         }
-        if (logErrors.emailLog) {
+        if (logErrors.emailLogError) {
             emailErrorLog.classList.remove('d-none');
-            emailErrorLog.innerHTML = logErrors.emailLog;
+            emailErrorLog.innerHTML = logErrors.emailLogError;
         } else {
             emailErrorLog.classList.add('d-none');
             emailErrorLog.innerHTML = '';
         }
     });
-    // passLog.addEventListener('blur', () => {
-    //     delete logErrors.passLog;
-    //     if (!validator.isStrongPassword(passLog.value)) {
-    //         logErrors.passReg =
-    //             'La contraseña debe tener letras mayúsculas, minúsculas, un número y un carácter especial';
-    //     }
-    //     if (passReg.value.length < 8) {
-    //         logErrors.passLog =
-    //             'La contraseña debe tener por lo menos 8 caracteres';
-    //     }
-    //     if (validator.isEmpty(passLog.value)) {
-    //         logErrors.passLog = 'Tenés que ingresar una contraseña';
-    //     }
-    //     if (logErrors.passLog) {
-    //         passErrorLog.classList.remove('d-none');
-    //         passErrorLog.innerHTML = logErrors.passLog;
-    //     } else {
-    //         passErrorLog.classList.add('d-none');
-    //         passErrorLog.innerHTML = '';
-    //     }
-    // });
+    passLog.addEventListener('blur', () => {
+        delete logErrors.passLogError;
+        console.log('logErrors', logErrors);
+
+        if (!validator.isStrongPassword(passLog.value)) {
+            logErrors.passLogError =
+                'La contraseña debe tener letras mayúsculas, minúsculas, un número y un carácter especial';
+        }
+        if (passLog.value.length < 8) {
+            logErrors.passLogError =
+                'La contraseña debe tener por lo menos 8 caracteres';
+        }
+        if (validator.isEmpty(passLog.value)) {
+            logErrors.passLogError = 'Tenés que ingresar una contraseña';
+        }
+        if (logErrors.passLogError) {
+            passErrorLog.classList.remove('d-none');
+            passErrorLog.innerHTML = logErrors.passLogError;
+        } else {
+            passErrorLog.classList.add('d-none');
+            passErrorLog.innerHTML = '';
+        }
+    });
 
     loginButton.addEventListener('click', (e) => {
         e.preventDefault();
         if (Object.values(logErrors).length == 0) login.submit();
     });
 });
-
-// const emailLog = document.querySelector('#emailLog');
-// let emailLogContainer = document.querySelector('#login div:first-child');
-// const passLog = document.querySelector('#passLog');
-// let passLogContainer = document.querySelector('#login div:nth-child(2)');

@@ -1,21 +1,25 @@
+const { User } = require('../database/models');
 const Users = require('../services/Users');
-const db = require('../database/models');
 
-function userLogged(req, res, next) {
-    let emailInCookie = req.cookies.userEmail;
+async function userLogged(req, res, next) {
+    console.log('req.cookies', req.cookies);
+    let emailInCookie = req.cookies.email;
+    console.log('emailInCookie', emailInCookie);
     if (emailInCookie) {
-        db.Parent.findOne({
+        const userFromCookie = await User.findOne({
             where: { email: emailInCookie },
-        })
-            .then((userFromCookie) => {
-                if (userFromCookie) {
-                    req.session.user = userFromCookie;
-                }
-            })
-            .catch((e) => res.render('error-page', { error: e }));
+            raw: true,
+            nest: true,
+        });
+        if (userFromCookie) {
+            req.session.user = userFromCookie;
+            req.session.profiles = await Users.findCurrentProfiles(
+                req,
+                userFromCookie.id
+            );
+        }
     }
 
-    // PREGUNTA: Este Next se dispara antes de cumplir la promesa??
     next();
 }
 
