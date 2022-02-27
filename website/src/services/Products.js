@@ -82,24 +82,12 @@ const Products = {
     },
     create: async function (req) {
         const videoFile = req.files.video ? req.files.video[0].filename : null;
+        console.log('videoFile', videoFile);
         const previewFile = req.files.preview
             ? req.files.preview[0].filename
             : null;
         const bonusFile = req.files.bonus ? req.files.bonus[0].filename : null;
         let old = req.session.old;
-
-        // const oldVideoFile =
-        //     old && old.interactive.video
-        //         ? old.interactive.video.location
-        //         : null;
-        // const oldPreviewFile =
-        //     old && old.interactive.preview
-        //         ? old.interactive.preview.location
-        //         : null;
-        // const oldBonusFile =
-        //     old && old.interactive.bonus
-        //         ? old.interactive.bonus.location
-        //         : null;
 
         const video = Video.create({
             location: videoFile ?? '',
@@ -113,9 +101,9 @@ const Products = {
         const interactives = Promise.all([video, preview, bonus]).then(
             ([video, preview, bonus]) => {
                 return Interactive.create({
-                    video_id: video.dataValues.id,
-                    preview_id: preview.dataValues.id,
-                    bonus_id: bonus.dataValues.id,
+                    videoId: video.dataValues.id,
+                    previewId: preview.dataValues.id,
+                    bonusId: bonus.dataValues.id,
                 });
             }
         );
@@ -130,8 +118,8 @@ const Products = {
             },
         });
         const description = Description.create({
-            description_short: req.body.description_short,
-            description_long: req.body.description_long,
+            descriptionShort: req.body.descriptionShort,
+            descriptionLong: req.body.descriptionLong,
             contents: req.body.contents,
         });
         return Promise.all([teacher, interactives, description]).then(
@@ -139,12 +127,12 @@ const Products = {
                 return Class.create(
                     {
                         title: req.body.title,
-                        subject_id: req.body.subject,
-                        grade_id: req.body.grade,
-                        teacher_id: teacher[0].dataValues.id,
+                        subjectId: req.body.subject,
+                        gradeId: req.body.grade,
+                        teacherId: teacher[0].dataValues.id,
                         price: req.body.price,
-                        interactive_id: interactives.dataValues.id,
-                        description_id: description.dataValues.id,
+                        interactiveId: interactives.dataValues.id,
+                        descriptionId: description.dataValues.id,
                     },
                     {
                         include: [{ association: 'description' }],
@@ -155,6 +143,7 @@ const Products = {
     },
     edit: async function (req) {
         let old = req.session.old;
+        console.log('old', old);
         const video = Video.update(
             {
                 location: req.files.video
@@ -195,9 +184,9 @@ const Products = {
             ([video, preview, bonus]) => {
                 return Interactive.update(
                     {
-                        video_id: old.interactive.video.id,
-                        preview_id: old.interactive.preview.id,
-                        bonus_id: old.interactive.bonus.id,
+                        videoId: old.interactive.video.id,
+                        previewId: old.interactive.preview.id,
+                        bonusId: old.interactive.bonus.id,
                     },
                     {
                         where: {
@@ -222,8 +211,8 @@ const Products = {
         );
         const description = Description.update(
             {
-                description_short: req.body.description_short,
-                description_long: req.body.description_short,
+                descriptionShort: req.body.descriptionShort,
+                descriptionLong: req.body.descriptionShort,
                 contents: req.body.contents,
             },
             {
@@ -268,24 +257,24 @@ const Products = {
                   },
               })
             : '';
-        const videoDelete = old.interactive.video_id
+        const videoDelete = old.interactive.videoId
             ? Video.destroy({
                   where: {
-                      id: old.interactive.video_id,
+                      id: old.interactive.videoId,
                   },
               })
             : '';
-        const previewDelete = old.interactive.preview_id
+        const previewDelete = old.interactive.previewId
             ? Preview.destroy({
                   where: {
-                      id: old.interactive.preview_id,
+                      id: old.interactive.previewId,
                   },
               })
             : '';
-        const bonusDelete = old.interactive.bonus_id
+        const bonusDelete = old.interactive.bonusId
             ? Bonus.destroy({
                   where: {
-                      id: old.interactive.bonus_id,
+                      id: old.interactive.bonusId,
                   },
               })
             : '';

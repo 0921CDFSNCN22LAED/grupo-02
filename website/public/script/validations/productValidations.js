@@ -55,7 +55,7 @@ window.addEventListener('load', () => {
                         errorMsg = null;
                     }
                     break;
-                case 'description_short':
+                case 'descriptionShort':
                     if (e.target.value.length < 20) {
                         errorMsg =
                             'La descripción corta deberá tener por lo menos 20 caracteres';

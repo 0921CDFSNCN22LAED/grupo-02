@@ -38,7 +38,7 @@ module.exports = [
             }
         }),
     body('contents').notEmpty().withMessage('Ingresá al menos un contenido'),
-    body('description_short')
+    body('descriptionShort')
         .notEmpty()
         .withMessage('Describí brevemente de qué se trata la clase')
         .isLength({ min: 20 })

@@ -1,13 +1,13 @@
 window.addEventListener('load', () => {
-    const avatarInput = document.querySelectorAll('.avatarInput');
+    const imgInput = document.querySelectorAll('.imgInput');
 
-    for (let i = 0; i < avatarInput.length; i++) {
-        avatarInput[i].addEventListener(
+    for (let i = 0; i < imgInput.length; i++) {
+        imgInput[i].addEventListener(
             'change',
             function () {
                 const [file] = this.files;
                 if (file) {
-                    avatarInput[
+                    imgInput[
                         i
                     ].parentElement.previousElementSibling.firstElementChild.src =
                         URL.createObjectURL(file);

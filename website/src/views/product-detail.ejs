@@ -21,7 +21,7 @@
                         <h2><%= classSel.title %></h2>
                         <img class="img-thumbnail " src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
                             alt="picture placeholder" />
-                        <p class="p-0 fw-lighter fs-5"><%=classSel.description.description_short %></p>
+                        <p class="p-0 fw-lighter fs-5"><%=classSel.description.descriptionShort %></p>
                         <div>
                             <% let stars = 0%>
                             <% for(let i = 0; i < Math.floor(classSel.rating); i++){ stars++; %>
@@ -43,7 +43,7 @@
                         <h4>Lo que aprenderás</h4>
                         <dl>
                             <dt>Descripción de la clase:</dt>
-                            <dd><%= classSel.description.description_long %></dd>
+                            <dd><%= classSel.description.descriptionLong %></dd>
                             <dt>Contenidos de la clase</dt>
                             <dd><%= classSel.description.contents %></dd>
                             <dt>Profesor</dt>

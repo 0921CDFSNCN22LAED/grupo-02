@@ -110,7 +110,6 @@ window.addEventListener('load', () => {
     });
     passLog.addEventListener('blur', () => {
         delete logErrors.passLogError;
-        console.log('logErrors', logErrors);
 
         if (!validator.isStrongPassword(passLog.value)) {
             logErrors.passLogError =

@@ -56,6 +56,7 @@ const controller = {
         });
     },
     productFormUpdate: (req, res) => {
+        req.session.old = req.session.class;
         Products.edit(req)
             .then(() => {
                 req.session.old = null;

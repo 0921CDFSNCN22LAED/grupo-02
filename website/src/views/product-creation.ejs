@@ -4,22 +4,24 @@
 <head>
     <%- include("./partials/head") %>
     <script src="/script/validations/productValidations.js"></script>
+    <script src="/script/imgInputPreview.js"></script>
 </head>
 
 <body>
     <header><%- include("./partials/header") %></header>
     <main class="container-c-fluid">
-        <form action="/products" method="post" enctype="multipart/form-data" class="container-c row-cols-md-2 mb-3"
+        <form <% if(old?.id) {%>action="/products/<%= old.id %> /edit?_method=PUT" <% } else {%> action="/products"
+            <% } %> method="post" enctype="multipart/form-data" class="container-c row-cols-md-2 mb-3"
             id="create-product-form">
             <div class="p-2 position-relative">
                 <div class="container-c_noFlex w-100">
                     <h2>Datos de la clase</h2>
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="title" id="title" placeholder="title"
-                            value="<%= locals.old && old.title ? old.title : "" %>" />
+                            value="<%= old?.title ? old.title : "" %>" />
                         <label for="title">Título</label>
                         <p class="feedback d-none" id="titleError"></p>
-                        <% if(errors && errors.title) { %>
+                        <% if(errors?.title) { %>
                         <p class="feedback text-start"><%= errors.title.msg %> </p>
                         <% } %>
                     </div>
@@ -27,13 +29,12 @@
                     <select class="form-select mb-3" aria-label="select año" name="grade" id="grade">
                         <option disabled selected>Seleccioná el año</option>
                         <% for (let grade of grades) { %>
-                        <option value="<%= grade.id %>" <%  if(locals.old && old.grade == grade.id){ %><%="selected"%>
-                            <%} %>>
+                        <option value="<%= grade.id %>" <%  if( old?.grades?.id == grade.id){ %><%="selected"%> <%} %>>
                             <%= grade.name %></option>
                         <% } %>
                     </select>
                     <p class="feedback d-none" id="gradeError"></p>
-                    <% if(errors && errors.grade) { %>
+                    <% if(errors?.grade) { %>
                     <p class="feedback text-start"><%= errors.grade.msg %> </p>
                     <% } %>
 
@@ -43,47 +44,47 @@
                         </option>
                         <% for(let subject of subjects) { %>
                         <option value="<%= subject.id %>"
-                            <%  if(locals.old && old.subject == subject.id){ %><%="selected"%><% } %>>
+                            <%  if(old?.subject.id == subject.id){ %><%="selected"%><% } %>>
                             <%=subject.name%>
                         </option>
                         <% } %>
                     </select>
                     <p class="feedback d-none" id="subjectError"></p>
-                    <% if(errors && errors.subject) { %>
+                    <% if(errors?.subject) { %>
                     <p class="feedback text-start"><%= errors.subject.msg %> </p>
                     <% } %>
 
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="contents" id="contents" placeholder="contents"
                             name="contents"
-                            value="<%= locals.old && old.contents ? typeof old.contents === "string" ? old.contents : old.contents.join(", ") : "" %>" />
+                            value="<%= old?.description.contents ? typeof old.description.contents === "string" ? old.description.contents : old.description.contents.join(", ") : "" %>" />
                         <label for="contents">Contenidos</label>
                         <p class="feedback d-none" id="contentsError"></p>
-                        <% if(errors && errors.contents) { %>
+                        <% if(errors?.contents) { %>
                         <p class="feedback text-start"><%= errors.contents.msg %> </p>
                         <% } %>
                     </div>
 
                     <div class="form-floating mb-3 " style="height: max-content;">
-                        <textarea class="form-control" rows="3" style="height:90%;" placeholder="description_short"
-                            id="description_short"
-                            name="description_short"><%= locals.old && old.description_short ? old.description_short : "" %></textarea>
-                        <label for="description_short">Descripción breve</label>
+                        <textarea class="form-control" rows="3" style="height:90%;" placeholder="descriptionShort"
+                            id="descriptionShort"
+                            name="descriptionShort"><%=  old?.description.descriptionShort ? old.description.descriptionShort : "" %></textarea>
+                        <label for="descriptionShort">Descripción breve</label>
                         <p class="feedback d-none" id="descriptionError"></p>
-                        <% if(errors && errors.description_short) { %>
-                        <p class="feedback text-start"><%= errors.description_short.msg %> </p>
+                        <% if(errors?.descriptionShort) { %>
+                        <p class="feedback text-start"><%= errors.descriptionShort.msg %> </p>
                         <% } %>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <textarea class="form-control " rows="6" style="height:90%;" placeholder="description_long"
-                            id="description_long"
-                            name="description_long"><%= locals.old &&  old.description_long ? old.description_long : "" %></textarea>
-                        <label for="description_long">Descripción detallada</label>
+                        <textarea class="form-control " rows="6" style="height:90%;" placeholder="descriptionLong"
+                            id="descriptionLong"
+                            name="descriptionLong"><%= old?.description.descriptionLong ? old.description.descriptionLong : "" %></textarea>
+                        <label for="descriptionLong">Descripción detallada</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="price" name="price" aria-label="price"
-                            placeholder="price" value="<%= locals.old && old.price ? old.price : "" %>" />
+                            placeholder="price" value="<%= old?.price ? old.price : "" %>" />
                         <label for="price">Precio</label>
                         <p class="feedback d-none" id="priceError"></p>
                         <% if(errors && errors.price) { %>
@@ -92,33 +93,57 @@
                     </div>
 
                     <div class="form-upload my-3">
-                        <label for="video" class="form-label">Cargá la clase</label>
-                        <input class="form-control" type="file" id="video" placeholder="Cargá la clase" name="video"
-                            value="<%= locals.old && old.video ? old.video.filename : ""%>" />
+                        <label for="video" class="form-label">
+                            <% if(old?.interactive.video.location) {%>
+                            <img src="/img/clases-video/<%=old.interactive.video.location%>" alt="video image">
+                            <% } %>
+                            <div>Cargá la clase</div>
+                        </label>
+                        <div class="file-input-container-c">
+                            <input class="form-control" type="file" id="video" placeholder="Cargá la clase"
+                                name="video" />
+                        </div>
                         <p class="feedback d-none bg-white" id="videoError"></p>
                     </div>
-                    <% if(errors && errors.video) { %>
+                    <% if(errors?.video) { %>
                     <p class="feedback text-start"><%= errors.video.msg %> </p>
                     <% } %>
 
                     <div class="form-upload my-3">
-                        <label for="preview" class="form-label">Previsualización del curso</label>
-                        <input class="form-control" type="file" id="preview"
-                            placeholder="Error en la previsualización del curso" name="preview"
-                            value="<%= locals.old && old.preview ? old.preview.filename : ""%>" />
+                        <label for="preview" class="form-label">
+                            <% if(old?.interactive.preview.location) {%>
+                            <img class="img-thumbnail" src="/img/clases-preview/<%=old.interactive.preview.location%>"
+                                alt="preview image" />
+                            <% } %>
+                            <div>Previsualización del curso</div>
+                        </label>
+                        <div class="file-input-container-c">
+                            <input class="form-control imgInput" type="file" id="preview"
+                                placeholder="Error en la previsualización del curso" name="preview" />
+                        </div>
+
                         <p class="feedback d-none" id="previewError"></p>
                     </div>
-                    <% if(errors && errors.preview) { %>
+                    <% if(errors?.preview) { %>
                     <p class="feedback text-start"><%= errors.preview.msg %> </p>
                     <% } %>
 
                     <div class="form-upload my-3">
-                        <label for="bonus" class="form-label">Cargá material extra</label>
-                        <input class="form-control" type="file" id="bonus" placeholder="Cargá material extra"
-                            name="bonus" value="<%= locals.old && old.bonus ? old.bonus.filename : ""%>" />
+                        <label for="bonus" class="form-label">
+                            <% if(old?.interactive.bonus.location) {%>
+                            <img class="img-thumbnail"
+                                src="/img/clases-material-extra/<%=old.interactive.bonus.location%>"
+                                alt="preview image" />
+                            <% } %>
+                            <div>Cargá material extra</div>
+                        </label>
+                        <div class="file-input-container-c">
+                            <input class="form-control" type="file" id="bonus" placeholder="Cargá material extra"
+                                name="bonus" />
+                        </div>
                         <p class="feedback d-none" id="bonusError"></p>
                     </div>
-                    <% if(errors && errors.bonus) { %>
+                    <% if(errors?.bonus) { %>
                     <p class="feedback text-start"><%= errors.bonus.msg %> </p>
                     <% } %>
 
@@ -130,22 +155,20 @@
 
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="teacherFirstName" id="teacherFirstName"
-                            placeholder="Nombre"
-                            value="<%= locals.old && old.teacherFirstName ? old.teacherFirstName : "" %>" />
+                            placeholder="Nombre" value="<%= old?.teacher.firstName ? old.teacher.firstName : "" %>" />
                         <label for="teacherFirstName">Nombre</label>
                         <p class="feedback d-none" id="teacherFirstNameError"></p>
-                        <% if(errors && errors.teacherFirstName) { %>
+                        <% if(errors?.teacherFirstName) { %>
                         <p class="feedback text-start"><%= errors.teacherFirstName.msg %> </p>
                         <% } %>
                     </div>
 
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="teacherLastName" id="teacherLastName"
-                            placeholder="Apellido"
-                            value="<%= locals.old && old.teacherLastName ? old.teacherLastName : "" %>" />
+                            placeholder="Apellido" value="<%= old?.teacher.lastName ? old.teacher.lastName : "" %>" />
                         <label for="teacherLastName">Apellido</label>
                         <p class="feedback d-none" id="teacherLastNameError"></p>
-                        <% if(errors && errors.teacherLastName) { %>
+                        <% if(errors?.teacherLastName) { %>
                         <p class="feedback text-start"><%= errors.teacherLastName.msg %> </p>
                         <% } %>
                     </div>
@@ -153,22 +176,27 @@
                     <div class="form-floating mb-3">
                         <input class="form-control" type="email" name="teacherEmail" id="teacherEmail"
                             placeholder="Correo Electrónico"
-                            value="<%= locals.old && old.teacherEmail  ? old.teacherEmail : "" %>" />
+                            value="<%=  old?.teacher.email  ? old.teacher.email : "" %>" />
                         <label for="teacherEmail">Correo Electrónico</label>
                         <p class="feedback d-none" id="teacherEmailError"></p>
-                        <% if(errors && errors.teacherEmail) { %>
+                        <% if(errors?.teacherEmail) { %>
                         <p class="feedback text-start"><%= errors.teacherEmail.msg %> </p>
                         <% } %>
                     </div>
 
                     <div class="form-floating mb-3">
                         <textarea class="form-control" rows="5" style="height:90%;" placeholder="cv" id="teacherCv"
-                            name="teacherCv"><%if(locals.old && old.teacher && old.teacher.cv){%><%=old.teacher.cv%><%}%></textarea>
+                            name="teacherCv"><%if(old?.teacher?.cv){%><%=old.teacher.cv%><%}%></textarea>
                         <label for="teacherCv">Breve presentación (cv)</label>
                     </div>
                     <div class="d-flex justify-content-around">
+
                         <button class=" btn btn-primary btn-lg align-self-end" type="submit">
+                            <% if(old?.id) {%>
+                            Actualizar la clase
+                            <% } else {%>
                             Cargar la clase
+                            <% } %>
                         </button>
                     </div>
                 </div>
@@ -176,6 +204,7 @@
         </form>
     </main>
     <%- include("./partials/footer") %>
+
 </body>
 
 </html>
