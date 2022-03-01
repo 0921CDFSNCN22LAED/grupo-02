@@ -69,11 +69,11 @@ module.exports = {
         const users = usersRaw.map((user) => {
             return {
                 id: user.id,
-                email: user.email,
-                name: user.profiles.name,
-                created: user.createdAt,
-                isParent: user.profiles.isParent,
-                grade: user.profiles.grade.id,
+                Nombre: user.profiles.name,
+                'Correo Electrónico': user.email,
+                Rol: user.profiles.isParent == 1 ? 'Padre' : 'Hijo',
+                Grado: user.profiles.grade.id,
+                Registro: user.createdAt,
             };
         });
 

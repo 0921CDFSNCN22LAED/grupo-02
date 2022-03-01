@@ -1,5 +1,7 @@
 const {
     Class,
+    Grade,
+    Subject,
     Interactive,
     Video,
     Preview,
@@ -8,6 +10,7 @@ const {
     Teacher,
 } = require('../database/models');
 const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const Products = {
     findAll: async function () {
@@ -299,6 +302,52 @@ const Products = {
             nest: true,
         });
         return productId;
+    },
+    searchProduct: async function (searchItem) {
+        try {
+            let products = await Class.findAll({
+                raw: true,
+                nest: true,
+                where: {
+                    [Op.or]: {
+                        '$class.title$': { [Op.like]: `%${searchItem}%` },
+                        '$subject.name$': { [Op.like]: `%${searchItem}%` },
+                        '$grades.name$': { [Op.like]: `%${searchItem}%` },
+                        '$teacher.firstName$': { [Op.like]: `%${searchItem}%` },
+                        '$teacher.lastName$': { [Op.like]: `%${searchItem}%` },
+                        '$teacher.email$': { [Op.like]: `%${searchItem}%` },
+                        '$teacher.cv$': { [Op.like]: `%${searchItem}%` },
+                        '$description.descriptionShort$': {
+                            [Op.like]: `%${searchItem}%`,
+                        },
+                        '$description.descriptionLong$': {
+                            [Op.like]: `%${searchItem}%`,
+                        },
+                        '$description.contents$': {
+                            [Op.like]: `%${searchItem}%`,
+                        },
+                    },
+                },
+                include: [
+                    { model: Subject, as: 'subject' },
+                    { model: Grade, as: 'grades' },
+                    { model: Teacher, as: 'teacher' },
+                    {
+                        model: Interactive,
+                        as: 'interactive',
+                        include: [
+                            { association: 'video' },
+                            { association: 'preview' },
+                            { association: 'bonus' },
+                        ],
+                    },
+                    { model: Description, as: 'description' },
+                ],
+            });
+            return products;
+        } catch (error) {
+            console.log('error', error);
+        }
     },
 };
 

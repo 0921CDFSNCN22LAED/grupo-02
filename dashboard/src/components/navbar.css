@@ -124,8 +124,8 @@ header {
     right: 7%;
     z-index: 10;
     border-radius: 0 50% 50% 0;
-    -webkit-transform: translateY(2px);
-    transform: translateY(2px);
+    /* -webkit-transform: translateY(2px); */
+    /* transform: translateY(2px); */
 }
 
 #header .search button i {

@@ -71,20 +71,20 @@ module.exports = {
         const products = productsRaw.map((product) => {
             return {
                 id: product.id,
-                title: product.title,
-                price: product.price,
-                subject: product.subject.name,
-                grades: product.grades.name,
-                teacher:
+                Título: product.title,
+                Precio: product.price,
+                Materia: product.subject.name,
+                Grado: product.grades.name,
+                Maestro:
                     product.teacher.firstName + ' ' + product.teacher.lastName,
-                'teacher email': product.teacher.email,
-                'teacher cv': product.teacher.cv,
-                video: product.interactive.video.location,
-                preview: product.interactive.preview.location,
-                bonus: product.interactive.bonus.location,
-                description: product.description.descriptionShort,
-                'description long': product.description.descriptionLong,
-                contents: product.description.contents,
+                'Correo electrónico del maestro': product.teacher.email,
+                'Cv del maestro': product.teacher.cv,
+                Video: product.interactive.video.location,
+                Portada: product.interactive.preview.location,
+                'Material extra': product.interactive.bonus.location,
+                Descripción: product.description.descriptionShort,
+                'Descripción detallada': product.description.descriptionLong,
+                Contenidos: product.description.contents,
             };
         });
         res.json({
@@ -105,5 +105,34 @@ module.exports = {
         const productId = await Products.lastProductCreated();
         const product = await Products.findOne(productId.id);
         res.json(product);
+    },
+    search: async (req, res) => {
+        const searchItem = req.query.search;
+        const productsRaw = await Products.searchProduct(searchItem);
+        const products = productsRaw.map((product) => {
+            return {
+                id: product.id,
+                Título: product.title,
+                Precio: product.price,
+                Materia: product.subject.name,
+                Grado: product.grades.name,
+                Maestro:
+                    product.teacher.firstName + ' ' + product.teacher.lastName,
+                'Correo electrónico del maestro': product.teacher.email,
+                'Cv del maestro': product.teacher.cv,
+                Video: product.interactive.video.location,
+                Portada: product.interactive.preview.location,
+                'Material extra': product.interactive.bonus.location,
+                Descripción: product.description.descriptionShort,
+                'Descripción detallada': product.description.descriptionLong,
+                Contenidos: product.description.contents,
+            };
+        });
+        res.json({
+            meta: {
+                status: 200,
+            },
+            data: products,
+        });
     },
 };

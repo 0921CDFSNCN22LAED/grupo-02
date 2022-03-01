@@ -5,11 +5,13 @@ import './table.css';
 
 function Table(props) {
     const [data, setData] = useState('');
-    const [dataKeys, setDataKeys] = useState('');
+    const [dataKeys, setDataKeys] = useState([]);
     const [headers, setHeaders] = useState(props.initArray);
 
-    function getData() {}
-
+    const currHeaders = dataKeys.filter((dataKey) => {
+        if (headers.includes(dataKey)) return dataKey;
+    });
+    console.log('aca');
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -30,14 +32,13 @@ function Table(props) {
                 });
                 setData(data);
                 setDataKeys(dataKeys);
-                console.log('dataKeys', dataKeys);
             } catch (error) {
                 console.log('error', error);
             }
         };
 
         fetchData();
-    }, []);
+    }, [headers, props.url]);
     useEffect(() => () => {}, []);
     return (
         <div className="row">
@@ -47,7 +48,7 @@ function Table(props) {
                 headers={headers}
                 setHeaders={setHeaders}
             />
-            <TableData key="table-data" headers={headers} data={data} />
+            <TableData key="table-data" headers={currHeaders} data={data} />
         </div>
     );
 }

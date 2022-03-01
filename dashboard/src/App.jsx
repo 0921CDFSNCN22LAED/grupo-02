@@ -4,8 +4,11 @@ import Navbar from './components/Navbar';
 import Table from './components/Table';
 import { Route, Routes } from 'react-router-dom';
 import Info from './components/Info';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
+    const [search, setSearch] = useState('');
     return (
         <div
             className="App container-c-fluid"
@@ -17,7 +20,7 @@ function App() {
             }}
         >
             <header>
-                <Navbar />
+                <Navbar setSearch={setSearch} />
             </header>
             <main className="main">
                 <div id="main">
@@ -29,7 +32,7 @@ function App() {
                                 <Table
                                     key="tableProducts"
                                     url="http://localhost:3001/api/products/flattened"
-                                    initArray={['title', 'subject', 'grades']}
+                                    initArray={['Título', 'Materia', 'Grado']}
                                 />
                             }
                         />
@@ -39,7 +42,26 @@ function App() {
                                 <Table
                                     key="tableUsers"
                                     url="http://localhost:3001/api/users/flattened"
-                                    initArray={['id', 'email', 'name']}
+                                    initArray={[
+                                        'Nombre',
+                                        'Correo Electrónico',
+                                        'Rol',
+                                    ]}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/searchTable"
+                            element={
+                                <Table
+                                    key="tableSearch"
+                                    url={`http://localhost:3001/api/products/search?search=${search}`}
+                                    initArray={[
+                                        'Título',
+                                        'Materia',
+                                        'Grado',
+                                        'Maestro',
+                                    ]}
                                 />
                             }
                         />

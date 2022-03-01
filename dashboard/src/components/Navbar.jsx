@@ -2,8 +2,9 @@ import './navbar.css';
 import logo from '../assets/img/logo.png';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import Search from './Search';
 
-function Sidebar() {
+function Navbar(props) {
     return (
         <div id="header" className="mb-3">
             <div className="logo-title ">
@@ -22,28 +23,17 @@ function Sidebar() {
             <div className="d-flex flex-grow-1 justify-content-center">
                 <Link className={`links`} to="/productsTable">
                     <Button className="m-3" variant="warning" size="lg">
-                        Classes
+                        Clases
                     </Button>
                 </Link>{' '}
                 <Link className={`links`} to="/usersTable">
                     <Button className="m-3" variant="warning" size="lg">
-                        Users
+                        Usuarios
                     </Button>
                 </Link>{' '}
             </div>
-            <div className="search ">
-                <input
-                    type="search"
-                    name="main-search"
-                    id="main-search"
-                    placeholder="Implementar búsqueda"
-                />
-                <button type="submit">
-                    <i className="fas fa-search"></i>
-                </button>
-            </div>
-            <div id="background-img-under-search-bar"></div>
+            <Search setSearch={props.setSearch} />
         </div>
     );
 }
-export default Sidebar;
+export default Navbar;
