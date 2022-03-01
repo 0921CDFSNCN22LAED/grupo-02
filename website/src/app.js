@@ -42,8 +42,10 @@ app.use(randomBackground());
 app.use(userLogged);
 app.use(sessionData);
 
-app.listen(3001);
-
+const PORT = process.env.PORT || 80;
+app.listen(PORT, () => {
+    console.log(`Escuchando puerto ${PORT}`);
+});
 app.use('/', homeRoute);
 app.use('/user', userRoutes);
 app.use('/products', productRoutes);
