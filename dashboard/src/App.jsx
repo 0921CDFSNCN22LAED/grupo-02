@@ -5,7 +5,6 @@ import Table from './components/Table';
 import { Route, Routes } from 'react-router-dom';
 import Info from './components/Info';
 import { useState } from 'react';
-import { useEffect } from 'react';
 
 function App() {
     const [search, setSearch] = useState('');
