@@ -3,6 +3,7 @@ const apiUserController = require('../controller/apiUserController');
 const router = express.Router();
 
 router.get('/', apiUserController.allUsers);
+router.get('/count', apiUserController.count);
 router.get('/flattened', apiUserController.flattenedList);
 router.get('/current', apiUserController.currUser);
 router.get('/email', apiUserController.findByEmail);

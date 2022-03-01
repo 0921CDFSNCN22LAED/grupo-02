@@ -11,10 +11,10 @@ export default function TableHeaders(props) {
     }
 
     return (
-        <div>
-            <h2 className="tableTitle m-3">
+        <div className="col-12 col-md-2">
+            <h4 className="side-headers-title p-2 ">
                 Seleccioná los campos que quieras visualizar
-            </h2>
+            </h4>
             {props.dataKeys ? (
                 props.dataKeys.map((dataKey, i) => {
                     return (
@@ -23,7 +23,7 @@ export default function TableHeaders(props) {
                                 props.headers.includes(dataKey)
                                     ? 'danger'
                                     : 'secondary'
-                            }`}
+                            } w-100`}
                             key={'button' + dataKey + i}
                             onClick={() => addHeader(dataKey)}
                         >

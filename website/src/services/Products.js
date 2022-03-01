@@ -288,6 +288,18 @@ const Products = {
             classDelete,
         ]);
     },
+    count: async function () {
+        return await Class.count();
+    },
+    lastProductCreated: async function () {
+        const productId = await Class.findOne({
+            attributes: ['id'],
+            order: [['createdAt', 'DESC']],
+            raw: true,
+            nest: true,
+        });
+        return productId;
+    },
 };
 
 module.exports = Products;

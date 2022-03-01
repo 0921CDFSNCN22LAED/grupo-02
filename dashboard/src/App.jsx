@@ -3,25 +3,33 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
 import Table from './components/Table';
 import { Route, Routes } from 'react-router-dom';
-import Choose from './components/Choose';
+import Info from './components/Info';
 
 function App() {
     return (
-        <div className="App container-c-fluid">
+        <div
+            className="App container-c-fluid"
+            style={{
+                backgroundImage: 'url(/img/school.png)',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                minHeight: '100vh',
+            }}
+        >
             <header>
                 <Navbar />
             </header>
             <main className="main">
-                <div>
+                <div id="main">
                     <Routes>
-                        <Route path="/" element={<Choose />} />
+                        <Route path="/" element={<Info />} />
                         <Route
                             path="/productsTable"
                             element={
                                 <Table
                                     key="tableProducts"
                                     url="http://localhost:3001/api/products/flattened"
-                                    initArray={['id', 'title', 'price']}
+                                    initArray={['title', 'subject', 'grades']}
                                 />
                             }
                         />
@@ -31,7 +39,7 @@ function App() {
                                 <Table
                                     key="tableUsers"
                                     url="http://localhost:3001/api/users/flattened"
-                                    initArray={['id', 'email', 'profiles.name']}
+                                    initArray={['id', 'email', 'name']}
                                 />
                             }
                         />

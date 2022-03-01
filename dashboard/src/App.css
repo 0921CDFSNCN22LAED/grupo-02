@@ -33,13 +33,3 @@
         margin: auto;
     }
 }
-
-.main > div {
-    overflow-x: hidden;
-}
-
-.tableTitle {
-    text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: var(--color-1-strong);
-}

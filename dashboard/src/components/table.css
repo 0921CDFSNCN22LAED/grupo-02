@@ -1,0 +1,5 @@
+.side-headers-title {
+    background-color: var(--color-2-strong);
+    color: var(--color-shadow);
+    border-radius: 5px;
+}

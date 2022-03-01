@@ -2,8 +2,8 @@ import TableRow from './TableRow';
 
 export default function TableData(props) {
     return (
-        <div className="px-4">
-            <table className="table table-hover">
+        <div className="px-4 col-12 col-md-10 container-c">
+            <table className="table table-hover ">
                 <thead className="thead-dark">
                     <tr>
                         {props.headers ? (

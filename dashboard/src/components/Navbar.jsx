@@ -20,16 +20,16 @@ function Sidebar() {
                 </Link>
             </div>
             <div className="d-flex flex-grow-1 justify-content-center">
-                <Button className="m-3" variant="warning" size="lg">
-                    <Link className={`links`} to="/productsTable">
+                <Link className={`links`} to="/productsTable">
+                    <Button className="m-3" variant="warning" size="lg">
                         Classes
-                    </Link>
-                </Button>{' '}
-                <Button className="m-3" variant="warning" size="lg">
-                    <Link className={`links`} to="/usersTable">
+                    </Button>
+                </Link>{' '}
+                <Link className={`links`} to="/usersTable">
+                    <Button className="m-3" variant="warning" size="lg">
                         Users
-                    </Link>
-                </Button>{' '}
+                    </Button>
+                </Link>{' '}
             </div>
             <div className="search ">
                 <input

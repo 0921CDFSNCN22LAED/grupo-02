@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import TableData from './TableData';
 import TableHeaders from './TableHeaders';
+import './table.css';
 
 function Table(props) {
     const [data, setData] = useState('');
     const [dataKeys, setDataKeys] = useState('');
     const [headers, setHeaders] = useState(props.initArray);
+
+    function getData() {}
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,23 +30,25 @@ function Table(props) {
                 });
                 setData(data);
                 setDataKeys(dataKeys);
+                console.log('dataKeys', dataKeys);
             } catch (error) {
                 console.log('error', error);
             }
         };
 
         fetchData();
-    }, [dataKeys]);
+    }, []);
     useEffect(() => () => {}, []);
     return (
-        <React.Fragment>
+        <div className="row">
             <TableHeaders
+                key="table-header"
                 dataKeys={dataKeys}
                 headers={headers}
                 setHeaders={setHeaders}
             />
-            <TableData headers={headers} data={data} />
-        </React.Fragment>
+            <TableData key="table-data" headers={headers} data={data} />
+        </div>
     );
 }
 

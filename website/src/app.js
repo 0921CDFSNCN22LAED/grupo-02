@@ -12,6 +12,7 @@ const homeRoute = require('./routes/homeRoute');
 const saleRoutes = require('./routes/saleRoutes');
 const apiUserRoutes = require('./api/routes/apiUserRoutes');
 const apiProductRoutes = require('./api/routes/apiProductRoutes');
+const apiTeacherRoutes = require('./api/routes/apiTeacherRoutes');
 
 const randomBackground = require('./middleware/randomBackground');
 const userLogged = require('./middleware/userLogged');
@@ -49,6 +50,7 @@ app.use('/products', productRoutes);
 app.use('/sale', saleRoutes);
 app.use('/api/users', apiUserRoutes);
 app.use('/api/products', apiProductRoutes);
+app.use('/api/teachers', apiTeacherRoutes);
 
 app.use((req, res, next) => {
     res.status(404).render('not-found');

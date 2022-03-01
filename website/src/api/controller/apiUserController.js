@@ -1,4 +1,4 @@
-const { User, Profile } = require('../../database/models');
+const { User, Profile, Teacher } = require('../../database/models');
 const Users = require('../../services/Users');
 
 function flattenObject(ob) {
@@ -45,8 +45,16 @@ module.exports = {
 
         res.json(jsonUsers);
     },
+    count: async (req, res) => {
+        const count = await User.count();
+        res.json({
+            status: 200,
+            title: 'usuarios',
+            count,
+        });
+    },
     flattenedList: async (req, res) => {
-        const users = await User.findAll({
+        const usersRaw = await User.findAll({
             raw: true,
             nest: true,
             include: [
@@ -57,15 +65,26 @@ module.exports = {
                 },
             ],
         });
-        const flattenedUsers = users.map((user) => flattenObject(user));
-        flattenedUsers.forEach((user) => delete user.pass);
+        // const flattenedUsers = users.map((user) => flattenObject(user));
+        const users = usersRaw.map((user) => {
+            return {
+                id: user.id,
+                email: user.email,
+                name: user.profiles.name,
+                created: user.createdAt,
+                isParent: user.profiles.isParent,
+                grade: user.profiles.grade.id,
+            };
+        });
+
+        // flattenedUsers.forEach((user) => delete user.pass);
         res.json({
             meta: {
                 status: 200,
                 total: users.length,
                 url: '/api/users/flattened',
             },
-            data: flattenedUsers,
+            data: users,
         });
     },
     selProfile: async (req, res) => {

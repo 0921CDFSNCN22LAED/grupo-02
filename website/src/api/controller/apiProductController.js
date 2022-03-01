@@ -53,23 +53,57 @@ module.exports = {
 
         res.json(jsonProducts);
     },
+    count: async (req, res) => {
+        const count = await Products.count();
+        res.json({
+            status: 200,
+            title: 'clases',
+            count,
+        });
+    },
+
     flattenedList: async (req, res) => {
-        const products = await Products.findAll();
-        const flattenedProducts = products.map((product) =>
-            flattenObject(product)
-        );
+        const productsRaw = await Products.findAll();
+        // const productsRaw = productsRaw.map((product) =>
+        //     flattenObject(product)
+        // );
+
+        const products = productsRaw.map((product) => {
+            return {
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                subject: product.subject.name,
+                grades: product.grades.name,
+                teacher:
+                    product.teacher.firstName + ' ' + product.teacher.lastName,
+                'teacher email': product.teacher.email,
+                'teacher cv': product.teacher.cv,
+                video: product.interactive.video.location,
+                preview: product.interactive.preview.location,
+                bonus: product.interactive.bonus.location,
+                description: product.description.descriptionShort,
+                'description long': product.description.descriptionLong,
+                contents: product.description.contents,
+            };
+        });
         res.json({
             meta: {
                 status: 200,
                 total: products.length,
                 url: '/api/products/flattened',
             },
-            data: flattenedProducts,
+            data: products,
         });
     },
     selProduct: async (req, res) => {
         const id = req.params.id;
         const product = await Products.findOne(id);
+        res.json(product);
+    },
+    lastCreated: async (req, res) => {
+        const productId = await Products.lastProductCreated();
+        const product = await Products.findOne(productId.id);
         res.json(product);
     },
 };
