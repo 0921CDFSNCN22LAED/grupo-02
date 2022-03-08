@@ -7,7 +7,8 @@
         "dev": "node src/app.js",
         "debug": "nodemon -e js --inspect src/app.js",
         "start": "nodemon -e js src/app.js",
-        "compile:sass": "sass --watch scss:public/css"
+        "compile:sass": "sass --watch scss:public/css",
+        "start_local": "nodemon -r dotenv/config src/app.js"
     },
     "repository": {
         "type": "git",
@@ -36,6 +37,7 @@
         "multer": "^1.4.3",
         "mysql2": "^2.3.3",
         "normalize.css": "^8.0.1",
+        "pg": "^8.7.3",
         "postcss": "^8.4.5",
         "postcss-cli": "^9.1.0",
         "sequelize": "^6.12.5",

@@ -118,7 +118,7 @@
             </section>
             <section class="row reviews" id="comentarios">
                 <article class="col-12 col-md-6 mb-3">
-                    <div class="container-c ">
+                    <div class="container-c responsive600px">
                         <h2>Comentarios</h2>
                         <div class="carouselVertical">
                             <% for(let i = 0; i < comentarios.length; i+=2){ %>
@@ -136,19 +136,6 @@
                             </div>
                             <% } %>
                         </div>
-                        <!-- <h2>Comentarios</h2>
-                        <div id="carouselVertical" class="v-carousel slide vertical">
-                            <div class="v-carousel-inner">
-                                <% for(let i = 0; i < comentarios.length; i++){ %>
-                                <div class="v-carousel-item">
-                                    <div>
-                                        <p><%= comentarios[i].comment %> </p>
-                                        <p><%= comentarios[i].commenter %> </p>
-                                    </div>
-                                </div>
-                                <% } %>
-                            </div>
-                        </div> -->
                     </div>
                 </article>
                 <article class="col-12 col-md-6 mb-3">
@@ -158,8 +145,8 @@
                             action=<%= user ? `/user/${locals.profile && profile.id ? profile.id : "anonymous"}/comment` : "" %>
                             method="post">
                             <div class="form-floating">
-                                <% if(!profiles) { %>
-                                <p>Tenés que ingresar para dejar un comentario</p>
+                                <% if(!profile) { %>
+                                <p>Tenés que elegir un perfil para dejar un comentario</p>
                                 <% } else { %>
                                 <p>¡Buen día<%= locals.profile && profile.name ? ` ${profile.name}` : "" %>, contanos
                                     que te
@@ -167,11 +154,13 @@
                                 <% } %>
                             </div>
                             <div class="form-floating">
-                                <textarea class="form-control" name="comment" id="comment" placeholder="comment"
-                                    rows="4" style="height: 100%; font-size: 24px;"></textarea>
+                                <textarea <% if(!profile) { %> disabled <% }  %>class="form-control" name="comment"
+                                    id="comment" placeholder="comment" rows="4"
+                                    style="height: 100%; font-size: 24px;"></textarea>
                                 <label for="comment">Comentario</label>
                             </div>
-                            <button class="btn btn-primary btn-lg button-right" type="submit">Enviar</button>
+                            <button class="btn btn-primary btn-lg button-right" <% if(!profile) { %> disabled
+                                <% }  %>type="submit">Enviar</button>
                         </form>
                     </div>
                 </article>
@@ -195,6 +184,7 @@
                                     placeholder="consulta"></textarea>
                                 <label for="consulta">Consulta</label>
                             </div>
+                            <button class="btn btn-primary btn-lg button-right" type="submit">Enviar</button>
                         </form>
                     </div>
                 </article>

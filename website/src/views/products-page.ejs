@@ -7,6 +7,24 @@
 
 <body>
     <header><%- include("./partials/header") %></header>
+    <% if(classes.length < 1) {%>
+    <main class="container-c-fluid position-relative on-top">
+        <div class="row">
+            <div class="col-12 mx-5">
+                <div class="shadow-pill my-5 auto-fit-center">
+                    <h3>Parece que no se encuentra ninguna clase con la descripción que estás buscando</h3>
+                </div>
+            </div>
+        </div>
+        <a href="/" class="row">
+            <div class="col-12 mx-5">
+                <div class="shadow-pill my-5 auto-fit-center">
+                    <h3>Volver a página de inicio</h3>
+                </div>
+            </div>
+        </a>
+    </main>
+    <% } else {%>
     <main class="container-c-fluid">
         <div class="row position-relative on-top">
             <section class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
@@ -56,9 +74,11 @@
                     </div>
                 </article>
                 <% } %>
+
             </section>
         </div>
     </main>
+    <% } %>
     <%- include("./partials/footer") %>
 </body>
 

@@ -3,6 +3,7 @@ const router = express.Router();
 const upload = require('../middleware/multerMiddleware');
 const authMiddleware = require('../middleware/authMiddleware');
 const userValidations = require('../middleware/validations/userValidations');
+const userValidationsLogin = require('../middleware/validations/userValidationsLogin');
 const userValidationsImage = require('../middleware/validations/userValidationsImage');
 const validation = require('../middleware/validation');
 
@@ -10,7 +11,7 @@ const userController = require('../controllers/userController');
 
 //Register login and logout from main page
 router.post('/register', userValidations, validation, userController.register);
-router.post('/login', userController.login);
+router.post('/login', userValidationsLogin, validation, userController.login);
 router.get('/selProfile/:id', userController.selProfile);
 router.get('/logout', userController.logout);
 router.get('/changeProfile', userController.logoutProfile);
@@ -30,7 +31,6 @@ router.post(
 
 router.post('/secure', userController.userLoginProcess);
 
-//VER AUTH MIDDLEWARE EN ESTA RUTA
 router.get('/profile', authMiddleware, userController.profile);
 
 router.delete('/:id/delete', userController.deleteProfile);

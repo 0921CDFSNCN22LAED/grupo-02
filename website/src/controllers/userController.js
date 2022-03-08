@@ -11,20 +11,19 @@ const controller = {
         return res.redirect(`/user/profile`);
     },
     login: async (req, res) => {
-        const user = await Users.findByEmail(req.body.email);
+        const user = await Users.findByEmail(req.body.emailLog);
         if (user) {
-            if (bcrypt.compareSync(req.body.pass, user.pass)) {
+            if (bcrypt.compareSync(req.body.passLog, user.pass)) {
                 req.session.user = user;
                 const profiles = await Users.findCurrentProfiles(req);
                 req.session.profiles = profiles;
                 if (req.body.rememberMe) {
-                    res.cookie('email', req.body.email, {
+                    res.cookie('email', req.body.emailLog, {
                         maxAge: 1000 * 60 * 60,
                     });
                 }
                 return res.redirect(`/user/profile`);
             }
-            res.redirect('/');
         }
         req.session.errors = {
             invalidLogIn: {
@@ -93,6 +92,7 @@ const controller = {
     },
 
     comment: async (req, res) => {
+        if (!req.session.profile) return res.redirect('/');
         await Users.createPageComment(req.params.id, req.body.comment);
         res.redirect('/');
     },

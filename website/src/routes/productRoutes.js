@@ -33,6 +33,8 @@ router.post(
     productController.publish
 );
 
+router.get('/search', productController.search);
+
 //duplicate
 router.post(
     '/duplicate',

@@ -44,15 +44,21 @@
         <div class=" shadow-pill ">
             <form action="/user/login" method="post" id="login">
                 <div class="form-floating my-3  text-start ">
-                    <input class="form-control" type="email" name="email" id="emailLog" placeholder="Nombre de usuario"
-                        value="<%= old && old.email ? old.email : "" %>" />
+                    <input class="form-control" type="email" name="emailLog" id="emailLog"
+                        placeholder="Nombre de usuario" value="<%= old?.emailLog ? old.emailLog : "" %>" />
                     <label class="text-shadow" for="emailLog">Correo electrónico</label>
                     <p class="feedback d-none w-100" id="emailErrorLog"></p>
+                    <% if(errors && errors.emailLog) { %>
+                    <p class="feedback "><%= errors.emailLog.msg %> </p>
+                    <% } %>
                 </div>
                 <div class="form-floating my-3  text-start">
-                    <input class="form-control" type="password" name="pass" id="passLog" placeholder="Contraseña" />
+                    <input class="form-control" type="password" name="passLog" id="passLog" placeholder="Contraseña" />
                     <label class="text-shadow" for="passLog">Contraseña</label>
                     <p class="feedback d-none w-100" id="passErrorLog"></p>
+                    <% if(errors && errors.passLog) { %>
+                    <p class="feedback "><%= errors.passLog.msg %> </p>
+                    <% } %>
                 </div>
                 <div class="float-left checkbox mb-3 text-start">
                     <input type="checkbox" value="rememberMe" name="rememberMe" />

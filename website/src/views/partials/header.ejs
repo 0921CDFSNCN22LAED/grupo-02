@@ -9,11 +9,11 @@
             </h1>
         </a>
     </div>
-    <div class="search ">
-        <input type="search" name="main-search" id="main-search" placeholder="Busca clases, temas o profesores" />
+    <form class="search" method="get" action="/products/search">
+        <input type="search" name="search" id="main-search" placeholder="Busca clases, temas o profesores" />
         <button type="submit"><i class="fas fa-search"></i></button>
-    </div>
-    <% if(profile && profile.isParent){ %>
+    </form>
+    <% if(profile?.isParent){ %>
     <nav class="nav-bar ">
         <div id="cart">
             <a class="position-relative " href="/sale/cart"><i class="fas fa-shopping-cart">
@@ -50,7 +50,7 @@
                 sesión</button>
         </form>
         <div class="text-start mx-2">
-            <% if(errors && errors.invalidLogIn) { %>
+            <% if(errors?.invalidLogIn) { %>
             <p class="feedback">Contraseña parental incorrecta</p>
             <% } %>
         </div>

@@ -1,11 +1,11 @@
 <article class="col-12 col-md-6  mb-3">
     <div class="container-c ">
         <h2>
-            <%= child.name %>
             <form action="/user/<%= child.id %>/delete?_method=DELETE" method="POST"
                 enctype="application/x-www-form-urlencoded" class="deleteForm">
                 <button class="btn-close button-right mt-0 " type="submit"></button>
             </form>
+            <%= child.name %>
         </h2>
         <div class="item">
             <form action="/user/<%= child.id %>/update?_method=PUT" method="post" enctype="multipart/form-data">

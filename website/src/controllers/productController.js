@@ -79,6 +79,14 @@ const controller = {
             })
             .catch((e) => res.render('error-page', { error: e }));
     },
+    search: async (req, res) => {
+        const searchItem = req.query.search;
+        console.log('searchItem', searchItem);
+        const classes = await Products.searchProduct(searchItem);
+        res.render('products-page', {
+            classes,
+        });
+    },
 };
 
 module.exports = controller;

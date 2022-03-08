@@ -84,3 +84,18 @@ label {
     border-radius: 0.25rem !important;
     width: 100%;
 }
+
+.w-95vw {
+    width: 95vw;
+}
+
+.modal-backdrop {
+    height: 1000vh !important;
+}
+
+.responsive600px {
+    height: 450px;
+    @media (min-width: 769px) {
+        height: 100%;
+    }
+}
