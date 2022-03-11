@@ -11,7 +11,6 @@ function Table(props) {
     const currHeaders = dataKeys.filter((dataKey) => {
         if (headers.includes(dataKey)) return dataKey;
     });
-    console.log('aca');
     useEffect(() => {
         const fetchData = async () => {
             try {

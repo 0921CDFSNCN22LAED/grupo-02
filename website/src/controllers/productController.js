@@ -56,8 +56,8 @@ const controller = {
         });
     },
     publishBulk: async (req, res) => {
-        console.log('req.body', req.body);
         await Products.bulkCreate(req);
+        res.redirect('/success');
     },
     productFormEdit: async (req, res) => {
         let grades = await db.Grade.findAll({ raw: true });
