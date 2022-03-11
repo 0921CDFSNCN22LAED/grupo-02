@@ -56,8 +56,7 @@
 
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="contents" id="contents" placeholder="contents"
-                            name="contents"
-                            value="<%= old?.description.contents ? typeof old.description.contents === "string" ? old.description.contents : old.description.contents.join(", ") : "" %>" />
+                            name="contents" value="<%= old?.description?.contents ? old.description.contents : "" %>" />
                         <label for="contents">Contenidos</label>
                         <p class="feedback d-none" id="contentsError"></p>
                         <% if(errors?.contents) { %>
@@ -68,7 +67,7 @@
                     <div class="form-floating mb-3 " style="height: max-content;">
                         <textarea class="form-control" rows="3" style="height:90%;" placeholder="descriptionShort"
                             id="descriptionShort"
-                            name="descriptionShort"><%=  old?.description.descriptionShort ? old.description.descriptionShort : "" %></textarea>
+                            name="descriptionShort"><%=  old?.description?.descriptionShort ? old.description.descriptionShort : "" %></textarea>
                         <label for="descriptionShort">Descripción breve</label>
                         <p class="feedback d-none" id="descriptionError"></p>
                         <% if(errors?.descriptionShort) { %>
@@ -79,7 +78,7 @@
                     <div class="form-floating mb-3">
                         <textarea class="form-control " rows="6" style="height:90%;" placeholder="descriptionLong"
                             id="descriptionLong"
-                            name="descriptionLong"><%= old?.description.descriptionLong ? old.description.descriptionLong : "" %></textarea>
+                            name="descriptionLong"><%= old?.description?.descriptionLong ? old.description.descriptionLong : "" %></textarea>
                         <label for="descriptionLong">Descripción detallada</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -94,7 +93,7 @@
 
                     <div class="form-upload my-3">
                         <label for="video" class="form-label">
-                            <% if(old?.interactive.video.location) {%>
+                            <% if(old?.interactive?.video.location) {%>
                             <img src="/img/clases-video/<%=old.interactive.video.location%>" alt="video image">
                             <% } %>
                             <div>Cargá la clase</div>
@@ -111,7 +110,7 @@
 
                     <div class="form-upload my-3">
                         <label for="preview" class="form-label">
-                            <% if(old?.interactive.preview.location) {%>
+                            <% if(old?.interactive?.preview.location) {%>
                             <img class="img-thumbnail" src="/img/clases-preview/<%=old.interactive.preview.location%>"
                                 alt="preview image" />
                             <% } %>
@@ -130,7 +129,7 @@
 
                     <div class="form-upload my-3">
                         <label for="bonus" class="form-label">
-                            <% if(old?.interactive.bonus.location) {%>
+                            <% if(old?.interactive?.bonus.location) {%>
                             <img class="img-thumbnail"
                                 src="/img/clases-material-extra/<%=old.interactive.bonus.location%>"
                                 alt="preview image" />
@@ -155,7 +154,7 @@
 
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="teacherFirstName" id="teacherFirstName"
-                            placeholder="Nombre" value="<%= old?.teacher.firstName ? old.teacher.firstName : "" %>" />
+                            placeholder="Nombre" value="<%= old?.teacher?.firstName ? old.teacher.firstName : "" %>" />
                         <label for="teacherFirstName">Nombre</label>
                         <p class="feedback d-none" id="teacherFirstNameError"></p>
                         <% if(errors?.teacherFirstName) { %>
@@ -165,7 +164,7 @@
 
                     <div class="form-floating mb-3">
                         <input class="form-control" type="text" name="teacherLastName" id="teacherLastName"
-                            placeholder="Apellido" value="<%= old?.teacher.lastName ? old.teacher.lastName : "" %>" />
+                            placeholder="Apellido" value="<%= old?.teacher?.lastName ? old.teacher.lastName : "" %>" />
                         <label for="teacherLastName">Apellido</label>
                         <p class="feedback d-none" id="teacherLastNameError"></p>
                         <% if(errors?.teacherLastName) { %>
@@ -176,7 +175,7 @@
                     <div class="form-floating mb-3">
                         <input class="form-control" type="email" name="teacherEmail" id="teacherEmail"
                             placeholder="Correo Electrónico"
-                            value="<%=  old?.teacher.email  ? old.teacher.email : "" %>" />
+                            value="<%=  old?.teacher?.email  ? old.teacher.email : "" %>" />
                         <label for="teacherEmail">Correo Electrónico</label>
                         <p class="feedback d-none" id="teacherEmailError"></p>
                         <% if(errors?.teacherEmail) { %>

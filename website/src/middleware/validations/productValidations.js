@@ -59,7 +59,8 @@ module.exports = [
         let preview = req.files.preview;
         let acceptedExtensions = ['.jpg', '.png', '.gif'];
         if (!preview) {
-            throw new Error('Subí una imagen');
+            return true;
+            // throw new Error('Subí una imagen');
         } else {
             let fileExtension = path.extname(preview[0].originalname);
             if (!acceptedExtensions.includes(fileExtension)) {

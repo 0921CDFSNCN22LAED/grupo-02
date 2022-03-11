@@ -3,56 +3,46 @@ const Products = require('../services/Products');
 const Sales = require('../services/Sales');
 
 const controller = {
-    list: (req, res) => {
-        Products.findAll().then((classes) => {
-            res.render('products-page', {
-                classes,
-            });
+    list: async (req, res) => {
+        const classes = await Products.findAll();
+        res.render('products-page', {
+            classes,
         });
     },
     detail: async (req, res) => {
         const idsInCart = await Sales.idsInCart(req);
-
-        Products.findOne(req.params.id).then((classSel) => {
-            req.session.class = classSel;
-            let inCart = false;
-            if (idsInCart && idsInCart.includes(classSel.id)) {
-                inCart = true;
-            }
-            if (!classSel) res.render('not-found');
-            res.render('product-detail', {
-                classSel,
-                id: req.params.id,
-                inCart,
-            });
+        const classSel = await Products.findOne(req.params.id);
+        req.session.class = classSel;
+        let inCart = false;
+        if (idsInCart && idsInCart.includes(classSel.id)) {
+            inCart = true;
+        }
+        if (!classSel) res.render('not-found');
+        res.render('product-detail', {
+            classSel,
+            id: req.params.id,
+            inCart,
         });
     },
-    productForm: (req, res) => {
-        let grades = db.Grade.findAll({ raw: true });
-        let subjects = db.Subject.findAll({ raw: true });
-        Promise.all([grades, subjects]).then(([grades, subjects]) => {
-            res.render('product-creation', {
-                grades,
-                subjects,
-            });
+    productForm: async (req, res) => {
+        let grades = await db.Grade.findAll({ raw: true });
+        let subjects = await db.Subject.findAll({ raw: true });
+        res.render('product-creation', {
+            grades,
+            subjects,
         });
     },
-    publish: (req, res) => {
-        Products.create(req)
-            .then(() => {
-                req.session.old = null;
-                return res.redirect('/success');
-            })
-            .catch((e) => res.render('error-page', { error: e }));
+    publish: async (req, res) => {
+        await Products.create(req);
+        req.session.old = null;
+        return res.redirect('/success');
     },
-    productFormBulk: (req, res) => {
-        let grades = db.Grade.findAll({ raw: true });
-        let subjects = db.Subject.findAll({ raw: true });
-        Promise.all([grades, subjects]).then(([grades, subjects]) => {
-            res.render('product-creation-bulk', {
-                grades,
-                subjects,
-            });
+    productFormBulk: async (req, res) => {
+        let grades = await db.Grade.findAll({ raw: true });
+        let subjects = await db.Subject.findAll({ raw: true });
+        res.render('product-creation-bulk', {
+            grades,
+            subjects,
         });
     },
     publishBulk: async (req, res) => {
@@ -69,33 +59,25 @@ const controller = {
             subjects,
         });
     },
-    productFormUpdate: (req, res) => {
+    productFormUpdate: async (req, res) => {
         req.session.old = req.session.class;
-        Products.edit(req)
-            .then(() => {
-                req.session.old = null;
-                return res.redirect('/success');
-            })
-            .catch((e) => res.render('error-page', { error: e }));
+        await Products.edit(req);
+        req.session.old = null;
+        return res.redirect('/success');
     },
-    delete: (req, res) => {
-        let old = req.session.old;
-        Products.delete(old).then(() => {
-            req.session.old = null;
-            res.redirect('/');
-        });
+    delete: async (req, res) => {
+        let old = req.session.old || req.session.class;
+        await Products.delete(old);
+        req.session.old = null;
+        res.redirect('/');
     },
-    duplicate: (req, res) => {
-        Products.create(req)
-            .then(() => {
-                req.session.old = null;
-                return res.redirect('/success');
-            })
-            .catch((e) => res.render('error-page', { error: e }));
+    duplicate: async (req, res) => {
+        await Products.create(req);
+        req.session.old = null;
+        return res.redirect('/success');
     },
     search: async (req, res) => {
         const searchItem = req.query.search;
-        console.log('searchItem', searchItem);
         const classes = await Products.searchProduct(searchItem);
         res.render('products-page', {
             classes,

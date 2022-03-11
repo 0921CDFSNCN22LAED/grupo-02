@@ -1,9 +1,9 @@
-@use "../custom" as *;
+@use '../custom' as *;
 
 .ms-primary-btn {
     color: var(--color-shadow);
     text-align: center;
-    font-family: "Gotham Black", sans-serif;
+    font-family: 'Gotham Black', sans-serif;
     background-color: var(--color-1-light);
     border: var(--color-shadow) solid 1px;
     padding: 7px;
@@ -14,4 +14,14 @@
 .button-right {
     margin-top: 40px;
     float: right;
+}
+
+.remove-btn-style {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
