@@ -45,6 +45,20 @@ const controller = {
             })
             .catch((e) => res.render('error-page', { error: e }));
     },
+    productFormBulk: (req, res) => {
+        let grades = db.Grade.findAll({ raw: true });
+        let subjects = db.Subject.findAll({ raw: true });
+        Promise.all([grades, subjects]).then(([grades, subjects]) => {
+            res.render('product-creation-bulk', {
+                grades,
+                subjects,
+            });
+        });
+    },
+    publishBulk: async (req, res) => {
+        console.log('req.body', req.body);
+        await Products.bulkCreate(req);
+    },
     productFormEdit: async (req, res) => {
         let grades = await db.Grade.findAll({ raw: true });
         let subjects = await db.Subject.findAll({ raw: true });

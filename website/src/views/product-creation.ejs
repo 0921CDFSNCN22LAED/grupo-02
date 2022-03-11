@@ -190,14 +190,16 @@
                         <label for="teacherCv">Breve presentación (cv)</label>
                     </div>
                     <div class="d-flex justify-content-around">
-
-                        <button class=" btn btn-primary btn-lg align-self-end" type="submit">
+                        <a class="btn btn-warning btn-lg align-self-end" href="/products/create-bulk">Creación en
+                            masa</a>
+                        <button class="btn btn-primary btn-lg align-self-end" type="submit">
                             <% if(old?.id) {%>
                             Actualizar la clase
                             <% } else {%>
                             Cargar la clase
                             <% } %>
                         </button>
+
                     </div>
                 </div>
             </div>

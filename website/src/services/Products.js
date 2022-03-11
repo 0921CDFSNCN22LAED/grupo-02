@@ -1,3 +1,7 @@
+const fs = require('fs');
+const path = require('path');
+const { createCanvas, loadImage } = require('canvas');
+
 const {
     Class,
     Grade,
@@ -348,6 +352,78 @@ const Products = {
         } catch (error) {
             console.log('error', error);
         }
+    },
+    autoCreatePreview: async function (tema, subject, grade) {
+        const fileName = `${tema}-${subject.substring(0, 3)}-${grade.substring(
+            0
+        )}.png`;
+        const random = Math.random() * 360;
+        const backgroundColor = `hsla(${random}, 100%, 75%, 1)`;
+        const strokeColor = `hsla(${random}, 100%, 25%, 1)`;
+        const width = 600;
+        const height = 450;
+
+        const canvas = createCanvas(width, height);
+        const context = canvas.getContext('2d');
+
+        context.fillStyle = backgroundColor;
+        context.fillRect(0, 0, width, height);
+
+        //Tema
+        context.font = 'bold 48pt Gotham';
+        context.fillStyle = strokeColor;
+        context.textAlign = 'center';
+        const temaWidth = context.measureText(tema).width;
+        const temaHeight = 48;
+        context.fillRect(0, 0, temaWidth + 40, temaHeight * 2);
+        context.fillStyle = '#fff';
+        context.fillText(tema, temaWidth / 2 + 20, temaHeight + 20);
+
+        // Subject and grade
+        context.font = 'bold 28pt Gotham';
+        context.fillStyle = strokeColor;
+        const subjectWidth = context.measureText(subject).width;
+        const subjectHeight = 28;
+        context.fillRect(0, height - 2 * subjectHeight * 2, width, 480);
+        context.fillStyle = '#fff';
+        context.fillText(
+            subject,
+            subjectWidth / 2 + 10,
+            height - subjectHeight + 10
+        );
+        const gradeWidth = context.measureText(grade).width;
+        context.fillText(
+            grade,
+            gradeWidth / 2 + 10,
+            height - subjectHeight * 2 - 20
+        );
+
+        const buffer = canvas.toBuffer('image/png');
+        console.log('buffer', buffer);
+        await fs.writeFileSync(
+            path.resolve(
+                __dirname,
+                `../../public/img/clases-preview/${fileName}`
+            ),
+            buffer,
+            (err) => {
+                if (err) throw err;
+                console.log('The file has been saved!');
+            }
+        );
+
+        // loadImage('./logo.png').then((image) => {
+        //     context.drawImage(image, 340, 515, 70, 70);
+        // });
+    },
+    bulkCreate: function (req) {
+        const tema = req.body.contents;
+        this.autoCreatePreview(
+            'Fracciones',
+            'Formación Ética y Ciudadana',
+            '5to año'
+        );
+        console.log('req.body', req.body);
     },
 };
 

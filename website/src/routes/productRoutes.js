@@ -32,6 +32,8 @@ router.post(
     validation,
     productController.publish
 );
+router.get('/create-bulk', productController.productFormBulk);
+router.post('/create-bulk', productController.publishBulk);
 
 router.get('/search', productController.search);
 
