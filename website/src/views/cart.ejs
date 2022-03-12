@@ -20,7 +20,7 @@
                     <%= cart.length %> cursos en carrito
                 </p>
             </div>
-            <section class="d-flex flex-wrap">
+            <section class="d-flex flex-wrap justify-content-around">
                 <% for(let product of cart){ %>
                 <article class="p-2 cart-article mb-5">
                     <div class="container-c_noFlex position-relative">
@@ -58,13 +58,13 @@
                 </article>
                 <% } %>
 
-                <form class="d-flex pay-flex align-items-start justify-content-center" action="/sale/payment"
+                <form class="d-flex pay-flex align-items-start justify-content-end " action="/sale/payment"
                     method="post">
-                    <div class="row">
+                    <div class="p-4">
                         <% if(totalPrice > 0) {%>
-                        <div class="mb-3">
+                        <div class="mb-3 cart-article">
                             <div class="shadow-pill">
-                                <div class="d-flex">
+                                <div class="">
                                     <h5 class="p-1">Asignar curso<%= cart.length > 1 ? "s" : "" %> a:</h5>
                                     <div class="d-inline flex-grow-1">
                                         <select class="form-select" aria-label="select child" name="selectChild"
@@ -73,7 +73,7 @@
                                             <option value="<%= children[0].id %>" selected><%= children[0].name %>
                                             </option>
                                             <% } else { %>
-                                            <option value="" selected>Elegí un hijo</option>
+                                            <option selected disabled>Elegí un hijo</option>
                                             <% for(let child of children) { %>
                                             <option value="<%= child.id %>"
                                                 <%= profile ? child.id == profile.id ? "selected" : "" : ""%>>
@@ -89,8 +89,8 @@
                             </div>
                         </div>
                         <% } %>
-                        <div class="mb-3">
-                            <div class="pay-flex shadow-pill d-flex justify-content-between">
+                        <div class="mb-3 cart-article">
+                            <div class="pay-flex shadow-pill  justify-content-between">
                                 <% if(!userIsLoggedSecure && totalPrice > 0) { %>
                                 <h3 class="mt-1">Total: $<%= totalPrice %></h3>
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#parentVerificationModal"

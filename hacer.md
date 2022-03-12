@@ -6,11 +6,7 @@
 
 ## migrations date now() no funciona
 
-## Creación bulk de productos Listo
-
 ## Paginación en main y products
-
-## Sistema de recomendación
 
 ## Fondo personalizado
 

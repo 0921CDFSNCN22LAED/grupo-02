@@ -17,6 +17,7 @@ module.exports = {
         const profiles = req.session.profiles;
         const children = profiles.filter((profile) => !profile.isParent);
         const profile = req.session.profile;
+        console.log('profile', profile);
         req.session.cart = cart;
         const totalPrice = cart
             .reduce((a, b) => a + b.classesSales.historicPrice, 0)
@@ -38,6 +39,7 @@ module.exports = {
         req.session.profile = req.session.profiles.find(
             (child) => child.id == req.body.selectChild
         );
+        console.log('req.session.profile', req.session.profile);
         res.redirect('/sale/payment');
     },
     paymentPage: async (req, res) => {

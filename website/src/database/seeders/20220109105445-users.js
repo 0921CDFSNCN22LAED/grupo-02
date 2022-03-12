@@ -88,7 +88,12 @@ module.exports = {
             {
                 id: '4b8b544f-9a30-40a3-8dd1-87aa8d0fc17c',
                 profileId: '1c0e8356-4f3f-47a5-93f1-d60b35ac8f63',
-                comment: 'Va muy bien, a seguir trabajando!!! ',
+                comment: 'Va muy bien, a seguir trabajando!!!',
+            },
+            {
+                id: '4b8b544f-9a30-40a3-8dd1-87aa8d0fc17c',
+                profileId: '780bfaa9-77ca-46e7-b96c-b4e11144bf64',
+                comment: 'Tercero!',
             },
         ]);
     },

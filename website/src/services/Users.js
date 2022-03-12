@@ -89,6 +89,8 @@ const Users = {
                     ],
                 },
             ],
+            raw: true,
+            nest: true,
         });
         return profile;
     },
@@ -136,9 +138,9 @@ const Users = {
         comments.sort(() => Math.random() - Math.random());
         return comments;
     },
-    lastClassTaken: async function (profileId) {
+    currentClasses: async function (profileId) {
         if (!profileId) return [];
-        const classSel = await Progress.findOne({
+        const classes = await Progress.findAll({
             where: { profileId },
             order: [['updatedAt', 'DESC']],
             raw: true,
@@ -165,10 +167,9 @@ const Users = {
                 },
             ],
         });
-        return classSel;
+        return classes;
     },
     findProgress: async function (profileId) {
-        console.log('profileId', profileId);
         const progress = await Progress.findAll({
             where: { profileId: profileId },
             order: [['progress', 'DESC']],

@@ -127,16 +127,16 @@
                     <div class="container-c responsive600px">
                         <h2>Comentarios</h2>
                         <div class="carouselVertical">
-                            <% for(let i = 0; i < comentarios.length; i+=2){ %>
+                            <% for(let i = 0; i < comments.length; i+=2){ %>
                             <div class="carouselVerticalItemGroup">
                                 <div class="carouselVerticalItem">
-                                    <p><%= comentarios[i].comment %> </p>
-                                    <p><%= comentarios[i].profiles.name %> </p>
+                                    <p><%= comments[i].comment %> </p>
+                                    <p><%= comments[i].profiles.name %> </p>
                                 </div>
-                                <% if(i+1 < comentarios.length) {%>
+                                <% if(i+1 < comments.length) {%>
                                 <div class="carouselVerticalItem">
-                                    <p><%= comentarios[i+1].comment %> </p>
-                                    <p><%= comentarios[i+1].profiles.name %> </p>
+                                    <p><%= comments[i+1].comment %> </p>
+                                    <p><%= comments[i+1].profiles.name %> </p>
                                 </div>
                                 <% } %>
                             </div>
