@@ -1,7 +1,7 @@
 <div class="mb-3">
     <div class="container-c">
         <h2>¡Hola <%= profile.name %>!</h2>
-        <h2>Hoy es un buen día para aprender <%= recommendations[0].titulo %></h2>
+        <h2>Hoy es un buen día para aprender <%= collection[0]?.classes.title %></h2>
 
 
     </div>
@@ -24,8 +24,8 @@
 <article class="col-12 col-md-6  ">
     <div class="container-c">
         <h2>Mi colección</h2>
-        <% if(clasesActuales.length > 0) {%>
-        <% for(let clase of clasesActuales){ %>
+        <% if(collection.length > 0) {%>
+        <% for(let clase of collection){ %>
         <a class="item" href="/products/<%= clase.classes.id%>">
             <img class=" img-thumbnail" src="/img/clases-preview/<%= clase.classes.interactive.preview.location %>"
                 alt="<%= clase.classes.title %> " />

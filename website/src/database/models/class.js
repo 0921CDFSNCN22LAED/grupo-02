@@ -74,6 +74,10 @@ module.exports = (sequelize, DataTypes) => {
             as: 'progresses',
             foreignKey: 'classId',
         });
+        Class.hasMany(models.ClassReview, {
+            as: 'classReviews',
+            foreignKey: 'classId',
+        });
     };
 
     return Class;

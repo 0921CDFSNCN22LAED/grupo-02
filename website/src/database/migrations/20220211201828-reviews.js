@@ -45,8 +45,9 @@ module.exports = {
                 onUpdate: 'cascade',
                 onDelete: 'cascade',
             },
-            ranking: {
-                type: DataTypes.DECIMAL(2, 1),
+            rating: {
+                type: DataTypes.INTEGER,
+                defaultValue: 5,
             },
             review: {
                 type: DataTypes.TEXT,

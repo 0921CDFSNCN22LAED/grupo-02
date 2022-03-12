@@ -12,11 +12,12 @@ const controller = {
     detail: async (req, res) => {
         const idsInCart = await Sales.idsInCart(req);
         const classSel = await Products.findOne(req.params.id);
-        req.session.class = classSel;
         let inCart = false;
+
         if (idsInCart && idsInCart.includes(classSel.id)) {
             inCart = true;
         }
+        req.session.class = classSel;
         if (!classSel) res.render('not-found');
         res.render('product-detail', {
             classSel,

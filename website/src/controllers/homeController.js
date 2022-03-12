@@ -3,19 +3,20 @@ const Users = require('../services/Users');
 
 const controller = {
     home: async (req, res) => {
-        let clasesActuales = req.session.profile?.progress
+        const collection = req.session.profile?.progress
             ? req.session.profile.progress
             : [];
-
         const classes = await Products.findAll();
-        const recommendations = await Products.findRandom(4);
+        const recommendations = await Products.recommender(
+            collection[0]?.classId
+        );
         const comentarios = await Users.allPageComments();
-
+        console.log('collection', collection);
         res.render('home', {
             classes,
             recommendations,
             comentarios,
-            clasesActuales,
+            collection,
         });
     },
     success: (req, res) => {

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { createCanvas, loadImage } = require('canvas');
+const ContentBasedRecommender = require('content-based-recommender');
 
 const {
     Class,
@@ -12,6 +13,7 @@ const {
     Bonus,
     Description,
     Teacher,
+    ClassReview,
 } = require('../database/models');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -37,10 +39,13 @@ const Products = {
                 { association: 'description' },
             ],
         });
+        for (let product of products) {
+            product.stars = await this.getProductRating(product.id);
+        }
         return products;
     },
-    findRandom: function (n) {
-        const products = Class.findAll({
+    findRandom: async function (n) {
+        const products = await Class.findAll({
             raw: true,
             nest: true,
             include: [
@@ -61,10 +66,13 @@ const Products = {
             order: Sequelize.literal('rand()'),
             limit: n,
         });
+        for (let product of products) {
+            product.stars = await this.getProductRating(product.id);
+        }
         return products;
     },
-    findOne: function (id) {
-        return Class.findOne({
+    findOne: async function (id) {
+        const product = await Class.findOne({
             raw: true,
             nest: true,
             where: {
@@ -86,7 +94,27 @@ const Products = {
                 { association: 'description' },
             ],
         });
+        product.stars = await this.getProductRating(product.id);
+        return product;
     },
+    getProductRating: async function (id) {
+        const ratings = await ClassReview.findAll({
+            where: { classId: id },
+            attributes: ['rating'],
+            raw: true,
+            nest: true,
+        });
+        if (ratings.length == 0) ratings.push({ rating: 4 }, { rating: 3 });
+        const rating = ratings
+            .map((r) => r.rating)
+            .reduce((a, b) => Math.round(a + b) / 2);
+        const starFilled = Math.floor(rating);
+        const starSemiFilled = rating % 1 == 0.5 ? 1 : 0;
+        const starHollow = 5 - starSemiFilled - starFilled;
+
+        return [starFilled, starSemiFilled, starHollow];
+    },
+
     create: async function (req) {
         const subject = await Subject.findByPk(req.body.subject, {
             raw: true,
@@ -177,7 +205,6 @@ const Products = {
     },
     edit: async function (req) {
         let old = req.session.old;
-        console.log('old', old);
         const video = Video.update(
             {
                 location: req.files.video
@@ -272,6 +299,9 @@ const Products = {
         );
     },
     delete: async function (old) {
+        const classReviewDelete = ClassReview.destroy({
+            where: { classId: old.id },
+        });
         const classDelete = Class.destroy({
             where: {
                 id: old.id,
@@ -320,6 +350,7 @@ const Products = {
             interactiveDelete,
             descriptionDelete,
             classDelete,
+            classReviewDelete,
         ]);
     },
     count: async function () {
@@ -545,6 +576,59 @@ const Products = {
         } catch (error) {
             console.log('error', error);
         }
+    },
+    recommender: async function (id) {
+        const recommender = new ContentBasedRecommender({
+            minScore: 0.1,
+            maxSimilarDocuments: 10,
+        });
+        const classes = await this.findAll();
+        const documents = classes.map((classSel) => {
+            return {
+                id: classSel.id,
+                content:
+                    ' ' +
+                    classSel.title +
+                    ' ' +
+                    classSel.subject.name +
+                    ' ' +
+                    classSel.grades.name +
+                    ' ' +
+                    classSel.teacher.email +
+                    ' ' +
+                    classSel.description.contents +
+                    ' ' +
+                    classSel.description.descriptionShort +
+                    ' ' +
+                    classSel.description.descriptionShort,
+            };
+        });
+
+        recommender.train(documents);
+        const similarDocuments = recommender.getSimilarDocuments(id, 0, 10);
+        const similarIds = similarDocuments.map((simDoc) => simDoc.id);
+        const similarClasses = await Class.findAll({
+            where: { id: similarIds },
+            raw: true,
+            nest: true,
+            include: [
+                { association: 'subject' },
+                { association: 'grades' },
+                { association: 'teacher' },
+                {
+                    model: Interactive,
+                    as: 'interactive',
+                    include: [
+                        { association: 'video' },
+                        { association: 'preview' },
+                        { association: 'bonus' },
+                    ],
+                },
+                { association: 'description' },
+            ],
+        });
+
+        return similarClasses;
     },
 };
 

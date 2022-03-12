@@ -20,12 +20,17 @@ module.exports = {
             raw: true,
             nest: true,
         });
-        const classSaleData = await ClassSale.create({
-            classId: selClass.id,
-            saleId: sale.id,
-            historicPrice: selClass.price,
-        });
-        const classSale = classSaleData.dataValues;
+        const classSale = await ClassSale.create(
+            {
+                classId: selClass.id,
+                saleId: sale.id,
+                historicPrice: selClass.price,
+            },
+            {
+                raw: true,
+                nest: true,
+            }
+        );
         return classSale;
     },
     findAllInCart: function (req) {

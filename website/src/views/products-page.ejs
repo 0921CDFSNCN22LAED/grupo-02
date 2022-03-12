@@ -47,16 +47,13 @@
                                     <%=classSel.teacher.firstName + " " + classSel.teacher.lastName %>
                                 </h5>
                                 <div>
-                                    <% let stars = 0; %>
-                                    <%for(let i = 0; i < Math.floor(classSel.rating); i++){ %>
-                                    <% stars++; %>
+                                    <% for(let i = 0; i < classSel.stars[0]; i++) { %>
                                     <i class="fas fa-star"></i>
                                     <% } %>
-                                    <% if(classSel.rating % 1 !=0) { %>
-                                    <% stars++; %>
+                                    <% for(let j = 0; j < classSel.stars[1]; j++) { %>
                                     <i class="fas fa-star-half-alt"></i>
                                     <% } %>
-                                    <% for(let i=0; i < 5 - stars ; i++){ %>
+                                    <% for(let k = 0; k < classSel.stars[2]; k++) { %>
                                     <i class="far fa-star"></i>
                                     <% } %>
                                 </div>

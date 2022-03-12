@@ -8,31 +8,26 @@ module.exports = {
         await Sales.addToCart(req);
         res.redirect('/sale/cart');
     },
-    viewCart: (req, res) => {
-        try {
-            const cart = Sales.findAllInCart(req);
-            const recommendations = Products.findAll();
-            const profiles = req.session.profiles;
-            const profile = req.session.profile;
-            Promise.all([cart, recommendations]).then(
-                ([cart, recommendations]) => {
-                    req.session.cart = cart;
-                    const totalPrice = cart
-                        .reduce((a, b) => a + b.classesSales.historicPrice, 0)
-                        .toFixed(2);
+    viewCart: async (req, res) => {
+        const cart = await Sales.findAllInCart(req);
+        const recommendations =
+            (await Products.recommender(
+                cart[cart.length - 1]?.classesSales.classId
+            )) || [];
+        const profiles = req.session.profiles;
+        const profile = req.session.profile;
+        req.session.cart = cart;
+        const totalPrice = cart
+            .reduce((a, b) => a + b.classesSales.historicPrice, 0)
+            .toFixed(2);
 
-                    res.render('cart', {
-                        cart,
-                        recommendations,
-                        totalPrice,
-                        profiles,
-                        profile,
-                    });
-                }
-            );
-        } catch (error) {
-            res.render('error-page', { error });
-        }
+        res.render('cart', {
+            cart,
+            recommendations,
+            totalPrice,
+            profiles,
+            profile,
+        });
     },
     removeFromCart: async (req, res) => {
         await Sales.removeFromCart(req);
