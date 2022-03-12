@@ -1,43 +1,48 @@
-<article class="col-12 col-md-6 mb-3">
+<article class="col-12  mb-3">
     <div class="container-c">
-        <h2>Tus datos personales</h2>
-        <form action="/user/<%= parent.id %>/update?_method=PUT" method="post" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-upload text-center mb-3">
-                        <label for="avatar-<%=parent.id%>" class="form-label">
-                            <img class="img-thumbnail rounded-circle " id="avatarImg-<%=parent.avatar%>"
-                                src="/img/avatars/<%= parent.avatar %>" alt="avatar" />
-                            <div>Seleccioná el avatar</div>
-                        </label>
-                        <div class="file-input-container-c">
-                            <input class="form-control  imgInput" type="file" id="avatar-<%=parent.id%>"
-                                placeholder="Avatar del hijo" name="avatar" />
+        <div class="col-12 col-md-6">
+            <h2>Tus datos personales</h2>
+            <form action="/user/<%= parent.id %>/update?_method=PUT" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-upload text-center mb-3">
+                            <label for="avatar-<%=parent.id%>" class="form-label">
+                                <img class="img-thumbnail rounded-circle " id="avatarImg-<%=parent.avatar%>"
+                                    src="/img/avatars/<%= parent.avatar %>" alt="avatar" />
+                                <div>Seleccioná el avatar</div>
+                            </label>
+                            <div class="file-input-container-c">
+                                <input class="form-control  imgInput" type="file" id="avatar-<%=parent.id%>"
+                                    placeholder="Avatar del hijo" name="avatar" />
+                            </div>
                         </div>
                     </div>
+                    <div class="col-sm-8">
+                        <div class="form-floating my-3">
+                            <input disabled class="form-control" type="text" name="name" id="name"
+                                placeholder="Nombre de usuario" value=<%= parent.name %> />
+                            <label for="name">Nombre de usuario</label>
+                        </div>
+                        <div class="form-floating my-3">
+                            <input disabled class="form-control disabled" type="text" name="email" id="email"
+                                placeholder="Correo electrónico" value=<%= parent.email %> />
+                            <label for="email">Correo electrónico</label>
+                        </div>
+                        <div class="form-floating my-3">
+                            <input disabled class="form-control" type="password" name="pass" id="pass"
+                                placeholder="Contraseña" />
+                            <label class="text-shadow" for="pass">
+                                Cambiá tu contraseña
+                            </label>
+                        </div>
+                        <button class="btn btn-success btn-lg button-right my-3" type="submit">Actualizar
+                            perfil</button>
+                    </div>
                 </div>
-                <div class="col-sm-8">
-                    <div class="form-floating my-3">
-                        <input disabled class="form-control" type="text" name="name" id="name"
-                            placeholder="Nombre de usuario" value=<%= parent.name %> />
-                        <label for="name">Nombre de usuario</label>
-                    </div>
-                    <div class="form-floating my-3">
-                        <input disabled class="form-control disabled" type="text" name="email" id="email"
-                            placeholder="Correo electrónico" value=<%= parent.email %> />
-                        <label for="email">Correo electrónico</label>
-                    </div>
-                    <div class="form-floating my-3">
-                        <input disabled class="form-control" type="password" name="pass" id="pass"
-                            placeholder="Contraseña" />
-                        <label class="text-shadow" for="pass">
-                            Cambiá tu contraseña
-                        </label>
-                    </div>
-                    <button class="btn btn-success btn-lg button-right my-3" type="submit">Actualizar
-                        perfil</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="col-12 col-md-6">
+            DATOS DE PAGO
+        </div>
     </div>
 </article>

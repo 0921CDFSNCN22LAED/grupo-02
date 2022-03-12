@@ -10,11 +10,11 @@
 <article class="col-12 col-md-6">
     <div class="container-c">
         <h2>Clase actual</h2>
-        <% if(locals.ultimaClase) {%>
-        <a class="item" href="/products/<%= ultimaClase.id %>">
-            <img class="img-thumbnail" src="/img/clases-preview/<%= ultimaClase.preview %>"
-                alt="<%= ultimaClase.titulo %> " />
-            <h4 class="subtitle"><%= ultimaClase.titulo %></h4>
+        <% if(lastClassTaken) {%>
+        <a class="item" href="/user/class/<%= lastClassTaken.id %>">
+            <img class="img-thumbnail" src="/img/clases-preview/<%= lastClassTaken.interactive.preview.location %>"
+                alt="<%= lastClassTaken.title %> " />
+            <h4 class="subtitle"><%= lastClassTaken.title %></h4>
         </a>
         <% } else { %>
         <h3>No estás tomando ninguna clase aún</h3>
@@ -25,11 +25,14 @@
     <div class="container-c">
         <h2>Mi colección</h2>
         <% if(collection.length > 0) {%>
-        <% for(let clase of collection){ %>
-        <a class="item" href="/products/<%= clase.classes.id%>">
-            <img class=" img-thumbnail" src="/img/clases-preview/<%= clase.classes.interactive.preview.location %>"
-                alt="<%= clase.classes.title %> " />
-            <h4 class="subtitle"><%= clase.classes.title %></h4>
+        <% for(let classSel of collection){ %>
+        <a class="item" href="/user/class/<%= classSel.classes.id%>">
+            <span class="progressData" data-value=<%= classSel.progress %>>
+                <progress class="progressOverImage w-100" max="100"></progress>
+            </span>
+            <img class=" img-thumbnail" src="/img/clases-preview/<%= classSel.classes.interactive.preview.location %>"
+                alt="<%= classSel.classes.title %> " />
+            <h4 class="subtitle"><%= classSel.classes.title %></h4>
         </a>
         <% } %>
         <% } else { %>
@@ -37,3 +40,4 @@
         <% } %>
     </div>
 </article>
+<script src="/script/progressValue.js"></script>

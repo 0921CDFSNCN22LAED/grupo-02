@@ -8,17 +8,20 @@
                     <th>Clase</th>
                     <th>Progreso</th>
                 </tr>
+                <% for(let prog of progress) {%>
                 <tr>
-                    <td>Hijo 1</td>
-                    <td>Clase 1</td>
-                    <td>Barra de progreso</td>
+                    <td><%= prog.profiles.name %> </td>
+                    <td><%= prog.classes.title %> </td>
+
+                    <td>
+                        <span class="progressData" data-value=<%= prog.progress %>>
+                            <progress max="100" value="0"></progress>
+                        </span>
+                    </td>
                 </tr>
-                <tr>
-                    <td>Hijo 2</td>
-                    <td>Clase 2</td>
-                    <td>Barra de progreso</td>
-                </tr>
+                <% } %>
             </table>
         </div>
     </div>
 </article>
+<script src="/script/progressValue.js"></script>

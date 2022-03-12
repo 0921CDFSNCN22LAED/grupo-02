@@ -15,6 +15,7 @@ module.exports = {
                 cart[cart.length - 1]?.classesSales.classId
             )) || [];
         const profiles = req.session.profiles;
+        const children = profiles.filter((profile) => !profile.isParent);
         const profile = req.session.profile;
         req.session.cart = cart;
         const totalPrice = cart
@@ -25,7 +26,7 @@ module.exports = {
             cart,
             recommendations,
             totalPrice,
-            profiles,
+            children,
             profile,
         });
     },

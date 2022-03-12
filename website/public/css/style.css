@@ -11236,6 +11236,10 @@ a {
   margin: 0.5rem;
   flex: 1 1 10rem;
 }
+.item .progressOverImage {
+  position: absolute;
+  -webkit-appearance: none;
+}
 
 .subtitle, .subtitle--center {
   float: inline-end;
@@ -11602,6 +11606,8 @@ footer {
 .main #otros-cursos {
   display: flex;
   flex-wrap: wrap;
+  max-height: 600px;
+  overflow-x: hidden;
 }
 .main #otros-cursos div {
   border: var(--color-shadow) dashed 1px;

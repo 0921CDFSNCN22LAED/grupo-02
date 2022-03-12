@@ -32,6 +32,8 @@ router.post(
 router.post('/secure', userController.userLoginProcess);
 
 router.get('/profile', authMiddleware, userController.profile);
+router.get('/class/:id', authMiddleware, userController.class);
+router.post('/saveProgress/:classId', userController.saveProgress);
 
 router.delete('/:id/delete', userController.deleteProfile);
 

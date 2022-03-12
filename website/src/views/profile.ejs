@@ -12,7 +12,7 @@
     <main class="container-c-fluid">
         <section class="row">
             <%- include("./partials/partials-profile/personal-data") %>
-            <%- include("./partials/partials-profile/progress-bar") %>
+
             <% children.forEach(function(child){ %>
             <%- include("./partials/partials-profile/profile-card", {child: child}); %>
             <% }); %>
@@ -67,6 +67,7 @@
             </article>
         </section>
     </main>
+    <%- include("./partials/footer") %>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/script/confirmDelete.js"></script>
 </body>

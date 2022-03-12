@@ -3,13 +3,10 @@ const path = require('path');
 
 module.exports = [
     body('avatar').custom((value, { req }) => {
-        // if (req.body.previewLocation) {
-        //     return true;
-        // }
         let avatar = req.file;
         let acceptedExtensions = ['.jpg', '.png', '.gif'];
         if (!avatar) {
-            throw new Error('Subí una imagen');
+            return true;
         } else {
             let fileExtension = path.extname(avatar.originalname);
             if (!acceptedExtensions.includes(fileExtension)) {

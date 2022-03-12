@@ -136,6 +136,61 @@ const Users = {
         comments.sort(() => Math.random() - Math.random());
         return comments;
     },
+    lastClassTaken: async function (profileId) {
+        if (!profileId) return [];
+        const classSel = await Progress.findOne({
+            where: { profileId },
+            order: [['updatedAt', 'DESC']],
+            raw: true,
+            nest: true,
+            include: [
+                {
+                    model: Class,
+                    as: 'classes',
+                    include: [
+                        { association: 'subject' },
+                        { association: 'grades' },
+                        { association: 'teacher' },
+                        {
+                            model: Interactive,
+                            as: 'interactive',
+                            include: [
+                                { association: 'video' },
+                                { association: 'preview' },
+                                { association: 'bonus' },
+                            ],
+                        },
+                        { association: 'description' },
+                    ],
+                },
+            ],
+        });
+        return classSel;
+    },
+    findProgress: async function (profileId) {
+        console.log('profileId', profileId);
+        const progress = await Progress.findAll({
+            where: { profileId: profileId },
+            order: [['progress', 'DESC']],
+            attributes: ['progress'],
+            raw: true,
+            nest: true,
+            include: [
+                { association: 'profiles', attributes: ['name'] },
+                { association: 'classes', attributes: ['title'] },
+            ],
+        });
+        return progress;
+    },
+
+    createCustomPage: async function () {
+        // Tomar id de profile
+        // aceptar foto
+        // Tomar colores de la foto
+        // Crear Css
+        // Guardar css
+        // Retornar ruta
+    },
 };
 
 module.exports = Users;

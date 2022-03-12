@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include("./partials/head") %>
+    <script src="/script/imgInputPreview.js"></script>
+</head>
+
+<body>
+    <header><%- include("./partials/header") %></header>
+
+    <main class="container-c-fluid">
+        <section class="row">
+        </section>
+        <section class="row">
+            <article class="col-12 col-md-6  mb-3">
+                <div class="container-c ">
+                    <h2>
+                        Clase
+                    </h2>
+                    <div class="item">
+                        <h2>Video o actividad</h2>
+                        <img class="img-thumbnail" src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
+                            alt="<%= classSel.title %> " />
+                        <h4 class="subtitle"><%= classSel.title %></h4>
+
+                    </div>
+                </div>
+            </article>
+            <article class="col-12 col-md-6  mb-3">
+                <div class="container-c ">
+                    <h2>
+                        Progreso <span id="progressValue"></span>
+                    </h2>
+                    <div class="item  ">
+                        <form action="/user/saveProgress/<%= classSel.id %>" method="post"
+                            enctype="application/x-www-form-urlencoded">
+                            <input name="progress" id="progressValueInput" class="w-100 my-5" type="range" min="0"
+                                max="100" step="1" value=<%= classSel.progress.progress %>>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-primary btn-lg align-self-end" type="submit">Guardar
+                                    progreso</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+    <%- include("./partials/footer") %>
+    <script src="/script/progressValue.js"></script>
+</body>
+
+</html>

@@ -60,7 +60,6 @@ module.exports = [
         let acceptedExtensions = ['.jpg', '.png', '.gif'];
         if (!preview) {
             return true;
-            // throw new Error('Subí una imagen');
         } else {
             let fileExtension = path.extname(preview[0].originalname);
             if (!acceptedExtensions.includes(fileExtension)) {

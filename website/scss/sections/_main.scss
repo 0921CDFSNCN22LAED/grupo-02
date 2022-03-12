@@ -52,6 +52,8 @@
     #otros-cursos {
         display: flex;
         flex-wrap: wrap;
+        max-height: 600px;
+        overflow-x: hidden;
         div {
             border: var(--color-shadow) dashed 1px;
             padding: 5px;

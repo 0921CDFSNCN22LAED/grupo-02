@@ -69,12 +69,12 @@
                                     <div class="d-inline flex-grow-1">
                                         <select class="form-select" aria-label="select child" name="selectChild"
                                             id="selectChild">
-                                            <%if(profiles.length == 1){ %>
-                                            <option value="<%= profiles[0].id %>" selected><%= profiles[0].name %>
+                                            <%if(children.length == 1){ %>
+                                            <option value="<%= children[0].id %>" selected><%= children[0].name %>
                                             </option>
                                             <% } else { %>
                                             <option value="" selected>Elegí un hijo</option>
-                                            <% for(let child of profiles) { %>
+                                            <% for(let child of children) { %>
                                             <option value="<%= child.id %>"
                                                 <%= profile ? child.id == profile.id ? "selected" : "" : ""%>>
                                                 <%= child.name %></option>

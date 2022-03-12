@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include("./partials/head") %>
+    <script src="/script/imgInputPreview.js"></script>
+</head>
+
+<body>
+    <header><%- include("./partials/header") %></header>
+
+    <main class="container-c-fluid">
+        <section class="row">
+            <%- include("./partials/partials-profile/progress-bar", {progress: progress}) %>
+            <%- include("./partials/partials-profile/profile-card", {child: child}); %>
+        </section>
+        <section class="row">
+            <article class="col-12 col-md-6  mb-3">
+                <div class="container-c ">
+                    <h2>
+                        Subí tu propio tema
+                    </h2>
+                    <div class="item">
+                        <form action="/user/<%= child.id %>/customTheme" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="">
+                                    <div class="form-upload text-center mb-3">
+                                        <label for="avatar-<%=child.id%>" class="form-label">
+                                            <img class="img-thumbnail rounded-circle "
+                                                id="avatarChildImg-<%=child.avatar%>" src="" alt="avatar" />
+                                            <div>Seleccioná el avatar</div>
+                                        </label>
+                                        <div class="file-input-container-c">
+                                            <input class="form-control  imgInput" type="file" id="avatar-<%=child.id%>"
+                                                placeholder="Avatar del hijo" name="avatar" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+    <%- include("./partials/footer") %>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/script/cannotDelete.js"></script>
+</body>
+
+</html>

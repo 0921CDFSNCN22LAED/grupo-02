@@ -61,8 +61,12 @@
                 <%- include("./partials/partials-home/choose-profile") %>
 
                 <!-- 3) cursos del hijo -->
-                <% } else if(locals.profile) { %>
+                <% } else if(locals.profile && !locals.profile.isParent) { %>
                 <%- include("./partials/partials-home/child-classes") %>
+
+                <!-- 4) info del padre -->
+                <% } else if(locals.profile && locals.profile.isParent) { %>
+                <%- include("./partials/partials-home/parent-info") %>
                 <% } %>
             </section>
             <section class="row">
@@ -86,15 +90,17 @@
                 <article class="col-12 col-md-6 mb-3">
                     <div id="otros-cursos" class="container-c">
                         <h2>Otros cursos</h2>
-                        <% for(let clase of classes){ %>
-                        <a href="/products/<%= clase.id %> ">
-                            <div class="other-clases">
-                                <%= clase.title %>
-                            </div>
-                        </a>
-                        <% } %>
-                        <a href="/products">
-                            <div class="other-clases">Más cursos</div>
+                        <span class="d-flex flex-wrap w-100 justify-content-around">
+                            <% for(let i = 0; i < Math.min(classes.length, 42); i++){ %>
+                            <a href="/products/<%= classes[i].id %> ">
+                                <div class="other-clases">
+                                    <%= classes[i].title %>
+                                </div>
+                            </a>
+                            <% } %>
+                        </span>
+                        <a href="/products" class="me-auto">
+                            <div class="other-clases ">...Más cursos</div>
                         </a>
                     </div>
                 </article>

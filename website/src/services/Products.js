@@ -14,8 +14,10 @@ const {
     Description,
     Teacher,
     ClassReview,
+    Progress,
 } = require('../database/models');
 const Sequelize = require('sequelize');
+const { where } = require('sequelize');
 const Op = Sequelize.Op;
 
 const Products = {
@@ -71,7 +73,8 @@ const Products = {
         }
         return products;
     },
-    findOne: async function (id) {
+    findOne: async function (id, req) {
+        const profileId = req?.session.profile.id;
         const product = await Class.findOne({
             raw: true,
             nest: true,
@@ -94,8 +97,27 @@ const Products = {
                 { association: 'description' },
             ],
         });
+        if (profileId)
+            product.progress = await Progress.findOne({
+                where: { classId: id, profileId: profileId },
+                raw: true,
+                nest: true,
+            });
         product.stars = await this.getProductRating(product.id);
         return product;
+    },
+    saveProgress: async function (req) {
+        await Progress.update(
+            {
+                progress: req.body.progress,
+            },
+            {
+                where: {
+                    classId: req.params.classId,
+                    profileId: req.session.profile.id,
+                },
+            }
+        );
     },
     getProductRating: async function (id) {
         const ratings = await ClassReview.findAll({
@@ -366,50 +388,49 @@ const Products = {
         return productId;
     },
     searchProduct: async function (searchItem) {
-        try {
-            let products = await Class.findAll({
-                raw: true,
-                nest: true,
-                where: {
-                    [Op.or]: {
-                        '$class.title$': { [Op.like]: `%${searchItem}%` },
-                        '$subject.name$': { [Op.like]: `%${searchItem}%` },
-                        '$grades.name$': { [Op.like]: `%${searchItem}%` },
-                        '$teacher.firstName$': { [Op.like]: `%${searchItem}%` },
-                        '$teacher.lastName$': { [Op.like]: `%${searchItem}%` },
-                        '$teacher.email$': { [Op.like]: `%${searchItem}%` },
-                        '$teacher.cv$': { [Op.like]: `%${searchItem}%` },
-                        '$description.descriptionShort$': {
-                            [Op.like]: `%${searchItem}%`,
-                        },
-                        '$description.descriptionLong$': {
-                            [Op.like]: `%${searchItem}%`,
-                        },
-                        '$description.contents$': {
-                            [Op.like]: `%${searchItem}%`,
-                        },
+        let products = await Class.findAll({
+            raw: true,
+            nest: true,
+            where: {
+                [Op.or]: {
+                    '$class.title$': { [Op.like]: `%${searchItem}%` },
+                    '$subject.name$': { [Op.like]: `%${searchItem}%` },
+                    '$grades.name$': { [Op.like]: `%${searchItem}%` },
+                    '$teacher.firstName$': { [Op.like]: `%${searchItem}%` },
+                    '$teacher.lastName$': { [Op.like]: `%${searchItem}%` },
+                    '$teacher.email$': { [Op.like]: `%${searchItem}%` },
+                    '$teacher.cv$': { [Op.like]: `%${searchItem}%` },
+                    '$description.descriptionShort$': {
+                        [Op.like]: `%${searchItem}%`,
+                    },
+                    '$description.descriptionLong$': {
+                        [Op.like]: `%${searchItem}%`,
+                    },
+                    '$description.contents$': {
+                        [Op.like]: `%${searchItem}%`,
                     },
                 },
-                include: [
-                    { model: Subject, as: 'subject' },
-                    { model: Grade, as: 'grades' },
-                    { model: Teacher, as: 'teacher' },
-                    {
-                        model: Interactive,
-                        as: 'interactive',
-                        include: [
-                            { association: 'video' },
-                            { association: 'preview' },
-                            { association: 'bonus' },
-                        ],
-                    },
-                    { model: Description, as: 'description' },
-                ],
-            });
-            return products;
-        } catch (error) {
-            console.log('error', error);
+            },
+            include: [
+                { model: Subject, as: 'subject' },
+                { model: Grade, as: 'grades' },
+                { model: Teacher, as: 'teacher' },
+                {
+                    model: Interactive,
+                    as: 'interactive',
+                    include: [
+                        { association: 'video' },
+                        { association: 'preview' },
+                        { association: 'bonus' },
+                    ],
+                },
+                { model: Description, as: 'description' },
+            ],
+        });
+        for (let product of products) {
+            product.stars = await this.getProductRating(product.id);
         }
+        return products;
     },
     autoCreatePreview: async function (tema, subject, grade) {
         const fileName = `${tema}-${subject.substring(0, 3)}-${grade.substring(
@@ -481,100 +502,96 @@ const Products = {
         return fileName;
     },
     bulkCreate: async function (req) {
-        try {
-            const tema = req.body.contents;
-            const subjects = req.body.subjects;
-            const grades = req.body.grades;
+        const tema = req.body.contents;
+        const subjects = req.body.subjects;
+        const grades = req.body.grades;
 
-            for (let subject of subjects) {
-                subject = await Subject.findByPk(subject, {
+        for (let subject of subjects) {
+            subject = await Subject.findByPk(subject, {
+                raw: true,
+                nest: true,
+            });
+            for (let grade of grades) {
+                grade = await Grade.findByPk(grade, {
                     raw: true,
                     nest: true,
                 });
-                for (let grade of grades) {
-                    grade = await Grade.findByPk(grade, {
-                        raw: true,
-                        nest: true,
-                    });
-                    const subjAbbr = () => {
-                        return subject.name
-                            .split(' ')
-                            .map(
-                                (abbr) =>
-                                    abbr.substring(0, 1).toUpperCase() +
-                                    abbr.substring(1, 3)
-                            )
-                            .join('');
-                    };
-                    const title = tema
-                        ? `${tema}-${grade.name.substring(0, 1)}`
-                        : subjAbbr() + grade.name.substring(0, 1);
-                    console.log('grade', grade.name);
-                    console.log('subject', subject.name);
+                const subjAbbr = () => {
+                    return subject.name
+                        .split(' ')
+                        .map(
+                            (abbr) =>
+                                abbr.substring(0, 1).toUpperCase() +
+                                abbr.substring(1, 3)
+                        )
+                        .join('');
+                };
+                const title = tema
+                    ? `${tema}-${grade.name.substring(0, 1)}`
+                    : subjAbbr() + grade.name.substring(0, 1);
+                console.log('grade', grade.name);
+                console.log('subject', subject.name);
 
-                    const previewFile = await this.autoCreatePreview(
-                        title,
-                        subject.name,
-                        grade.name
-                    );
+                const previewFile = await this.autoCreatePreview(
+                    title,
+                    subject.name,
+                    grade.name
+                );
 
-                    const video = await Video.create({
-                        location: '',
-                    });
-                    const preview = await Preview.create({
-                        location: previewFile,
-                    });
-                    const bonus = await Bonus.create({
-                        location: '',
-                    });
-                    const interactives = await Interactive.create({
-                        videoId: video.dataValues.id,
-                        previewId: preview.dataValues.id,
-                        bonusId: bonus.dataValues.id,
-                    });
-                    const teacher = await Teacher.findOrCreate({
-                        where: {
-                            email: req.body.teacherEmail,
-                        },
-                        defaults: {
-                            firstName: req.body.teacherFirstName,
-                            lastName: req.body.teacherLastName,
-                            cv: req.body.teacherCv,
-                        },
-                    });
-                    const description = await Description.create({
-                        descriptionShort:
-                            req.body.contents +
-                            ' de ' +
-                            subject.name +
-                            ' para ' +
-                            grade.name,
-                        descriptionLong:
-                            req.body.contents +
-                            ' de ' +
-                            subject.name +
-                            ' para ' +
-                            grade.name,
-                        contents: req.body.contents,
-                    });
-                    await Class.create(
-                        {
-                            title: title,
-                            subjectId: subject.id,
-                            gradeId: grade.id,
-                            teacherId: teacher[0].dataValues.id,
-                            price: req.body.price,
-                            interactiveId: interactives.dataValues.id,
-                            descriptionId: description.dataValues.id,
-                        },
-                        {
-                            include: [{ association: 'description' }],
-                        }
-                    );
-                }
+                const video = await Video.create({
+                    location: '',
+                });
+                const preview = await Preview.create({
+                    location: previewFile,
+                });
+                const bonus = await Bonus.create({
+                    location: '',
+                });
+                const interactives = await Interactive.create({
+                    videoId: video.dataValues.id,
+                    previewId: preview.dataValues.id,
+                    bonusId: bonus.dataValues.id,
+                });
+                const teacher = await Teacher.findOrCreate({
+                    where: {
+                        email: req.body.teacherEmail,
+                    },
+                    defaults: {
+                        firstName: req.body.teacherFirstName,
+                        lastName: req.body.teacherLastName,
+                        cv: req.body.teacherCv,
+                    },
+                });
+                const description = await Description.create({
+                    descriptionShort:
+                        req.body.contents +
+                        ' de ' +
+                        subject.name +
+                        ' para ' +
+                        grade.name,
+                    descriptionLong:
+                        req.body.contents +
+                        ' de ' +
+                        subject.name +
+                        ' para ' +
+                        grade.name,
+                    contents: req.body.contents,
+                });
+                await Class.create(
+                    {
+                        title: title,
+                        subjectId: subject.id,
+                        gradeId: grade.id,
+                        teacherId: teacher[0].dataValues.id,
+                        price: req.body.price,
+                        interactiveId: interactives.dataValues.id,
+                        descriptionId: description.dataValues.id,
+                    },
+                    {
+                        include: [{ association: 'description' }],
+                    }
+                );
             }
-        } catch (error) {
-            console.log('error', error);
         }
     },
     recommender: async function (id) {

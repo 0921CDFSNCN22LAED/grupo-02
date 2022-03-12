@@ -118,7 +118,7 @@ module.exports = {
         });
         await Sale.update(
             {
-                user_id: req.session.profile.user_id,
+                userId: req.session.profile.userId,
                 bought: 1,
             },
             {

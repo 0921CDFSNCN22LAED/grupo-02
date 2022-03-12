@@ -22,7 +22,7 @@ const controller = {
                         maxAge: 1000 * 60 * 60,
                     });
                 }
-                return res.redirect(`/user/profile`);
+                return res.redirect(`/`);
             }
         }
         req.session.errors = {
@@ -35,14 +35,25 @@ const controller = {
     profile: async (req, res) => {
         const grades = await Grade.findAll({ raw: true, nest: true });
         const profiles = await Users.findCurrentProfiles(req);
-        const parent = profiles.filter((profile) => profile.isParent == 1);
-        const children = profiles.filter((profile) => profile.isParent == 0);
-
-        res.render('profile', {
-            grades,
-            parent: parent[0],
-            children,
-        });
+        if (!req.session.profile || req.session.profile.isParent) {
+            const parent = profiles.filter((profile) => profile.isParent == 1);
+            const children = profiles.filter(
+                (profile) => profile.isParent == 0
+            );
+            return res.render('profile', {
+                grades,
+                parent: parent[0],
+                children,
+            });
+        } else {
+            const profileId = req.session.profile.id;
+            const progress = await Users.findProgress(profileId);
+            return res.render('profile-child', {
+                grades,
+                child: req.session.profile,
+                progress,
+            });
+        }
     },
     selProfile: async (req, res) => {
         req.session.profile = await Users.selectProfile(req.params.id);
@@ -64,6 +75,7 @@ const controller = {
     },
     updateProfile: async (req, res) => {
         await Users.update(req);
+        req.session.profile = await Users.selectProfile(req.params.id);
         res.redirect(`/user/profile`);
     },
     deleteProfile: async (req, res) => {
@@ -94,6 +106,14 @@ const controller = {
     comment: async (req, res) => {
         if (!req.session.profile) return res.redirect('/');
         await Users.createPageComment(req.params.id, req.body.comment);
+        res.redirect('/');
+    },
+    class: async (req, res) => {
+        const classSel = await Products.findOne(req.params.id, req);
+        res.render('class', { classSel });
+    },
+    saveProgress: async (req, res) => {
+        await Products.saveProgress(req);
         res.redirect('/');
     },
 };
