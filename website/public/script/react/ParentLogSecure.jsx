@@ -1,4 +1,22 @@
-function ParentLogSecure() {
+const domContainer = document.querySelector('#ParentLogSecure');
+ReactDOM.render(<Prueba />, domContainer);
+console.log('aca');
+('use strict');
+
+function Prueba() {
+    let [passedData, setPassedData] = React.useState('');
+
+    const button = document.querySelector(
+        '[data-bs-target*="parentVerificationModal"]'
+    );
+    if (button) {
+        const passingData = document.querySelector('#selectChild');
+        button.addEventListener('click', (e) => {
+            e.preventDefault;
+            setPassedData(passingData.value);
+            console.log('passingData.value', passingData.value);
+        });
+    }
     return (
         <div
             class="modal fade w-95vw"
@@ -41,7 +59,7 @@ function ParentLogSecure() {
                                 name="passedData"
                                 id="passedData"
                                 class="hidden"
-                                value=""
+                                value={passedData}
                             />
                             <button
                                 type="submit"

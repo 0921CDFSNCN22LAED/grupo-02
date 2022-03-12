@@ -10,7 +10,7 @@
         <%- include("./partials/header") %>
     </header>
     <main class="container-c-fluid">
-        <%- include("./partials/partials-home/parent-logsecure-modal") %>
+        <div id="ParentLogSecure"></div>
         <div class="container-c position-relative fit-content mb-5">
             <div class="w-100">
                 <h2>
@@ -20,7 +20,7 @@
                     <%= cart.length %> cursos en carrito
                 </p>
             </div>
-            <section class="d-flex flex-wrap justify-content-around">
+            <section class="d-flex flex-wrap justify-content-between">
                 <% for(let product of cart){ %>
                 <article class="p-2 cart-article mb-5">
                     <div class="container-c_noFlex position-relative">
@@ -60,7 +60,7 @@
 
                 <form class="d-flex pay-flex align-items-start justify-content-end " action="/sale/payment"
                     method="post">
-                    <div class="p-4">
+                    <div class="p-2">
                         <% if(totalPrice > 0) {%>
                         <div class="mb-3 cart-article">
                             <div class="shadow-pill">
@@ -76,15 +76,15 @@
                                             <option selected disabled>Elegí un hijo</option>
                                             <% for(let child of children) { %>
                                             <option value="<%= child.id %>"
-                                                <%= profile ? child.id == profile.id ? "selected" : "" : ""%>>
+                                                <%= profile ? child.id == childBenefited ? "selected" : "" : ""%>>
                                                 <%= child.name %></option>
                                             <% } %>
                                             <% } %>
                                         </select>
                                     </div>
                                 </div>
-                                <% if(errors && errors.selectChild) { %>
-                                <p class="feedback text-start"><%= errors.selectChild.msg %> </p>
+                                <% if(errors?.selectChild) { %>
+                                <p class="feedback text-start w-100 p-2"><%= errors.selectChild.msg %> </p>
                                 <% } %>
                             </div>
                         </div>
@@ -135,6 +135,7 @@
 
     </main>
     <%- include("./partials/footer") %>
+    <script src="/script/ParentLogSecure.js"></script>
 </body>
 
 </html>

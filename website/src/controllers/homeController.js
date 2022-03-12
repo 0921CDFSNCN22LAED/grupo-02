@@ -1,4 +1,5 @@
 const Products = require('../services/Products');
+const Sales = require('../services/Sales');
 const Users = require('../services/Users');
 
 const controller = {
@@ -9,7 +10,10 @@ const controller = {
         let collection = [];
         let lastClassTaken;
         let progress;
+        let cart = [];
         if (req.session.profiles && req.session.profile?.isParent) {
+            cart = await Sales.findAllInCart(req);
+            req.session.cart = cart;
             if (req.session.profiles) {
                 const profiles = await Users.findCurrentProfiles(req);
                 const profilesId = profiles.map((profile) => profile.id);
@@ -42,6 +46,7 @@ const controller = {
             collection,
             lastClassTaken: lastClassTaken?.classes,
             progress,
+            cart,
         });
     },
     success: (req, res) => {

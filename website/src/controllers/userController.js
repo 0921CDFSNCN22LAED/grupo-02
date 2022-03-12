@@ -89,6 +89,7 @@ const controller = {
                 .then((user) => {
                     if (bcrypt.compareSync(req.body.pass, user.pass)) {
                         req.session.userIsLoggedSecure = true;
+                        req.session.childBenefited = req.body.passedData;
                         return res.redirect('back');
                     }
                     req.session.userIsLoggedSecure = false;

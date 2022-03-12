@@ -8,7 +8,7 @@
         "debug": "nodemon -e js --inspect src/app.js",
         "start": "nodemon -e js src/app.js",
         "compile:sass": "sass --watch scss:public/css",
-        "compile:react": "npx babel --watch ./public/script --out-dir ./public/script -e js --presets react-app/prod",
+        "compile:react": "npx babel --watch ./public/script/react --out-dir ./public/script -e jsx --presets react-app/prod",
         "start_local": "nodemon -r dotenv/config src/app.js"
     },
     "repository": {

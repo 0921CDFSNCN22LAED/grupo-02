@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
     res.locals.profile = req.session.profile;
     res.locals.childClasses = req.session.childClasses;
     res.locals.class = req.session.class;
+    res.locals.cart = req.session.cart;
 
     res.locals.userIsLoggedSecure = req.session.userIsLoggedSecure;
 

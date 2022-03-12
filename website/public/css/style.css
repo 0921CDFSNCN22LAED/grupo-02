@@ -11174,6 +11174,10 @@ a {
   z-index: 1;
 }
 
+.badge {
+  font-size: 0.5em;
+}
+
 .ms-primary-btn {
   color: var(--color-shadow);
   text-align: center;

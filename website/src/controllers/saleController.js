@@ -17,8 +17,10 @@ module.exports = {
         const profiles = req.session.profiles;
         const children = profiles.filter((profile) => !profile.isParent);
         const profile = req.session.profile;
-        console.log('profile', profile);
         req.session.cart = cart;
+        let childBenefited;
+        if (profile.isParent) childBenefited = req.session.childBenefited;
+        console.log('childBenefited', childBenefited);
         const totalPrice = cart
             .reduce((a, b) => a + b.classesSales.historicPrice, 0)
             .toFixed(2);
@@ -29,6 +31,7 @@ module.exports = {
             totalPrice,
             children,
             profile,
+            childBenefited,
         });
     },
     removeFromCart: async (req, res) => {
@@ -39,11 +42,11 @@ module.exports = {
         req.session.profile = req.session.profiles.find(
             (child) => child.id == req.body.selectChild
         );
-        console.log('req.session.profile', req.session.profile);
         res.redirect('/sale/payment');
     },
     paymentPage: async (req, res) => {
-        const cart = await Sales.findAllInCart(req);
+        const cart = req.session.cart;
+        console.log('cart', cart);
         const totalPrice = cart
             .reduce((a, b) => a + b.classesSales.historicPrice, 0)
             .toFixed(2);

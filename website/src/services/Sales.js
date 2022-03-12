@@ -109,6 +109,7 @@ module.exports = {
         }
     },
     assignSoldAndProgress: async function (req) {
+        const childBenefited = req.session.childBenefited;
         const saleId = req.session.cart[0].id;
         const classes = await ClassSale.findAll({
             where: { saleId: saleId },
@@ -131,7 +132,7 @@ module.exports = {
         for (let classSel of classes) {
             await Progress.create({
                 classId: classSel.classId,
-                profileId: classSel.sales.profileId,
+                profileId: childBenefited,
             });
         }
         req.session.profile = await Users.selectProfile(req.params.id);
