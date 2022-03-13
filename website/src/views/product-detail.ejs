@@ -82,7 +82,8 @@
                                 </button>
                             </form>
                             <% } else { %>
-                            <form action="/sale/addToCart?classId=<%=classSel.id%>&profileId=<%= profile.id %> "
+                            <form
+                                action="/sale/addToCart?classId=<%=classSel.id%>&userId=<%= profile.userId %>&profileId=<%= profile.id %>"
                                 method="post">
                                 <button class="btn btn-success btn-lg text-white" type="submit">
                                     Agregar al carrito

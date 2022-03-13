@@ -10,7 +10,8 @@ const controller = {
         });
     },
     detail: async (req, res) => {
-        const idsInCart = await Sales.idsInCart(req);
+        const idsInCart = [];
+        //await Sales.idsInCart(req);
         const classSel = await Products.findOne(req.params.id);
         let inCart = false;
 

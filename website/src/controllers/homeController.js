@@ -12,10 +12,10 @@ const controller = {
         let progress;
         let cart = [];
         if (req.session.profiles && req.session.profile?.isParent) {
+            cart = await Sales.findAllInCart(req.session.user.id);
+            req.session.cart = cart;
             const profiles = await Users.findCurrentProfiles(req);
             const profilesId = profiles.map((profile) => profile.id);
-            cart = await Sales.findAllInCart(profilesId);
-            req.session.cart = cart;
             progress = await Users.findProgress(profilesId);
         } else if (
             req.session.profiles &&

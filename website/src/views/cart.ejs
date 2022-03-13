@@ -61,7 +61,7 @@
                                     <option selected disabled>Elegí un hijo</option>
                                     <% for(let child of children) { %>
                                     <option value="<%= child.id %>"
-                                        <%= profile ? child.id == cart[i].profileId ? "selected" : "" : ""%>>
+                                        <%= profile ? child.id == cart[i].classesSales.profileId ? "selected" : "" : ""%>>
                                         <%= child.name %></option>
                                     <% } %>
                                 </select>
@@ -80,7 +80,7 @@
                     <div class="d-none">
                         <% for(let j =0 ; j < cart.length; j++){ %>
                         <input class="hiddenInputs" type="text" id=<%= j %> name="hiddenInputs"
-                            value=<%= cart[j].profileId %>>
+                            value=<%= cart[j].classesSales.profileId %>>
                         <% } %>
                     </div>
 

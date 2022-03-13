@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
             as: 'classes',
             foreignKey: 'classId',
         });
+        ClassSale.belongsTo(models.Sale, {
+            as: 'sales',
+            foreignKey: 'saleId',
+        });
         ClassSale.belongsTo(models.Profile, {
             as: 'profiles',
             foreignKey: 'profileId',

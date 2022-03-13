@@ -50,10 +50,10 @@
                             <div class="p-3 ">
                                 <h5 class="fs-3"> Clases</h5>
                                 <hr class="mt-0">
-                                <% for(let product of cart){ %>
+                                <% for(let subCart of cartFormatted){ %>
                                 <div class="my-5 ms-4">
                                     <div>
-                                        <h5 class="fs-3">Para <%= product.profiles.name %> </h5>
+                                        <h5 class="fs-3">Para <%= subCart[0].profileName %> </h5>
                                     </div>
                                     <hr class="mt-0">
                                     <div class="mt-1 fs-5">
@@ -62,12 +62,14 @@
                                                 <th>Curso</th>
                                                 <th class="text-end">Precio</th>
                                             </tr>
+                                            <% for(let classSel of Object.values(subCart)) {%>
                                             <tr>
-                                                <td><%= product.classesSales.classes.title %> </td>
+                                                <td><%= classSel.className %> </td>
                                                 <td class="text-end">
-                                                    <%= product.classesSales.classes.price.toFixed(2) %>
+                                                    <%= classSel.price.toFixed(2) %>
                                                 </td>
                                             </tr>
+                                            <% } %>
                                         </table>
                                     </div>
                                 </div>
