@@ -11,7 +11,7 @@ module.exports = {
             bought: {
                 type: DataTypes.BOOLEAN,
             },
-            profileId: {
+            userId: {
                 type: DataTypes.UUID,
                 references: {
                     model: 'profiles',
@@ -46,6 +46,15 @@ module.exports = {
                 type: DataTypes.UUID,
                 references: {
                     model: 'sales',
+                    key: 'id',
+                },
+                onUpdate: 'cascade',
+                onDelete: 'cascade',
+            },
+            profileId: {
+                type: DataTypes.UUID,
+                references: {
+                    model: 'profiles',
                     key: 'id',
                 },
                 onUpdate: 'cascade',

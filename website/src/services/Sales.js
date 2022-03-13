@@ -8,40 +8,36 @@ const {
 const Users = require('./Users');
 
 module.exports = {
-    addToCart: async function (req) {
+    addToCart: async function (profileId, classId) {
         const [saleData, created] = await Sale.findOrCreate({
             where: {
                 bought: null,
-                profileId: req.session.profile.id,
+                profileId: profileId,
             },
-        });
-        const sale = saleData.dataValues;
-        const selClass = await Class.findByPk(req.session.class.id, {
             raw: true,
             nest: true,
         });
-        const classSale = await ClassSale.create(
-            {
-                classId: selClass.id,
-                saleId: sale.id,
-                historicPrice: selClass.price,
-            },
-            {
-                raw: true,
-                nest: true,
-            }
-        );
-        return classSale;
+        const sale = saleData;
+        const selClass = await Class.findByPk(classId, {
+            raw: true,
+            nest: true,
+        });
+        const classSale = await ClassSale.create({
+            classId: selClass.id,
+            saleId: sale.id,
+            historicPrice: selClass.price,
+        });
     },
-    findAllInCart: function (req) {
+    findAllInCart: function (profilesId) {
         return Sale.findAll({
             raw: true,
             nest: true,
             where: {
                 bought: null,
-                profileId: req.session.profile.id,
+                profileId: profilesId,
             },
             include: [
+                { association: 'profiles' },
                 {
                     model: ClassSale,
                     as: 'classesSales',
@@ -108,33 +104,42 @@ module.exports = {
             await Sale.destroy({ where: { id: saleDeleted.saleId } });
         }
     },
-    assignSoldAndProgress: async function (req) {
-        const childBenefited = req.session.childBenefited;
-        const saleId = req.session.cart[0].id;
-        const classes = await ClassSale.findAll({
-            where: { saleId: saleId },
-            raw: true,
-            nest: true,
-            include: [{ association: 'sales' }],
-        });
-        await Sale.update(
-            {
-                userId: req.session.profile.userId,
-                bought: 1,
-            },
-            {
-                where: {
-                    id: saleId,
-                },
+    updateCart: async function (data, cart) {
+        let i = 0;
+        for (let c of cart) {
+            if (data[i] != c.profileId) {
+                await Sale.update(
+                    {
+                        profileId: data[c.id],
+                    },
+                    {
+                        where: {
+                            id: c.id,
+                        },
+                    }
+                );
             }
-        );
-
-        for (let classSel of classes) {
+            console.log('i', i);
+            console.log('data[i]', data[i]);
+            i++;
+        }
+    },
+    assignSoldAndProgress: async function (cart) {
+        for (let c of cart) {
+            await Sale.update(
+                {
+                    bought: true,
+                },
+                {
+                    where: {
+                        id: c.id,
+                    },
+                }
+            );
             await Progress.create({
-                classId: classSel.classId,
-                profileId: childBenefited,
+                classId: c.classSale.classId,
+                profileId: c.profiles.id,
             });
         }
-        req.session.profile = await Users.selectProfile(req.params.id);
     },
 };

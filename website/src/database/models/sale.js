@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             bought: {
                 type: DataTypes.BOOLEAN,
             },
-            profileId: {
+            userId: {
                 type: DataTypes.UUID,
             },
             createdAt: {
@@ -30,9 +30,9 @@ module.exports = (sequelize, DataTypes) => {
             as: 'classesSales',
             foreignKey: 'saleId',
         });
-        Sale.belongsTo(models.Profile, {
-            as: 'profiles',
-            foreignKey: 'profileId',
+        Sale.belongsTo(models.User, {
+            as: 'users',
+            foreignKey: 'userId',
         });
     };
 

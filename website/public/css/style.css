@@ -11178,6 +11178,11 @@ a {
   font-size: 0.5em;
 }
 
+.maxWidth600 {
+  max-width: 600px;
+  margin: auto;
+}
+
 .ms-primary-btn {
   color: var(--color-shadow);
   text-align: center;

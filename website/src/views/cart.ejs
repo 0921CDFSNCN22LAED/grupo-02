@@ -10,7 +10,6 @@
         <%- include("./partials/header") %>
     </header>
     <main class="container-c-fluid">
-        <div id="ParentLogSecure"></div>
         <div class="container-c position-relative fit-content mb-5">
             <div class="w-100">
                 <h2>
@@ -20,84 +19,80 @@
                     <%= cart.length %> cursos en carrito
                 </p>
             </div>
-            <section class="d-flex flex-wrap justify-content-between">
-                <% for(let product of cart){ %>
+            <section class="d-flex flex-wrap justify-content-between w-100">
+                <% for(let i =0 ; i < cart.length; i++){ %>
                 <article class="p-2 cart-article mb-5">
                     <div class="container-c_noFlex position-relative">
-                        <a class="d-flex flex-column h-100 justify-content-between"
-                            href="/products/<%= product.classesSales.classes.id %>">
-                            <div>
-                                <div class="p-1">
-                                    <img class="img-thumbnail "
-                                        src="/img/clases-preview/<%=product.classesSales.classes.interactive.preview.location%>"
-                                        alt="picture placeholder" />
-                                </div>
-                                <div class="lh-lg p-1">
-                                    <h5>
-                                        <%= product.classesSales.classes.title + " en " + product.classesSales.classes.grades.name %>
-                                    </h5>
-                                    <h5><%=product.classesSales.classes.subject.name %></h5>
-                                    <h5>
-                                        <%=product.classesSales.classes.teacher.firstName + " " + product.classesSales.classes.teacher.lastName %>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="shadow-pill text-end mb-2">
-                                <h3>
-                                    <%="$" + product.classesSales.classes.price %>
-                                </h3>
+                        <div class="d-flex flex-column h-100 justify-content-between">
+                            <a href="/products/<%= cart[i].classesSales.classes.id %>">
                                 <div>
+                                    <div class="p-1">
+                                        <img class="img-thumbnail "
+                                            src="/img/clases-preview/<%=cart[i].classesSales.classes.interactive.preview.location%>"
+                                            alt="picture placeholder" />
+                                    </div>
+                                    <div class="lh-lg p-1">
+                                        <h5>
+                                            <%= cart[i].classesSales.classes.title + " en " + cart[i].classesSales.classes.grades.name %>
+                                        </h5>
+                                        <h5><%=cart[i].classesSales.classes.subject.name %></h5>
+                                        <h5>
+                                            <%=cart[i].classesSales.classes.teacher.firstName + " " + cart[i].classesSales.classes.teacher.lastName %>
+                                        </h5>
+                                    </div>
                                 </div>
-                                <form action="/sale/removeFromCart/<%=product.classesSales.id%>?_method=DELETE"
-                                    method="post">
-                                    <button class="btn btn-danger btn-sm" type="submit">eliminar</button>
-                                </form>
+                                <div class="shadow-pill text-end mb-2">
+                                    <h3>
+                                        <%="$" + cart[i].classesSales.classes.price %>
+                                    </h3>
+                                    <div>
+                                    </div>
+                                    <form action="/sale/removeFromCart/<%=cart[i].classesSales.id%>?_method=DELETE"
+                                        method="post">
+                                        <button class="btn btn-danger btn-sm" type="submit">eliminar</button>
+                                    </form>
+                                </div>
+                            </a>
+                            <div class="w-100 bg-white p-2 d-flex fs-4">
+                                <span>Para</span>
+
+                                <select class="bg-white border-0 flex-grow-1" aria-label="form-select select child"
+                                    name="selectChild" id=<%= i %>>
+                                    <option selected disabled>Elegí un hijo</option>
+                                    <% for(let child of children) { %>
+                                    <option value="<%= child.id %>"
+                                        <%= profile ? child.id == cart[i].profileId ? "selected" : "" : ""%>>
+                                        <%= child.name %></option>
+                                    <% } %>
+                                </select>
                             </div>
-                        </a>
+                            <% if(errors?.hiddenInputs) { %>
+                            <p class="feedback text-start w-100 p-2"><%= errors.hiddenInputs.msg %> </p>
+                            <% } %>
+                        </div>
                     </div>
                 </article>
                 <% } %>
 
                 <form class="d-flex pay-flex align-items-start justify-content-end " action="/sale/payment"
                     method="post">
-                    <div class="p-2">
-                        <% if(totalPrice > 0) {%>
-                        <div class="mb-3 cart-article">
-                            <div class="shadow-pill">
-                                <div class="">
-                                    <h5 class="p-1">Asignar curso<%= cart.length > 1 ? "s" : "" %> a:</h5>
-                                    <div class="d-inline flex-grow-1">
-                                        <select class="form-select" aria-label="select child" name="selectChild"
-                                            id="selectChild">
-                                            <%if(children.length == 1){ %>
-                                            <option value="<%= children[0].id %>" selected><%= children[0].name %>
-                                            </option>
-                                            <% } else { %>
-                                            <option selected disabled>Elegí un hijo</option>
-                                            <% for(let child of children) { %>
-                                            <option value="<%= child.id %>"
-                                                <%= profile ? child.id == childBenefited ? "selected" : "" : ""%>>
-                                                <%= child.name %></option>
-                                            <% } %>
-                                            <% } %>
-                                        </select>
-                                    </div>
-                                </div>
-                                <% if(errors?.selectChild) { %>
-                                <p class="feedback text-start w-100 p-2"><%= errors.selectChild.msg %> </p>
-                                <% } %>
-                            </div>
-                        </div>
+
+                    <div class="d-none">
+                        <% for(let j =0 ; j < cart.length; j++){ %>
+                        <input class="hiddenInputs" type="text" id=<%= j %> name="hiddenInputs"
+                            value=<%= cart[j].profileId %>>
                         <% } %>
-                        <div class="mb-3 cart-article">
+                    </div>
+
+                    <div class="p-2 w-100">
+                        <div class="mb-3 cart-article w-100 maxWidth600">
                             <div class="pay-flex shadow-pill  justify-content-between">
-                                <% if(!userIsLoggedSecure && totalPrice > 0) { %>
+                                <% if(errors?.hiddenInputs) { %>
+                                <p class="feedback text-start w-100 p-2"><%= errors.hiddenInputs.msg %> </p>
+                                <% } %>
+                                <% if(totalPrice > 0) { %>
                                 <h3 class="mt-1">Total: $<%= totalPrice %></h3>
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#parentVerificationModal"
-                                    class=" btn btn-primary btn-lg">Continuar como padre </a>
-                                <% } else if(totalPrice > 0) { %>
-                                <h3 class="mt-1">Total: $<%= totalPrice %></h3>
-                                <button class="btn btn-danger btn-lg" type="submit">Pagar</button>
+                                <button class="btn btn-danger btn-lg " type="submit">Pagar</button>
                                 <% } else { %>
                                 <a href="/products">
                                     <h3>¡Elegí alguna de nuestras clases en nuestra página
@@ -113,7 +108,7 @@
 
         </div>
 
-        <section class="container-c mb-5 position-relative">
+        <section class=" container-c mb-5 position-relative">
             <h2>También podría gustarte...</h2>
             <section class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
                 <% for(let recommendation of recommendations){ %>
@@ -135,7 +130,7 @@
 
     </main>
     <%- include("./partials/footer") %>
-    <script src="/script/ParentLogSecure.js"></script>
+    <script src="/script/cartLinkSelectToForm.js"></script>
 </body>
 
 </html>

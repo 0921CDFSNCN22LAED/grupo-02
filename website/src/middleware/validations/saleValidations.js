@@ -1,8 +1,13 @@
-const path = require("path");
-const { check } = require("express-validator");
+const { body } = require('express-validator');
 
 module.exports = [
-    check("selectChild")
-        .notEmpty()
-        .withMessage("Elegí para que hijo es la clase"),
+    body('hiddenInputs').custom((value, { req }) => {
+        const parentId = req.session.profiles
+            .filter((profile) => profile.isParent)
+            .map((profile) => profile.id);
+        if (!value || value == parentId) {
+            throw new Error('Elegí para que hijo es la clase');
+        }
+        return true;
+    }),
 ];

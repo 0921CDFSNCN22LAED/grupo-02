@@ -14,7 +14,6 @@ function Prueba() {
         button.addEventListener('click', (e) => {
             e.preventDefault;
             setPassedData(passingData.value);
-            console.log('passingData.value', passingData.value);
         });
     }
     return (

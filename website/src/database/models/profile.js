@@ -50,8 +50,8 @@ module.exports = (sequelize, DataTypes) => {
             as: 'progress',
             foreignKey: 'profileId',
         });
-        Profile.hasMany(models.Sale, {
-            as: 'sales',
+        Profile.hasMany(models.ClassSale, {
+            as: 'classesSales',
             foreignKey: 'profileId',
         });
         Profile.hasMany(models.ClassReview, {
