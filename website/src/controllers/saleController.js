@@ -8,7 +8,9 @@ module.exports = {
         const userId = req.query.userId;
         const classId = req.query.classId;
         const profileId = req.query.profileId;
+        const keepLooking = req.query.keepLooking;
         await Sales.addToCart(userId, classId, profileId);
+        if (keepLooking) return res.redirect('/products');
         res.redirect('/sale/cart');
     },
     viewCart: async (req, res) => {

@@ -1,6 +1,7 @@
 const db = require('../database/models');
 const Products = require('../services/Products');
 const Sales = require('../services/Sales');
+const Users = require('../services/Users');
 
 const controller = {
     list: async (req, res) => {
@@ -10,20 +11,50 @@ const controller = {
         });
     },
     detail: async (req, res) => {
-        const idsInCart = [];
-        //await Sales.idsInCart(req);
+        let idsInCart = [];
+        let idsBought = [];
+        let isParent = false;
+        if (req.session.profiles) {
+            let profilesId = [];
+            if (req.session.profile) {
+                profilesId = Array.from(Users.selectProfile(req.session.id));
+            } else {
+                const profiles = await Users.findCurrentProfiles(req);
+                profilesId = profiles.map((profile) => profile.id);
+            }
+            const progress = await Users.findProgress(profilesId);
+            idsBought = progress.map((progress) => progress.classId);
+
+            const userId = req.session.user.id;
+            let sales = await Sales.findAllInCart(userId);
+            if (req.session.profile) {
+                sales = sales.filter(
+                    (sale) =>
+                        sale.classesSales.profiles.isParent ||
+                        sale.classesSales.profileId == req.session.profile.id
+                );
+            }
+            idsInCart = sales.map((sale) => sale.classesSales.classId);
+        }
+        if (req.session.profile) isParent = req.session.profile.isParent;
+
         const classSel = await Products.findOne(req.params.id);
         let inCart = false;
-
-        if (idsInCart && idsInCart.includes(classSel.id)) {
+        let bought = false;
+        if (idsInCart.includes(classSel.id)) {
             inCart = true;
         }
+        if (idsBought.includes(classSel.id)) {
+            bought = true;
+        }
         req.session.class = classSel;
-        if (!classSel) res.render('not-found');
+        if (!classSel) return res.render('not-found');
         res.render('product-detail', {
             classSel,
             id: req.params.id,
             inCart,
+            bought,
+            isParent,
         });
     },
     productForm: async (req, res) => {

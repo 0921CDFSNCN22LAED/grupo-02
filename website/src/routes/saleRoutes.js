@@ -8,13 +8,7 @@ const saleController = require('../controllers/saleController');
 router.post('/addToCart', saleController.addToCart);
 router.get('/cart', saleController.viewCart);
 router.delete('/removeFromCart/:id', saleController.removeFromCart);
-router.post(
-    '/payment',
-
-    saleValidations,
-    validation,
-    saleController.payment
-);
+router.post('/payment', saleValidations, validation, saleController.payment);
 router.get('/payment', saleController.paymentPage);
 
 router.post('/endPurchase', saleController.endPurchase);

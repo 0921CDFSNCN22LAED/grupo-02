@@ -11,3 +11,5 @@
 ## Fondo personalizado
 
 ## Comentar código
+
+## Mejorar asignación de carrito

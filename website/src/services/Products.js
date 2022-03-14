@@ -17,28 +17,38 @@ const {
     Progress,
 } = require('../database/models');
 const Sequelize = require('sequelize');
-const { where } = require('sequelize');
 const Op = Sequelize.Op;
 
 const Products = {
     findAll: async function () {
         const products = await Class.findAll({
+            attributes: ['id', 'title', 'price'],
             raw: true,
             nest: true,
             include: [
-                { association: 'subject' },
-                { association: 'grades' },
-                { association: 'teacher' },
+                { association: 'subject', attributes: ['id', 'name'] },
+                { association: 'grades', attributes: ['id', 'name'] },
+                {
+                    association: 'teacher',
+                    attributes: ['firstName', 'lastName', 'email', 'cv'],
+                },
                 {
                     model: Interactive,
                     as: 'interactive',
                     include: [
-                        { association: 'video' },
-                        { association: 'preview' },
-                        { association: 'bonus' },
+                        { association: 'video', attributes: ['location'] },
+                        { association: 'preview', attributes: ['location'] },
+                        { association: 'bonus', attributes: ['location'] },
                     ],
                 },
-                { association: 'description' },
+                {
+                    association: 'description',
+                    attributes: [
+                        'descriptionShort',
+                        'descriptionLong',
+                        'contents',
+                    ],
+                },
             ],
         });
         for (let product of products) {

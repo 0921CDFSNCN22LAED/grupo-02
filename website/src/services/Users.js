@@ -36,23 +36,32 @@ const Users = {
     },
     findByEmail: async function (email) {
         const user = await User.findOne({
+            attributes: ['id', 'pass'],
             where: { email: email },
             raw: true,
             nest: true,
         });
         return user;
     },
-
-    findOneProfile: async function (id) {
-        const profile = await Profile.findByPk(id, { raw: true, nest: true });
-        return profile;
-    },
     findCurrentProfiles: async (req, searchedId) => {
         const id = req.session.user.id ?? searchedId;
         let profiles = await User.findAll({
+            attributes: ['email'],
             raw: true,
             nest: true,
-            include: [{ association: 'profiles' }],
+            include: [
+                {
+                    association: 'profiles',
+                    attributes: [
+                        'id',
+                        'name',
+                        'isParent',
+                        'gradeId',
+                        'createdAt',
+                        'avatar',
+                    ],
+                },
+            ],
             where: {
                 id: id,
             },
@@ -127,11 +136,13 @@ const Users = {
     },
     allPageComments: async function () {
         const comments = await db.PageComment.findAll({
+            attributes: ['comment'],
             raw: true,
             nest: true,
             include: [
                 {
                     association: 'profiles',
+                    attributes: ['name'],
                 },
             ],
         });

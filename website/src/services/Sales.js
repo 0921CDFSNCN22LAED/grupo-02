@@ -145,7 +145,6 @@ module.exports = {
     },
     assignSoldAndProgress: async function (cart) {
         for (let c of cart) {
-            console.log('c', c);
             await Sale.update(
                 {
                     bought: true,

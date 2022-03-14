@@ -61,11 +61,11 @@
                 <%- include("./partials/partials-home/choose-profile") %>
 
                 <!-- 3) cursos del hijo -->
-                <% } else if(locals.profile && !locals.profile.isParent) { %>
+                <% } else if(!locals.profile?.isParent) { %>
                 <%- include("./partials/partials-home/child-classes") %>
 
                 <!-- 4) info del padre -->
-                <% } else if(locals.profile && locals.profile.isParent) { %>
+                <% } else if(locals.profile?.isParent) { %>
                 <%- include("./partials/partials-home/parent-info") %>
                 <% } %>
             </section>
@@ -73,11 +73,12 @@
                 <article class="col-12 col-md-6 mb-3">
                     <div class="container-c">
                         <h2>Sugerencias</h2>
-                        <% for(let clase of recommendations){ %>
-                        <a class="item" href="/products/<%= clase.id %> ">
-                            <img class="img-thumbnail" src="/img/clases-preview/<%=clase.interactive.preview.location%>"
-                                alt="<%= clase.titulo %> " />
-                            <h4 class="subtitle"><%= clase.title %></h4>
+                        <% for(let classSel of recommendations){ %>
+                        <a class="item" href="/products/<%= classSel.id %> ">
+                            <img class="img-thumbnail"
+                                src="/img/clases-preview/<%=classSel.interactive.preview.location%>"
+                                alt="<%= classSel.title %> " />
+                            <h4 class="subtitle"><%= classSel.title %></h4>
                         </a>
                         <% } %>
                         <div class="w-100 text-end">
