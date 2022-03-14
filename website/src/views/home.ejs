@@ -91,18 +91,18 @@
                 <article class="col-12 col-md-6 mb-3">
                     <div id="otros-cursos" class="container-c">
                         <h2>Otros cursos</h2>
-                        <span class="d-flex flex-wrap w-100 justify-content-around">
+                        <span class="d-flex flex-wrap w-100 justify-content-around" id="classesRandomPosition">
                             <% for(let i = 0; i < Math.min(classes.length, 42); i++){ %>
-                            <a href="/products/<%= classes[i].id %> ">
+                            <a href="/products/<%= classes[i].id %>">
                                 <div class="other-clases">
                                     <%= classes[i].title %>
                                 </div>
                             </a>
                             <% } %>
+                            <a href="/products">
+                                <div class="other-clases ">...Más cursos</div>
+                            </a>
                         </span>
-                        <a href="/products" class="me-auto">
-                            <div class="other-clases ">...Más cursos</div>
-                        </a>
                     </div>
                 </article>
             </section>
@@ -200,6 +200,7 @@
 
     </main>
     <%- include("./partials/footer") %>
+    <script src="/script/classesRandomPosition.js"></script>
 
 </body>
 
