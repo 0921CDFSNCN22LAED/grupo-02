@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "heroku-prebuild": "cd dashboard && npm install && npm run build && cd .. && cd website && npm install",
-        "start": "cd website && npm start"
+        "start": "cd dashboard && npm start"
     },
     "repository": {
         "type": "git",
