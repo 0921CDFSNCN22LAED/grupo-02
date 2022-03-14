@@ -3,7 +3,7 @@
 const util = require('util');
 
 module.exports = (req, res, next) => {
-    console.log(util.inspect(req.session, false, null, true));
+    // console.log(util.inspect(req.session, false, null, true));
     const user = req.session.user;
     delete user?.pass;
     res.locals.user = user;
