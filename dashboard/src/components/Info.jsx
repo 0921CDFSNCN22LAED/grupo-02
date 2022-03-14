@@ -3,9 +3,9 @@ import BigCard from './BigCard';
 
 export default function Info() {
     const countUrl = [
-        'http://localhost:3001/api/products/count',
-        'http://localhost:3001/api/users/count',
-        'http://localhost:3001/api/teachers/count',
+        'https://mundo-sapien.herokuapp.com/api/products/count',
+        'https://mundo-sapien.herokuapp.com/api/users/count',
+        'https://mundo-sapien.herokuapp.com/api/teachers/count',
     ];
 
     return (
@@ -15,7 +15,7 @@ export default function Info() {
             })}
             <BigCard
                 key="last-product-info"
-                url="http://localhost:3001/api/products/lastCreated"
+                url="https://mundo-sapien.herokuapp.com/api/products/lastCreated"
             />
         </section>
     );

@@ -31,7 +31,7 @@ window.addEventListener('load', () => {
     email.addEventListener('blur', async () => {
         delete errors.email;
         const response = await fetch(
-            `http://localhost:3001/api/users/email?email=${email.value}`
+            `https://mundo-sapien.herokuapp.com/api/users/email?email=${email.value}`
         );
         const user = await response.json();
         if (user !== null) {
