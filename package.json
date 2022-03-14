@@ -1,0 +1,21 @@
+{
+    "name": "grupo-02",
+    "version": "1.0.0",
+    "description": "---",
+    "main": "index.js",
+    "scripts": {
+        "heroku-prebuild": "cd dashboard && npm install && npm run build && cd .. && cd website && npm install",
+        "start": "cd website && npm start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/0921CDFSNCN22LAED/grupo-02.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/0921CDFSNCN22LAED/grupo-02/issues"
+    },
+    "homepage": "https://github.com/0921CDFSNCN22LAED/grupo-02#readme"
+}
