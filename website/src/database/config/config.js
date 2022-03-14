@@ -1,9 +1,9 @@
 module.exports = {
     development: {
-        username: 'root',
-        password: null,
-        database: 'mundosapien_db',
-        host: '127.0.0.1',
+        username: 'ba8fd7d5c50cf8',
+        password: 'd9dbcbde',
+        database: 'heroku_ee8c2601b233ff8',
+        host: 'us-cdbr-east-05.cleardb.net',
         dialect: 'mysql',
         logging: false,
     },
