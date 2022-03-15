@@ -1,3 +1,11 @@
+# Este projecto es continuado en:
+- [Website repo](https://github.com/LuiosDyet/mundo-sapien-website)
+- [Website deployed](https://mundo-sapien.herokuapp.com/)
+- [Dashboard repo] (https://github.com/LuiosDyet/mundo-sapien-dashboard)
+- [Dashboard deployed](https://mundo-sapien-dashboard.herokuapp.com/)
+
+
+
 # Mundo Sapien
 
 ## Vínculos
