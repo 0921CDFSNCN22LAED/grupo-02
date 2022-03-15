@@ -66,6 +66,9 @@
                                     <% } %>
                                 </select>
                             </div>
+                            <% if(errors?.hiddenInputs) { %>
+                            <p class="feedback text-start w-100 p-2"><%= errors.hiddenInputs.msg %> </p>
+                            <% } %>
                         </div>
                     </div>
                 </article>

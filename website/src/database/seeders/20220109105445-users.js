@@ -8,14 +8,14 @@ module.exports = {
             {
                 id: '17deb234-78d0-4de6-a0ff-683f14b94e35',
                 email: 'luios@mail.com',
-                pass: '$2a$10$2P4plEuhgo0oqUolQ6JFPuQCJiCi66CFCR8B82x0pZK.UfL9ehMjW',
+                pass: '$2a$10$/9JmQhDmfSpQ2h5jvTb.OOt3LwdUzYtyj42ZxJTJmhHVpvQXg4Xl6',
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
                 id: '5820bf71-bf62-462d-90b7-233933ca7452',
                 email: 'jacob@mail.com',
-                pass: '$2a$10$2P4plEuhgo0oqUolQ6JFPuQCJiCi66CFCR8B82x0pZK.UfL9ehMjW',
+                pass: '$2a$10$/9JmQhDmfSpQ2h5jvTb.OOt3LwdUzYtyj42ZxJTJmhHVpvQXg4Xl6',
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },

@@ -11183,18 +11183,6 @@ a {
   margin: auto;
 }
 
-#classesRandomPosition {
-  height: 80%;
-}
-#classesRandomPosition a {
-  position: relative;
-  top: 0;
-  transition: top ease 0.5s;
-}
-#classesRandomPosition a:hover {
-  top: -5px;
-}
-
 .ms-primary-btn {
   color: var(--color-shadow);
   text-align: center;

@@ -74,15 +74,3 @@ a {
     max-width: 600px;
     margin: auto;
 }
-
-#classesRandomPosition {
-    height: 80%;
-    a {
-        position: relative;
-        top: 0;
-        transition: top ease 0.5s;
-    }
-    a:hover {
-        top: -5px;
-    }
-}

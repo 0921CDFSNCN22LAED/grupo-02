@@ -11,7 +11,6 @@
                 <li><a href="">Política de privacidad</a></li>
                 <li><a href="">Términos de pago</a></li>
                 <li><a href="">Preguntas frecuentes</a></li>
-                <% if(user?.id == "17deb234-78d0-4de6-a0ff-683f14b94e35") {%>
                 <li><a href="/products/create">Subir clase</a></li>
                 <% if(locals.id) { %>
                 <li><a href="/products/<%= id %>/edit">Editar clase</a></li>
@@ -21,7 +20,6 @@
                             type="submit">Eliminar clase</button>
                     </form>
                 </li>
-                <% } %>
                 <% } %>
             </ul>
         </div>

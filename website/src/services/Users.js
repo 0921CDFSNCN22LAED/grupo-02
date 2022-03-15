@@ -17,7 +17,6 @@ const Users = {
             },
             { raw: true, nest: true }
         );
-        delete user.pass;
         req.session.user = user;
         await this.createProfile(user.id, req, true);
     },

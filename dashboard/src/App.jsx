@@ -30,7 +30,7 @@ function App() {
                             element={
                                 <Table
                                     key="tableProducts"
-                                    url="https://mundo-sapien.herokuapp.com/api/products/flattened"
+                                    url="http://localhost:3001/api/products/flattened"
                                     initArray={['Título', 'Materia', 'Grado']}
                                 />
                             }
@@ -40,7 +40,7 @@ function App() {
                             element={
                                 <Table
                                     key="tableUsers"
-                                    url="https://mundo-sapien.herokuapp.com/api/users/flattened"
+                                    url="http://localhost:3001/api/users/flattened"
                                     initArray={[
                                         'Nombre',
                                         'Correo Electrónico',
@@ -54,7 +54,7 @@ function App() {
                             element={
                                 <Table
                                     key="tableSearch"
-                                    url={`https://mundo-sapien.herokuapp.com/api/products/search?search=${search}`}
+                                    url={`http://localhost:3001/api/products/search?search=${search}`}
                                     initArray={[
                                         'Título',
                                         'Materia',
