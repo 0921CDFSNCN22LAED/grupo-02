@@ -135,4 +135,11 @@ module.exports = {
             data: products,
         });
     },
+    getProductsByPage: async (req, res) => {
+        const page = req.query.page;
+        const products = await Products.getProductsByPage(page);
+        res.json({
+            products,
+        });
+    },
 };

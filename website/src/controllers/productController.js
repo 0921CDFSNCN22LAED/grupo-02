@@ -5,7 +5,7 @@ const Users = require('../services/Users');
 
 const controller = {
     list: async (req, res) => {
-        const classes = await Products.findAll();
+        const { products: classes } = await Products.getProductsByPage(0);
         res.render('products-page', {
             classes,
         });

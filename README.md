@@ -1,12 +1,50 @@
-# Este projecto es continuado en:
-- [Website repo](https://github.com/LuiosDyet/mundo-sapien-website)
-- [Website deployed](https://mundo-sapien.herokuapp.com/)
-- [Dashboard repo](https://github.com/LuiosDyet/mundo-sapien-dashboard)
-- [Dashboard deployed](https://mundo-sapien-dashboard.herokuapp.com/)
-
-
-
 # Mundo Sapien
+
+## Visualización
+
+---
+
+Podés ver el proyecto en:
+
+[Website](https://mundo-sapien.herokuapp.com/)
+
+[Dashboard](https://mundo-sapien-dashboard.herokuapp.com/)
+
+## Sobre el proyecto
+
+---
+
+Mundo Sapien nació como un proyecto grupal dentro del curso de FullStack de Digital House cuyo código, tras la disolución del grupo apenas hecho el diagrama original, fue escrito por [Luis Dartayet](https://github.com/LuiosDyet/)
+
+#### Stack tecnólogico
+
+##### Mínimo requerido
+
+En este proyecto podemos ver el uso de las herramientas requeridas del curso como
+
+-   JavaScript
+-   HTML
+-   Hojas de estilos en cascada (CSS)
+-   Diseño web adaptable
+-   Node Js
+-   React
+-   Express
+-   Creación y consumo de Apis
+-   MySQL
+-   Git
+-   OOP
+-   Patrón de arquitectura MVC
+-   Postman
+-   Sequelize
+
+##### Adicional
+
+-   Bootstrap
+-   Sass
+-   Fondos aleatorios
+-   Infinite Scrolls
+-   Funciones generadoras
+-   Canvas
 
 ## Vínculos
 
@@ -24,7 +62,7 @@
 
 #### Logo
 
-![logo](/public/img/Logo-MundoSapien-10.jpg)
+![logo](/website/public/img/Logo-MundoSapien-10.jpg)
 
 #### paleta de colores
 
@@ -43,7 +81,7 @@
 
 -   ver en carpeta
 
-![logo](/public/img/mundo.gif)
+![logo](/website/public/img/mundo.gif)
 
 ## Integrantes
 

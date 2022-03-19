@@ -161,7 +161,7 @@ const Products = {
 
         const video = await Video.create(
             {
-                location: req.files?.video[0]?.filename ?? '',
+                location: req.files.video ? req.files?.video[0]?.filename : '',
             },
             {
                 raw: true,
@@ -170,13 +170,13 @@ const Products = {
         );
         const preview = await Preview.create(
             {
-                location:
-                    req.files?.preview[0]?.filename ??
-                    (await this.autoCreatePreview(
-                        req.body.title,
-                        req.body.subject,
-                        req.body.grade
-                    )),
+                location: req.files.preview
+                    ? req.files?.preview[0]?.filename
+                    : await this.autoCreatePreview(
+                          req.body.title,
+                          req.body.subject,
+                          req.body.grade
+                      ),
             },
             {
                 raw: true,
@@ -185,7 +185,7 @@ const Products = {
         );
         const bonus = await Bonus.create(
             {
-                location: req.files?.bonus[0]?.filename ?? '',
+                location: req.files.bonus ? req.files?.bonus[0]?.filename : '',
             },
             {
                 raw: true,
@@ -656,6 +656,45 @@ const Products = {
         });
 
         return similarClasses;
+    },
+    getProductsByPage: async function (page, limit = 8) {
+        const { count, rows } = await Class.findAndCountAll({
+            limit: limit,
+            offset: page * limit,
+            raw: true,
+            nest: true,
+            attributes: ['id', 'title', 'price'],
+            raw: true,
+            nest: true,
+            include: [
+                { association: 'subject', attributes: ['id', 'name'] },
+                { association: 'grades', attributes: ['id', 'name'] },
+                {
+                    association: 'teacher',
+                    attributes: ['firstName', 'lastName', 'email', 'cv'],
+                },
+                {
+                    model: Interactive,
+                    as: 'interactive',
+                    include: [
+                        { association: 'preview', attributes: ['location'] },
+                    ],
+                },
+                {
+                    association: 'description',
+                    attributes: [
+                        'descriptionShort',
+                        'descriptionLong',
+                        'contents',
+                    ],
+                },
+            ],
+        });
+        const products = rows;
+        for (let product of products) {
+            product.stars = await this.getProductRating(product.id);
+        }
+        return { count, products };
     },
 };
 

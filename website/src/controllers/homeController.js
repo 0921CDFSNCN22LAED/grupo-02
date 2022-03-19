@@ -4,7 +4,7 @@ const Users = require('../services/Users');
 
 const controller = {
     home: async (req, res) => {
-        const classes = await Products.findAll();
+        const { products: classes } = await Products.getProductsByPage(0, 15);
         let recommendations = [];
         let comments = await Users.allPageComments();
         let collection = [];

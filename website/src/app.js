@@ -42,7 +42,7 @@ app.use(randomBackground());
 app.use(userLogged);
 app.use(sessionData);
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Escuchando puerto ${PORT}`);
 });

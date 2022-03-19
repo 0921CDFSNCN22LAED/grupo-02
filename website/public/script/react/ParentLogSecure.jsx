@@ -45,7 +45,7 @@ function Prueba() {
                                     class="form-control"
                                     type="password"
                                     name="pass"
-                                    id="pass"
+                                    id="passSecured"
                                     placeholder="Contraseña"
                                     autofocus
                                 />
